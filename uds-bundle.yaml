@@ -1,0 +1,131 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/uds-cli/v0.0.5-alpha/uds.schema.json
+kind: UDSBundle
+metadata:
+  name: software-factory-nutanix
+  description: A UDS bundle for deploying a software factory to an RKE2 cluster
+  version: 0.0.1
+  architecture: amd64
+
+zarf-packages:
+  # Zarf init
+  - name: init
+    repository: ghcr.io/defenseunicorns/packages/init
+    ref: v0.29.2
+    optional-components:
+      - git-server
+
+  # Defense Unicorns Big Bang Distro
+  - name: dubbd-k3d
+    repository: ghcr.io/defenseunicorns/packages/dubbd-rke2
+    ref: 0.9.1
+
+  # Namespace pre-reqs for swf capabilities
+  - name: software-factory-namespaces
+    path: build
+    ref: 1.0.0
+
+  # Change the realm file keycloak imports from
+  - name: software-factory-idam-realm
+    path: build
+    ref: 1.0.0
+    optional-components:
+      - exported-variables
+    exports:
+      - name: REALM_IMPORT_FILE
+
+  # Identity and Access Management
+  - name: uds-idam
+    repository: ghcr.io/defenseunicorns/uds-capability/uds-idam
+    ref: 0.1.9
+    imports:
+      - name: REALM_IMPORT_FILE
+        package: software-factory-idam-realm
+
+  # GitLab SSO secret and variables
+  - name: software-factory-idam-gitlab
+    path: build
+    ref: 1.0.0
+    exports:
+      - name: GITLAB_IDAM_ENABLED
+      - name: GITLAB_IDAM_ALLOWED_SSOS
+      - name: GITLAB_IDAM_PROVIDERS
+
+  # SonarQube SSO secret and variables
+  - name: software-factory-idam-sonarqube
+    path: build
+    ref: 1.0.0
+    exports:
+      - name: SONARQUBE_IDAM_ENABLED
+      - name: SONARQUBE_IDAM_CLIENT_ID
+      - name: SONARQUBE_IDAM_PROVIDER_NAME
+      - name: SONARQUBE_IDAM_REALM_URL
+      - name: SONARQUBE_IDAM_SAML_CERT
+      - name: SONARQUBE_IDAM_ATTR_LOGIN
+      - name: SONARQUBE_IDAM_ATTR_NAME
+      - name: SONARQUBE_IDAM_PROVIDER_EMAIL
+
+  # Gitlab
+  - name: gitlab-redis
+    repository: ghcr.io/defenseunicorns/uds-capability/gitlab/dev-dependency/gitlab-redis
+    ref: 0.0.2
+
+  - name: gitlab-minio
+    repository: ghcr.io/defenseunicorns/uds-capability/gitlab/dev-dependency/gitlab-minio
+    ref: 0.0.1
+
+  - name: gitlab-postgres
+    repository: ghcr.io/defenseunicorns/uds-capability/gitlab/dev-dependency/gitlab-postgres
+    ref: 0.0.2
+
+  - name: gitlab
+    repository: ghcr.io/defenseunicorns/uds-capability/gitlab
+    ref: 0.1.0
+    imports:
+      - name: GITLAB_IDAM_ENABLED
+        package: software-factory-idam-gitlab
+      - name: GITLAB_IDAM_PROVIDERS
+        package: software-factory-idam-gitlab
+      - name: GITLAB_IDAM_ALLOWED_SSOS
+        package: software-factory-idam-gitlab
+
+  # Gitlab Runner
+  - name: gitlab-runner-rbac
+    repository: ghcr.io/defenseunicorns/uds-capability/gitlab-runner/dev-dependency/gitlab-runner-rbac
+    ref: 0.0.1
+
+  - name: gitlab-runner
+    repository: ghcr.io/defenseunicorns/uds-capability/gitlab-runner
+    ref: 0.0.7
+
+  # Sonarqube
+  - name: sonarqube-postgres
+    repository: ghcr.io/defenseunicorns/uds-capability/sonarqube/dev-dependency/sonarqube-postgres
+    ref: 0.0.2
+
+  - name: sonarqube
+    repository: ghcr.io/defenseunicorns/uds-capability/sonarqube
+    ref: 0.0.9
+    imports:
+      - name: SONARQUBE_IDAM_ENABLED
+        package: software-factory-idam-sonarqube
+      - name: SONARQUBE_IDAM_CLIENT_ID
+        package: software-factory-idam-sonarqube
+      - name: SONARQUBE_IDAM_PROVIDER_NAME
+        package: software-factory-idam-sonarqube
+      - name: SONARQUBE_IDAM_REALM_URL
+        package: software-factory-idam-sonarqube
+      - name: SONARQUBE_IDAM_SAML_CERT
+        package: software-factory-idam-sonarqube
+      - name: SONARQUBE_IDAM_ATTR_LOGIN
+        package: software-factory-idam-sonarqube
+      - name: SONARQUBE_IDAM_ATTR_NAME
+        package: software-factory-idam-sonarqube
+      - name: SONARQUBE_IDAM_PROVIDER_EMAIL
+        package: software-factory-idam-sonarqube
+
+  # Add all virtualservices as internal dns entries for auth callbacks
+  - name: software-factory-idam-dns
+    path: build
+    ref: 1.0.0
+    optional-components:
+      - create-internal-dns-entries
