@@ -15,7 +15,7 @@ zarf-packages:
       - git-server
 
   # Defense Unicorns Big Bang Distro
-  - name: dubbd-k3d
+  - name: dubbd-rke2
     repository: ghcr.io/defenseunicorns/packages/dubbd-rke2
     ref: 0.9.1
 
