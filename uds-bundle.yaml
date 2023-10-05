@@ -14,15 +14,20 @@ zarf-packages:
     optional-components:
       - git-server
 
-  # Defense Unicorns Big Bang Distro
-  - name: dubbd-rke2
-    repository: ghcr.io/defenseunicorns/packages/dubbd-rke2
-    ref: 0.9.1
-
   # Namespace pre-reqs for swf capabilities
   - name: software-factory-namespaces
     path: build
     ref: 1.0.0
+
+  # MetalLB
+  - name: metallb
+    repository: ghcr.io/defenseunicorns/packages/metallb
+    ref: 0.0.4
+
+  # Defense Unicorns Big Bang Distro
+  - name: dubbd-rke2
+    repository: ghcr.io/defenseunicorns/packages/dubbd-rke2
+    ref: 0.9.1
 
   # Change the realm file keycloak imports from
   - name: software-factory-idam-realm

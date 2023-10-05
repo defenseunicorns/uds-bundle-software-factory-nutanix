@@ -24,3 +24,6 @@ namespaces:
   - name: sonarqube-db
     labels:
       istio-injection: enabled
+  - name: metallb-system
+    labels:
+      istio-injection: disabled
