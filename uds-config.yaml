@@ -1,0 +1,6 @@
+bundle:
+  deploy:
+    zarf-packages:
+      metallb:
+        set:
+          IP_ADDRESS_POOL: "172.23.0.10/27"

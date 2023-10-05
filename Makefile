@@ -93,6 +93,7 @@ build/uds-bundle-software-factory: | build ## Build the software factory
 ########################################################################
 
 deploy: ## Deploy the software factory package
+	cp uds-config.yaml ./build/uds-config.yaml
 	cd ./build && ./uds bundle deploy uds-bundle-software-factory-*.tar.zst --confirm
 
 ########################################################################
