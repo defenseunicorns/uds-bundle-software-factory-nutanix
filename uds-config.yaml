@@ -3,4 +3,4 @@ bundle:
     zarf-packages:
       metallb:
         set:
-          IP_ADDRESS_POOL: "172.23.0.10/27"
+          IP_ADDRESS_POOL: "24.0.132.0/24"
