@@ -27,6 +27,6 @@ bundle:
       mattermost:
         set:
           DOMAIN: "mtsi.bigbang.dev"
-      artifactory:
+      nexus:
         set:
           DOMAIN: "mtsi.bigbang.dev"
