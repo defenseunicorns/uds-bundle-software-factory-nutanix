@@ -96,6 +96,7 @@ deploy: ## Deploy the software factory package
 	cp uds-config.yaml ./build/
 	cp deploy-dubbd-values.yaml ./build/
 	cd ./build && ./uds bundle deploy uds-bundle-software-factory-*.tar.zst --confirm
+	cd ../scripts && ./update-certs.sh
 
 ########################################################################
 # Macro Section
