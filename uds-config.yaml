@@ -8,3 +8,4 @@ bundle:
         set:
           # TODO - replace these blanket exceptions with more targeted kyverno policy exceptions
           EXEMPT_NAMESPACES: '["zarf", "rook-ceph", "metallb-system"]'
+          DOMAIN: "bigbang.dev"
