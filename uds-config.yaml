@@ -18,3 +18,15 @@ bundle:
       sonarqube:
         set:
           DOMAIN: "mtsi.bigbang.dev"
+      jira:
+        set:
+          DOMAIN: "mtsi.bigbang.dev"
+      confluence:
+        set:
+          DOMAIN: "mtsi.bigbang.dev"
+      mattermost:
+        set:
+          DOMAIN: "mtsi.bigbang.dev"
+      artifactory:
+        set:
+          DOMAIN: "mtsi.bigbang.dev"
