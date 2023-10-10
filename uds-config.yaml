@@ -1,6 +1,10 @@
 bundle:
   deploy:
     zarf-packages:
+      init:
+        set:
+          # TODO - remove this if/when functionality is restored upstream
+          REGISTRY_HPA_ENABLE: false
       metallb:
         set:
           IP_ADDRESS_POOL: "24.0.132.240/28"
