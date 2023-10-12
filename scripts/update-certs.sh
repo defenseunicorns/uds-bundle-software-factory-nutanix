@@ -1,11 +1,12 @@
 #!/bin/bash
 ##
 ## This script can be used after a fresh deploy to remove the default (bigbang.dev) cert secret
-##   from the istio-system namespace and create new secrets with the `*.mtsi.bigbang.dev` cert.
+##   from the istio-system namespace and create new secrets with a cert using a custom domain such
+##   as `*.mtsi.bigbang.dev`.
 ##
-## PREREQS:
-##   * Access to mtsi-bigbang-dev-fullchain.pem (contact ablanchard)
-##   * Access to mtsi-bigbang-dev-privkey.pem (contact ablanchard)
+## PARAMS:
+##   * $1 -- relative path to a cert file in pem format (contact ablanchard)
+##   * $2 -- relative path to a key file in pem format (contact ablanchard)
 
 cert=$1
 key=$2
