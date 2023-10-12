@@ -33,8 +33,8 @@ endif
 .DEFAULT_GOAL := help
 
 # Target vars
-CERT_PATH := scripts/test-cert.pem
-KEY_PATH := scripts/test-key.pem
+CERT_PATH := scripts/test-cluster-ingress-cert.pem
+KEY_PATH := scripts/test-cluster-ingress-key.pem
 
 # Idiomatic way to force a target to always run, by having it depend on this dummy target
 FORCE:
