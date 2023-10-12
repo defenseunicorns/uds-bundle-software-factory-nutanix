@@ -32,6 +32,10 @@ endif
 
 .DEFAULT_GOAL := help
 
+# Target vars
+CERT_PATH := scripts/test-cert.pem
+KEY_PATH := scripts/test-key.pem
+
 # Idiomatic way to force a target to always run, by having it depend on this dummy target
 FORCE:
 
@@ -96,7 +100,7 @@ deploy: ## Deploy the software factory package
 	cp uds-config.yaml ./build/
 	cp deploy-dubbd-values.yaml ./build/
 	cd ./build && ./uds bundle deploy uds-bundle-software-factory-*.tar.zst --confirm
-	cd ./scripts && ./update-certs.sh
+	cd ./scripts && ./update-certs.sh $(CERT_PATH) $(KEY_PATH)
 
 ########################################################################
 # Macro Section
