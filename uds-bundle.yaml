@@ -41,7 +41,7 @@ zarf-packages:
   # Identity and Access Management
   - name: uds-idam
     repository: ghcr.io/defenseunicorns/uds-capability/uds-idam
-    ref: 0.1.9
+    ref: 0.1.13
     imports:
       - name: REALM_IMPORT_FILE
         package: software-factory-idam-realm
@@ -142,7 +142,7 @@ zarf-packages:
 
   - name: jira
     repository: ghcr.io/defenseunicorns/uds-capability/jira
-    ref: 0.0.3
+    ref: 0.0.4
 
   # Confluence
   - name: confluence-postgres
@@ -151,7 +151,7 @@ zarf-packages:
 
   - name: confluence
     repository: ghcr.io/defenseunicorns/uds-capability/confluence
-    ref: 0.0.2
+    ref: 0.0.3
 
    # Mattermost Operator with a Mattermost instance
   - name: mattermost-minio
@@ -164,7 +164,7 @@ zarf-packages:
 
   - name: mattermost
     repository: ghcr.io/defenseunicorns/uds-capability/mattermost
-    ref: 0.0.1
+    ref: 0.0.2
 
   # Nexus
   - name: nexus-postgres
@@ -173,4 +173,4 @@ zarf-packages:
 
   - name: nexus
     repository: ghcr.io/defenseunicorns/uds-capability/nexus
-    ref: 0.0.2
+    ref: 0.0.3
