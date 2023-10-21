@@ -39,9 +39,13 @@ zarf-packages:
       - name: REALM_IMPORT_FILE
 
   # Identity and Access Management
+  # - name: keycloak-postgres
+  #   path: build
+  #   ref: 0.0.1
+
   - name: uds-idam
     repository: ghcr.io/defenseunicorns/uds-capability/uds-idam
-    ref: 0.1.12
+    ref: 0.1.9
     imports:
       - name: REALM_IMPORT_FILE
         package: software-factory-idam-realm
