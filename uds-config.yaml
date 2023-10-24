@@ -15,25 +15,49 @@ bundle:
         set:
           # TODO - replace these blanket exceptions with more targeted kyverno policy exceptions
           EXEMPT_NAMESPACES: '["zarf", "rook-ceph", "metallb-system"]'
-          DOMAIN: "mtsi.bigbang.dev"
+          # dev
+          DOMAIN: "mtsi-dev.bigbang.dev"
+          # test
+          # DOMAIN: "mtsi.bigbang.dev"
       uds-idam:
         set:
-          DOMAIN: "mtsi.bigbang.dev"
+          # dev
+          DOMAIN: "mtsi-dev.bigbang.dev"
+          # test
+          # DOMAIN: "mtsi.bigbang.dev"
       gitlab:
         set:
-          DOMAIN: "mtsi.bigbang.dev"
+          # dev
+          DOMAIN: "mtsi-dev.bigbang.dev"
+          # test
+          # DOMAIN: "mtsi.bigbang.dev"
       sonarqube:
         set:
-          DOMAIN: "mtsi.bigbang.dev"
+          # dev
+          DOMAIN: "mtsi-dev.bigbang.dev"
+          # test
+          # DOMAIN: "mtsi.bigbang.dev"
       jira:
         set:
-          DOMAIN: "mtsi.bigbang.dev"
+          # dev
+          DOMAIN: "mtsi-dev.bigbang.dev"
+          # test
+          # DOMAIN: "mtsi.bigbang.dev"
       confluence:
         set:
-          DOMAIN: "mtsi.bigbang.dev"
+          # dev
+          DOMAIN: "mtsi-dev.bigbang.dev"
+          # test
+          # DOMAIN: "mtsi.bigbang.dev"
       mattermost:
         set:
-          DOMAIN: "mtsi.bigbang.dev"
+          # dev
+          DOMAIN: "mtsi-dev.bigbang.dev"
+          # test
+          # DOMAIN: "mtsi.bigbang.dev"
       nexus:
         set:
-          DOMAIN: "mtsi.bigbang.dev"
+          # dev
+          DOMAIN: "mtsi-dev.bigbang.dev"
+          # test
+          # DOMAIN: "mtsi.bigbang.dev"
