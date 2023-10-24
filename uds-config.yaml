@@ -19,7 +19,6 @@ bundle:
       uds-idam:
         set:
           DOMAIN: "mtsi.bigbang.dev"
-          
       gitlab:
         set:
           DOMAIN: "mtsi.bigbang.dev"
