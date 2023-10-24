@@ -80,7 +80,7 @@ build/idam-gitlab: | build ## Build idam-gitlab package
 	cd build && ./zarf package create ../packages/idam-gitlab/ --confirm --output-directory .
 
 build/idam-sonarqube: | build ## Build idam-sonarqube package
-	cd build && ./zarf package create ../packages/idam-sonarqube/ --confirm --output-directory .
+	cd build && ./zarf package create ../packages/idam-sonarqube/ --skip-sbom --confirm --output-directory .
 
 build/idam-dns: | build ## Build idam-dns package
 	cd build && ./zarf package create ../packages/idam-dns/ --confirm --output-directory .

@@ -7,7 +7,10 @@ bundle:
           REGISTRY_HPA_ENABLE: false
       metallb:
         set:
-          IP_ADDRESS_POOL: "24.0.132.240/28"
+          # dev
+          IP_ADDRESS_POOL: "24.0.132.244/30"
+          # test
+          # IP_ADDRESS_POOL: "24.0.132.248/30"
       dubbd-rke2:
         set:
           # TODO - replace these blanket exceptions with more targeted kyverno policy exceptions
