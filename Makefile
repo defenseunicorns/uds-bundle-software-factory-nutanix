@@ -50,7 +50,7 @@ help: ## Show a list of all targets
 ########################################################################
 
 .PHONY: build/all
-build/all: build build/zarf build/uds build/software-factory-namespaces build/idam-dns build/idam-realm build/idam-gitlab build/idam-sonarqube build/idam-postgres build/uds-bundle-software-factory ## Build everything
+build/all: build build/zarf build/uds build/software-factory-namespaces build/idam-dns build/idam-realm build/idam-gitlab build/idam-sonarqube build/uds-bundle-software-factory ## Build everything
 
 build: ## Create build directory
 	mkdir -p build
@@ -80,16 +80,13 @@ build/idam-gitlab: | build ## Build idam-gitlab package
 	cd build && ./zarf package create ../packages/idam-gitlab/ --confirm --output-directory .
 
 build/idam-sonarqube: | build ## Build idam-sonarqube package
-	cd build && ./zarf package create ../packages/idam-sonarqube/ --confirm --output-directory .
+	cd build && ./zarf package create ../packages/idam-sonarqube/ --skip-sbom --confirm --output-directory .
 
 build/idam-dns: | build ## Build idam-dns package
 	cd build && ./zarf package create ../packages/idam-dns/ --confirm --output-directory .
 
 build/idam-realm: | build ## Build idam-realm package
 	cd build && ./zarf package create ../packages/idam-realm/ --confirm --output-directory .
-
-build/idam-postgres: | build ## Build idam-postgres package
-	cd build && ./zarf package create ../packages/idam-postgres/ --confirm --output-directory .
 
 build/uds-bundle-software-factory: | build ## Build the software factory
 	cd build && ./uds bundle create ../ --confirm

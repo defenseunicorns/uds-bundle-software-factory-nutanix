@@ -8,9 +8,9 @@ bundle:
       metallb:
         set:
           # dev
-          # IP_ADDRESS_POOL: "24.0.132.244/30"
+          IP_ADDRESS_POOL: "24.0.132.244/30"
           # test
-          IP_ADDRESS_POOL: "24.0.132.248/30"
+          # IP_ADDRESS_POOL: "24.0.132.248/30"
       dubbd-rke2:
         set:
           # TODO - replace these blanket exceptions with more targeted kyverno policy exceptions
@@ -19,6 +19,7 @@ bundle:
       uds-idam:
         set:
           DOMAIN: "mtsi.bigbang.dev"
+          
       gitlab:
         set:
           DOMAIN: "mtsi.bigbang.dev"
