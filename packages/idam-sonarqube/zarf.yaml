@@ -6,10 +6,6 @@ metadata:
   version: "1.0.1"
   architecture: amd64
 
-variables:
-  - name: DOMAIN
-    default: "test.dev"
-
 components:
   - name: exported-variables
     required: true
