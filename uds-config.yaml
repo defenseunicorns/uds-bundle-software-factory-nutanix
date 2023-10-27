@@ -19,6 +19,24 @@ bundle:
           DOMAIN: "mtsi-dev.bigbang.dev"
           # test
           # DOMAIN: "mtsi.bigbang.dev"
+      software-factory-idam-gitlab:
+        set:
+          # dev
+          DOMAIN: "mtsi-dev.bigbang.dev"
+          # test
+          # DOMAIN: "mtsi.bigbang.dev"
+      software-factory-idam-sonarqube:
+        set:
+          # dev
+          DOMAIN: "mtsi-dev.bigbang.dev"
+          # test
+          # DOMAIN: "mtsi.bigbang.dev"
+      software-factory-idam-realm:
+        set:
+          # dev
+          DOMAIN: "mtsi-dev.bigbang.dev"
+          # test
+          # DOMAIN: "mtsi.bigbang.dev"
       uds-idam:
         set:
           # dev
