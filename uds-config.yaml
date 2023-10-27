@@ -53,8 +53,10 @@ bundle:
         set:
           # dev
           DOMAIN: "mtsi-dev.bigbang.dev"
+          SONARQUBE_IDAM_REALM_URL: "https://keycloak.mtsi-dev.bigbang.dev/auth/realms/baby-yoda"
           # test
           # DOMAIN: "mtsi.bigbang.dev"
+          # SONARQUBE_IDAM_REALM_URL: "https://keycloak.mtsi.bigbang.dev/auth/realms/baby-yoda"
       jira:
         set:
           # dev
