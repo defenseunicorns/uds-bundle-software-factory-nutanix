@@ -1,8 +1,8 @@
 #!/bin/bash
 
 NAMESPACE=kube-system
-CONFIGMAP=coredns
-DEPLOYMENT=coredns
+CONFIGMAP=rke2-coredns-rke2-coredns
+DEPLOYMENT=rke2-coredns-rke2-coredns
 TMP_FILE=tmp_cm.yaml
 
 # Get list of gateways and their ip's
@@ -47,7 +47,7 @@ EOF
 
   # escape newlines
   INSERT_STRING="${INSERT_STRING//$'\n'/\\n}"
-  
+
   # Create new Corefile with hosts block
   COREFILE_NEW=$(echo "$COREFILE" | sed -Ez "s/kubernetes/$INSERT_STRING\n    &/")
 else

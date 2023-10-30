@@ -19,6 +19,18 @@ bundle:
           DOMAIN: "mtsi-dev.bigbang.dev"
           # test
           # DOMAIN: "mtsi.bigbang.dev"
+      software-factory-idam-gitlab:
+        set:
+          # dev
+          DOMAIN: "mtsi-dev.bigbang.dev"
+          # test
+          # DOMAIN: "mtsi.bigbang.dev"
+      software-factory-idam-realm:
+        set:
+          # dev
+          DOMAIN: "mtsi-dev.bigbang.dev"
+          # test
+          # DOMAIN: "mtsi.bigbang.dev"
       uds-idam:
         set:
           # dev
@@ -35,8 +47,10 @@ bundle:
         set:
           # dev
           DOMAIN: "mtsi-dev.bigbang.dev"
+          SONARQUBE_IDAM_REALM_URL: "https://keycloak.mtsi-dev.bigbang.dev/auth/realms/baby-yoda"
           # test
           # DOMAIN: "mtsi.bigbang.dev"
+          # SONARQUBE_IDAM_REALM_URL: "https://keycloak.mtsi.bigbang.dev/auth/realms/baby-yoda"
       jira:
         set:
           # dev
