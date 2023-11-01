@@ -43,6 +43,8 @@ bundle:
           DOMAIN: "mtsi-dev.bigbang.dev"
           # test
           # DOMAIN: "mtsi.bigbang.dev"
+          GITLAB_DB_NAME: "gitlabdb"
+          GITLAB_DB_USERNAME: "gitlab"
       sonarqube:
         set:
           # dev
@@ -51,18 +53,24 @@ bundle:
           # test
           # DOMAIN: "mtsi.bigbang.dev"
           # SONARQUBE_IDAM_REALM_URL: "https://keycloak.mtsi.bigbang.dev/auth/realms/baby-yoda"
+          SONARQUBE_DB_NAME: "sonarqubedb"
+          SONARQUBE_DB_USERNAME: "sonarqube"
       jira:
         set:
           # dev
           DOMAIN: "mtsi-dev.bigbang.dev"
           # test
           # DOMAIN: "mtsi.bigbang.dev"
+          JIRA_DB_NAME: "jiradb"
+          JIRA_DB_USERNAME: "jira"
       confluence:
         set:
           # dev
           DOMAIN: "mtsi-dev.bigbang.dev"
           # test
           # DOMAIN: "mtsi.bigbang.dev"
+          CONFLUENCE_DB_NAME: "confluencedb"
+          CONFLUENCE_DB_USERNAME: "confluence"
       mattermost:
         set:
           # dev
@@ -75,3 +83,5 @@ bundle:
           DOMAIN: "mtsi-dev.bigbang.dev"
           # test
           # DOMAIN: "mtsi.bigbang.dev"
+          NEXUS_DB_NAME: "nexusdb"
+          NEXUS_DB_USERNAME: "nexus"

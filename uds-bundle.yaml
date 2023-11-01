@@ -91,7 +91,7 @@ zarf-packages:
 
   - name: gitlab
     repository: ghcr.io/defenseunicorns/uds-capability/gitlab
-    ref: 0.1.1
+    ref: 0.1.2
     imports:
       - name: GITLAB_IDAM_ENABLED
         package: software-factory-idam-gitlab
@@ -116,7 +116,7 @@ zarf-packages:
 
   - name: sonarqube
     repository: ghcr.io/defenseunicorns/uds-capability/sonarqube
-    ref: 0.0.10
+    ref: 0.0.11
     imports:
       - name: SONARQUBE_IDAM_ENABLED
         package: software-factory-idam-sonarqube
@@ -133,13 +133,6 @@ zarf-packages:
       - name: SONARQUBE_IDAM_PROVIDER_EMAIL
         package: software-factory-idam-sonarqube
 
-  # Add all virtualservices as internal dns entries for auth callbacks
-  - name: software-factory-idam-dns
-    path: build
-    ref: 1.0.0
-    optional-components:
-      - create-internal-dns-entries
-
   # Jira
   - name: jira-postgres
     repository: ghcr.io/defenseunicorns/uds-capability/jira/dev-dependency/jira-postgres
@@ -147,7 +140,7 @@ zarf-packages:
 
   - name: jira
     repository: ghcr.io/defenseunicorns/uds-capability/jira
-    ref: 0.0.4
+    ref: 0.0.5
 
   # Confluence
   - name: confluence-postgres
@@ -156,7 +149,7 @@ zarf-packages:
 
   - name: confluence
     repository: ghcr.io/defenseunicorns/uds-capability/confluence
-    ref: 0.0.3
+    ref: 0.0.4
 
    # Mattermost Operator with a Mattermost instance
   - name: mattermost-minio
@@ -178,4 +171,11 @@ zarf-packages:
 
   - name: nexus
     repository: ghcr.io/defenseunicorns/uds-capability/nexus
-    ref: 0.0.3
+    ref: 0.0.4
+
+  # Add all virtualservices as internal dns entries for auth callbacks
+  - name: software-factory-idam-dns
+    path: build
+    ref: 1.0.0
+    optional-components:
+      - create-internal-dns-entries
