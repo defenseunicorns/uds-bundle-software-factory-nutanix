@@ -45,6 +45,10 @@ bundle:
           # DOMAIN: "mtsi.bigbang.dev"
           GITLAB_DB_NAME: "gitlabdb"
           GITLAB_DB_USERNAME: "gitlab"
+      sonarqube-database-manifests:
+        set:
+          SONARQUBE_DB_EXTERNAL_NAME: "replace-me"
+          SONARQUBE_DB_PASSWORD: "replace-me"
       sonarqube:
         set:
           # dev

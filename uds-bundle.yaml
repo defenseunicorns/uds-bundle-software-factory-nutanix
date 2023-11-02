@@ -110,9 +110,9 @@ zarf-packages:
     ref: 0.0.8
 
   # Sonarqube
-  - name: sonarqube-postgres
-    repository: ghcr.io/defenseunicorns/uds-capability/sonarqube/dev-dependency/sonarqube-postgres
-    ref: 0.0.2
+  - name: sonarqube-database-manifests
+    path: build
+    ref: 0.0.1
 
   - name: sonarqube
     repository: ghcr.io/defenseunicorns/uds-capability/sonarqube
