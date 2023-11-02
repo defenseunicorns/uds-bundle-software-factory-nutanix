@@ -47,6 +47,7 @@ bundle:
           GITLAB_DB_USERNAME: "gitlab"
       sonarqube-database-manifests:
         set:
+          # dev
           SONARQUBE_DB_EXTERNAL_NAME: "replace-me"
           SONARQUBE_DB_PASSWORD: "replace-me"
       sonarqube:
@@ -57,8 +58,9 @@ bundle:
           # test
           # DOMAIN: "mtsi.bigbang.dev"
           # SONARQUBE_IDAM_REALM_URL: "https://keycloak.mtsi.bigbang.dev/auth/realms/baby-yoda"
+          # db config
           SONARQUBE_DB_NAME: "sonarqubedb"
-          SONARQUBE_DB_USERNAME: "sonarqube"
+          SONARQUBE_DB_USERNAME: "postgres"
       jira:
         set:
           # dev
