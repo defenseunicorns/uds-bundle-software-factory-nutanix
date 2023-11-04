@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: nexus-database-manifests
+  version: "0.0.1"
+  architecture: amd64
+
+variables:
+  - name: NEXUS_DB_EXTERNAL_NAME
+    default: "replace-me"
+  - name: NEXUS_DB_PASSWORD
+    default: "replace-me"
+
+components:
+  - name: nexus-postgres-manifests
+    required: true
+    manifests:
+      - name: nexus-postgres-manifests
+        namespace: nexus
+        files:
+          - policy-exceptions/externalName.yaml
+          - secret.yaml
+          - service.yaml

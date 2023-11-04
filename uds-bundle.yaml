@@ -89,6 +89,11 @@ zarf-packages:
     repository: ghcr.io/defenseunicorns/uds-capability/gitlab/dev-dependency/gitlab-postgres
     ref: 0.0.2
 
+  # TODO Troubleshoot database intialization issue
+  # - name: gitlab-database-manifests
+  #   path: build
+  #   ref: 0.0.1
+
   - name: gitlab
     repository: ghcr.io/defenseunicorns/uds-capability/gitlab
     ref: 0.1.2
@@ -134,8 +139,8 @@ zarf-packages:
         package: software-factory-idam-sonarqube
 
   # Jira
-  - name: jira-postgres
-    repository: ghcr.io/defenseunicorns/uds-capability/jira/dev-dependency/jira-postgres
+  - name: jira-database-manifests
+    path: build
     ref: 0.0.1
 
   - name: jira
@@ -143,8 +148,8 @@ zarf-packages:
     ref: 0.0.5
 
   # Confluence
-  - name: confluence-postgres
-    repository: ghcr.io/defenseunicorns/uds-capability/confluence/dev-dependency/confluence-postgres
+  - name: confluence-database-manifests
+    path: build
     ref: 0.0.1
 
   - name: confluence
@@ -165,8 +170,8 @@ zarf-packages:
     ref: 0.0.2
 
   # Nexus
-  - name: nexus-postgres
-    repository: ghcr.io/defenseunicorns/uds-capability/nexus/dev-dependency/nexus-postgres
+  - name: nexus-database-manifests
+    path: build
     ref: 0.0.1
 
   - name: nexus

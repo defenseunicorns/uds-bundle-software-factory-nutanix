@@ -37,6 +37,12 @@ bundle:
           DOMAIN: "mtsi-dev.bigbang.dev"
           # test
           # DOMAIN: "mtsi.bigbang.dev"
+      # TODO Troubleshoot database initialization issues
+      # gitlab-database-manifests:
+      #   set:
+      #     # dev
+      #     GITLAB_DB_EXTERNAL_NAME: "gitlab-pg.mtsi-dev.bigbang.dev"
+      #     GITLAB_DB_PASSWORD: "replace-me"
       gitlab:
         set:
           # dev
@@ -48,7 +54,7 @@ bundle:
       sonarqube-database-manifests:
         set:
           # dev
-          SONARQUBE_DB_EXTERNAL_NAME: "replace-me"
+          SONARQUBE_DB_EXTERNAL_NAME: "sonarqube-pg.mtsi-dev.bigbang.dev"
           SONARQUBE_DB_PASSWORD: "replace-me"
       sonarqube:
         set:
@@ -61,6 +67,11 @@ bundle:
           # db config
           SONARQUBE_DB_NAME: "sonarqubedb"
           SONARQUBE_DB_USERNAME: "postgres"
+      jira-database-manifests:
+        set:
+          # dev
+          JIRA_DB_EXTERNAL_NAME: "jira-pg.mtsi-dev.bigbang.dev"
+          JIRA_DB_PASSWORD: "replace-me"
       jira:
         set:
           # dev
@@ -68,7 +79,12 @@ bundle:
           # test
           # DOMAIN: "mtsi.bigbang.dev"
           JIRA_DB_NAME: "jiradb"
-          JIRA_DB_USERNAME: "jira"
+          JIRA_DB_USERNAME: "postgres"
+      confluence-database-manifests:
+        set:
+          # dev
+          CONFLUENCE_DB_EXTERNAL_NAME: "confluence-pg.mtsi-dev.bigbang.dev"
+          CONFLUENCE_DB_PASSWORD: "replace-me"
       confluence:
         set:
           # dev
@@ -76,13 +92,18 @@ bundle:
           # test
           # DOMAIN: "mtsi.bigbang.dev"
           CONFLUENCE_DB_NAME: "confluencedb"
-          CONFLUENCE_DB_USERNAME: "confluence"
+          CONFLUENCE_DB_USERNAME: "postgres"
       mattermost:
         set:
           # dev
           DOMAIN: "mtsi-dev.bigbang.dev"
           # test
           # DOMAIN: "mtsi.bigbang.dev"
+      nexus-database-manifests:
+        set:
+          # dev
+          NEXUS_DB_EXTERNAL_NAME: "nexus-pg.mtsi-dev.bigbang.dev"
+          NEXUS_DB_PASSWORD: "replace-me"
       nexus:
         set:
           # dev
@@ -90,4 +111,4 @@ bundle:
           # test
           # DOMAIN: "mtsi.bigbang.dev"
           NEXUS_DB_NAME: "nexusdb"
-          NEXUS_DB_USERNAME: "nexus"
+          NEXUS_DB_USERNAME: "postgres"

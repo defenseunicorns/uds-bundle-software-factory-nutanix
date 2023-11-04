@@ -50,7 +50,7 @@ help: ## Show a list of all targets
 ########################################################################
 
 .PHONY: build/all
-build/all: build build/zarf build/uds build/software-factory-namespaces build/idam-dns build/idam-realm build/idam-postgres build/idam-gitlab build/idam-sonarqube build/sonarqube-db-manifests build/uds-bundle-software-factory ## Build everything
+build/all: build build/zarf build/uds build/software-factory-namespaces build/idam-dns build/idam-realm build/idam-postgres build/idam-gitlab build/idam-sonarqube build/db-manifests build/uds-bundle-software-factory ## Build everything
 
 build: ## Create build directory
 	mkdir -p build
@@ -91,7 +91,11 @@ build/idam-realm: | build ## Build idam-realm package
 build/idam-postgres: | build ## Build idam-postgres package
 	cd build && ./zarf package create ../packages/idam-postgres/ --confirm --output-directory .
 
-build/sonarqube-db-manifests:
+build/db-manifests:
+	cd build && ./zarf package create ../packages/databases/confluence/ --confirm --output-directory .
+	cd build && ./zarf package create ../packages/databases/gitlab/ --confirm --output-directory .
+	cd build && ./zarf package create ../packages/databases/jira/ --confirm --output-directory .
+	cd build && ./zarf package create ../packages/databases/nexus/ --confirm --output-directory .
 	cd build && ./zarf package create ../packages/databases/sonarqube/ --confirm --output-directory .
 
 build/uds-bundle-software-factory: | build ## Build the software factory
