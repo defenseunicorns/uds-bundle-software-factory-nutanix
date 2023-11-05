@@ -93,6 +93,13 @@ bundle:
           # DOMAIN: "mtsi.bigbang.dev"
           CONFLUENCE_DB_NAME: "confluencedb"
           CONFLUENCE_DB_USERNAME: "postgres"
+      mattermost-database-manifests:
+        set:
+          # dev
+          MATTERMOST_DB_EXTERNAL_NAME: "mattermost-pg.mtsi-dev.bigbang.dev"
+          MATTERMOST_DB_USERNAME: "postgres"
+          MATTERMOST_DB_PASSWORD: "replace-me"
+          MATTERMOST_DB_NAME: "mattermostdb"
       mattermost:
         set:
           # dev

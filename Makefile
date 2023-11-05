@@ -95,6 +95,7 @@ build/db-manifests:
 	cd build && ./zarf package create ../packages/databases/confluence/ --confirm --output-directory .
 	cd build && ./zarf package create ../packages/databases/gitlab/ --confirm --output-directory .
 	cd build && ./zarf package create ../packages/databases/jira/ --confirm --output-directory .
+	cd build && ./zarf package create ../packages/databases/mattermost/ --confirm --output-directory .
 	cd build && ./zarf package create ../packages/databases/nexus/ --confirm --output-directory .
 	cd build && ./zarf package create ../packages/databases/sonarqube/ --confirm --output-directory .
 

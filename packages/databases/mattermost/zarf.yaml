@@ -8,8 +8,12 @@ metadata:
 variables:
   - name: MATTERMOST_DB_EXTERNAL_NAME
     default: "replace-me"
+  - name: MATTERMOST_DB_USERNAME
+    default: "postgres"
   - name: MATTERMOST_DB_PASSWORD
     default: "replace-me"
+  - name: MATTERMOST_DB_NAME
+    default: "mattermostdb"
 
 components:
   - name: mattermost-postgres-manifests
