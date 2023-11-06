@@ -161,14 +161,9 @@ zarf-packages:
     repository: ghcr.io/defenseunicorns/uds-capability/mattermost/dev-dependency/mattermost-minio
     ref: 0.0.1
 
-  - name: mattermost-postgres
-    repository: ghcr.io/defenseunicorns/uds-capability/mattermost/dev-dependency/mattermost-postgres
-    ref: 0.0.2
-
-  # TODO try an switch to this
-  # - name: mattermost-database-manifests
-  #   path: build
-  #   ref: 0.0.1
+  - name: mattermost-database-manifests
+    path: build
+    ref: 0.0.1
 
   - name: mattermost
     repository: ghcr.io/defenseunicorns/uds-capability/mattermost
