@@ -37,12 +37,11 @@ bundle:
           DOMAIN: "mtsi-dev.bigbang.dev"
           # test
           # DOMAIN: "mtsi.bigbang.dev"
-      # TODO Troubleshoot database initialization issues
-      # gitlab-database-manifests:
-      #   set:
-      #     # dev
-      #     GITLAB_DB_EXTERNAL_NAME: "gitlab-pg.mtsi-dev.bigbang.dev"
-      #     GITLAB_DB_PASSWORD: "replace-me"
+      gitlab-database-manifests:
+        set:
+          # dev
+          GITLAB_DB_EXTERNAL_NAME: "gitlab-pg.mtsi-dev.bigbang.dev"
+          GITLAB_DB_PASSWORD: "replace-me"
       gitlab:
         set:
           # dev
@@ -50,7 +49,7 @@ bundle:
           # test
           # DOMAIN: "mtsi.bigbang.dev"
           GITLAB_DB_NAME: "gitlabdb"
-          GITLAB_DB_USERNAME: "gitlab"
+          GITLAB_DB_USERNAME: "postgres"
       sonarqube-database-manifests:
         set:
           # dev

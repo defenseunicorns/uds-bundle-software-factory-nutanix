@@ -39,6 +39,7 @@ zarf-packages:
       - name: REALM_IMPORT_FILE
 
   # Identity and Access Management
+  # TODO Replace with external DB
   - name: keycloak-postgres
     path: build
     ref: 0.0.1
@@ -85,14 +86,9 @@ zarf-packages:
     repository: ghcr.io/defenseunicorns/uds-capability/gitlab/dev-dependency/gitlab-minio
     ref: 0.0.2
 
-  - name: gitlab-postgres
-    repository: ghcr.io/defenseunicorns/uds-capability/gitlab/dev-dependency/gitlab-postgres
-    ref: 0.0.2
-
-  # TODO Troubleshoot database intialization issue
-  # - name: gitlab-database-manifests
-  #   path: build
-  #   ref: 0.0.1
+  - name: gitlab-database-manifests
+    path: build
+    ref: 0.0.1
 
   - name: gitlab
     repository: ghcr.io/defenseunicorns/uds-capability/gitlab
