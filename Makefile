@@ -50,7 +50,7 @@ help: ## Show a list of all targets
 ########################################################################
 
 .PHONY: build/all
-build/all: build build/zarf build/uds build/software-factory-namespaces build/idam-dns build/idam-realm build/idam-postgres build/idam-gitlab build/idam-sonarqube build/db-manifests build/uds-bundle-software-factory ## Build everything
+build/all: build build/zarf build/uds build/software-factory-namespaces build/idam-dns build/idam-realm build/idam-gitlab build/idam-sonarqube build/db-manifests build/uds-bundle-software-factory ## Build everything
 
 build: ## Create build directory
 	mkdir -p build
