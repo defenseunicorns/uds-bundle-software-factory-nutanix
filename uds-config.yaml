@@ -35,6 +35,8 @@ bundle:
         set:
           # dev
           KEYCLOAK_DB_EXTERNAL_NAME: "keycloak-pg.mtsi-dev.bigbang.dev"
+          # test
+          # KEYCLOAK_DB_EXTERNAL_NAME: "keycloak-pg.mtsi.bigbang.dev"
       uds-idam:
         set:
           # dev
@@ -50,6 +52,9 @@ bundle:
           # dev
           GITLAB_DB_EXTERNAL_NAME: "gitlab-pg.mtsi-dev.bigbang.dev"
           GITLAB_DB_PASSWORD: "replace-me"
+          # test
+          # GITLAB_DB_EXTERNAL_NAME: "gitlab-pg.mtsi.bigbang.dev"
+          # GITLAB_DB_PASSWORD: "replace-me"
       gitlab:
         set:
           # dev
@@ -63,6 +68,9 @@ bundle:
           # dev
           SONARQUBE_DB_EXTERNAL_NAME: "sonarqube-pg.mtsi-dev.bigbang.dev"
           SONARQUBE_DB_PASSWORD: "replace-me"
+          # test
+          # SONARQUBE_DB_EXTERNAL_NAME: "sonarqube-pg.mtsi.bigbang.dev"
+          # SONARQUBE_DB_PASSWORD: "replace-me"
       sonarqube:
         set:
           # dev
@@ -79,6 +87,9 @@ bundle:
           # dev
           JIRA_DB_EXTERNAL_NAME: "jira-pg.mtsi-dev.bigbang.dev"
           JIRA_DB_PASSWORD: "replace-me"
+          # test
+          # JIRA_DB_EXTERNAL_NAME: "jira-pg.mtsi.bigbang.dev"
+          # JIRA_DB_PASSWORD: "replace-me"
       jira:
         set:
           # dev
@@ -92,6 +103,9 @@ bundle:
           # dev
           CONFLUENCE_DB_EXTERNAL_NAME: "confluence-pg.mtsi-dev.bigbang.dev"
           CONFLUENCE_DB_PASSWORD: "replace-me"
+          # test
+          # CONFLUENCE_DB_EXTERNAL_NAME: "confluence-pg.mtsi.bigbang.dev"
+          # CONFLUENCE_DB_PASSWORD: "replace-me"
       confluence:
         set:
           # dev
@@ -104,8 +118,11 @@ bundle:
         set:
           # dev
           MATTERMOST_DB_EXTERNAL_NAME: "mattermost-pg.mtsi-dev.bigbang.dev"
-          MATTERMOST_DB_USERNAME: "postgres"
           MATTERMOST_DB_PASSWORD: "replace-me"
+          # test
+          # MATTERMOST_DB_EXTERNAL_NAME: "mattermost-pg.mtsi.bigbang.dev"
+          # MATTERMOST_DB_PASSWORD: "replace-me"
+          MATTERMOST_DB_USERNAME: "postgres"
           MATTERMOST_DB_NAME: "mattermostdb"
       mattermost:
         set:
@@ -118,6 +135,9 @@ bundle:
           # dev
           NEXUS_DB_EXTERNAL_NAME: "nexus-pg.mtsi-dev.bigbang.dev"
           NEXUS_DB_PASSWORD: "replace-me"
+          # test
+          # NEXUS_DB_EXTERNAL_NAME: "nexus-pg.mtsi.bigbang.dev"
+          # NEXUS_DB_PASSWORD: "replace-me"
       nexus:
         set:
           # dev
