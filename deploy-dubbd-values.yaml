@@ -1,1 +1,32 @@
-# DO NOT USE -- this file is only here to silence a warning
+# DO NOT USE :oops-a-daisy: -- this file is only here to silence a warning
+loki:
+  values:
+    # Values for Monolith strategy
+    singleBinary:
+      resources:
+        limits:
+          cpu: 100m
+          memory: 1024Mi
+        requests:
+          cpu: 100m
+          memory: 512Mi
+
+monitoring:
+  values:
+    kube-state-metrics:
+      resources:
+        limits:
+          cpu: "500m"
+          memory: "1024Mi"
+        requests:
+          cpu: "10m"
+          memory: "512Mi"
+    prometheus:
+      prometheusSpec:
+        resources:
+          limits:
+            cpu: "600m"
+            memory: "6Gi"
+          requests:
+            cpu: "300m"
+            memory: "2Gi"

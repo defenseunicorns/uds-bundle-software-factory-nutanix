@@ -1,0 +1,19 @@
+apiVersion: kyverno.io/v2alpha1
+kind: PolicyException
+metadata:
+  name: jira-postgres-external-names-exception
+  namespace: jira
+spec:
+  exceptions:
+  - policyName: restrict-external-names
+    ruleNames:
+    - external-names
+  match:
+    any:
+    - resources:
+        kinds:
+        - Service
+        namespaces:
+        - jira
+        names:
+        - jira-postgres

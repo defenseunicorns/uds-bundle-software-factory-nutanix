@@ -1,20 +1,19 @@
 apiVersion: kyverno.io/v2alpha1
 kind: PolicyException
 metadata:
-  name: keycloak-postgres-registry-exception
+  name: keycloak-postgres-external-names-exception
   namespace: keycloak
 spec:
   exceptions:
-  - policyName: restrict-image-registries
+  - policyName: restrict-external-names
     ruleNames:
-    - validate-registries
-    - autogen-validate-registries
+    - external-names
   match:
     any:
     - resources:
         kinds:
-        - StatefulSet
+        - Service
         namespaces:
         - keycloak
         names:
-        - postgresql
+        - keycloak-postgres

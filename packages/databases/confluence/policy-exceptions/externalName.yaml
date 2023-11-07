@@ -1,0 +1,19 @@
+apiVersion: kyverno.io/v2alpha1
+kind: PolicyException
+metadata:
+  name: confluence-postgres-external-names-exception
+  namespace: confluence
+spec:
+  exceptions:
+  - policyName: restrict-external-names
+    ruleNames:
+    - external-names
+  match:
+    any:
+    - resources:
+        kinds:
+        - Service
+        namespaces:
+        - confluence
+        names:
+        - confluence-postgres

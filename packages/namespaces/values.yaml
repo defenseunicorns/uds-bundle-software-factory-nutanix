@@ -2,9 +2,6 @@ namespaces:
   - name: gitlab
     labels:
       istio-injection: enabled
-  - name: gitlab-db
-    labels:
-      istio-injection: enabled
   - name: gitlab-redis
     labels:
       istio-injection: enabled
@@ -21,28 +18,16 @@ namespaces:
   - name: sonarqube
     labels:
       istio-injection: enabled
-  - name: sonarqube-db
-    labels:
-      istio-injection: enabled
   - name: metallb-system
     labels:
       istio-injection: disabled
   - name: confluence
     labels:
       istio-injection: enabled
-  - name: confluence-db
-    labels:
-      istio-injection: enabled
   - name: jira
     labels:
       istio-injection: enabled
-  - name: jira-db
-    labels:
-      istio-injection: enabled
   - name: mattermost
-    labels:
-      istio-injection: enabled
-  - name: mattermost-db
     labels:
       istio-injection: enabled
   - name: mattermost-minio
@@ -52,9 +37,6 @@ namespaces:
     labels:
       istio-injection: enabled
   - name: nexus
-    labels:
-      istio-injection: enabled
-  - name: nexus-db
     labels:
       istio-injection: enabled
   - name: keycloak

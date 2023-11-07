@@ -39,11 +39,9 @@ zarf-packages:
       - name: REALM_IMPORT_FILE
 
   # Identity and Access Management
-  - name: keycloak-postgres
+  - name: keycloak-database-manifests
     path: build
     ref: 0.0.1
-    exports:
-      - name: KEYCLOAK_DB_PASSWORD
 
   - name: uds-idam
     repository: ghcr.io/defenseunicorns/uds-capability/uds-idam
@@ -51,8 +49,6 @@ zarf-packages:
     imports:
       - name: REALM_IMPORT_FILE
         package: software-factory-idam-realm
-      - name: KEYCLOAK_DB_PASSWORD
-        package: keycloak-postgres
 
   # GitLab SSO secret and variables
   - name: software-factory-idam-gitlab
@@ -85,13 +81,13 @@ zarf-packages:
     repository: ghcr.io/defenseunicorns/uds-capability/gitlab/dev-dependency/gitlab-minio
     ref: 0.0.2
 
-  - name: gitlab-postgres
-    repository: ghcr.io/defenseunicorns/uds-capability/gitlab/dev-dependency/gitlab-postgres
-    ref: 0.0.2
+  - name: gitlab-database-manifests
+    path: build
+    ref: 0.0.1
 
   - name: gitlab
     repository: ghcr.io/defenseunicorns/uds-capability/gitlab
-    ref: 0.1.1
+    ref: 0.1.2
     imports:
       - name: GITLAB_IDAM_ENABLED
         package: software-factory-idam-gitlab
@@ -110,13 +106,13 @@ zarf-packages:
     ref: 0.0.8
 
   # Sonarqube
-  - name: sonarqube-postgres
-    repository: ghcr.io/defenseunicorns/uds-capability/sonarqube/dev-dependency/sonarqube-postgres
-    ref: 0.0.2
+  - name: sonarqube-database-manifests
+    path: build
+    ref: 0.0.1
 
   - name: sonarqube
     repository: ghcr.io/defenseunicorns/uds-capability/sonarqube
-    ref: 0.0.10
+    ref: 0.0.11
     imports:
       - name: SONARQUBE_IDAM_ENABLED
         package: software-factory-idam-sonarqube
@@ -133,49 +129,49 @@ zarf-packages:
       - name: SONARQUBE_IDAM_PROVIDER_EMAIL
         package: software-factory-idam-sonarqube
 
-  # Add all virtualservices as internal dns entries for auth callbacks
-  - name: software-factory-idam-dns
-    path: build
-    ref: 1.0.0
-    optional-components:
-      - create-internal-dns-entries
-
   # Jira
-  - name: jira-postgres
-    repository: ghcr.io/defenseunicorns/uds-capability/jira/dev-dependency/jira-postgres
+  - name: jira-database-manifests
+    path: build
     ref: 0.0.1
 
   - name: jira
     repository: ghcr.io/defenseunicorns/uds-capability/jira
-    ref: 0.0.4
+    ref: 0.0.5
 
   # Confluence
-  - name: confluence-postgres
-    repository: ghcr.io/defenseunicorns/uds-capability/confluence/dev-dependency/confluence-postgres
+  - name: confluence-database-manifests
+    path: build
     ref: 0.0.1
 
   - name: confluence
     repository: ghcr.io/defenseunicorns/uds-capability/confluence
-    ref: 0.0.3
+    ref: 0.0.4
 
    # Mattermost Operator with a Mattermost instance
   - name: mattermost-minio
     repository: ghcr.io/defenseunicorns/uds-capability/mattermost/dev-dependency/mattermost-minio
     ref: 0.0.1
 
-  - name: mattermost-postgres
-    repository: ghcr.io/defenseunicorns/uds-capability/mattermost/dev-dependency/mattermost-postgres
-    ref: 0.0.2
+  - name: mattermost-database-manifests
+    path: build
+    ref: 0.0.1
 
   - name: mattermost
     repository: ghcr.io/defenseunicorns/uds-capability/mattermost
     ref: 0.0.2
 
   # Nexus
-  - name: nexus-postgres
-    repository: ghcr.io/defenseunicorns/uds-capability/nexus/dev-dependency/nexus-postgres
+  - name: nexus-database-manifests
+    path: build
     ref: 0.0.1
 
   - name: nexus
     repository: ghcr.io/defenseunicorns/uds-capability/nexus
-    ref: 0.0.3
+    ref: 0.0.4
+
+  # Add all virtualservices as internal dns entries for auth callbacks
+  - name: software-factory-idam-dns
+    path: build
+    ref: 1.0.0
+    optional-components:
+      - create-internal-dns-entries
