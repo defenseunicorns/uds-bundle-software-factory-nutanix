@@ -105,8 +105,14 @@ build/uds-bundle-software-factory: | build ## Build the software factory
 # Deploy Section
 ########################################################################
 
-deploy: ## Deploy the software factory package
-	cp uds-config.yaml ./build/
+deploy/test-cluster: ## Deploy the software factory package to the test cluster
+	cp uds-config/test-cluster/uds-config.yaml ./build/
+	cp deploy-dubbd-values.yaml ./build/
+	cd ./build && ./uds bundle deploy uds-bundle-software-factory-*.tar.zst --confirm
+	cd ./scripts && ./update-certs.sh $(CERT_PATH) $(KEY_PATH)
+
+deploy/dev-cluster: ## Deploy the software factory package to the dev cluster
+	cp uds-config/dev-cluster/uds-config.yaml ./build/
 	cp deploy-dubbd-values.yaml ./build/
 	cd ./build && ./uds bundle deploy uds-bundle-software-factory-*.tar.zst --confirm
 	cd ./scripts && ./update-certs.sh $(CERT_PATH) $(KEY_PATH)
@@ -115,8 +121,9 @@ deploy: ## Deploy the software factory package
 # Macro Section
 ########################################################################
 
-.PHONY: all
-all: build/all deploy ## Build and deploy the software factory
+all/test-cluster: build/all deploy/test-cluster ## Build and deploy the software factory to the test cluster
+
+all/dev-cluster: build/all deploy/dev-cluster ## Build and deploy the software factory to the test cluster
 
 .PHONY: rebuild
 rebuild: clean build/all
