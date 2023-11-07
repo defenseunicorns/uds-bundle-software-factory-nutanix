@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: keycloak-database-manifests
+  version: "0.0.1"
+  architecture: amd64
+
+variables:
+  - name: KEYCLOAK_DB_EXTERNAL_NAME
+    default: "replace-me"
+
+components:
+  - name: keycloak-postgres-manifests
+    required: true
+    manifests:
+      - name: keycloak-postgres-manifests
+        namespace: keycloak
+        files:
+          - policy-exceptions/externalName.yaml
+          - service.yaml

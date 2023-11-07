@@ -31,12 +31,20 @@ bundle:
           DOMAIN: "mtsi-dev.bigbang.dev"
           # test
           # DOMAIN: "mtsi.bigbang.dev"
+      keycloak-database-manifests:
+        set:
+          # dev
+          KEYCLOAK_DB_EXTERNAL_NAME: "keycloak-pg.mtsi-dev.bigbang.dev"
       uds-idam:
         set:
           # dev
           DOMAIN: "mtsi-dev.bigbang.dev"
           # test
           # DOMAIN: "mtsi.bigbang.dev"
+          KEYCLOAK_DB_USERNAME: "postgres"
+          KEYCLOAK_DB_PASSWORD: "replace-me"
+          KEYCLOAK_DB_NAME: "keycloakdb"
+          KEYCLOAK_DB_ENDPOINT: "keycloak-postgres.keycloak.svc.cluster.local"
       gitlab-database-manifests:
         set:
           # dev

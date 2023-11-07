@@ -16,4 +16,4 @@ spec:
         namespaces:
         - keycloak
         names:
-        - keycloak-postgresql
+        - keycloak-postgres
