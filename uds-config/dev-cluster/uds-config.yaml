@@ -7,142 +7,80 @@ bundle:
           REGISTRY_HPA_ENABLE: false
       metallb:
         set:
-          # dev
           IP_ADDRESS_POOL: "24.0.132.244/30"
-          # test
-          # IP_ADDRESS_POOL: "24.0.132.248/30"
       dubbd-rke2:
         set:
           # TODO - replace these blanket exceptions with more targeted kyverno policy exceptions
           EXEMPT_NAMESPACES: '["zarf", "rook-ceph", "metallb-system"]'
-          # dev
           DOMAIN: "mtsi-dev.bigbang.dev"
-          # test
-          # DOMAIN: "mtsi.bigbang.dev"
       software-factory-idam-gitlab:
         set:
-          # dev
           DOMAIN: "mtsi-dev.bigbang.dev"
-          # test
-          # DOMAIN: "mtsi.bigbang.dev"
       software-factory-idam-realm:
         set:
-          # dev
           DOMAIN: "mtsi-dev.bigbang.dev"
-          # test
-          # DOMAIN: "mtsi.bigbang.dev"
       keycloak-database-manifests:
         set:
-          # dev
           KEYCLOAK_DB_EXTERNAL_NAME: "keycloak-pg.mtsi-dev.bigbang.dev"
-          # test
-          # KEYCLOAK_DB_EXTERNAL_NAME: "keycloak-pg.mtsi.bigbang.dev"
       uds-idam:
         set:
-          # dev
           DOMAIN: "mtsi-dev.bigbang.dev"
-          # test
-          # DOMAIN: "mtsi.bigbang.dev"
           KEYCLOAK_DB_USERNAME: "postgres"
           KEYCLOAK_DB_PASSWORD: "replace-me"
           KEYCLOAK_DB_NAME: "keycloakdb"
           KEYCLOAK_DB_ENDPOINT: "keycloak-postgres.keycloak.svc.cluster.local"
       gitlab-database-manifests:
         set:
-          # dev
           GITLAB_DB_EXTERNAL_NAME: "gitlab-pg.mtsi-dev.bigbang.dev"
           GITLAB_DB_PASSWORD: "replace-me"
-          # test
-          # GITLAB_DB_EXTERNAL_NAME: "gitlab-pg.mtsi.bigbang.dev"
-          # GITLAB_DB_PASSWORD: "replace-me"
       gitlab:
         set:
-          # dev
           DOMAIN: "mtsi-dev.bigbang.dev"
-          # test
-          # DOMAIN: "mtsi.bigbang.dev"
           GITLAB_DB_NAME: "gitlabdb"
           GITLAB_DB_USERNAME: "postgres"
       sonarqube-database-manifests:
         set:
-          # dev
           SONARQUBE_DB_EXTERNAL_NAME: "sonarqube-pg.mtsi-dev.bigbang.dev"
           SONARQUBE_DB_PASSWORD: "replace-me"
-          # test
-          # SONARQUBE_DB_EXTERNAL_NAME: "sonarqube-pg.mtsi.bigbang.dev"
-          # SONARQUBE_DB_PASSWORD: "replace-me"
       sonarqube:
         set:
-          # dev
           DOMAIN: "mtsi-dev.bigbang.dev"
           SONARQUBE_IDAM_REALM_URL: "https://keycloak.mtsi-dev.bigbang.dev/auth/realms/baby-yoda"
-          # test
-          # DOMAIN: "mtsi.bigbang.dev"
-          # SONARQUBE_IDAM_REALM_URL: "https://keycloak.mtsi.bigbang.dev/auth/realms/baby-yoda"
-          # db config
           SONARQUBE_DB_NAME: "sonarqubedb"
           SONARQUBE_DB_USERNAME: "postgres"
       jira-database-manifests:
         set:
-          # dev
           JIRA_DB_EXTERNAL_NAME: "jira-pg.mtsi-dev.bigbang.dev"
           JIRA_DB_PASSWORD: "replace-me"
-          # test
-          # JIRA_DB_EXTERNAL_NAME: "jira-pg.mtsi.bigbang.dev"
-          # JIRA_DB_PASSWORD: "replace-me"
       jira:
         set:
-          # dev
           DOMAIN: "mtsi-dev.bigbang.dev"
-          # test
-          # DOMAIN: "mtsi.bigbang.dev"
           JIRA_DB_NAME: "jiradb"
           JIRA_DB_USERNAME: "postgres"
       confluence-database-manifests:
         set:
-          # dev
           CONFLUENCE_DB_EXTERNAL_NAME: "confluence-pg.mtsi-dev.bigbang.dev"
           CONFLUENCE_DB_PASSWORD: "replace-me"
-          # test
-          # CONFLUENCE_DB_EXTERNAL_NAME: "confluence-pg.mtsi.bigbang.dev"
-          # CONFLUENCE_DB_PASSWORD: "replace-me"
       confluence:
         set:
-          # dev
           DOMAIN: "mtsi-dev.bigbang.dev"
-          # test
-          # DOMAIN: "mtsi.bigbang.dev"
           CONFLUENCE_DB_NAME: "confluencedb"
           CONFLUENCE_DB_USERNAME: "postgres"
       mattermost-database-manifests:
         set:
-          # dev
           MATTERMOST_DB_EXTERNAL_NAME: "mattermost-pg.mtsi-dev.bigbang.dev"
           MATTERMOST_DB_PASSWORD: "replace-me"
-          # test
-          # MATTERMOST_DB_EXTERNAL_NAME: "mattermost-pg.mtsi.bigbang.dev"
-          # MATTERMOST_DB_PASSWORD: "replace-me"
           MATTERMOST_DB_USERNAME: "postgres"
           MATTERMOST_DB_NAME: "mattermostdb"
       mattermost:
         set:
-          # dev
           DOMAIN: "mtsi-dev.bigbang.dev"
-          # test
-          # DOMAIN: "mtsi.bigbang.dev"
       nexus-database-manifests:
         set:
-          # dev
           NEXUS_DB_EXTERNAL_NAME: "nexus-pg.mtsi-dev.bigbang.dev"
           NEXUS_DB_PASSWORD: "replace-me"
-          # test
-          # NEXUS_DB_EXTERNAL_NAME: "nexus-pg.mtsi.bigbang.dev"
-          # NEXUS_DB_PASSWORD: "replace-me"
       nexus:
         set:
-          # dev
           DOMAIN: "mtsi-dev.bigbang.dev"
-          # test
-          # DOMAIN: "mtsi.bigbang.dev"
           NEXUS_DB_NAME: "nexusdb"
           NEXUS_DB_USERNAME: "postgres"
