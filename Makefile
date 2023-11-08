@@ -1,9 +1,9 @@
 # The version of Zarf to use. To keep this repo as portable as possible the Zarf binary will be downloaded and added to
 # the build folder.
 # renovate: datasource=github-tags depName=defenseunicorns/zarf
-UDS_CLI_VERSION := v0.0.5-alpha
+UDS_CLI_VERSION := v0.0.11-alpha
 
-ZARF_VERSION := v0.29.1
+ZARF_VERSION := v0.30.1
 
 # Figure out which Zarf binary we should use based on the operating system we are on
 ZARF_BIN := zarf
@@ -98,7 +98,7 @@ build/db-manifests:
 	cd build && ./zarf package create ../packages/databases/sonarqube/ --confirm --output-directory .
 
 build/uds-bundle-software-factory: | build ## Build the software factory
-	cd build && ./uds bundle create ../ --confirm
+	cd build && ./uds create ../ --confirm
 	mv uds-bundle-software-factory-*.tar.zst build/
 
 ########################################################################
@@ -108,13 +108,13 @@ build/uds-bundle-software-factory: | build ## Build the software factory
 deploy/test-cluster: ## Deploy the software factory package to the test cluster
 	cp uds-config/test-cluster/uds-config.yaml ./build/
 	cp deploy-dubbd-values.yaml ./build/
-	cd ./build && ./uds bundle deploy uds-bundle-software-factory-*.tar.zst --confirm
+	cd ./build && ./uds deploy uds-bundle-software-factory-*.tar.zst --confirm
 	cd ./scripts && ./update-certs.sh $(CERT_PATH) $(KEY_PATH)
 
 deploy/dev-cluster: ## Deploy the software factory package to the dev cluster
 	cp uds-config/dev-cluster/uds-config.yaml ./build/
 	cp deploy-dubbd-values.yaml ./build/
-	cd ./build && ./uds bundle deploy uds-bundle-software-factory-*.tar.zst --confirm
+	cd ./build && ./uds deploy uds-bundle-software-factory-*.tar.zst --confirm
 	cd ./scripts && ./update-certs.sh $(CERT_PATH) $(KEY_PATH)
 
 ########################################################################
