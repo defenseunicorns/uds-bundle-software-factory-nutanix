@@ -150,7 +150,7 @@ zarf-packages:
    # Mattermost Operator with a Mattermost instance
   - name: mattermost-minio
     repository: ghcr.io/defenseunicorns/uds-capability/mattermost/dev-dependency/mattermost-minio
-    ref: 0.0.1
+    ref: 0.0.2
 
   - name: mattermost-database-manifests
     path: build
