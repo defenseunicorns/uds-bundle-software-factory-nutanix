@@ -87,7 +87,7 @@ zarf-packages:
 
   - name: gitlab
     repository: ghcr.io/defenseunicorns/uds-capability/gitlab
-    ref: 0.1.2
+    ref: 0.1.8
     imports:
       - name: GITLAB_IDAM_ENABLED
         package: software-factory-idam-gitlab
