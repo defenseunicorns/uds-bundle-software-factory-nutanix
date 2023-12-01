@@ -83,7 +83,7 @@ zarf-packages:
 
   - name: gitlab-database-manifests
     path: build
-    ref: 0.1.8
+    ref: 0.0.1
 
   - name: gitlab
     repository: ghcr.io/defenseunicorns/uds-capability/gitlab
@@ -108,7 +108,7 @@ zarf-packages:
   # Sonarqube
   - name: sonarqube-database-manifests
     path: build
-    ref: 0.1.2
+    ref: 0.0.1
 
   - name: sonarqube
     repository: ghcr.io/defenseunicorns/uds-capability/sonarqube
@@ -132,7 +132,7 @@ zarf-packages:
   # Jira
   - name: jira-database-manifests
     path: build
-    ref: 0.1.2
+    ref: 0.0.1
 
   - name: jira
     repository: ghcr.io/defenseunicorns/uds-capability/jira
@@ -141,7 +141,7 @@ zarf-packages:
   # Confluence
   - name: confluence-database-manifests
     path: build
-    ref: 0.1.2
+    ref: 0.0.1
 
   - name: confluence
     repository: ghcr.io/defenseunicorns/uds-capability/confluence
@@ -154,7 +154,7 @@ zarf-packages:
 
   - name: mattermost-database-manifests
     path: build
-    ref: 0.1.2
+    ref: 0.0.1
 
   - name: mattermost
     repository: ghcr.io/defenseunicorns/uds-capability/mattermost
@@ -163,7 +163,7 @@ zarf-packages:
   # Nexus
   - name: nexus-database-manifests
     path: build
-    ref: 0.1.2
+    ref: 0.0.1
 
   - name: nexus
     repository: ghcr.io/defenseunicorns/uds-capability/nexus
