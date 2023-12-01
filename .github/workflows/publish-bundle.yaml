@@ -56,5 +56,5 @@ jobs:
         run: make build/all
 
       - name: Publish bundle
-        run: ./uds publish uds-bundle-software-factory-nutanix-amd64-*.tar.zst oci://ghcr.io/defenseunicorns/uds-bundle-software-factory-nutanix --no-progress
+        run: ./uds publish uds-bundle-software-factory-nutanix-amd64-*.tar.zst oci://ghcr.io/defenseunicorns/uds-bundle --no-progress
         working-directory: build
