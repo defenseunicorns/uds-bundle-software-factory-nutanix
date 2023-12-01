@@ -3,7 +3,9 @@ kind: UDSBundle
 metadata:
   name: software-factory-nutanix
   description: A UDS bundle for deploying a software factory to an RKE2 cluster
-  version: 0.1.0
+  # x-release-please-start-version
+  version: "0.1.0"
+  # x-release-please-end
   architecture: amd64
 
 zarf-packages:

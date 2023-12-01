@@ -1,0 +1,33 @@
+name: Tag, Test and Publish UDS Capability Artifactory
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+
+jobs:
+  tag-new-version:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    outputs:
+      release_created: ${{ steps.release-flag.outputs.release_created }}
+    steps:
+      - name: Create Release Tag
+        id: tag
+        uses: google-github-actions/release-please-action@v3
+        with:
+          command: manifest # use configs in release-please-config.json
+      - id: release-flag
+        run: echo "release_created=${{ steps.tag.outputs.release_created || false }}" >> $GITHUB_OUTPUT
+
+  # Publish the uds bundle
+  publish-uds-bundle:
+    needs: tag-new-version
+    if: ${{ needs.tag-new-version.outputs.release_created == 'true'}}
+    uses: ./.github/workflows/publish-bundle.yaml
+    secrets: inherit
