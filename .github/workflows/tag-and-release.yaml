@@ -1,4 +1,4 @@
-name: Tag, Test and Publish UDS Capability Artifactory
+name: Tag, Release and Publish UDS Bundle
 
 on:
   push:
