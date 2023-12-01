@@ -3,14 +3,14 @@ kind: UDSBundle
 metadata:
   name: software-factory-nutanix
   description: A UDS bundle for deploying a software factory to an RKE2 cluster
-  version: 0.0.1
+  version: 0.1.0
   architecture: amd64
 
 zarf-packages:
   # Zarf init
   - name: init
     repository: ghcr.io/defenseunicorns/packages/init
-    ref: v0.30.1
+    ref: v0.31.3
     optional-components:
       - git-server
 
@@ -27,7 +27,7 @@ zarf-packages:
   # Defense Unicorns Big Bang Distro
   - name: dubbd-rke2
     repository: ghcr.io/defenseunicorns/packages/dubbd-rke2
-    ref: 0.12.1
+    ref: 0.13.0
 
   # Change the realm file keycloak imports from
   - name: software-factory-idam-realm
@@ -45,7 +45,7 @@ zarf-packages:
 
   - name: uds-idam
     repository: ghcr.io/defenseunicorns/uds-capability/uds-idam
-    ref: 0.1.12
+    ref: 0.1.14
     imports:
       - name: REALM_IMPORT_FILE
         package: software-factory-idam-realm
@@ -75,19 +75,19 @@ zarf-packages:
   # Gitlab
   - name: gitlab-redis
     repository: ghcr.io/defenseunicorns/uds-capability/gitlab/dev-dependency/gitlab-redis
-    ref: 0.0.2
+    ref: 0.1.8
 
   - name: gitlab-minio
     repository: ghcr.io/defenseunicorns/uds-capability/gitlab/dev-dependency/gitlab-minio
-    ref: 0.0.2
+    ref: 0.1.8
 
   - name: gitlab-database-manifests
     path: build
-    ref: 0.0.1
+    ref: 0.1.8
 
   - name: gitlab
     repository: ghcr.io/defenseunicorns/uds-capability/gitlab
-    ref: 0.1.2
+    ref: 0.1.8
     imports:
       - name: GITLAB_IDAM_ENABLED
         package: software-factory-idam-gitlab
@@ -99,20 +99,20 @@ zarf-packages:
   # Gitlab Runner
   - name: gitlab-runner-rbac
     repository: ghcr.io/defenseunicorns/uds-capability/gitlab-runner/dev-dependency/gitlab-runner-rbac
-    ref: 0.0.1
+    ref: 0.1.2
 
   - name: gitlab-runner
     repository: ghcr.io/defenseunicorns/uds-capability/gitlab-runner
-    ref: 0.0.8
+    ref: 0.1.2
 
   # Sonarqube
   - name: sonarqube-database-manifests
     path: build
-    ref: 0.0.1
+    ref: 0.1.2
 
   - name: sonarqube
     repository: ghcr.io/defenseunicorns/uds-capability/sonarqube
-    ref: 0.0.11
+    ref: 0.1.2
     imports:
       - name: SONARQUBE_IDAM_ENABLED
         package: software-factory-idam-sonarqube
@@ -132,42 +132,42 @@ zarf-packages:
   # Jira
   - name: jira-database-manifests
     path: build
-    ref: 0.0.1
+    ref: 0.1.2
 
   - name: jira
     repository: ghcr.io/defenseunicorns/uds-capability/jira
-    ref: 0.0.5
+    ref: 0.1.2
 
   # Confluence
   - name: confluence-database-manifests
     path: build
-    ref: 0.0.1
+    ref: 0.1.2
 
   - name: confluence
     repository: ghcr.io/defenseunicorns/uds-capability/confluence
-    ref: 0.0.4
+    ref: 0.1.2
 
    # Mattermost Operator with a Mattermost instance
   - name: mattermost-minio
     repository: ghcr.io/defenseunicorns/uds-capability/mattermost/dev-dependency/mattermost-minio
-    ref: 0.0.2
+    ref: 0.1.2
 
   - name: mattermost-database-manifests
     path: build
-    ref: 0.0.1
+    ref: 0.1.2
 
   - name: mattermost
     repository: ghcr.io/defenseunicorns/uds-capability/mattermost
-    ref: 0.0.2
+    ref: 0.1.2
 
   # Nexus
   - name: nexus-database-manifests
     path: build
-    ref: 0.0.1
+    ref: 0.1.2
 
   - name: nexus
     repository: ghcr.io/defenseunicorns/uds-capability/nexus
-    ref: 0.0.4
+    ref: 0.1.2
 
   # Add all virtualservices as internal dns entries for auth callbacks
   - name: software-factory-idam-dns
