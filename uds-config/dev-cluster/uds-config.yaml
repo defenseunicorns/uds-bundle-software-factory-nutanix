@@ -38,6 +38,8 @@ bundle:
           DOMAIN: "mtsi-dev.bigbang.dev"
           GITLAB_DB_NAME: "gitlabdb"
           GITLAB_DB_USERNAME: "postgres"
+          GITLAB_PAGES_ENABLED: "true"
+          GITLAB_SIGNUP_ENABLED: "false"
       sonarqube-database-manifests:
         set:
           SONARQUBE_DB_EXTERNAL_NAME: "sonarqube-pg.mtsi-dev.bigbang.dev"
