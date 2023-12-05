@@ -14,7 +14,7 @@ zarf-packages:
     repository: ghcr.io/defenseunicorns/uds-bundle-software-factory-nutanix/init
     optional-components:
       - git-server
-    ref: v0.31.1
+    ref: v0.31.3
 
   # Namespace pre-reqs for swf capabilities
   - name: software-factory-namespaces
