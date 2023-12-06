@@ -79,9 +79,9 @@ zarf-packages:
     repository: ghcr.io/defenseunicorns/uds-capability/gitlab/dev-dependency/gitlab-redis
     ref: 0.1.8
 
-  - name: gitlab-minio
-    repository: ghcr.io/defenseunicorns/uds-capability/gitlab/dev-dependency/gitlab-minio
-    ref: 0.1.8
+  - name: gitlab-object-store
+    path: build
+    ref: 0.0.1
 
   - name: gitlab-database-manifests
     path: build
