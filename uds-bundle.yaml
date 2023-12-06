@@ -11,10 +11,10 @@ metadata:
 zarf-packages:
   # Zarf init
   - name: init
-    repository: ghcr.io/defenseunicorns/uds-bundle-software-factory-nutanix/init
+    repository: ghcr.io/defenseunicorns/uds-capability/rook-ceph/init
     optional-components:
       - git-server
-    ref: v0.31.3
+    ref: v0.31.3-0.1.0
 
   # Namespace pre-reqs for swf capabilities
   - name: software-factory-namespaces
