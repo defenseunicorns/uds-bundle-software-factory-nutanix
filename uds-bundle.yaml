@@ -150,7 +150,7 @@ zarf-packages:
     ref: 0.1.3
 
    # Mattermost Operator with a Mattermost instance
-  - name: gitlab-object-store
+  - name: mattermost-object-store
     path: build
     ref: 0.0.1
 

@@ -99,6 +99,7 @@ build/db-manifests: | build ## Build DB Manifests
 
 build/object-store-manifests: | build ## Build object store Manifests
 	cd build && ./zarf package create ../packages/object-store/gitlab/ --confirm --output-directory .
+	cd build && ./zarf package create ../packages/object-store/mattermost/ --confirm --output-directory .
 
 build/uds-bundle-software-factory: | build ## Build the software factory
 	cd build && ./uds create ../ --confirm
