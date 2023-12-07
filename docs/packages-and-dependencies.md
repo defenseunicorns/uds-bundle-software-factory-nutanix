@@ -12,7 +12,7 @@ This list covers tools which would be required on a developer machine in order t
 | [terraform](https://github.com/hashicorp/terraform) | v1.6.4 | An Infrastructure As Code (IAC) tool for managing the deployment of virtual resources (VMs, databases, object storage) within Nutanix |
 | [kubectl](https://github.com/kubernetes/kubectl) | v1.28.4 | Kubernetes management utility and CLI used by cluster admins to interact directly with a Kubernetes cluster |
 | [helm](https://github.com/helm/helm) | v3.13.2 | Kubernetes package manager CLI used to review the status of deployments in the cluster |
-| [Zarf](https://github.com/defenseunicorns/zarf) | v0.30.1 | A custom tool for packaging and delivering software components (such as gitlab) across an airgap |
+| [Zarf](https://github.com/defenseunicorns/zarf) | v0.31.3 | A custom tool for packaging and delivering software components (such as gitlab) across an airgap |
 | [UDS](https://github.com/defenseunicorns/uds-cli) | v0.4.0 | A custom tool for automating and simplifying the management of multiple Zarf deployments in one environment |
 
 ## Operating System Package Installs
