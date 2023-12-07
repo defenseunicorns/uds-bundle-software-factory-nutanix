@@ -80,9 +80,15 @@ bundle:
           MATTERMOST_DB_PASSWORD: "replace-me"
           MATTERMOST_DB_USERNAME: "postgres"
           MATTERMOST_DB_NAME: "mattermostdb"
+      mattermost-object-store:
+        set:
+          ENDPOINT: "http://swf.objects.mtsi.bigbang.dev"
+          ACCESS_KEY: "object-store-replace-access-key"
+          SECRET_KEY: "object-store-replace-secret-key"
       mattermost:
         set:
           DOMAIN: "mtsi-dev.bigbang.dev"
+          MATTERMOST_BUCKET_SUFFIX: "-dev"
       nexus-database-manifests:
         set:
           NEXUS_DB_EXTERNAL_NAME: "nexus-pg.mtsi-dev.bigbang.dev"

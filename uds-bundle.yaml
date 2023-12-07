@@ -150,9 +150,9 @@ zarf-packages:
     ref: 0.1.3
 
    # Mattermost Operator with a Mattermost instance
-  - name: mattermost-minio
-    repository: ghcr.io/defenseunicorns/uds-capability/mattermost/dev-dependency/mattermost-minio
-    ref: 0.1.2
+  - name: gitlab-object-store
+    path: build
+    ref: 0.0.1
 
   - name: mattermost-database-manifests
     path: build
@@ -160,7 +160,7 @@ zarf-packages:
 
   - name: mattermost
     repository: ghcr.io/defenseunicorns/uds-capability/mattermost
-    ref: 0.1.2
+    ref: 0.1.3
 
   # Nexus
   - name: nexus-database-manifests

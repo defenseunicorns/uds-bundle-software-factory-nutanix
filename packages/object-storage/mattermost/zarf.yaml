@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: mattermost-object-store
+  version: "0.0.1"
+  architecture: amd64
+
+variables:
+  - name: ENDPOINT
+    default: "replace-me"
+  - name: ACCESS_KEY
+    default: "replace-me"
+  - name: SECRET_KEY
+    default: "replace-me"
+
+components:
+  - name: object-store-kyverno-exceptions
+    required: true
+    manifests:
+      - name: kyverno-exceptions
+        files:
+          - policy-exceptions/externalName.yaml
+  - name: mattermost-object-store-secret
+    required: true
+    manifests:
+      - name: mattermost-object-store-secret
+        files:
+          - "secret.yaml"
+  - name: mattermost-object-store-service
+    required: true
+    manifests:
+      - name: mattermost-object-store-service
+        files:
+          - "service.yaml"
