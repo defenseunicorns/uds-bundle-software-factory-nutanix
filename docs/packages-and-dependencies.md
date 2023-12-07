@@ -23,6 +23,9 @@ This list covers tools and packages installed in the Operating System of the vir
 | [rke2](https://github.com/rancher/rke2/releases/) | v1.27.6+rke2r1 | A Kubernetes distribution provided by Rancher, focused on security compliance for Government workloads |
 | [iptables](https://linux.die.net/man/8/iptables) | v1.8.4 | A linux tool for managing local IPv4 packet filtering and NAT routing |
 | [postgres14](https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm) | 14.10 | Database server required as part of initial setup |
+| [lvm2](https://gitlab.com/lvmteam/lvm2) | 2.03.14(2)-RHEL8 | Logical volume management tool needed by rook/ceph |
+| [rke2-selinux](https://github.com/rancher/rke2-selinux) | 0.14-1.el8 | Package needed by RKE2 for systems running selinux |
+| [postgis33_14](https://postgis.net/docs/manual-3.3/) | 3.3.5-1PGDG.rhel8 | Postgres extension used for geoggraphical data needed by GitLab |
 
 ## Ansible Playbooks // Collections
 The following are Ansible playbooks and collections run on the host VMs during the image building process, installing further dependencies and applying STIG's.
