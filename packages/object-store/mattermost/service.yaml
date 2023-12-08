@@ -5,4 +5,4 @@ metadata:
   namespace: mattermost
 spec:
   type: ExternalName
-  externalName: "###ZARF_VAR_ENDPOINT###"
+  externalName: ###ZARF_VAR_ENDPOINT###

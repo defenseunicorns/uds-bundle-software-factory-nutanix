@@ -83,7 +83,7 @@ bundle:
           MATTERMOST_DB_NAME: "mattermostdb"
       mattermost-object-store:
         set:
-          ENDPOINT: "http://swf.objects.mtsi.bigbang.dev"
+          ENDPOINT: "swf.objects.mtsi.bigbang.dev"
           ACCESS_KEY: "object-store-replace-access-key"
           SECRET_KEY: "object-store-replace-secret-key"
       mattermost:
