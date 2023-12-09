@@ -27,9 +27,9 @@ zarf-packages:
     ref: 0.0.4
 
   # Defense Unicorns Big Bang Distro
-  - name: dubbd-rke2
-    repository: ghcr.io/defenseunicorns/packages/dubbd-rke2
-    ref: 0.14.0
+  - name: dubbd-rke2-nutanix
+    path: build
+    ref: 0.14.0-n1
 
   # Change the realm file keycloak imports from
   - name: software-factory-idam-realm

@@ -1,0 +1,11 @@
+loki:
+  values:
+    # Values for Monolith strategy
+    singleBinary:
+      resources:
+        limits:
+          cpu: 100m
+          memory: 1024Mi
+        requests:
+          cpu: 100m
+          memory: 512Mi

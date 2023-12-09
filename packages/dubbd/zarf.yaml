@@ -1,0 +1,85 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/v0.29.2/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: dubbd-rke2-nutanix
+  description: "RKE2 DUBBD configuration tweaked for swf-nutanix"
+  architecture: "amd64"
+  version: "0.14.0-n1"
+
+x-dubbd-oci: &dubbd_oci "oci://ghcr.io/defenseunicorns/packages/dubbd-rke2:0.14.0-skeleton"
+
+variables:
+  - name: DOMAIN
+  # - name: KEY_FILE
+  # - name: CERT_FILE
+
+components:
+  - name: set-zarf-vars
+    required: true
+    import:
+      name: set-zarf-vars
+      url: *dubbd_version
+
+  - name: preflight
+    required: true
+    import:
+      name: preflight
+      url: *dubbd_version
+
+  - name: load-certs
+    required: true
+    import:
+      name: load-certs
+      url: *dubbd_version
+
+  - name: generate-credentials
+    required: true
+    import:
+      name: generate-credentials
+      url: *dubbd_version
+
+  - name: download-flux
+    required: true
+    import:
+      name: download-flux
+      url: *dubbd_version
+
+  - name: storage-class
+    required: true
+    import:
+      name: storage-class
+      url: *dubbd_version
+
+  - name: dubbd-pre-upgrade
+    required: true
+    import:
+      name: dubbd-pre-upgrade
+      url: *dubbd_version
+
+  - name: bigbang
+    required: true
+    import:
+      name: bigbang
+      url: *dubbd_version
+    extensions:
+      bigbang:
+        version: "###ZARF_PKG_TMPL_BIGBANG_VERSION###"
+        valuesFiles:
+          - values/istio.yaml
+          - values/loki.yaml
+          - values/monitoring.yaml
+          - values/velero.yaml
+
+  - name: dubbd-post-upgrade
+    required: true
+    import:
+      name: dubbd-post-upgrade
+      url: *dubbd_version
+
+  - name: gitlab-ssh
+    required: true
+    manifests:
+      - name: gitlab-ssh-virtualservice
+        namespace: gitlab
+        files:
+          - manifests/gitlab-ssh-virtualservice.yaml
