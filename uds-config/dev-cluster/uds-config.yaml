@@ -84,11 +84,24 @@ bundle:
         set:
           ACCESS_KEY: "object-store-replace-access-key"
           SECRET_KEY: "object-store-replace-secret-key"
+          CA_CERT: |
+            -----BEGIN CERTIFICATE-----
+            put-correct-cert-here
+            -----END CERTIFICATE-----
       mattermost:
         set:
           DOMAIN: "mtsi-dev.bigbang.dev"
           MATTERMOST_BUCKET_SUFFIX: "-dev"
           MATTERMOST_FILE_STORE_ENDPOINT: "swf.objects.mtsi.bigbang.dev"
+          MATTERMOST_VOLUMES: |
+            - name: ca-cert
+              secret:
+                secretName: ca-secret
+                defaultMode: 0644
+          MATTERMOST_VOLUME_MOUNTS: |
+            - name: ca-cert
+              mountPath: /etc/ssl/certs
+              readOnly: true"
       nexus-database-manifests:
         set:
           NEXUS_DB_EXTERNAL_NAME: "nexus-pg.mtsi-dev.bigbang.dev"

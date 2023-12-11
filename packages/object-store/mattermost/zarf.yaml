@@ -6,12 +6,13 @@ metadata:
   architecture: amd64
 
 variables:
-  # - name: ENDPOINT
-  #   default: "replace-me"
   - name: ACCESS_KEY
     default: "replace-me"
   - name: SECRET_KEY
     default: "replace-me"
+  - name: CA_CERT
+    default: "replace-me"
+    autoIndent: true
 
 components:
   - name: object-store-kyverno-exceptions
@@ -26,3 +27,9 @@ components:
       - name: mattermost-object-store-secret
         files:
           - "secret.yaml"
+  - name: mattermost-object-store-ca-cert
+    required: true
+    manifests:
+      - name: mattermost-object-store-ca-cert
+        files:
+          - "ca-cert.yaml"
