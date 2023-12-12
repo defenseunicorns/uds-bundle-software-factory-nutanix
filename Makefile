@@ -1,7 +1,7 @@
 # The version of Zarf to use. To keep this repo as portable as possible the Zarf binary will be downloaded and added to
 # the build folder.
 # renovate: datasource=github-tags depName=defenseunicorns/zarf
-UDS_CLI_VERSION := v0.4.0
+UDS_CLI_VERSION := v0.4.1
 
 ZARF_VERSION := v0.31.3
 
@@ -50,7 +50,7 @@ help: ## Show a list of all targets
 ########################################################################
 
 .PHONY: build/all
-build/all: build build/zarf build/uds build/software-factory-namespaces build/idam-dns build/idam-realm build/idam-gitlab build/idam-sonarqube build/db-manifests build/uds-bundle-software-factory ## Build everything
+build/all: build build/zarf build/uds build/software-factory-namespaces build/idam-dns build/idam-realm build/idam-gitlab build/idam-sonarqube build/db-manifests build/object-store-manifests build/uds-bundle-software-factory ## Build everything
 
 build: ## Create build directory
 	mkdir -p build
@@ -88,7 +88,7 @@ build/idam-dns: | build ## Build idam-dns package
 build/idam-realm: | build ## Build idam-realm package
 	cd build && ./zarf package create ../packages/idam-realm/ --confirm --output-directory .
 
-build/db-manifests:
+build/db-manifests: | build ## Build DB Manifests
 	cd build && ./zarf package create ../packages/databases/confluence/ --confirm --output-directory .
 	cd build && ./zarf package create ../packages/databases/gitlab/ --confirm --output-directory .
 	cd build && ./zarf package create ../packages/databases/jira/ --confirm --output-directory .
@@ -96,6 +96,10 @@ build/db-manifests:
 	cd build && ./zarf package create ../packages/databases/mattermost/ --confirm --output-directory .
 	cd build && ./zarf package create ../packages/databases/nexus/ --confirm --output-directory .
 	cd build && ./zarf package create ../packages/databases/sonarqube/ --confirm --output-directory .
+
+build/object-store-manifests: | build ## Build object store Manifests
+	cd build && ./zarf package create ../packages/object-store/gitlab/ --confirm --output-directory .
+	cd build && ./zarf package create ../packages/object-store/mattermost/ --confirm --output-directory .
 
 build/uds-bundle-software-factory: | build ## Build the software factory
 	cd build && ./uds create ../ --confirm

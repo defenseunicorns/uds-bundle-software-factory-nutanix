@@ -79,9 +79,9 @@ zarf-packages:
     repository: ghcr.io/defenseunicorns/uds-capability/gitlab/dev-dependency/gitlab-redis
     ref: 0.1.8
 
-  - name: gitlab-minio
-    repository: ghcr.io/defenseunicorns/uds-capability/gitlab/dev-dependency/gitlab-minio
-    ref: 0.1.8
+  - name: gitlab-object-store
+    path: build
+    ref: 0.0.1
 
   - name: gitlab-database-manifests
     path: build
@@ -150,9 +150,9 @@ zarf-packages:
     ref: 0.1.3
 
    # Mattermost Operator with a Mattermost instance
-  - name: mattermost-minio
-    repository: ghcr.io/defenseunicorns/uds-capability/mattermost/dev-dependency/mattermost-minio
-    ref: 0.1.2
+  - name: mattermost-object-store
+    path: build
+    ref: 0.0.1
 
   - name: mattermost-database-manifests
     path: build
@@ -160,7 +160,7 @@ zarf-packages:
 
   - name: mattermost
     repository: ghcr.io/defenseunicorns/uds-capability/mattermost
-    ref: 0.1.2
+    ref: 0.1.5
 
   # Nexus
   - name: nexus-database-manifests
