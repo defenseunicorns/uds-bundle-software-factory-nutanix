@@ -10,7 +10,7 @@ Detailed list of packages and dependencies in this bundle:
 This project is continually improving and being iterated on. Stay tuned to the latest updates.
 ### Things you will need
 - You need an appropriately provisioned kubernetes cluster to deploy to.
-- You need all databases and object storage provisioned with connection configurations ready to plug into your `uds-config.yaml`
+- You need all databases and object storage provisioned with connection configurations ready to plug into your `uds-config.yaml`. Click the links for more documentation on creation and configuration of your [databases](docs/database-creation-and-configuration.md) and [object store](docs/object-store-creation-and-configuration.md)
 - You need domain configuration and certs ready for use
 - You need [zarf](https://github.com/defenseunicorns/zarf) and [uds](https://github.com/defenseunicorns/uds-cli)
 - You need a bundle artifact. You can build it from this repository, download it or reference it directly from the [oci registry](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/pkgs/container/uds-bundle%2Fsoftware-factory-nutanix)
