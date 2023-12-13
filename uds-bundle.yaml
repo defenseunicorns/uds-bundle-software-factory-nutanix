@@ -29,7 +29,7 @@ zarf-packages:
   # Defense Unicorns Big Bang Distro
   - name: dubbd-rke2
     repository: ghcr.io/defenseunicorns/packages/dubbd-rke2
-    ref: 0.14.0
+    ref: 0.15.0
 
   # Change the realm file keycloak imports from
   - name: software-factory-idam-realm
