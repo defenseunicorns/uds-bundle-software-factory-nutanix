@@ -1,0 +1,10 @@
+# Source: bigbang/templates/mattermost/secret-objectstore.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ca-secret
+  namespace: mattermost
+type: kubernetes.io/opaque
+stringData:
+  ca.crt: |
+    ###ZARF_VAR_CA_CERT###
