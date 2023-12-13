@@ -69,5 +69,5 @@ bundle:
           MATTERMOST_VOLUME_MOUNTS: |
             - name: ca-cert
               mountPath: /etc/ssl/certs
-              readOnly: true"
+              readOnly: true
 ```
