@@ -102,7 +102,7 @@ bundle:
           MATTERMOST_VOLUME_MOUNTS: |
             - name: ca-cert
               mountPath: /etc/ssl/certs
-              readOnly: true"
+              readOnly: true
       nexus-database-manifests:
         set:
           NEXUS_DB_EXTERNAL_NAME: "nexus-pg.mtsi.bigbang.dev"
