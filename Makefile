@@ -1,12 +1,7 @@
 # The version of Zarf to use. To keep this repo as portable as possible the Zarf binary will be downloaded and added to
 # the build folder.
 # renovate: datasource=github-tags depName=defenseunicorns/zarf
-<<<<<<< HEAD
-UDS_CLI_VERSION := v0.4.0
-=======
 UDS_CLI_VERSION := v0.4.1
-
->>>>>>> main
 ZARF_VERSION := v0.31.3
 
 # Figure out which Zarf binary we should use based on the operating system we are on
@@ -54,11 +49,7 @@ help: ## Show a list of all targets
 ########################################################################
 
 .PHONY: build/all
-<<<<<<< HEAD
-build/all: build build/zarf build/uds build/software-factory-namespaces build/idam-dns build/idam-realm build/dubbd-rke2-nutanix build/idam-gitlab build/idam-sonarqube build/db-manifests build/uds-bundle-software-factory ## Build everything
-=======
-build/all: build build/zarf build/uds build/software-factory-namespaces build/idam-dns build/idam-realm build/idam-gitlab build/idam-sonarqube build/db-manifests build/object-store-manifests build/uds-bundle-software-factory ## Build everything
->>>>>>> main
+build/all: build build/zarf build/uds build/software-factory-namespaces build/idam-dns build/idam-realm build/dubbd-rke2-nutanix build/idam-gitlab build/idam-sonarqube build/db-manifests build/object-store-manifests build/uds-bundle-software-factory ## Build everything
 
 build: ## Create build directory
 	mkdir -p build
