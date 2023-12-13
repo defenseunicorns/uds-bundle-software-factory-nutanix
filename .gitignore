@@ -32,3 +32,5 @@ run/
 
 # certs
 *.pem
+
+scratch/
