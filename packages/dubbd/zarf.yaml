@@ -18,49 +18,49 @@ components:
     required: true
     import:
       name: set-zarf-vars
-      url: *dubbd_version
+      url: *dubbd_oci
 
   - name: preflight
     required: true
     import:
       name: preflight
-      url: *dubbd_version
+      url: *dubbd_oci
 
   - name: load-certs
     required: true
     import:
       name: load-certs
-      url: *dubbd_version
+      url: *dubbd_oci
 
   - name: generate-credentials
     required: true
     import:
       name: generate-credentials
-      url: *dubbd_version
+      url: *dubbd_oci
 
   - name: download-flux
     required: true
     import:
       name: download-flux
-      url: *dubbd_version
+      url: *dubbd_oci
 
   - name: storage-class
     required: true
     import:
       name: storage-class
-      url: *dubbd_version
+      url: *dubbd_oci
 
   - name: dubbd-pre-upgrade
     required: true
     import:
       name: dubbd-pre-upgrade
-      url: *dubbd_version
+      url: *dubbd_oci
 
   - name: bigbang
     required: true
     import:
       name: bigbang
-      url: *dubbd_version
+      url: *dubbd_oci
     extensions:
       bigbang:
         version: "###ZARF_PKG_TMPL_BIGBANG_VERSION###"
@@ -74,7 +74,7 @@ components:
     required: true
     import:
       name: dubbd-post-upgrade
-      url: *dubbd_version
+      url: *dubbd_oci
 
   - name: gitlab-ssh
     required: true
