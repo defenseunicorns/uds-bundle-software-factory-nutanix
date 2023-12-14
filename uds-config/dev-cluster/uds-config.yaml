@@ -11,7 +11,7 @@ bundle:
       dubbd-rke2-nutanix:
         set:
           # TODO - replace these blanket exceptions with more targeted kyverno policy exceptions
-          EXEMPT_NAMESPACES: '["zarf", "rook-ceph", "metallb-system"]'
+          EXEMPT_NAMESPACES: '["zarf", "rook-ceph", "metallb-system", "kube-system"]'
           DOMAIN: "mtsi-dev.bigbang.dev"
           TENANT_CERT: |
             -----BEGIN CERTIFICATE-----
