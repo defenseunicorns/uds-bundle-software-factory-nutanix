@@ -17,7 +17,7 @@ istio:
               ###ZARF_VAR_TENANT_CERT###
             minProtocolVersion: "TLSV1_3"
         - hosts:
-            - "*.###ZARF_VAR_DOMAIN###"
+            - "gitlab.###ZARF_VAR_DOMAIN###"
           port:
             name: tcp-ssh
             number: 2022
