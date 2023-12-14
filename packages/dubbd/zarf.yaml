@@ -9,9 +9,29 @@ metadata:
 x-dubbd-oci: &dubbd_oci "oci://ghcr.io/defenseunicorns/packages/dubbd-rke2:0.14.0-skeleton"
 
 variables:
+# domains and certs
   - name: DOMAIN
-  # - name: KEY_FILE
-  # - name: CERT_FILE
+  - name: ADMIN_DOMAIN
+  - name: TENANT_CERT
+    description: "RSA Cert to be served by the tenant gateway"
+    sensitive: true
+    autoIndent: true
+    # default: "Intentionally left blank"
+  - name: TENANT_KEY
+    description: "RSA cert private key to be loaded by the tenant gateway"
+    sensitive: true
+    autoIndent: true
+    # default: "Intentionally left blank"
+  - name: ADMIN_CERT
+    description: "RSA cert to be served by the admin gateway"
+    sensitive: true
+    autoIndent: true
+    # default: "Intentionally left blank"
+  - name: ADMIN_KEY
+    description: "RSA cert private key to be loaded by the admin gateway"
+    sensitive: true
+    autoIndent: true
+    # default: "Intentionally left blank"
 
 components:
   - name: set-zarf-vars
@@ -25,12 +45,8 @@ components:
     import:
       name: preflight
       url: *dubbd_oci
-
-  - name: load-certs
-    required: true
-    import:
-      name: load-certs
-      url: *dubbd_oci
+  
+  # NOTE -- This DUBBD package assumes certs are provided directly via variable configuration. No certs will be loaded from files by default.
 
   - name: generate-credentials
     required: true

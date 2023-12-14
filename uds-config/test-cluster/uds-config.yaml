@@ -13,6 +13,22 @@ bundle:
           # TODO - replace these blanket exceptions with more targeted kyverno policy exceptions
           EXEMPT_NAMESPACES: '["zarf", "rook-ceph", "metallb-system"]'
           DOMAIN: "mtsi.bigbang.dev"
+          TENANT_CERT: |
+            -----BEGIN CERTIFICATE-----
+            replace-me-tenant-gateway-cert
+            -----END CERTIFICATE-----
+          TENANT_KEY: |
+            -----BEGIN PRIVATE KEY-----
+            replace-me-tenant-gateway-key
+            -----END PRIVATE KEY-----
+          ADMIN_CERT: |
+            -----BEGIN CERTIFICATE-----
+            replace-me-admin-gateway-cert
+            -----END CERTIFICATE-----
+          ADMIN_KEY: |
+            -----BEGIN PRIVATE KEY-----
+            replace-me-admin-gateway-key
+            -----END PRIVATE KEY-----
       software-factory-idam-gitlab:
         set:
           DOMAIN: "mtsi.bigbang.dev"
