@@ -11,11 +11,9 @@ istio:
             number: 8443
             protocol: HTTPS
           tls:
-            key: |
-              ###ZARF_VAR_TENANT_KEY###
-            cert: |
-              ###ZARF_VAR_TENANT_CERT###
             minProtocolVersion: "TLSV1_3"
+            mode: SIMPLE
+            credentialName: tenant-cert
         - hosts:
             - "gitlab.###ZARF_VAR_DOMAIN###"
           port:
