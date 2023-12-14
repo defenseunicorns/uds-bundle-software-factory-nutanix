@@ -50,4 +50,3 @@ components:
           - cmd: 'printf "%b" "- secret: gitlab-sso-provider\n  key: gitlab-sso.json"'
             setVariables:
               - name: GITLAB_IDAM_PROVIDERS
-
