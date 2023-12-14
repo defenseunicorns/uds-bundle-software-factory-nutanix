@@ -31,7 +31,11 @@ Below are the example configurations used in this project to configure deploy ti
 There will be sensitive values you will need to update before deployment. You can search `replace-me` in the above `uds-config.yaml` files for quick reference sensitive values needing updated.
 
 ## Certs
-Currently we are deploying the bundle, and then updating the certs in the cluster to our own `mtsi.bigbang.dev` and `mtsi-dev.bigbang.dev` certs using this [update-certs.sh](scripts/update-certs.sh) script. In a future version we will update this example to put the certs in the `uds-config.yaml` to be setup at deploy time.
+Certs for the tenant and admin gateways should be provided via `uds-config.yaml` variables: 
+* TENANT_CERT
+* TENANT_KEY
+* ADMIN_CERT
+* ADMIN_KEY
 
 ## High Level Steps
 You can follow the breadcrumbs starting at the [Makefile](Makefile) target `make all/dev-cluster`. This Makefile downloads configured versions of zarf and uds to the build directory, places the `uds-config.yaml` and `deploy-dubbd-values.yaml` in that build directory and performs the deploy command from there. Steps numbered below. Or follow along in the Makefile.
@@ -61,4 +65,3 @@ brew tap defenseunicorns/tap && brew install uds && brew install zarf
 1) build the bundle itself
 1) place the `uds-config.yaml` and the `deploy-dubbd-values.yaml` in the directory where the deployment will take place
 1) deploy the software factory.
-1) update the certs with our certs (This step will be replaced with adding the certs to the configuration in a future version)
