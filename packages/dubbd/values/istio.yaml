@@ -49,5 +49,5 @@ istio:
               protocol: TCP
             - port: 22
               targetPort: 2022
-              name: tcp-bolt
+              name: tcp-ssh
               protocol: TCP
