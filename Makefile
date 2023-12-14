@@ -31,10 +31,6 @@ endif
 
 .DEFAULT_GOAL := help
 
-# Target vars
-CERT_PATH ?= scripts/test-cluster-ingress-cert.pem
-KEY_PATH ?= scripts/test-cluster-ingress-key.pem
-
 # Idiomatic way to force a target to always run, by having it depend on this dummy target
 FORCE:
 
@@ -115,13 +111,11 @@ deploy/test-cluster: ## Deploy the software factory package to the test cluster
 	cp uds-config/test-cluster/uds-config.yaml ./build/
 	cp deploy-dubbd-values.yaml ./build/
 	cd ./build && ./uds deploy uds-bundle-software-factory-*.tar.zst --confirm
-	cd ./scripts && ./update-certs.sh $(CERT_PATH) $(KEY_PATH)
 
 deploy/dev-cluster: ## Deploy the software factory package to the dev cluster
 	cp uds-config/dev-cluster/uds-config.yaml ./build/
 	cp deploy-dubbd-values.yaml ./build/
 	cd ./build && ./uds deploy uds-bundle-software-factory-*.tar.zst --confirm
-	cd ./scripts && ./update-certs.sh $(CERT_PATH) $(KEY_PATH)
 
 ########################################################################
 # Macro Section
