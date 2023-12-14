@@ -45,7 +45,8 @@ help: ## Show a list of all targets
 ########################################################################
 
 .PHONY: build/all
-build/all: build build/zarf build/uds build/software-factory-namespaces build/idam-dns build/idam-realm build/dubbd-rke2-nutanix build/idam-gitlab build/idam-sonarqube build/db-manifests build/object-store-manifests build/uds-bundle-software-factory ## Build everything
+build/all: build build/zarf build/uds build/software-factory-namespaces build/idam-dns build/idam-realm build/dubbd-rke2-nutanix build/idam-gitlab build/idam-sonarqube build/db-manifests build/object-store-manifests build/additional-kyverno-exceptions build/uds-bundle-software-factory ## Build everything
+
 
 build: ## Create build directory
 	mkdir -p build
@@ -98,6 +99,9 @@ build/db-manifests: | build ## Build DB Manifests
 build/object-store-manifests: | build ## Build object store Manifests
 	cd build && ./zarf package create ../packages/object-store/gitlab/ --confirm --output-directory .
 	cd build && ./zarf package create ../packages/object-store/mattermost/ --confirm --output-directory .
+
+build/additional-kyverno-exceptions: | build ## Build additional kyverno exceptions
+	cd build && ./zarf package create ../packages/additional-kyverno-exceptions/ --confirm --output-directory .
 
 build/uds-bundle-software-factory: | build ## Build the software factory
 	cd build && ./uds create ../ --confirm

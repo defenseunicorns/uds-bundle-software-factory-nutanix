@@ -12,6 +12,7 @@ bundle:
         set:
           # TODO - replace these blanket exceptions with more targeted kyverno policy exceptions
           EXEMPT_NAMESPACES: '["zarf", "rook-ceph", "metallb-system", "kube-system"]'
+          # Domain and Certs
           DOMAIN: "mtsi.bigbang.dev"
           TENANT_CERT: |
             -----BEGIN CERTIFICATE-----
@@ -29,6 +30,12 @@ bundle:
             -----BEGIN PRIVATE KEY-----
             replace-me-admin-gateway-key
             -----END PRIVATE KEY-----
+          # Velero
+          VELERO_BUCKET_PROVIDER_URL: "http://swf.objects.mtsi.bigbang.dev"
+          VELERO_BUCKET: "velero-bucket-test"
+          VELERO_BUCKET_REGION: "us-east-1"
+          VELERO_BUCKET_KEY: "replace-me-object-store-access-key"
+          VELERO_BUCKET_KEY_SECRET: "replace-me-object-store-secret-key"
       software-factory-idam-gitlab:
         set:
           DOMAIN: "mtsi.bigbang.dev"

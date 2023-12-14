@@ -1,6 +1,23 @@
 # Object Store
 You will need object storage created and configured for use by these capabilities in the bundle. Below are example `uds-config.yaml` object store entries. Your object store needs to conform to what you place in these entries at deploy time. You will also see the buckets that need to exist for these capabilities.
 
+## Velero
+You will to create and configure the bucket you are going to use for Velero
+
+### config
+```yaml
+bundle:
+  deploy:
+    zarf-packages:
+      dubbd-rke2:
+        set:
+          VELERO_BUCKET_PROVIDER_URL: "http://swf.objects.mtsi.bigbang.dev" # Replace with domain entry for your object store
+          VELERO_BUCKET: "velero-bucket" # Configure the appropriate name of your bucket
+          VELERO_BUCKET_REGION: "us-east-1" # Replace with appropriate region. Nutanix expects this to be us-east-1
+          VELERO_BUCKET_KEY: "replace-me-object-store-access-key" # Replace with access key to your object store
+          VELERO_BUCKET_KEY_SECRET: "replace-me-object-store-secret-key" # Replace with secret key to your object store
+```
+
 ## Gitlab
 You will need these buckets created in your object store. If you choose to configure bucket names to use a suffix, your bucket names will need to contain that suffix.
 
