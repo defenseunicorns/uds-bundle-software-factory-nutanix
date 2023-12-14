@@ -99,3 +99,4 @@ components:
         namespace: gitlab
         files:
           - manifests/gitlab-ssh-virtualservice.yaml
+          - manifests/gitlab-ssh-networkpolicies.yaml
