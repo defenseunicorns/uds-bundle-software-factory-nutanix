@@ -1,0 +1,102 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/v0.31.4/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: dubbd-rke2-nutanix
+  description: "RKE2 DUBBD configuration tweaked for swf-nutanix"
+  architecture: "amd64"
+  version: "0.15.0-n1"
+
+x-dubbd-oci: &dubbd_oci "oci://ghcr.io/defenseunicorns/packages/dubbd-rke2:0.15.0-skeleton"
+
+variables:
+# domains and certs
+  - name: DOMAIN
+  - name: ADMIN_DOMAIN
+  - name: TENANT_CERT
+    description: "RSA Cert to be served by the tenant gateway"
+    sensitive: true
+    autoIndent: true
+    # default: "Intentionally left blank"
+  - name: TENANT_KEY
+    description: "RSA cert private key to be loaded by the tenant gateway"
+    sensitive: true
+    autoIndent: true
+    # default: "Intentionally left blank"
+  - name: ADMIN_CERT
+    description: "RSA cert to be served by the admin gateway"
+    sensitive: true
+    autoIndent: true
+    # default: "Intentionally left blank"
+  - name: ADMIN_KEY
+    description: "RSA cert private key to be loaded by the admin gateway"
+    sensitive: true
+    autoIndent: true
+    # default: "Intentionally left blank"
+
+components:
+  - name: set-zarf-vars
+    required: true
+    import:
+      name: set-zarf-vars
+      url: *dubbd_oci
+
+  - name: preflight
+    required: true
+    import:
+      name: preflight
+      url: *dubbd_oci
+  
+  # NOTE -- This DUBBD package assumes certs are provided directly via variable configuration. No certs will be loaded from files by default.
+
+  - name: generate-credentials
+    required: true
+    import:
+      name: generate-credentials
+      url: *dubbd_oci
+
+  - name: download-flux
+    required: true
+    import:
+      name: download-flux
+      url: *dubbd_oci
+
+  - name: storage-class
+    required: true
+    import:
+      name: storage-class
+      url: *dubbd_oci
+
+  - name: dubbd-pre-upgrade
+    required: true
+    import:
+      name: dubbd-pre-upgrade
+      url: *dubbd_oci
+
+  - name: bigbang
+    required: true
+    import:
+      name: bigbang
+      url: *dubbd_oci
+    extensions:
+      bigbang:
+        version: "###ZARF_PKG_TMPL_BIGBANG_VERSION###"
+        valuesFiles:
+          - values/istio.yaml
+          - values/loki.yaml
+          - values/monitoring.yaml
+          - values/velero.yaml
+
+  - name: dubbd-post-upgrade
+    required: true
+    import:
+      name: dubbd-post-upgrade
+      url: *dubbd_oci
+
+  - name: gitlab-ssh
+    required: true
+    manifests:
+      - name: gitlab-ssh-virtualservice
+        namespace: gitlab
+        files:
+          - manifests/gitlab-ssh-virtualservice.yaml
+          - manifests/gitlab-ssh-networkpolicies.yaml

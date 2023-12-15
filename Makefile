@@ -2,7 +2,6 @@
 # the build folder.
 # renovate: datasource=github-tags depName=defenseunicorns/zarf
 UDS_CLI_VERSION := v0.4.1
-
 ZARF_VERSION := v0.31.3
 
 # Figure out which Zarf binary we should use based on the operating system we are on
@@ -32,10 +31,6 @@ endif
 
 .DEFAULT_GOAL := help
 
-# Target vars
-CERT_PATH := scripts/test-cluster-ingress-cert.pem
-KEY_PATH := scripts/test-cluster-ingress-key.pem
-
 # Idiomatic way to force a target to always run, by having it depend on this dummy target
 FORCE:
 
@@ -50,7 +45,8 @@ help: ## Show a list of all targets
 ########################################################################
 
 .PHONY: build/all
-build/all: build build/zarf build/uds build/software-factory-namespaces build/idam-dns build/idam-realm build/idam-gitlab build/idam-sonarqube build/db-manifests build/object-store-manifests build/additional-kyverno-exceptions build/uds-bundle-software-factory ## Build everything
+build/all: build build/zarf build/uds build/software-factory-namespaces build/idam-dns build/idam-realm build/dubbd-rke2-nutanix build/idam-gitlab build/idam-sonarqube build/db-manifests build/object-store-manifests build/additional-kyverno-exceptions build/uds-bundle-software-factory ## Build everything
+
 
 build: ## Create build directory
 	mkdir -p build
@@ -75,6 +71,9 @@ build/uds: | build ## Download uds-cli to the build dir
 
 build/software-factory-namespaces: | build ## Build namespaces package
 	cd build && ./zarf package create ../packages/namespaces/ --confirm --output-directory .
+
+build/dubbd-rke2-nutanix: | build ## Build dubbd-rke2-nutanix package
+	cd packages/dubbd && ../../build/zarf package create . --confirm --output-directory ../../build
 
 build/idam-gitlab: | build ## Build idam-gitlab package
 	cd build && ./zarf package create ../packages/idam-gitlab/ --confirm --output-directory .
@@ -116,13 +115,11 @@ deploy/test-cluster: ## Deploy the software factory package to the test cluster
 	cp uds-config/test-cluster/uds-config.yaml ./build/
 	cp deploy-dubbd-values.yaml ./build/
 	cd ./build && ./uds deploy uds-bundle-software-factory-*.tar.zst --confirm
-	cd ./scripts && ./update-certs.sh $(CERT_PATH) $(KEY_PATH)
 
 deploy/dev-cluster: ## Deploy the software factory package to the dev cluster
 	cp uds-config/dev-cluster/uds-config.yaml ./build/
 	cp deploy-dubbd-values.yaml ./build/
 	cd ./build && ./uds deploy uds-bundle-software-factory-*.tar.zst --confirm
-	cd ./scripts && ./update-certs.sh $(CERT_PATH) $(KEY_PATH)
 
 ########################################################################
 # Macro Section

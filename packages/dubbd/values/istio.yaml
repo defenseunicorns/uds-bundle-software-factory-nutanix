@@ -1,0 +1,43 @@
+istio:
+  values:
+    gateways:
+      tenant:
+        ingressGateway: tenant-ingressgateway
+        servers:
+        - hosts:
+            - "*.###ZARF_VAR_DOMAIN###"
+          port:
+            name: https
+            number: 8443
+            protocol: HTTPS
+          tls:
+            minProtocolVersion: "TLSV1_3"
+            mode: SIMPLE
+            credentialName: tenant-cert
+        - hosts:
+            - "gitlab.###ZARF_VAR_DOMAIN###"
+          port:
+            name: tcp-ssh
+            number: 2022
+            protocol: TCP
+  ingressGateways:
+    tenant-ingressgateway:
+      kubernetesResourceSpec:
+        service:
+          ports:
+            - port: 15021
+              targetPort: 15021
+              name: status-port
+              protocol: TCP
+            - port: 80
+              targetPort: 8080
+              name: http2
+              protocol: TCP
+            - port: 443
+              targetPort: 8443
+              name: https
+              protocol: TCP
+            - port: 22
+              targetPort: 2022
+              name: tcp-ssh
+              protocol: TCP

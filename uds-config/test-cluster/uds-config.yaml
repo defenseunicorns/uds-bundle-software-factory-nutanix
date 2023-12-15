@@ -8,11 +8,29 @@ bundle:
       metallb:
         set:
           IP_ADDRESS_POOL: "24.0.132.248/30"
-      dubbd-rke2:
+      dubbd-rke2-nutanix:
         set:
           # TODO - replace these blanket exceptions with more targeted kyverno policy exceptions
-          EXEMPT_NAMESPACES: '["zarf", "rook-ceph", "metallb-system"]'
+          EXEMPT_NAMESPACES: '["zarf", "rook-ceph", "metallb-system", "kube-system"]'
+          # Domain and Certs
           DOMAIN: "mtsi.bigbang.dev"
+          TENANT_CERT: |
+            -----BEGIN CERTIFICATE-----
+            replace-me-tenant-gateway-cert
+            -----END CERTIFICATE-----
+          TENANT_KEY: |
+            -----BEGIN PRIVATE KEY-----
+            replace-me-tenant-gateway-key
+            -----END PRIVATE KEY-----
+          ADMIN_CERT: |
+            -----BEGIN CERTIFICATE-----
+            replace-me-admin-gateway-cert
+            -----END CERTIFICATE-----
+          ADMIN_KEY: |
+            -----BEGIN PRIVATE KEY-----
+            replace-me-admin-gateway-key
+            -----END PRIVATE KEY-----
+          # Velero
           VELERO_BUCKET_PROVIDER_URL: "http://swf.objects.mtsi.bigbang.dev"
           VELERO_BUCKET: "velero-bucket-test"
           VELERO_BUCKET_REGION: "us-east-1"
