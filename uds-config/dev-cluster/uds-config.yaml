@@ -33,7 +33,7 @@ bundle:
             -----END PRIVATE KEY-----
           # Velero
           VELERO_BUCKET_PROVIDER_URL: "http://swf.objects.mtsi.bigbang.dev"
-          VELERO_BUCKET: "velero-bucket-test"
+          VELERO_BUCKET: "velero-bucket-dev"
           VELERO_BUCKET_REGION: "us-east-1"
           VELERO_BUCKET_KEY: "replace-me-object-store-access-key"
           VELERO_BUCKET_KEY_SECRET: "replace-me-object-store-secret-key"
