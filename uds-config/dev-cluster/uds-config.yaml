@@ -1,137 +1,116 @@
-bundle:
-  deploy:
-    zarf-packages:
-      init:
-        set:
-          # TODO - remove this if/when functionality is restored upstream
-          REGISTRY_HPA_ENABLE: false
-      metallb:
-        set:
-          IP_ADDRESS_POOL: "24.0.132.244/30"
-      dubbd-rke2-nutanix:
-        set:
-          # TODO - replace these blanket exceptions with more targeted kyverno policy exceptions
-          EXEMPT_NAMESPACES: '["zarf", "rook-ceph", "metallb-system", "kube-system"]'
-          DOMAIN: "mtsi-dev.bigbang.dev"
-          # Domain and Certs
-          DOMAIN: "mtsi.bigbang.dev"
-          TENANT_CERT: |
-            -----BEGIN CERTIFICATE-----
-            replace-me-tenant-gateway-cert
-            -----END CERTIFICATE-----
-          TENANT_KEY: |
-            -----BEGIN PRIVATE KEY-----
-            replace-me-tenant-gateway-key
-            -----END PRIVATE KEY-----
-          ADMIN_CERT: |
-            -----BEGIN CERTIFICATE-----
-            replace-me-admin-gateway-cert
-            -----END CERTIFICATE-----
-          ADMIN_KEY: |
-            -----BEGIN PRIVATE KEY-----
-            replace-me-admin-gateway-key
-            -----END PRIVATE KEY-----
-          # Velero
-          VELERO_BUCKET_PROVIDER_URL: "http://swf.objects.mtsi.bigbang.dev"
-          VELERO_BUCKET: "velero-bucket-dev"
-          VELERO_BUCKET_REGION: "us-east-1"
-          VELERO_BUCKET_KEY: "replace-me-object-store-access-key"
-          VELERO_BUCKET_KEY_SECRET: "replace-me-object-store-secret-key"
-      software-factory-idam-gitlab:
-        set:
-          DOMAIN: "mtsi-dev.bigbang.dev"
-      software-factory-idam-realm:
-        set:
-          DOMAIN: "mtsi-dev.bigbang.dev"
-      keycloak-database-manifests:
-        set:
-          KEYCLOAK_DB_EXTERNAL_NAME: "keycloak-pg.mtsi-dev.bigbang.dev"
-      uds-idam:
-        set:
-          DOMAIN: "mtsi-dev.bigbang.dev"
-          KEYCLOAK_DB_USERNAME: "postgres"
-          KEYCLOAK_DB_PASSWORD: "replace-me-db-passwords"
-          KEYCLOAK_DB_NAME: "keycloakdb"
-          KEYCLOAK_DB_ENDPOINT: "keycloak-postgres.keycloak.svc.cluster.local"
-      gitlab-database-manifests:
-        set:
-          GITLAB_DB_EXTERNAL_NAME: "gitlab-pg.mtsi-dev.bigbang.dev"
-          GITLAB_DB_PASSWORD: "replace-me-db-passwords"
-      gitlab-object-store:
-        set:
-          ENDPOINT: "http://swf.objects.mtsi.bigbang.dev"
-          ACCESS_KEY: "replace-me-object-store-access-key"
-          SECRET_KEY: "replace-me-object-store-secret-key"
-      gitlab:
-        set:
-          DOMAIN: "mtsi-dev.bigbang.dev"
-          GITLAB_DB_NAME: "gitlabdb"
-          GITLAB_DB_USERNAME: "postgres"
-          GITLAB_PAGES_ENABLED: "true"
-          GITLAB_SIGNUP_ENABLED: "false"
-          BUCKET_SUFFIX: "-dev"
-      sonarqube-database-manifests:
-        set:
-          SONARQUBE_DB_EXTERNAL_NAME: "sonarqube-pg.mtsi-dev.bigbang.dev"
-          SONARQUBE_DB_PASSWORD: "replace-me-db-passwords"
-      sonarqube:
-        set:
-          DOMAIN: "mtsi-dev.bigbang.dev"
-          SONARQUBE_IDAM_REALM_URL: "https://keycloak.mtsi-dev.bigbang.dev/auth/realms/baby-yoda"
-          SONARQUBE_DB_NAME: "sonarqubedb"
-          SONARQUBE_DB_USERNAME: "postgres"
-      jira-database-manifests:
-        set:
-          JIRA_DB_EXTERNAL_NAME: "jira-pg.mtsi-dev.bigbang.dev"
-          JIRA_DB_PASSWORD: "replace-me-db-passwords"
-      jira:
-        set:
-          DOMAIN: "mtsi-dev.bigbang.dev"
-          JIRA_DB_NAME: "jiradb"
-          JIRA_DB_USERNAME: "postgres"
-      confluence-database-manifests:
-        set:
-          CONFLUENCE_DB_EXTERNAL_NAME: "confluence-pg.mtsi-dev.bigbang.dev"
-          CONFLUENCE_DB_PASSWORD: "replace-me-db-passwords"
-      confluence:
-        set:
-          DOMAIN: "mtsi-dev.bigbang.dev"
-          CONFLUENCE_DB_NAME: "confluencedb"
-          CONFLUENCE_DB_USERNAME: "postgres"
-      mattermost-database-manifests:
-        set:
-          MATTERMOST_DB_EXTERNAL_NAME: "mattermost-pg.mtsi-dev.bigbang.dev"
-          MATTERMOST_DB_PASSWORD: "replace-me-db-passwords"
-          MATTERMOST_DB_USERNAME: "postgres"
-          MATTERMOST_DB_NAME: "mattermostdb"
-      mattermost-object-store:
-        set:
-          ACCESS_KEY: "replace-me-object-store-access-key"
-          SECRET_KEY: "replace-me-object-store-secret-key"
-          CA_CERT: |
-            -----BEGIN CERTIFICATE-----
-            replace-me-ca-cert-to-trust
-            -----END CERTIFICATE-----
-      mattermost:
-        set:
-          DOMAIN: "mtsi-dev.bigbang.dev"
-          MATTERMOST_BUCKET_SUFFIX: "-dev"
-          MATTERMOST_FILE_STORE_ENDPOINT: "swf.objects.mtsi.bigbang.dev"
-          MATTERMOST_VOLUMES: |
-            - name: ca-cert
-              secret:
-                secretName: ca-secret
-                defaultMode: 0644
-          MATTERMOST_VOLUME_MOUNTS: |
-            - name: ca-cert
-              mountPath: /etc/ssl/certs
-              readOnly: true
-      nexus-database-manifests:
-        set:
-          NEXUS_DB_EXTERNAL_NAME: "nexus-pg.mtsi-dev.bigbang.dev"
-          NEXUS_DB_PASSWORD: "replace-me-db-passwords"
-      nexus:
-        set:
-          DOMAIN: "mtsi-dev.bigbang.dev"
-          NEXUS_DB_NAME: "nexusdb"
-          NEXUS_DB_USERNAME: "postgres"
+options:
+  log_level: info
+variables:
+  init:
+    # TODO - remove this if/when functionality is restored upstream
+    REGISTRY_HPA_ENABLE: false
+  metallb:
+    IP_ADDRESS_POOL: "24.0.132.244/30"
+  dubbd-rke2-nutanix:
+    # TODO - replace these blanket exceptions with more targeted kyverno policy exceptions
+    EXEMPT_NAMESPACES: '["zarf", "rook-ceph", "metallb-system", "kube-system"]'
+    DOMAIN: "mtsi-dev.bigbang.dev"
+    # Domain and Certs
+    DOMAIN: "mtsi.bigbang.dev"
+    TENANT_CERT: |
+      -----BEGIN CERTIFICATE-----
+      replace-me-tenant-gateway-cert
+      -----END CERTIFICATE-----
+    TENANT_KEY: |
+      -----BEGIN PRIVATE KEY-----
+      replace-me-tenant-gateway-key
+      -----END PRIVATE KEY-----
+    ADMIN_CERT: |
+      -----BEGIN CERTIFICATE-----
+      replace-me-admin-gateway-cert
+      -----END CERTIFICATE-----
+    ADMIN_KEY: |
+      -----BEGIN PRIVATE KEY-----
+      replace-me-admin-gateway-key
+      -----END PRIVATE KEY-----
+    # Velero
+    VELERO_BUCKET_PROVIDER_URL: "http://swf.objects.mtsi.bigbang.dev"
+    VELERO_BUCKET: "velero-bucket-dev"
+    VELERO_BUCKET_REGION: "us-east-1"
+    VELERO_BUCKET_KEY: "replace-me-object-store-access-key"
+    VELERO_BUCKET_KEY_SECRET: "replace-me-object-store-secret-key"
+  software-factory-idam-gitlab:
+    DOMAIN: "mtsi-dev.bigbang.dev"
+  software-factory-idam-realm:
+    DOMAIN: "mtsi-dev.bigbang.dev"
+  keycloak-database-manifests:
+    KEYCLOAK_DB_EXTERNAL_NAME: "keycloak-pg.mtsi-dev.bigbang.dev"
+  uds-idam:
+    DOMAIN: "mtsi-dev.bigbang.dev"
+    KEYCLOAK_DB_USERNAME: "postgres"
+    KEYCLOAK_DB_PASSWORD: "replace-me-db-passwords"
+    KEYCLOAK_DB_NAME: "keycloakdb"
+    KEYCLOAK_DB_ENDPOINT: "keycloak-postgres.keycloak.svc.cluster.local"
+  gitlab-database-manifests:
+    GITLAB_DB_EXTERNAL_NAME: "gitlab-pg.mtsi-dev.bigbang.dev"
+    GITLAB_DB_PASSWORD: "replace-me-db-passwords"
+  gitlab-object-store:
+    ENDPOINT: "http://swf.objects.mtsi.bigbang.dev"
+    ACCESS_KEY: "replace-me-object-store-access-key"
+    SECRET_KEY: "replace-me-object-store-secret-key"
+  gitlab:
+    DOMAIN: "mtsi-dev.bigbang.dev"
+    GITLAB_DB_NAME: "gitlabdb"
+    GITLAB_DB_USERNAME: "postgres"
+    GITLAB_PAGES_ENABLED: "true"
+    GITLAB_SIGNUP_ENABLED: "false"
+    BUCKET_SUFFIX: "-dev"
+  sonarqube-database-manifests:
+    SONARQUBE_DB_EXTERNAL_NAME: "sonarqube-pg.mtsi-dev.bigbang.dev"
+    SONARQUBE_DB_PASSWORD: "replace-me-db-passwords"
+  sonarqube:
+    DOMAIN: "mtsi-dev.bigbang.dev"
+    SONARQUBE_IDAM_REALM_URL: "https://keycloak.mtsi-dev.bigbang.dev/auth/realms/baby-yoda"
+    SONARQUBE_DB_NAME: "sonarqubedb"
+    SONARQUBE_DB_USERNAME: "postgres"
+  jira-database-manifests:
+    JIRA_DB_EXTERNAL_NAME: "jira-pg.mtsi-dev.bigbang.dev"
+    JIRA_DB_PASSWORD: "replace-me-db-passwords"
+  jira:
+    DOMAIN: "mtsi-dev.bigbang.dev"
+    JIRA_DB_NAME: "jiradb"
+    JIRA_DB_USERNAME: "postgres"
+  confluence-database-manifests:
+    CONFLUENCE_DB_EXTERNAL_NAME: "confluence-pg.mtsi-dev.bigbang.dev"
+    CONFLUENCE_DB_PASSWORD: "replace-me-db-passwords"
+  confluence:
+    DOMAIN: "mtsi-dev.bigbang.dev"
+    CONFLUENCE_DB_NAME: "confluencedb"
+    CONFLUENCE_DB_USERNAME: "postgres"
+  mattermost-database-manifests:
+    MATTERMOST_DB_EXTERNAL_NAME: "mattermost-pg.mtsi-dev.bigbang.dev"
+    MATTERMOST_DB_PASSWORD: "replace-me-db-passwords"
+    MATTERMOST_DB_USERNAME: "postgres"
+    MATTERMOST_DB_NAME: "mattermostdb"
+  mattermost-object-store:
+    ACCESS_KEY: "replace-me-object-store-access-key"
+    SECRET_KEY: "replace-me-object-store-secret-key"
+    CA_CERT: |
+      -----BEGIN CERTIFICATE-----
+      replace-me-ca-cert-to-trust
+      -----END CERTIFICATE-----
+  mattermost:
+    DOMAIN: "mtsi-dev.bigbang.dev"
+    MATTERMOST_BUCKET_SUFFIX: "-dev"
+    MATTERMOST_FILE_STORE_ENDPOINT: "swf.objects.mtsi.bigbang.dev"
+    MATTERMOST_VOLUMES: |
+      - name: ca-cert
+        secret:
+          secretName: ca-secret
+          defaultMode: 0644
+    MATTERMOST_VOLUME_MOUNTS: |
+      - name: ca-cert
+        mountPath: /etc/ssl/certs
+        readOnly: true
+  nexus-database-manifests:
+    NEXUS_DB_EXTERNAL_NAME: "nexus-pg.mtsi-dev.bigbang.dev"
+    NEXUS_DB_PASSWORD: "replace-me-db-passwords"
+  nexus:
+    DOMAIN: "mtsi-dev.bigbang.dev"
+    NEXUS_DB_NAME: "nexusdb"
+    NEXUS_DB_USERNAME: "postgres"
