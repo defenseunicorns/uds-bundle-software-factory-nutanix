@@ -37,6 +37,7 @@ Certs for the tenant and admin gateways should be provided via `uds-config.yaml`
 * ADMIN_CERT
 * ADMIN_KEY
 
+You can reference [this](uds-config/dev-cluster/uds-config.yaml) example config to see how to set these.
 ## High Level Steps
 You can follow the breadcrumbs starting at the [Makefile](Makefile) target `make all/dev-cluster`. This Makefile downloads configured versions of zarf and uds to the build directory, places the `uds-config.yaml` and `deploy-dubbd-values.yaml` in that build directory and performs the deploy command from there. Steps numbered below. Or follow along in the Makefile.
 
