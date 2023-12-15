@@ -50,6 +50,10 @@ zarf-packages:
     path: build
     ref: 0.0.1
 
+  - name: deploy-time-jar-wrapper
+    path: build
+    ref: 0.0.1
+
   - name: uds-idam
     repository: ghcr.io/defenseunicorns/uds-capability/uds-idam
     ref: 0.1.14

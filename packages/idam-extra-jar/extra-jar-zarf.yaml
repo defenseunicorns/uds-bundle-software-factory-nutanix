@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: deploy-time-jar
+  description: "UDS IDAM Deploy time jar"
+  architecture: amd64
+  version: 0.0.1
+
+components:
+  - name: jar-image-push
+    required: true
+    images: 
+      - "###ZARF_PKG_TMPL_IMAGE###"

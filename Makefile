@@ -50,7 +50,7 @@ help: ## Show a list of all targets
 ########################################################################
 
 .PHONY: build/all
-build/all: build build/zarf build/uds build/software-factory-namespaces build/idam-dns build/idam-realm build/idam-gitlab build/idam-sonarqube build/db-manifests build/object-store-manifests build/additional-kyverno-exceptions build/uds-bundle-software-factory ## Build everything
+build/all: build build/zarf build/uds build/software-factory-namespaces build/idam-dns build/idam-realm build/idam-extra-jar build/idam-gitlab build/idam-sonarqube build/db-manifests build/object-store-manifests build/additional-kyverno-exceptions build/uds-bundle-software-factory ## Build everything
 
 build: ## Create build directory
 	mkdir -p build
@@ -88,6 +88,9 @@ build/idam-dns: | build ## Build idam-dns package
 build/idam-realm: | build ## Build idam-realm package
 	cd build && ./zarf package create ../packages/idam-realm/ --confirm --output-directory .
 
+build/idam-extra-jar: | build ## Build idam-realm package
+	cd build && ./zarf package create ../packages/idam-extra-jar/ --confirm --output-directory .
+
 build/db-manifests: | build ## Build DB Manifests
 	cd build && ./zarf package create ../packages/databases/confluence/ --confirm --output-directory .
 	cd build && ./zarf package create ../packages/databases/gitlab/ --confirm --output-directory .
@@ -121,6 +124,8 @@ deploy/test-cluster: ## Deploy the software factory package to the test cluster
 deploy/dev-cluster: ## Deploy the software factory package to the dev cluster
 	cp uds-config/dev-cluster/uds-config.yaml ./build/
 	cp deploy-dubbd-values.yaml ./build/
+	cp extra-keycloak-values.yaml ./build/
+	cp theme.jar ./build/
 	cd ./build && ./uds deploy uds-bundle-software-factory-*.tar.zst --confirm
 	cd ./scripts && ./update-certs.sh $(CERT_PATH) $(KEY_PATH)
 

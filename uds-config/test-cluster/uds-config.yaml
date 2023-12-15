@@ -34,6 +34,7 @@ bundle:
           KEYCLOAK_DB_PASSWORD: "replace-me-db-passwords"
           KEYCLOAK_DB_NAME: "keycloakdb"
           KEYCLOAK_DB_ENDPOINT: "keycloak-postgres.keycloak.svc.cluster.local"
+          KEYCLOAK_VALUES: extra-keycloak-values.yaml
       gitlab-database-manifests:
         set:
           GITLAB_DB_EXTERNAL_NAME: "gitlab-pg.mtsi.bigbang.dev"

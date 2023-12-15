@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: deploy-time-jar-wrapper
+  description: "UDS IDAM Deploy time jar wrapper"
+  architecture: amd64
+  version: 0.0.1
+
+variables:
+  - name: KEYCLOAK_EXTRA_JAR
+    default: theme.jar
+  - name: KEYCLOAK_EXTRA_JAR_IMAGE
+    default: defenseunicorns/extra-jar:0.0.1
+
+components:
+  - name: files
+    required: true
+    actions:
+      onDeploy:
+        before:
+          - cmd: mkdir -p deploy-time-jar
+    files:
+      - source: Dockerfile
+        target: Dockerfile
+      - source: extra-jar-zarf.yaml
+        target: deploy-time-jar/zarf.yaml
+  - name: jar-deploy
+    required: true
+    actions: 
+      onDeploy:
+        before:
+          - cmd: docker build . -t ${ZARF_VAR_KEYCLOAK_EXTRA_JAR_IMAGE}
+          - cmd: zarf package create deploy-time-jar --confirm --set IMAGE=${ZARF_VAR_KEYCLOAK_EXTRA_JAR_IMAGE}
+          - cmd: zarf package deploy zarf-package-deploy-time-jar-amd64-0.0.1.tar.zst --confirm
