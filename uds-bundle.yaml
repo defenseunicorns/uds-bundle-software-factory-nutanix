@@ -82,7 +82,7 @@ packages:
   # Gitlab
   - name: gitlab-redis
     repository: ghcr.io/defenseunicorns/uds-capability/gitlab/dev-dependency/gitlab-redis
-    ref: 0.1.10
+    ref: 0.1.11
 
   - name: gitlab-object-store
     path: build
@@ -94,7 +94,7 @@ packages:
 
   - name: gitlab
     repository: ghcr.io/defenseunicorns/uds-capability/gitlab
-    ref: 0.1.10
+    ref: 0.1.11
     imports:
       - name: GITLAB_IDAM_ENABLED
         package: software-factory-idam-gitlab
