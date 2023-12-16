@@ -15,7 +15,6 @@ This project is continually improving and being iterated on. Stay tuned to the l
 - You need [zarf](https://github.com/defenseunicorns/zarf) and [uds](https://github.com/defenseunicorns/uds-cli)
 - You need a bundle artifact. You can build it from this repository, download it or reference it directly from the [oci registry](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/pkgs/container/uds-bundle%2Fsoftware-factory-nutanix)
 - You need a `uds-config.yaml` that is set up for your environment.
-- You need a `deploy-dubbd-values.yaml` to configure some resource increases needed for this bundle.
 
 ## The Bundle
 
@@ -31,7 +30,7 @@ Below are the example configurations used in this project to configure deploy ti
 There will be sensitive values you will need to update before deployment. You can search `replace-me` in the above `uds-config.yaml` files for quick reference sensitive values needing updated.
 
 ## Certs
-Certs for the tenant and admin gateways should be provided via `uds-config.yaml` variables: 
+Certs for the tenant and admin gateways should be provided via `uds-config.yaml` variables:
 * TENANT_CERT
 * TENANT_KEY
 * ADMIN_CERT
@@ -64,5 +63,5 @@ brew tap defenseunicorns/tap && brew install uds && brew install zarf
 ```
 2) build all the zarf packages that support this bundle
 1) build the bundle itself
-1) place the `uds-config.yaml` and the `deploy-dubbd-values.yaml` in the directory where the deployment will take place
+1) place the `uds-config.yaml` in the directory where the deployment will take place
 1) deploy the software factory.
