@@ -12,8 +12,8 @@ This list covers tools which would be required on a developer machine in order t
 | [terraform](https://github.com/hashicorp/terraform) | v1.6.4 | An Infrastructure As Code (IAC) tool for managing the deployment of virtual resources (VMs, databases, object storage) within Nutanix |
 | [kubectl](https://github.com/kubernetes/kubectl) | v1.28.4 | Kubernetes management utility and CLI used by cluster admins to interact directly with a Kubernetes cluster |
 | [helm](https://github.com/helm/helm) | v3.13.2 | Kubernetes package manager CLI used to review the status of deployments in the cluster |
-| [Zarf](https://github.com/defenseunicorns/zarf) | v0.31.3 | A custom tool for packaging and delivering software components (such as gitlab) across an airgap |
-| [UDS](https://github.com/defenseunicorns/uds-cli) | v0.4.0 | A custom tool for automating and simplifying the management of multiple Zarf deployments in one environment |
+| [Zarf](https://github.com/defenseunicorns/zarf) | v0.31.4 | A custom tool for packaging and delivering software components (such as gitlab) across an airgap |
+| [UDS](https://github.com/defenseunicorns/uds-cli) | v0.5.1 | A custom tool for automating and simplifying the management of multiple Zarf deployments in one environment |
 
 ## Operating System Package Installs
 This list covers tools and packages installed in the Operating System of the virtual machines allocated to run Kubernetes. This list is obviously not exhaustive, but instead covers what is being added to the base STIG'd image.
@@ -41,20 +41,20 @@ The UDS Software Factory Bundle (SWF) is a collection of Zarf packages which inc
 
 | Name | Package Version (internal) | Application Version | Description |
 |----|----|----|----|
-| [Zarf Init](https://github.com/defenseunicorns/zarf/pkgs/container/packages%2Finit) | v0.31.3 | N/A | A zarf component installed in the cluster for orchestrating further deployment of Zarf based packages |
+| [Rook Ceph Zarf Init](https://github.com/defenseunicorns/uds-capability-rook-ceph/pkgs/container/uds-capability%2Frook-ceph%2Finit) | v0.31.4-0.1.2 | N/A | A zarf component installed in the cluster for orchestrating further deployment of Zarf based packages |
 | [MetalLB](https://github.com/defenseunicorns/uds-capability-metallb/tree/v0.0.4) | 0.0.4 | v0.13.12 | Tool for providing load balancer capabilities for ingress into a Kubernetes deployment |
 | [DUBBD](https://github.com/defenseunicorns/uds-package-dubbd) | 0.15.0 | N/A | [DESCRIPTION BELOW](#Defense-Unicorns-Big-Bang-Distribution-(DUBBD)) |
 | [Keycloak](https://github.com/defenseunicorns/uds-idam) | 0.1.14 | 21.1.1 | An identity and access management (IDAM) tool used to authenticate users for access to applications |
 | [Redis](https://github.com/defenseunicorns/uds-capability-gitlab/tree/main/utils/pkg-deps/gitlab/redis) | 0.0.2 | 7.0.12 | A key-value store used as a data backend for several applications in the stack |
 | [Minio](https://github.com/defenseunicorns/uds-capability-gitlab/tree/main/utils/pkg-deps/gitlab/minio) | 0.0.2 | 5.0.13 | An S3 compliant object storage solution backed by in-cluster storage providers. Allows applications to simulate access to cloud based storage against in-cluster resources |
-| [Gitlab](https://github.com/defenseunicorns/uds-capability-gitlab/tree/main) | 0.1.8 | 16.5.0 | A source control management tool used in the software development lifecycle for storing, updating, building and deploying custom software |
-| [Gitlab Runner](https://github.com/defenseunicorns/uds-capability-gitlab-runner/tree/main) | 0.1.2 | v15.11.0 | A counterpart to Gitlab (above) in which automated software builds, tests and deployments are executed |
+| [Gitlab](https://github.com/defenseunicorns/uds-capability-gitlab/tree/main) | 0.1.11 | 16.5.1 | A source control management tool used in the software development lifecycle for storing, updating, building and deploying custom software |
+| [Gitlab Runner](https://github.com/defenseunicorns/uds-capability-gitlab-runner/tree/main) | 0.1.3 | v16.5.0 | A counterpart to Gitlab (above) in which automated software builds, tests and deployments are executed |
 | [Sonarqube](https://github.com/defenseunicorns/uds-capability-sonarqube) | 0.1.2 | 9.9.2-community | A code inspection tool used during automated pipelines to evaluate security considerations of custom software and packaged images |
 | [Jira](https://github.com/defenseunicorns/uds-capability-jira) | 0.1.3 | 9.11.2 | A collaboration tool used for team management and task organization |
 | [Confluence](https://github.com/defenseunicorns/uds-capability-confluence) | 0.1.3 | 8.6.1 | A knowledge management tool used by teams to organize information |
-| [Mattermost Operator](https://github.com/defenseunicorns/uds-capability-mattermost-operator) | 0.1.5 | 1.20.1 | A Kubernetes operator installed to manage deployment and configuration of Mattermost instances within the cluster |
-| [Mattermost](https://github.com/defenseunicorns/uds-capability-mattermost-operator) | 0.1.5 | 9.2.3 | An instance of Mattermost, a self-hosted chat and collaboration platform |
-| [Nexus](https://github.com/defenseunicorns/uds-capability-nexus) | 0.1.2 | 3.53.1-02 | An artifact repository used for storing compiled application libraries, packages, images and other such artifacts |
+| [Mattermost Operator](https://github.com/defenseunicorns/uds-capability-mattermost-operator) | 0.1.6 | 1.20.1 | A Kubernetes operator installed to manage deployment and configuration of Mattermost instances within the cluster |
+| [Mattermost](https://github.com/defenseunicorns/uds-capability-mattermost-operator) | 0.1.6 | 9.2.3 | An instance of Mattermost, a self-hosted chat and collaboration platform |
+| [Nexus](https://github.com/defenseunicorns/uds-capability-nexus) | 0.1.3 | 3.62.0-01 | An artifact repository used for storing compiled application libraries, packages, images and other such artifacts |
 
 ## Defense Unicorns Big Bang Distribution (DUBBD)
  DUBBD is an opinionated configuration of Platform One's Big Bang product. It is a collection of tools that provide administrative capabilities such as centralized logging, monitoring, alerting and runtime security to a kubernetes cluster. The following applications and tools are installed:
