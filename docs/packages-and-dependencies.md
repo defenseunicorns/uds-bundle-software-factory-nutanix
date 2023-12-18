@@ -47,14 +47,14 @@ The UDS Software Factory Bundle (SWF) is a collection of Zarf packages which inc
 | [Keycloak](https://github.com/defenseunicorns/uds-idam) | 0.1.14 | 21.1.1 | An identity and access management (IDAM) tool used to authenticate users for access to applications |
 | [Redis](https://github.com/defenseunicorns/uds-capability-gitlab/tree/main/utils/pkg-deps/gitlab/redis) | 0.0.2 | 7.0.12 | A key-value store used as a data backend for several applications in the stack |
 | [Minio](https://github.com/defenseunicorns/uds-capability-gitlab/tree/main/utils/pkg-deps/gitlab/minio) | 0.0.2 | 5.0.13 | An S3 compliant object storage solution backed by in-cluster storage providers. Allows applications to simulate access to cloud based storage against in-cluster resources |
-| [Gitlab](https://github.com/defenseunicorns/uds-capability-gitlab/tree/main) | 0.1.11 | 16.5.1 | A source control management tool used in the software development lifecycle for storing, updating, building and deploying custom software |
+| [Gitlab](https://github.com/defenseunicorns/uds-capability-gitlab/tree/main) | 0.1.13 | 16.5.1 | A source control management tool used in the software development lifecycle for storing, updating, building and deploying custom software |
 | [Gitlab Runner](https://github.com/defenseunicorns/uds-capability-gitlab-runner/tree/main) | 0.1.3 | v16.5.0 | A counterpart to Gitlab (above) in which automated software builds, tests and deployments are executed |
 | [Sonarqube](https://github.com/defenseunicorns/uds-capability-sonarqube) | 0.1.2 | 9.9.2-community | A code inspection tool used during automated pipelines to evaluate security considerations of custom software and packaged images |
 | [Jira](https://github.com/defenseunicorns/uds-capability-jira) | 0.1.3 | 9.11.2 | A collaboration tool used for team management and task organization |
 | [Confluence](https://github.com/defenseunicorns/uds-capability-confluence) | 0.1.3 | 8.6.1 | A knowledge management tool used by teams to organize information |
 | [Mattermost Operator](https://github.com/defenseunicorns/uds-capability-mattermost-operator) | 0.1.6 | 1.20.1 | A Kubernetes operator installed to manage deployment and configuration of Mattermost instances within the cluster |
-| [Mattermost](https://github.com/defenseunicorns/uds-capability-mattermost-operator) | 0.1.6 | 9.2.3 | An instance of Mattermost, a self-hosted chat and collaboration platform |
-| [Nexus](https://github.com/defenseunicorns/uds-capability-nexus) | 0.1.3 | 3.62.0-01 | An artifact repository used for storing compiled application libraries, packages, images and other such artifacts |
+| [Mattermost](https://github.com/defenseunicorns/uds-capability-mattermost-operator) | 0.1.7 | 9.2.3 | An instance of Mattermost, a self-hosted chat and collaboration platform |
+| [Nexus](https://github.com/defenseunicorns/uds-capability-nexus) | 0.1.4 | 3.62.0-01 | An artifact repository used for storing compiled application libraries, packages, images and other such artifacts |
 
 ## Defense Unicorns Big Bang Distribution (DUBBD)
  DUBBD is an opinionated configuration of Platform One's Big Bang product. It is a collection of tools that provide administrative capabilities such as centralized logging, monitoring, alerting and runtime security to a kubernetes cluster. The following applications and tools are installed:
