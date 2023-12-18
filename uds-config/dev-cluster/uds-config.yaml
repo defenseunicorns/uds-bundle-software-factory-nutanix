@@ -58,6 +58,8 @@ variables:
     GITLAB_DB_USERNAME: "postgres"
     GITLAB_PAGES_ENABLED: "true"
     GITLAB_SIGNUP_ENABLED: "false"
+    GITLAB_BACKUP_SCHEDULE: "0 3 * * *"
+    GITLAB_BACKUP_EXTRA_ARGS: "--skip artifiacts,registry"
     BUCKET_SUFFIX: "-dev"
   sonarqube-database-manifests:
     SONARQUBE_DB_EXTERNAL_NAME: "sonarqube-pg.mtsi-dev.bigbang.dev"
@@ -106,6 +108,7 @@ variables:
       - name: ca-cert
         mountPath: /etc/ssl/certs
         readOnly: true
+    MATTERMOST_SSO_ENABLED: "false"
   nexus-database-manifests:
     NEXUS_DB_EXTERNAL_NAME: "nexus-pg.mtsi-dev.bigbang.dev"
     NEXUS_DB_PASSWORD: "replace-me-db-passwords"
@@ -113,3 +116,4 @@ variables:
     DOMAIN: "mtsi-dev.bigbang.dev"
     NEXUS_DB_NAME: "nexusdb"
     NEXUS_DB_USERNAME: "postgres"
+    NEXUS_SSO_ENABLED: "false"
