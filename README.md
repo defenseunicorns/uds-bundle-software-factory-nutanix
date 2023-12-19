@@ -112,7 +112,7 @@ uds pull oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix:0.1.4
 
 And subsequently deploying from the local file:
 ```
-uds deploy uds-bundle-software-factory-nutanix-amd64-0.1.4.tar.zst
+uds deploy uds-bundle-software-factory-nutanix-amd64-0.1.4.tar.zst --confirm
 ```
 
 ## Additional Notes
