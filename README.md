@@ -1,46 +1,124 @@
 # uds-bundle-software-factory-nutanix
-Detailed list of packages and dependencies in this bundle:
-[packages-and-dependencies.md](docs/packages-and-dependencies.md)
+The UDS Software Factory (SWF) bundle can be used to deploy an opinionated kubernetes based devsecops stack and development environment.
+The full list of packages and dependencies installed by the bundle (and an assumed underlying environment) can be [viewed here](docs/packages-and-dependencies.md).
+
+> NOTE: this project is young and rapidly iterating, stay up to date on changes by subscribing to release notifications
 
 ## Developer Info
-
 [DEVELOPMENT_MAINTENANCE.md](docs/DEVELOPMENT_MAINTENANCE.md)
 
-## Key Points
-This project is continually improving and being iterated on. Stay tuned to the latest updates.
-### Things you will need
-- You need an appropriately provisioned kubernetes cluster to deploy to.
-- You need all databases and object storage provisioned with connection configurations ready to plug into your `uds-config.yaml`. Click the links for more documentation on creation and configuration of your [databases](docs/database-creation-and-configuration.md) and [object store](docs/object-store-creation-and-configuration.md)
-- You need domain configuration and certs ready for use
-- You need [zarf](https://github.com/defenseunicorns/zarf) and [uds](https://github.com/defenseunicorns/uds-cli)
-- You need a bundle artifact. You can build it from this repository, download it or reference it directly from the [oci registry](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/pkgs/container/uds-bundle%2Fsoftware-factory-nutanix)
-- You need a `uds-config.yaml` that is set up for your environment.
+## Installation ("quickstart")
+### Prerequisites
+**Tools**:
+* [zarf](https://github.com/defenseunicorns/zarf)
+* [uds](https://github.com/defenseunicorns/uds-cli)
+* (OPTIONAL) [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
+* (OPTIONAL) [helm](https://github.com/helm/helm)
 
-## The Bundle
+> NOTE: Zarf must be accessible on the user's PATH
 
-When disconnected, you can download the tarball for this bundle to use for deployment from the oci compliant github container registry connected to this repo [here](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/pkgs/container/uds-bundle%2Fsoftware-factory-nutanix). You can also deploy the bundle directly from the oci registry if you are in a connected environment.
+**Infrastructure**:
+* Kubernetes cluster
+* Access to the cluster with enough privilage to deploy 
+* A valid domain 
+  > NOTE: `*.bigbang.dev` may be used for demomonstration and test deployments.
+* Wildcard certificates to cover your domain (alternatively, expand for full SAN list)
+  <details>
+    <summary>Individual SAN list </summary>
+	
+	* `confluence.your.domain`
+	* `gitlab.your.domain`
+	* `*.pages.your.domain`
+	* `registry.your.domain`
+	* `gitlab.your.domain`
+	* `jira.your.domain`
+	* `keycloak.your.domain`
+	* `kiali.your.domain`
+	* `chat.your.domain`
+	* `grafana.your.domain`
+	* `neuvector.your.domain`
+	* `nexus.your.domain`
+	* `sonarqube.your.domain`
+    * `tracing.your.domain`
+  </details>
 
-## uds-config.yaml
-Once you have the bundle where you need or have access to it via oci, you can then set up a `uds-config.yaml` configuration for your environment. This configuration will be used during deployment.
+  > NOTE: If using the example domain (`*.bigbang.dev`), a valid corresponding certificate and key can be found [in the Platform1 Big Bang repo](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/chart/ingress-certs.yaml?ref_type=heads).
+* Object Storage with provisioned buckets (expand for details)
+  <details>
+    <summary> Velero </summary>
 
-Below are the example configurations used in this project to configure deploy time variables for the zarf packages in the bundle.
-- [uds-config.yaml](uds-config/dev-cluster/uds-config.yaml) Example of our nutanix Dev cluster config
-- [uds-config.yaml](uds-config/test-cluster/uds-config.yaml) Example of our nutanix Test cluster config
+    * velero-backups
+  </details>
+  <details>
+    <summary> Gitlab </summary>
+	
+    * gitlab-artifacts
+    * gitlab-backups
+    * gitlab-ci-secure-files
+    * gitlab-dependency-proxy
+    * gitlab-lfs
+    * gitlab-mr-diffs
+    * gitlab-packages
+    * gitlab-pages
+    * gitlab-terraform-state
+    * gitlab-uploads
+    * gitlab-registry
+    * gitlab-tmp
+  </details>
+  <details>
+    <summary> Mattermost </summary>
 
-There will be sensitive values you will need to update before deployment. You can search `replace-me` in the above `uds-config.yaml` files for quick reference sensitive values needing updated.
+    * mattermost-objects
+  </details>
+* Postgres databases (expand for details):
+  <details>
+    <summary> Full list of databases </summary>
 
-## Certs
-Certs for the tenant and admin gateways should be provided via `uds-config.yaml` variables:
-* TENANT_CERT
-* TENANT_KEY
-* ADMIN_CERT
-* ADMIN_KEY
+  * Keycloak
+  * Gitlab
+  * Sonarqube
+  * Jira
+  * Confluence
+  * Mattermost
+  * Nexus
+  </details>
 
-You can reference [this](uds-config/dev-cluster/uds-config.yaml) example config to see how to set these.
-## High Level Steps
-You can follow the breadcrumbs starting at the [Makefile](Makefile) target `make all/dev-cluster`. This Makefile downloads configured versions of zarf and uds to the build directory, places the `uds-config.yaml` and `deploy-dubbd-values.yaml` in that build directory and performs the deploy command from there. Steps numbered below. Or follow along in the Makefile.
+> NOTE: All database and object storage credentials must be provided via username and password in the uds-config.
 
-These breadcrumbs will show you how to:
+### Configuration
+Deployment configuration is managed via a `uds-config.yaml` file in the deployment directory. Some values in the configuration will be sensitive, **we do not recommend checking this into source control in its entierty**. Best practice would involve either storing the configuration in an external secrets manager (like Vault), or managing deployments via CD and generating the config file dynamically at deploy time using CD managed secrets.
+
+For demonstration purposes, you can setup a local configfile as follows:
+* Copy an example configuration from `uds-config/test-cluster` to your working directory
+* Update the config according to your environment taking care to set:
+  * domain variables
+  * certificate values
+  * bucket names and credentials
+  * database names and credentials
+
+> NOTE: the config must be named `uds-config.yaml` and be present in your working directory at deploy time
+
+### Deployment
+Select a target version number and gather the OCI image reference [from the packages page](https://github.com/orgs/defenseunicorns/packages?repo_name=uds-bundle-software-factory-nutanix). With the above prerequisites and configuration complete, you can deploy the bundle directly via OCI:
+```
+uds deploy oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix:0.1.4-amd64 --confirm
+```
+
+### (OPTIONAL) Local Deployment Reference
+Situationally, it may be useful to download the deployment artifact so that it may be referenced offline. This can be accomplished by first downloading the target release:
+```
+uds pull oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix:0.1.4-amd64
+```
+
+And subsequently deploying from the local file:
+```
+uds deploy uds-bundle-software-factory-nutanix-amd64-0.1.4.tar.zst --confirm
+```
+
+## Additional Notes
+For development and testing (both locally and in CI) we have included a Makefile to simplify common tasks. You can follow the breadcrumbs starting at the [Makefile](Makefile) target `make all/dev-cluster`. This Makefile downloads configured versions of zarf and uds to the build directory, places the `uds-config.yaml` in that build directory and performs the deploy command from there. Steps numbered below. Or follow along in the Makefile.
+
+These targets will show you how to:
 1) download the tools you need like zarf and uds.
 ```bash
 .PHONY: build/zarf
