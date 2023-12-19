@@ -101,7 +101,7 @@ For demonstration purposes, you can setup a local configfile as follows:
 ### Deployment
 Select a target version number and gather the OCI image reference [from the packages page](https://github.com/orgs/defenseunicorns/packages?repo_name=uds-bundle-software-factory-nutanix). With the above prerequisites and configuration complete, you can deploy the bundle directly via OCI:
 ```
-uds deploy oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix:0.1.4-amd64
+uds deploy oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix:0.1.4-amd64 --confirm
 ```
 
 ### (OPTIONAL) Local Deployment Reference
