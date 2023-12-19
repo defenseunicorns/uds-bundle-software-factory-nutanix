@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/uds-cli/v0.0.5-alpha/uds.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/uds-cli/v0.5.1/uds.schema.json
 kind: UDSBundle
 metadata:
   name: software-factory-nutanix
@@ -8,13 +8,13 @@ metadata:
   # x-release-please-end
   architecture: amd64
 
-zarf-packages:
+packages:
   # Zarf init
   - name: init
     repository: ghcr.io/defenseunicorns/uds-capability/rook-ceph/init
     optional-components:
       - git-server
-    ref: v0.31.3-0.1.0
+    ref: v0.31.4-0.1.2
 
   # Namespace pre-reqs for swf capabilities
   - name: software-factory-namespaces
@@ -52,7 +52,7 @@ zarf-packages:
 
   - name: uds-idam
     repository: ghcr.io/defenseunicorns/uds-capability/uds-idam
-    ref: 0.1.14
+    ref: 0.1.15
     imports:
       - name: REALM_IMPORT_FILE
         package: software-factory-idam-realm
@@ -82,7 +82,7 @@ zarf-packages:
   # Gitlab
   - name: gitlab-redis
     repository: ghcr.io/defenseunicorns/uds-capability/gitlab/dev-dependency/gitlab-redis
-    ref: 0.1.8
+    ref: 0.1.14
 
   - name: gitlab-object-store
     path: build
@@ -94,7 +94,7 @@ zarf-packages:
 
   - name: gitlab
     repository: ghcr.io/defenseunicorns/uds-capability/gitlab
-    ref: 0.1.8
+    ref: 0.1.14
     imports:
       - name: GITLAB_IDAM_ENABLED
         package: software-factory-idam-gitlab
@@ -106,11 +106,11 @@ zarf-packages:
   # Gitlab Runner
   - name: gitlab-runner-rbac
     repository: ghcr.io/defenseunicorns/uds-capability/gitlab-runner/dev-dependency/gitlab-runner-rbac
-    ref: 0.1.2
+    ref: 0.1.3
 
   - name: gitlab-runner
     repository: ghcr.io/defenseunicorns/uds-capability/gitlab-runner
-    ref: 0.1.2
+    ref: 0.1.3
 
   # Sonarqube
   - name: sonarqube-database-manifests
@@ -165,7 +165,7 @@ zarf-packages:
 
   - name: mattermost
     repository: ghcr.io/defenseunicorns/uds-capability/mattermost
-    ref: 0.1.5
+    ref: 0.1.7
 
   # Nexus
   - name: nexus-database-manifests
@@ -174,7 +174,7 @@ zarf-packages:
 
   - name: nexus
     repository: ghcr.io/defenseunicorns/uds-capability/nexus
-    ref: 0.1.2
+    ref: 0.1.5
 
   # Add all virtualservices as internal dns entries for auth callbacks
   - name: software-factory-idam-dns
