@@ -116,7 +116,7 @@ uds deploy uds-bundle-software-factory-nutanix-amd64-0.1.4.tar.zst --confirm
 ```
 
 ## Additional Notes
-For development and testing (both locally and in CI) we have included a Makefile to simplify common tasks. You can follow the breadcrumbs starting at the [Makefile](Makefile) target `make all/dev-cluster`. This Makefile downloads configured versions of zarf and uds to the build directory, places the `uds-config.yaml` and `deploy-dubbd-values.yaml` in that build directory and performs the deploy command from there. Steps numbered below. Or follow along in the Makefile.
+For development and testing (both locally and in CI) we have included a Makefile to simplify common tasks. You can follow the breadcrumbs starting at the [Makefile](Makefile) target `make all/dev-cluster`. This Makefile downloads configured versions of zarf and uds to the build directory, places the `uds-config.yaml` in that build directory and performs the deploy command from there. Steps numbered below. Or follow along in the Makefile.
 
 These targets will show you how to:
 1) download the tools you need like zarf and uds.
