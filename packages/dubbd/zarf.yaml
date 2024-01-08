@@ -4,9 +4,9 @@ metadata:
   name: dubbd-rke2-nutanix
   description: "RKE2 DUBBD configuration tweaked for swf-nutanix"
   architecture: "amd64"
-  version: "0.15.0-n1"
+  version: "0.16.0-n1"
 
-x-dubbd-oci: &dubbd_oci "oci://ghcr.io/defenseunicorns/packages/dubbd-rke2:0.15.0-skeleton"
+x-dubbd-oci: &dubbd_oci "oci://ghcr.io/defenseunicorns/packages/dubbd-rke2:0.16.0-skeleton"
 
 variables:
 # domains and certs
@@ -45,7 +45,7 @@ components:
     import:
       name: preflight
       url: *dubbd_oci
-  
+
   # NOTE -- This DUBBD package assumes certs are provided directly via variable configuration. No certs will be loaded from files by default.
 
   - name: generate-credentials

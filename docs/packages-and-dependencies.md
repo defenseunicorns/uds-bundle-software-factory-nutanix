@@ -62,7 +62,7 @@ The UDS Software Factory Bundle (SWF) is a collection of Zarf packages which inc
 | Package | Version | Description |
 |----|----|----|
 | [Flux](https://github.com/fluxcd/flux2/releases) | 2.1.1 | A GitOps based manager for scheduling deployments in the cluster |
-| [Big Bang](https://repo1.dso.mil/big-bang/bigbang) | 2.16.0 | Big Bang is a suite of DevSecOps tools which can be installed in Kubernetes to help secure, monitor and manage cluster workloads |
+| [Big Bang](https://repo1.dso.mil/big-bang/bigbang) | 2.17.0 | Big Bang is a suite of DevSecOps tools which can be installed in Kubernetes to help secure, monitor and manage cluster workloads |
 | [Kyverno](https://repo1.dso.mil/big-bang/product/packages/kyverno) | 1.10.3 | Kyverno is a policy management engine for Kubernetes used to restrict permissions in the cluster and enforce NIST based security control requirements |
 | [Istio Operator](https://repo1.dso.mil/big-bang/product/packages/istio-operator) | 1.19.4 | Kubernetes operator which manages deployments and configuration of the Istio service mesh (in-cluster networking) |
 | [Istio Controlplane](https://repo1.dso.mil/big-bang/product/packages/istio-controlplane) | 1.19.4 | A package detailing the configuration of the deployed service mesh -- used by the operator to apply the desired state in the cluster |
