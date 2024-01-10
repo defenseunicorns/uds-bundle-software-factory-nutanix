@@ -50,7 +50,7 @@ The UDS Software Factory Bundle (SWF) is a collection of Zarf packages which inc
 | [Gitlab](https://github.com/defenseunicorns/uds-capability-gitlab/tree/main) | 0.1.15 | 16.6.1 | A source control management tool used in the software development lifecycle for storing, updating, building and deploying custom software |
 | [Gitlab Runner](https://github.com/defenseunicorns/uds-capability-gitlab-runner/tree/main) | 0.1.3 | v16.5.0 | A counterpart to Gitlab (above) in which automated software builds, tests and deployments are executed |
 | [Sonarqube](https://github.com/defenseunicorns/uds-capability-sonarqube) | 0.1.3 | 9.9.3-community | A code inspection tool used during automated pipelines to evaluate security considerations of custom software and packaged images |
-| [Jira](https://github.com/defenseunicorns/uds-capability-jira) | 0.1.4 | 9.12.0 | A collaboration tool used for team management and task organization |
+| [Jira](https://github.com/defenseunicorns/uds-capability-jira) | 0.1.5 | 9.12.0 | A collaboration tool used for team management and task organization |
 | [Confluence](https://github.com/defenseunicorns/uds-capability-confluence) | 0.1.3 | 8.7.1 | A knowledge management tool used by teams to organize information |
 | [Mattermost Operator](https://github.com/defenseunicorns/uds-capability-mattermost-operator) | 0.1.6 | 1.20.1 | A Kubernetes operator installed to manage deployment and configuration of Mattermost instances within the cluster |
 | [Mattermost](https://github.com/defenseunicorns/uds-capability-mattermost-operator) | 0.1.7 | 9.2.3 | An instance of Mattermost, a self-hosted chat and collaboration platform |
