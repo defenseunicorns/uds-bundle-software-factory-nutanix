@@ -47,11 +47,11 @@ The UDS Software Factory Bundle (SWF) is a collection of Zarf packages which inc
 | [Keycloak](https://github.com/defenseunicorns/uds-idam) | 0.1.14 | 21.1.1 | An identity and access management (IDAM) tool used to authenticate users for access to applications |
 | [Redis](https://github.com/defenseunicorns/uds-capability-gitlab/tree/main/utils/pkg-deps/gitlab/redis) | 0.0.2 | 7.0.12 | A key-value store used as a data backend for several applications in the stack |
 | [Minio](https://github.com/defenseunicorns/uds-capability-gitlab/tree/main/utils/pkg-deps/gitlab/minio) | 0.0.2 | 5.0.13 | An S3 compliant object storage solution backed by in-cluster storage providers. Allows applications to simulate access to cloud based storage against in-cluster resources |
-| [Gitlab](https://github.com/defenseunicorns/uds-capability-gitlab/tree/main) | 0.1.14 | 16.5.1 | A source control management tool used in the software development lifecycle for storing, updating, building and deploying custom software |
+| [Gitlab](https://github.com/defenseunicorns/uds-capability-gitlab/tree/main) | 0.1.15 | 16.6.1 | A source control management tool used in the software development lifecycle for storing, updating, building and deploying custom software |
 | [Gitlab Runner](https://github.com/defenseunicorns/uds-capability-gitlab-runner/tree/main) | 0.1.3 | v16.5.0 | A counterpart to Gitlab (above) in which automated software builds, tests and deployments are executed |
-| [Sonarqube](https://github.com/defenseunicorns/uds-capability-sonarqube) | 0.1.2 | 9.9.2-community | A code inspection tool used during automated pipelines to evaluate security considerations of custom software and packaged images |
-| [Jira](https://github.com/defenseunicorns/uds-capability-jira) | 0.1.3 | 9.11.2 | A collaboration tool used for team management and task organization |
-| [Confluence](https://github.com/defenseunicorns/uds-capability-confluence) | 0.1.3 | 8.6.1 | A knowledge management tool used by teams to organize information |
+| [Sonarqube](https://github.com/defenseunicorns/uds-capability-sonarqube) | 0.1.3 | 9.9.3-community | A code inspection tool used during automated pipelines to evaluate security considerations of custom software and packaged images |
+| [Jira](https://github.com/defenseunicorns/uds-capability-jira) | 0.1.4 | 9.12.0 | A collaboration tool used for team management and task organization |
+| [Confluence](https://github.com/defenseunicorns/uds-capability-confluence) | 0.1.3 | 8.7.1 | A knowledge management tool used by teams to organize information |
 | [Mattermost Operator](https://github.com/defenseunicorns/uds-capability-mattermost-operator) | 0.1.6 | 1.20.1 | A Kubernetes operator installed to manage deployment and configuration of Mattermost instances within the cluster |
 | [Mattermost](https://github.com/defenseunicorns/uds-capability-mattermost-operator) | 0.1.7 | 9.2.3 | An instance of Mattermost, a self-hosted chat and collaboration platform |
 | [Nexus](https://github.com/defenseunicorns/uds-capability-nexus) | 0.1.5 | 3.62.0-01 | An artifact repository used for storing compiled application libraries, packages, images and other such artifacts |
@@ -62,7 +62,7 @@ The UDS Software Factory Bundle (SWF) is a collection of Zarf packages which inc
 | Package | Version | Description |
 |----|----|----|
 | [Flux](https://github.com/fluxcd/flux2/releases) | 2.1.1 | A GitOps based manager for scheduling deployments in the cluster |
-| [Big Bang](https://repo1.dso.mil/big-bang/bigbang) | 2.16.0 | Big Bang is a suite of DevSecOps tools which can be installed in Kubernetes to help secure, monitor and manage cluster workloads |
+| [Big Bang](https://repo1.dso.mil/big-bang/bigbang) | 2.17.0 | Big Bang is a suite of DevSecOps tools which can be installed in Kubernetes to help secure, monitor and manage cluster workloads |
 | [Kyverno](https://repo1.dso.mil/big-bang/product/packages/kyverno) | 1.10.3 | Kyverno is a policy management engine for Kubernetes used to restrict permissions in the cluster and enforce NIST based security control requirements |
 | [Istio Operator](https://repo1.dso.mil/big-bang/product/packages/istio-operator) | 1.19.4 | Kubernetes operator which manages deployments and configuration of the Istio service mesh (in-cluster networking) |
 | [Istio Controlplane](https://repo1.dso.mil/big-bang/product/packages/istio-controlplane) | 1.19.4 | A package detailing the configuration of the deployed service mesh -- used by the operator to apply the desired state in the cluster |
