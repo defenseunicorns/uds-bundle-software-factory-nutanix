@@ -34,6 +34,7 @@ addons:
             credential:
               name: "velero-bucket-credentials"
               key: "cloud"
+        defaultVolumesToFsBackup: true
       snapshotsEnabled: true
       schedules:
         udsbackup:
@@ -48,4 +49,4 @@ addons:
               - kube-system
               - flux
               - velero
-            ttl: "240h"
+            ttl: "240h"``
