@@ -36,6 +36,7 @@ addons:
               key: "cloud"
         defaultVolumesToFsBackup: true
       snapshotsEnabled: true
+      deployNodeAgent: true
       schedules:
         udsbackup:
           disabled: false
