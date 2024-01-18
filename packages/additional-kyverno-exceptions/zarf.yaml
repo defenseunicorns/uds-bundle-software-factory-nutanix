@@ -20,3 +20,10 @@ components:
         namespace: jira
         files:
           - jira/non-root-user.yaml
+  - name: velero-kyverno-policy-exception
+    required: true
+    manifests:
+      - name: velero-kyverno-policy-exception
+        namespace: velero
+        files:
+          - velero/hostpath-exception.yaml
