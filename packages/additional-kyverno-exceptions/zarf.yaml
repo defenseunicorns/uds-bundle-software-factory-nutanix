@@ -27,3 +27,4 @@ components:
         namespace: velero
         files:
           - velero/hostpath-exception.yaml
+          - velero/privileged-exception.yaml

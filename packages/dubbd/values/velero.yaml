@@ -47,7 +47,7 @@ addons:
       deployNodeAgent: true
       nodeAgent:
         podVolumePath: /var/lib/kubelet/pods
-        privileged: false
+        privileged: true
         # Pod priority class name to use for the node-agent daemonset. Optional.
         priorityClassName: ""
         # Resource requests/limits to specify for the node-agent daemonset deployment. Optional.
