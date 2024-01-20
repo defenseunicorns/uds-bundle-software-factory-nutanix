@@ -4,6 +4,14 @@ addons:
     plugins:
       - aws
     values:
+      resources:
+        server:
+          requests:
+            cpu: 1000m
+            memory: 2Gi
+          limits:
+            cpu: 1000m
+            memory: 2Gi
       credentials:
         useSecret: true
         name: "velero-bucket-credentials"
@@ -14,29 +22,43 @@ addons:
             aws_secret_access_key=###ZARF_VAR_VELERO_BUCKET_KEY_SECRET###
       configuration:
         backupStorageLocation:
-          - name: default
-            provider: aws
-            bucket: "###ZARF_VAR_VELERO_BUCKET###"
-            config:
-              region: "###ZARF_VAR_VELERO_BUCKET_REGION###"
-              s3ForcePathStyle: true
-              s3Url: "###ZARF_VAR_VELERO_BUCKET_PROVIDER_URL###"
-            credential:
-              name: "velero-bucket-credentials"
-              key: "cloud"
+        - name: default
+          provider: aws
+          bucket: "###ZARF_VAR_VELERO_BUCKET###"
+          config:
+            region: "###ZARF_VAR_VELERO_BUCKET_REGION###"
+            s3ForcePathStyle: true
+            s3Url: "###ZARF_VAR_VELERO_BUCKET_PROVIDER_URL###"
+          credential:
+            name: "velero-bucket-credentials"
+            key: "cloud"
         volumeSnapshotLocation:
-          - name: default
-            provider: aws
-            config:
-              region: "###ZARF_VAR_VELERO_BUCKET_REGION###"
-              s3ForcePathStyle: true
-              s3Url: "###ZARF_VAR_VELERO_BUCKET_PROVIDER_URL###"
-            credential:
-              name: "velero-bucket-credentials"
-              key: "cloud"
+        - name: default
+          provider: aws
+          config:
+            region: "###ZARF_VAR_VELERO_BUCKET_REGION###"
+            s3ForcePathStyle: true
+            s3Url: "###ZARF_VAR_VELERO_BUCKET_PROVIDER_URL###"
+          credential:
+            name: "velero-bucket-credentials"
+            key: "cloud"
         defaultVolumesToFsBackup: true
       snapshotsEnabled: true
       deployNodeAgent: true
+      nodeAgent:
+        podVolumePath: /var/lib/kubelet/pods
+        privileged: false
+        # Pod priority class name to use for the node-agent daemonset. Optional.
+        priorityClassName: ""
+        # Resource requests/limits to specify for the node-agent daemonset deployment. Optional.
+        # https://velero.io/docs/v1.6/customize-installation/#customize-resource-requests-and-limits
+        resources:
+          requests:
+            cpu: 1000m
+            memory: 2Gi
+          limits:
+            cpu: 1000m
+            memory: 2Gi
       schedules:
         udsbackup:
           disabled: false
