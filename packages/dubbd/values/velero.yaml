@@ -43,6 +43,7 @@ addons:
             name: "velero-bucket-credentials"
             key: "cloud"
         defaultVolumesToFsBackup: true
+        fsBackupTimeout: 8h
       snapshotsEnabled: true
       deployNodeAgent: true
       nodeAgent:
