@@ -143,7 +143,7 @@ packages:
 
   - name: jira
     repository: ghcr.io/defenseunicorns/uds-capability/jira
-    ref: 0.1.5
+    ref: 0.1.6
 
   # Confluence
   - name: confluence-database-manifests
@@ -152,7 +152,7 @@ packages:
 
   - name: confluence
     repository: ghcr.io/defenseunicorns/uds-capability/confluence
-    ref: 0.1.4
+    ref: 0.1.5
 
    # Mattermost Operator with a Mattermost instance
   - name: mattermost-object-store
