@@ -42,26 +42,9 @@ addons:
           credential:
             name: "velero-bucket-credentials"
             key: "cloud"
-        defaultVolumesToFsBackup: true
-        fsBackupTimeout: 8h
       snapshotsEnabled: true
-      deployNodeAgent: true
-      nodeAgent:
-        podVolumePath: /var/lib/kubelet/pods
-        privileged: true
-        # Pod priority class name to use for the node-agent daemonset. Optional.
-        priorityClassName: ""
-        # Resource requests/limits to specify for the node-agent daemonset deployment. Optional.
-        # https://velero.io/docs/v1.6/customize-installation/#customize-resource-requests-and-limits
-        resources:
-          requests:
-            cpu: 1000m
-            memory: 2Gi
-          limits:
-            cpu: 1000m
-            memory: 2Gi
       schedules:
-        udsbackup:
+        uds-jira-backup:
           disabled: false
           schedule: "0 3 * * *"
           useOwnerReferencesInBackup: false
@@ -69,8 +52,17 @@ addons:
             csiSnapshotTimeout: 0s
             includeClusterResources: true
             snapshotVolumes: true
-            excludedNamespaces:
-              - kube-system
-              - flux
-              - velero
+            includedNamespaces:
+              - jira
+            ttl: "240h"
+        uds-confluence-backup:
+          disabled: false
+          schedule: "0 5 * * *"
+          useOwnerReferencesInBackup: false
+          template:
+            csiSnapshotTimeout: 0s
+            includeClusterResources: true
+            snapshotVolumes: true
+            includedNamespaces:
+              - confluence
             ttl: "240h"
