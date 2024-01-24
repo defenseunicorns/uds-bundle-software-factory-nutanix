@@ -8,7 +8,7 @@ packages:
     IP_ADDRESS_POOL: "24.0.132.248/30"
   dubbd-rke2-nutanix:
     # TODO - replace these blanket exceptions with more targeted kyverno policy exceptions
-    EXEMPT_NAMESPACES: '["zarf", "rook-ceph", "metallb-system", "kube-system"]'
+    EXEMPT_NAMESPACES: '["zarf", "rook-ceph", "metallb-system", "kube-system", "velero"]'
     # Domain and Certs
     DOMAIN: "mtsi.bigbang.dev"
     TENANT_CERT: |
