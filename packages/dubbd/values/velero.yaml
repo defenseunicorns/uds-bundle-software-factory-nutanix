@@ -37,8 +37,6 @@ addons:
           provider: aws
           config:
             region: "###ZARF_VAR_VELERO_BUCKET_REGION###"
-            s3ForcePathStyle: true
-            s3Url: "###ZARF_VAR_VELERO_BUCKET_PROVIDER_URL###"
           credential:
             name: "velero-bucket-credentials"
             key: "cloud"
