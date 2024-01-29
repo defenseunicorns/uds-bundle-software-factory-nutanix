@@ -86,3 +86,14 @@ addons:
             includedNamespaces:
               - nexus
             ttl: "240h"
+        uds-gitlab-backup:
+          disabled: false
+          schedule: "0 3 * * *"
+          useOwnerReferencesInBackup: false
+          template:
+            csiSnapshotTimeout: 0s
+            includeClusterResources: true
+            snapshotVolumes: true
+            includedNamespaces:
+              - gitlab
+            ttl: "240h"
