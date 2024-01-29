@@ -55,7 +55,7 @@ addons:
             ttl: "240h"
         uds-confluence-backup:
           disabled: false
-          schedule: "0 5 * * *"
+          schedule: "0 3 * * *"
           useOwnerReferencesInBackup: false
           template:
             csiSnapshotTimeout: 0s
@@ -63,4 +63,26 @@ addons:
             snapshotVolumes: true
             includedNamespaces:
               - confluence
+            ttl: "240h"
+        uds-mattermost-backup:
+          disabled: false
+          schedule: "0 3 * * *"
+          useOwnerReferencesInBackup: false
+          template:
+            csiSnapshotTimeout: 0s
+            includeClusterResources: true
+            snapshotVolumes: true
+            includedNamespaces:
+              - mattermost
+            ttl: "240h"
+        uds-nexus-backup:
+          disabled: false
+          schedule: "0 3 * * *"
+          useOwnerReferencesInBackup: false
+          template:
+            csiSnapshotTimeout: 0s
+            includeClusterResources: true
+            snapshotVolumes: true
+            includedNamespaces:
+              - nexus
             ttl: "240h"

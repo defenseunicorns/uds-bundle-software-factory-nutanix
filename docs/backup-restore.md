@@ -24,8 +24,6 @@ kubectl exec -it -n gitlab deploy/gitlab-toolbox -- /bin/bash -c \
 ```
 - Cycle the gitlab-runner pod once restore is complete.
 
-## Jira and Confluence
-
 # Databases
 It is recommended to use the native database backup tools provided by your database provider to create your backups and create a new restored DB to switch to.
 
@@ -35,11 +33,14 @@ It is recommended to use the native database backup tools provided by your datab
 
 Once you have the desired DB with the restored data live and ready you can update your `uds-config.yaml` to point to this new restored DB and run a `uds deploy <bundle>` to update the cluster.
 
-# Local or shared home directory.
-Jira and Confluence require you to backup the local or shared home directory. This bundle has Velero configured to backup persistent volumes which contain this data. To perform a restore you will want to get the name of the velero backup you want to use for your restore and perform a velero restore for the relevant namespace.
+# Velero
+Apps like Jira and Confluence require you to backup the local or shared home directory. This bundle has Velero configured to backup persistent volumes which contain this data. To perform a restore you will want to get the name of the velero backup you want to use for your restore and perform a velero restore for the relevant namespace.
 
+Example command to start a velero restore for a namespace:
 ```bash
-# Put example commands here
+kubectl exec -it -n velero svc/velero-velero -- /bin/bash -c \
+    "velero restore create my-confluence-restore-$(date +%s)  \
+    --from-backup velero-velero-uds-confluence-backup-20240129050033 --include-namespaces confluence --wait"
 ```
 
 
