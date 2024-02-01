@@ -20,11 +20,10 @@ components:
         namespace: jira
         files:
           - jira/non-root-user.yaml
-  - name: velero-kyverno-policy-exception
+  - name: gitlab-kyverno-policy-exceptions
     required: true
     manifests:
-      - name: velero-kyverno-policy-exception
-        namespace: velero
+      - name: gitlab-kyverno-policy-exceptions
+        namespace: gitlab
         files:
-          - velero/hostpath-exception.yaml
-          - velero/privileged-exception.yaml
+          - gitlab/non-root-group.yaml
