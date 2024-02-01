@@ -21,20 +21,20 @@ packages:
     path: build
     ref: 1.0.0
 
-  # MetalLB
-  - name: metallb
-    repository: ghcr.io/defenseunicorns/packages/metallb
-    ref: 0.0.4
+  # # MetalLB
+  # - name: metallb
+  #   repository: ghcr.io/defenseunicorns/packages/metallb
+  #   ref: 0.0.4
 
-  # Defense Unicorns Big Bang Distro
-  - name: dubbd-rke2-nutanix
-    path: build
-    ref: 0.16.0-n1
+  # # Defense Unicorns Big Bang Distro
+  # - name: dubbd-rke2-nutanix
+  #   path: build
+  #   ref: 0.16.0-n1
 
-  # Additional Kyverno Exceptions
-  - name: additional-kyverno-exceptions
-    path: build
-    ref: 0.0.1
+  # # Additional Kyverno Exceptions
+  # - name: additional-kyverno-exceptions
+  #   path: build
+  #   ref: 0.0.1
 
   # Change the realm file keycloak imports from
   - name: software-factory-idam-realm
