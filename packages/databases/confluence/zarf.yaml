@@ -18,6 +18,6 @@ components:
       - name: confluence-postgres-manifests
         namespace: confluence
         files:
-          - policy-exceptions/externalName.yaml
+          # - policy-exceptions/externalName.yaml
           - secret.yaml
           - service.yaml

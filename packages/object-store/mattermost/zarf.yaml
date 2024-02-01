@@ -20,7 +20,7 @@ components:
     manifests:
       - name: kyverno-exceptions
         files:
-          - policy-exceptions/externalName.yaml
+          # - policy-exceptions/externalName.yaml
   - name: mattermost-object-store-secret
     required: true
     manifests:

@@ -18,6 +18,6 @@ components:
       - name: jira-postgres-manifests
         namespace: jira
         files:
-          - policy-exceptions/externalName.yaml
+          # - policy-exceptions/externalName.yaml
           - secret.yaml
           - service.yaml

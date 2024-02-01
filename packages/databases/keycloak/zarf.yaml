@@ -16,5 +16,5 @@ components:
       - name: keycloak-postgres-manifests
         namespace: keycloak
         files:
-          - policy-exceptions/externalName.yaml
+          # - policy-exceptions/externalName.yaml
           - service.yaml

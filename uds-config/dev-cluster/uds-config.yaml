@@ -1,38 +1,38 @@
 options:
   log_level: info
 variables:
-  init:
-    # TODO - remove this if/when functionality is restored upstream
-    REGISTRY_HPA_ENABLE: false
+  # init:
+  #   # TODO - remove this if/when functionality is restored upstream
+  #   REGISTRY_HPA_ENABLE: false
   metallb:
     IP_ADDRESS_POOL: "24.0.132.244/30"
-  dubbd-rke2-nutanix:
-    # TODO - replace these blanket exceptions with more targeted kyverno policy exceptions
-    EXEMPT_NAMESPACES: '["zarf", "rook-ceph", "metallb-system", "kube-system"]'
-    # Domain and Certs
-    DOMAIN: "mtsi-dev.bigbang.dev"
-    TENANT_CERT: |
-      -----BEGIN CERTIFICATE-----
-      replace-me-tenant-gateway-cert
-      -----END CERTIFICATE-----
-    TENANT_KEY: |
-      -----BEGIN PRIVATE KEY-----
-      replace-me-tenant-gateway-key
-      -----END PRIVATE KEY-----
-    ADMIN_CERT: |
-      -----BEGIN CERTIFICATE-----
-      replace-me-admin-gateway-cert
-      -----END CERTIFICATE-----
-    ADMIN_KEY: |
-      -----BEGIN PRIVATE KEY-----
-      replace-me-admin-gateway-key
-      -----END PRIVATE KEY-----
-    # Velero
-    VELERO_BUCKET_PROVIDER_URL: "http://swf.objects.mtsi.bigbang.dev"
-    VELERO_BUCKET: "velero-bucket-dev"
-    VELERO_BUCKET_REGION: "us-east-1"
-    VELERO_BUCKET_KEY: "replace-me-object-store-access-key"
-    VELERO_BUCKET_KEY_SECRET: "replace-me-object-store-secret-key"
+  # dubbd-rke2-nutanix:
+  #   # TODO - replace these blanket exceptions with more targeted kyverno policy exceptions
+  #   EXEMPT_NAMESPACES: '["zarf", "rook-ceph", "metallb-system", "kube-system"]'
+  #   # Domain and Certs
+  #   DOMAIN: "mtsi-dev.bigbang.dev"
+  #   TENANT_CERT: |
+  #     -----BEGIN CERTIFICATE-----
+  #     replace-me-tenant-gateway-cert
+  #     -----END CERTIFICATE-----
+  #   TENANT_KEY: |
+  #     -----BEGIN PRIVATE KEY-----
+  #     replace-me-tenant-gateway-key
+  #     -----END PRIVATE KEY-----
+  #   ADMIN_CERT: |
+  #     -----BEGIN CERTIFICATE-----
+  #     replace-me-admin-gateway-cert
+  #     -----END CERTIFICATE-----
+  #   ADMIN_KEY: |
+  #     -----BEGIN PRIVATE KEY-----
+  #     replace-me-admin-gateway-key
+  #     -----END PRIVATE KEY-----
+  #   # Velero
+  #   VELERO_BUCKET_PROVIDER_URL: "http://swf.objects.mtsi.bigbang.dev"
+  #   VELERO_BUCKET: "velero-bucket-dev"
+  #   VELERO_BUCKET_REGION: "us-east-1"
+  #   VELERO_BUCKET_KEY: "replace-me-object-store-access-key"
+  #   VELERO_BUCKET_KEY_SECRET: "replace-me-object-store-secret-key"
   software-factory-idam-gitlab:
     DOMAIN: "mtsi-dev.bigbang.dev"
   software-factory-idam-realm:
