@@ -15,12 +15,12 @@ variables:
     autoIndent: true
 
 components:
-  - name: object-store-kyverno-exceptions
-    required: true
-    manifests:
-      - name: kyverno-exceptions
-        files:
-          # - policy-exceptions/externalName.yaml
+  # - name: object-store-kyverno-exceptions
+  #   required: true
+  #   manifests:
+  #     - name: kyverno-exceptions
+  #       files:
+  #         # - policy-exceptions/externalName.yaml
   - name: mattermost-object-store-secret
     required: true
     manifests:
