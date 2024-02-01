@@ -29,7 +29,7 @@ packages:
   # Defense Unicorns Big Bang Distro
   - name: dubbd-rke2-nutanix
     path: build
-    ref: 0.16.0-n1
+    ref: 0.18.0-n1
 
   # Additional Kyverno Exceptions
   - name: additional-kyverno-exceptions
