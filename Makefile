@@ -2,7 +2,7 @@
 # the build folder.
 # renovate: datasource=github-tags depName=defenseunicorns/zarf
 UDS_CLI_VERSION := v0.7.0
-ZARF_VERSION := v0.31.4
+ZARF_VERSION := v0.32.1
 
 # Figure out which Zarf binary we should use based on the operating system we are on
 ZARF_BIN := zarf

@@ -8,7 +8,7 @@ variables:
     IP_ADDRESS_POOL: "24.0.132.244/30"
   # dubbd-rke2-nutanix:
   #   # TODO - replace these blanket exceptions with more targeted kyverno policy exceptions
-  #   EXEMPT_NAMESPACES: '["zarf", "rook-ceph", "metallb-system", "kube-system"]'
+  #   EXEMPT_NAMESPACES: '["zarf", "rook-ceph", "metallb-system", "kube-system", "velero"]'
   #   # Domain and Certs
   #   DOMAIN: "mtsi-dev.bigbang.dev"
   #   TENANT_CERT: |
@@ -76,6 +76,9 @@ variables:
     DOMAIN: "mtsi-dev.bigbang.dev"
     JIRA_DB_NAME: "jiradb"
     JIRA_DB_USERNAME: "postgres"
+    JIRA_LOCAL_HOME_ENABLED: "true"
+    JIRA_LOCAL_HOME_SIZE: "128Gi"
+    JIRA_RWO_STORAGE_CLASS: "ceph-block"
   confluence-database-manifests:
     CONFLUENCE_DB_EXTERNAL_NAME: "confluence-pg.mtsi-dev.bigbang.dev"
     CONFLUENCE_DB_PASSWORD: "replace-me-db-passwords"
@@ -83,6 +86,9 @@ variables:
     DOMAIN: "mtsi-dev.bigbang.dev"
     CONFLUENCE_DB_NAME: "confluencedb"
     CONFLUENCE_DB_USERNAME: "postgres"
+    CONFLUENCE_LOCAL_HOME_ENABLED: "true"
+    CONFLUENCE_LOCAL_HOME_SIZE: "128Gi"
+    CONFLUENCE_RWO_STORAGE_CLASS: "ceph-block"
   mattermost-database-manifests:
     MATTERMOST_DB_EXTERNAL_NAME: "mattermost-pg.mtsi-dev.bigbang.dev"
     MATTERMOST_DB_PASSWORD: "replace-me-db-passwords"

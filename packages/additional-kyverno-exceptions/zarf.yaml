@@ -20,3 +20,10 @@ components:
         namespace: jira
         files:
           - jira/non-root-user.yaml
+  - name: gitlab-kyverno-policy-exceptions
+    required: true
+    manifests:
+      - name: gitlab-kyverno-policy-exceptions
+        namespace: gitlab
+        files:
+          - gitlab/non-root-group.yaml
