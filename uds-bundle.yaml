@@ -17,9 +17,9 @@ packages:
   #   ref: v0.31.4-0.1.2
 
   - name: uds-k3d-dev
-    repository: ghcr.io/defenseunicorns/packages/uds-k3d-amd64
+    repository: ghcr.io/defenseunicorns/packages/uds-k3d
     # renovate: datasource=github-tags depName=defenseunicorns/uds-k3d versioning=semver
-    ref: 0.3.1
+    ref: 0.3.1-amd64
     overrides:
       uds-dev-stack:
         minio:
