@@ -1,0 +1,58 @@
+variables:
+  - name: ARCH
+    description: "What architecture to use"
+    default: "amd64"
+
+tasks:
+  # Build directory
+  - name: build-dir
+    description: Create build directory
+    actions:
+      - cmd: mkdir build -p
+
+  # Bundles
+  - name: dubbd-bundle
+    description: Create the UDS Bundle with SWF and DUBBD
+    actions:
+      - cmd: uds create ./bundles/dubbd-swf --architecture=${ARCH} --confirm
+
+  # Packages
+  - name: kyverno-exceptions-package
+    description: Create kyverno exceptions Zarf Package
+    actions:
+      - cmd: zarf package create ./packages/additional-kyverno-exceptions --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+
+  - name: database-manifest-packages
+    description: Create database manifest packages
+    actions:
+      - cmd: zarf package create ./packages/databases/confluence --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: zarf package create ./packages/databases/gitlab --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: zarf package create ./packages/databases/jira --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: zarf package create ./packages/databases/keycloak --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: zarf package create ./packages/databases/mattermost --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: zarf package create ./packages/databases/nexus --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: zarf package create ./packages/databases/sonarqube --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+
+  - name: namespaces-package
+    description: Create the namespaces package
+    actions:
+      - cmd: zarf package create ./packages/namespaces --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+
+  - name: idam-packages
+    description: Create the idam packages
+    actions:
+      - cmd: zarf package create ./packages/idam-dns --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: zarf package create ./packages/idam-gitlab --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: zarf package create ./packages/idam-realm --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: zarf package create ./packages/idam-sonarqube --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+
+  - name: object-store-packages
+    description: Create the object storage packages
+    actions:
+      - cmd: zarf package create ./packages/object-store/gitlab --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: zarf package create ./packages/object-store/mattermost --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+
+  - name: dubbd-package
+    description: Create the dubbd package
+    actions:
+      - cmd: ZARF_CONFIG=./packages/dubbd/zarf-config.yaml zarf package create ./packages/dubbd --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build

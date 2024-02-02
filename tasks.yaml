@@ -1,0 +1,19 @@
+includes:
+  - create: ./tasks/create.yaml
+
+tasks:
+
+  - name: create-dubbd-bundle
+    actions:
+      - task: create:build-dir
+      - task: create:kyverno-exceptions-package
+      - task: create:database-manifest-packages
+      - task: create:namespaces-package
+      - task: create:idam-packages
+      - task: create:object-store-packages
+      - task: create:dubbd-package
+      - task: create:dubbd-bundle
+
+  - name: clean
+    actions:
+      - cmd: rm -rf ./build/*
