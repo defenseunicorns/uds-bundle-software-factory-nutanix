@@ -41,6 +41,8 @@ packages:
     repository: ghcr.io/defenseunicorns/packages/init
     # renovate: datasource=github-tags depName=defenseunicorns/zarf versioning=semver
     ref: v0.32.1
+    optional-components:
+      - git-server
 
   - name: core
     repository: ghcr.io/blancharda/uds-core-ish/core
