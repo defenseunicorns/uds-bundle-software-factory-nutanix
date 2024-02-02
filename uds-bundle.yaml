@@ -85,6 +85,11 @@ packages:
   #   path: build
   #   ref: 0.0.1
 
+  # legacy requirements of DUBBD like flux (TODO -- remove someday)
+  - name: dubbd-legacy-reqs
+    path: build
+    ref: 0.18.0-n1
+
   # Change the realm file keycloak imports from
   - name: software-factory-idam-realm
     path: build

@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/v0.31.4/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: dubbd-legacy-reqs
+  description: "RKE2 DUBBD configuration tweaked for swf-nutanix"
+  architecture: "amd64"
+  version: "0.18.0-n1"
+
+x-dubbd-oci: &dubbd_oci "oci://ghcr.io/defenseunicorns/packages/dubbd-rke2:0.18.0"
+
+components:
+  - name: download-flux
+    required: true
+    import:
+      name: download-flux
+      url: *dubbd_oci
+
+  - name: install-flux-controllers
+    required: true
+    actions:
+      onDeploy:
+        before:
+          - cmd: ./flux install --namespace=flux-system
+  
+  - name: gitlab-ssh
+    required: true
+    manifests:
+      - name: gitlab-ssh-virtualservice
+        namespace: gitlab
+        files:
+          - manifests/gitlab-ssh-virtualservice.yaml
+          - manifests/gitlab-ssh-networkpolicies.yaml
