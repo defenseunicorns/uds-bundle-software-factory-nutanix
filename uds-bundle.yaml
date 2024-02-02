@@ -43,16 +43,6 @@ packages:
     ref: v0.32.1
     optional-components:
       - git-server
-  
-  # Namespace pre-reqs for swf capabilities
-  - name: software-factory-namespaces
-    path: build
-    ref: 1.0.0
-  
-  # legacy requirements of DUBBD like flux (TODO -- remove someday)
-  - name: dubbd-legacy-reqs
-    path: build
-    ref: 0.18.0-n1
 
   - name: core
     repository: ghcr.io/blancharda/uds-core-ish/core
@@ -77,6 +67,11 @@ packages:
               description: "The TLS key for the tenant gateway (must be base64 encoded)"
               path: tls.key
 
+  # Namespace pre-reqs for swf capabilities
+  - name: software-factory-namespaces
+    path: build
+    ref: 1.0.0
+
   # # MetalLB
   # - name: metallb
   #   repository: ghcr.io/defenseunicorns/packages/metallb
@@ -91,6 +86,11 @@ packages:
   # - name: additional-kyverno-exceptions
   #   path: build
   #   ref: 0.0.1
+
+  # legacy requirements of DUBBD like flux (TODO -- remove someday)
+  - name: dubbd-legacy-reqs
+    path: build
+    ref: 0.18.0-n1
 
   # Change the realm file keycloak imports from
   - name: software-factory-idam-realm
