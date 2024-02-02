@@ -43,7 +43,7 @@ packages:
     ref: v0.32.1
 
   - name: core
-    respository: ghcr.io/blancharda/uds-core-ish/core
+    repository: ghcr.io/blancharda/uds-core-ish/core
     ref: 0.10.0-upstream
     overrides:
       istio-admin-gateway:
