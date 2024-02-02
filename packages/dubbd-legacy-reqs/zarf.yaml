@@ -31,7 +31,7 @@ components:
       - name: bb-flux
         namespace: flux-system
         kustomizations:
-          - https://repo1.dso.mil/big-bang/bigbang/-/raw/2.19.1/base/flux/kustomization.yaml
+          - https://repo1.dso.mil/big-bang/bigbang.git//base/flux?ref=2.19.1
     images:
       - registry1.dso.mil/ironbank/fluxcd/helm-controller:v0.37.1
       - registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.2.1
