@@ -2,25 +2,41 @@
 kind: ZarfPackageConfig
 metadata:
   name: dubbd-legacy-reqs
-  description: "RKE2 DUBBD configuration tweaked for swf-nutanix"
+  description: "Installs Flux and some custom gitlab resources"
   architecture: "amd64"
   version: "0.18.0-n1"
 
-x-dubbd-oci: &dubbd_oci "oci://ghcr.io/defenseunicorns/packages/dubbd-rke2:0.18.0"
+# x-dubbd-oci: &dubbd_oci "oci://ghcr.io/defenseunicorns/packages/dubbd-rke2:0.18.0"
 
 components:
-  - name: download-flux
-    required: true
-    import:
-      name: download-flux
-      url: *dubbd_oci
+  # - name: download-flux
+  #   required: true
+  #   import:
+  #     name: download-flux
+  #     url: *dubbd_oci
 
-  - name: install-flux-controllers
+  # - name: install-flux-controllers
+  #   required: true
+  #   actions:
+  #     onDeploy:
+  #       before:
+  #         - cmd: ./flux install --namespace=flux-system
+  #           dir: run/flux
+  #           description: "Install flux"
+  #           mute: true
+
+  - name: install-flux
     required: true
-    actions:
-      onDeploy:
-        before:
-          - cmd: ./flux install --namespace=flux-system
+    manifests:
+      - name: bb-flux
+        namespace: flux-system
+        kustomizations:
+          - https://repo1.dso.mil/big-bang/bigbang/-/raw/2.19.1/base/flux/kustomization.yaml
+    images:
+      - registry1.dso.mil/ironbank/fluxcd/helm-controller:v0.37.1
+      - registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.2.1
+      - registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.2.3
+      - registry1.dso.mil/ironbank/fluxcd/source-controller:v1.2.2
   
   - name: gitlab-ssh
     required: true
