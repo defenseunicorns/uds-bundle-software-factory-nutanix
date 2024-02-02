@@ -1,7 +1,23 @@
 # Backup and Restore
 
+## Velero
+This bundle has Velero configured to run automated backups and stores that data to the configured object storage bucket. To perform a restore you will want to get the name of the velero backup you want to use for your restore and perform a velero restore for the relevant namespace.
+
+Example command to start a velero restore for a namespace:
+```bash
+kubectl exec -it -n velero svc/velero-velero -- /bin/bash -c \
+    "velero restore create my-confluence-restore-$(date +%s)  \
+    --from-backup velero-velero-uds-confluence-backup-20240129050033 --include-namespaces confluence --wait"
+```
+
 ## Gitlab
-# Backup
+Gitlab has its own utility to perform the backup and restore functionality. More details on how to use it shown are below.
+
+You may also need to recover and apply the following secrets in the `gitlab` namespace if the currently deployed secrets don't match your recovered backup. Those can be found in the corresponding gitlab velero backup.
+- `gitlab-gitlab-initial-root-password`
+- `gitlab-rails-secret`
+
+### Backup
 Gitlab is configured to take automatic backups and store those backups to the configured object storage bucket.
 
 - If desired, you can manually trigger a backup by triggering the Kubernetes CronJob that is used for the automated backups.
@@ -12,10 +28,10 @@ kubectl create job -n gitlab \
   gitlab-toolbox-backup
 ```
 
-K9s:
+Trigger from K9s:
 ![Gitlab Backup Cron Trigger](screenshots/gitlab-k9s-backup-cron.png)
 
-# Restore
+### Restore
 - Retrieve the filename of the desired backup from the configured gitlab-backup object storage bucket. Everything up through the `ee`.
 - Using the `backup-utiliity` in the gitlab-toolbox pod along with the filename of the backup you can initiate a restore. Example kubectl command below.
 ```bash
@@ -32,16 +48,3 @@ It is recommended to use the native database backup tools provided by your datab
 [AWS RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_CommonTasks.BackupRestore.html)
 
 Once you have the desired DB with the restored data live and ready you can update your `uds-config.yaml` to point to this new restored DB and run a `uds deploy <bundle>` to update the cluster.
-
-# Velero
-Apps like Jira and Confluence require you to backup the local or shared home directory. This bundle has Velero configured to backup persistent volumes which contain this data. To perform a restore you will want to get the name of the velero backup you want to use for your restore and perform a velero restore for the relevant namespace.
-
-Example command to start a velero restore for a namespace:
-```bash
-kubectl exec -it -n velero svc/velero-velero -- /bin/bash -c \
-    "velero restore create my-confluence-restore-$(date +%s)  \
-    --from-backup velero-velero-uds-confluence-backup-20240129050033 --include-namespaces confluence --wait"
-```
-
-
-
