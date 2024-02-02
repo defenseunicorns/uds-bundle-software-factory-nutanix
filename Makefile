@@ -1,8 +1,8 @@
 # The version of Zarf to use. To keep this repo as portable as possible the Zarf binary will be downloaded and added to
 # the build folder.
 # renovate: datasource=github-tags depName=defenseunicorns/zarf
-UDS_CLI_VERSION := v0.5.1
-ZARF_VERSION := v0.31.4
+UDS_CLI_VERSION := v0.7.0
+ZARF_VERSION := v0.32.1
 
 # Figure out which Zarf binary we should use based on the operating system we are on
 ZARF_BIN := zarf
@@ -73,7 +73,7 @@ build/software-factory-namespaces: | build ## Build namespaces package
 	cd build && ./zarf package create ../packages/namespaces/ --confirm --output-directory .
 
 build/dubbd-rke2-nutanix: | build ## Build dubbd-rke2-nutanix package
-	cd packages/dubbd && ../../build/zarf package create . --confirm --output-directory ../../build
+	cd packages/dubbd && ../../build/zarf package create . --skip-sbom --confirm --output-directory ../../build
 
 build/idam-gitlab: | build ## Build idam-gitlab package
 	cd build && ./zarf package create ../packages/idam-gitlab/ --confirm --output-directory .
