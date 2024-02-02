@@ -1,0 +1,11 @@
+tasks:
+
+  - name: bundle-to-dev
+    descriptions: Deploy the dubbd version of the bundle to test
+    actions:
+      - cmd: UDS_CONFIG=./uds-config/dev-cluster/uds-config.yaml uds deploy ./build/uds-bundle-software-factory-*.tar.zst --confirm
+
+  - name: bundle-to-test
+    descriptions: Deploy the dubbd version of the bundle to test
+    actions:
+      - cmd: UDS_CONFIG=./uds-config/test-cluster/uds-config.yaml uds deploy ./build/uds-bundle-software-factory-*.tar.zst --confirm

@@ -11,10 +11,11 @@ tasks:
       - cmd: mkdir build -p
 
   # Bundles
-  - name: dubbd-bundle
+  - name: bundle
     description: Create the UDS Bundle with SWF and DUBBD
     actions:
       - cmd: uds create ./bundles/dubbd-swf --architecture=${ARCH} --confirm
+      - cmd: mv ./bundles/dubbd-swf/uds-bundle-software-factory* ./build
 
   # Packages
   - name: kyverno-exceptions-package

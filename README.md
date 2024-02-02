@@ -19,13 +19,13 @@ The full list of packages and dependencies installed by the bundle (and an assum
 
 **Infrastructure**:
 * Kubernetes cluster
-* Access to the cluster with enough privilage to deploy 
-* A valid domain 
+* Access to the cluster with enough privilage to deploy
+* A valid domain
   > NOTE: `*.bigbang.dev` may be used for demomonstration and test deployments.
 * Wildcard certificates to cover your domain (alternatively, expand for full SAN list)
   <details>
     <summary>Individual SAN list </summary>
-	
+
 	* `confluence.your.domain`
 	* `gitlab.your.domain`
 	* `*.pages.your.domain`
@@ -51,7 +51,7 @@ The full list of packages and dependencies installed by the bundle (and an assum
   </details>
   <details>
     <summary> Gitlab </summary>
-	
+
     * gitlab-artifacts
     * gitlab-backups
     * gitlab-ci-secure-files
@@ -96,18 +96,18 @@ For demonstration purposes, you can setup a local configfile as follows:
   * bucket names and credentials
   * database names and credentials
 
-> NOTE: the config must be named `uds-config.yaml` and be present in your working directory at deploy time
+> NOTE: The config must be named `uds-config.yaml` and either be present in your working directory or have the environment variable UDS_CONFIG set to its location at deploy time
 
 ### Deployment
 Select a target version number and gather the OCI image reference [from the packages page](https://github.com/orgs/defenseunicorns/packages?repo_name=uds-bundle-software-factory-nutanix). With the above prerequisites and configuration complete, you can deploy the bundle directly via OCI:
 ```
-uds deploy oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix:0.1.4-amd64 --confirm
+uds deploy oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix:0.1.x --architecure amd64 --confirm
 ```
 
 ### (OPTIONAL) Local Deployment Reference
 Situationally, it may be useful to download the deployment artifact so that it may be referenced offline. This can be accomplished by first downloading the target release:
 ```
-uds pull oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix:0.1.4-amd64
+uds pull oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix:0.1.x --architecture amd64
 ```
 
 And subsequently deploying from the local file:
@@ -116,30 +116,19 @@ uds deploy uds-bundle-software-factory-nutanix-amd64-0.1.4.tar.zst --confirm
 ```
 
 ## Additional Notes
-For development and testing (both locally and in CI) we have included a Makefile to simplify common tasks. You can follow the breadcrumbs starting at the [Makefile](Makefile) target `make all/dev-cluster`. This Makefile downloads configured versions of zarf and uds to the build directory, places the `uds-config.yaml` in that build directory and performs the deploy command from there. Steps numbered below. Or follow along in the Makefile.
+You can use the uds tasks in this project to build and deploy.
 
-These targets will show you how to:
-1) download the tools you need like zarf and uds.
 ```bash
-.PHONY: build/zarf
-build/zarf: | build ## Download the Zarf to the build dir
-	if [ -f build/zarf ] && [ "$$(build/zarf version)" = "$(ZARF_VERSION)" ] ; then exit 0; fi && \
-	echo "Downloading zarf" && \
-	curl -sL https://github.com/defenseunicorns/zarf/releases/download/$(ZARF_VERSION)/zarf_$(ZARF_VERSION)_$(UNAME_S)_$(ARCH) -o build/zarf && \
-	chmod +x build/zarf
+# List the available tasks to run
+uds run --list
 
-.PHONY: build/uds
-build/uds: | build ## Download uds-cli to the build dir
-	if [ -f build/uds ] && [ "$$(build/uds version)" = "$(UDS_CLI_VERSION)" ] ; then exit 0; fi && \
-	echo "Downloading uds-cli" && \
-	curl -sL https://github.com/defenseunicorns/uds-cli/releases/download/$(UDS_CLI_VERSION)/uds-cli_$(UDS_CLI_VERSION)_$(UNAME_S)_$(ARCH) -o build/uds && \
-	chmod +x build/uds
+# Run the create-bundle task
+uds run create-bundle
+
+# Run the deploy-bundle-to-dev task
+uds run deploy-bundle-to-dev
+
+# Run the deploy-bundle-to-test task
+uds run deploy-bundle-to-test
 ```
-You can also use brew to install zarf and uds-cli
-```bash
-brew tap defenseunicorns/tap && brew install uds && brew install zarf
-```
-2) build all the zarf packages that support this bundle
-1) build the bundle itself
-1) place the `uds-config.yaml` in the directory where the deployment will take place
-1) deploy the software factory.
+
