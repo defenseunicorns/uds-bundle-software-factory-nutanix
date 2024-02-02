@@ -101,7 +101,7 @@ packages:
 
   - name: uds-idam
     repository: ghcr.io/defenseunicorns/uds-capability/uds-idam
-    ref: 0.1.15
+    ref: 0.1.15-amd64
     imports:
       - name: REALM_IMPORT_FILE
         package: software-factory-idam-realm
