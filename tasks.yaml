@@ -1,5 +1,6 @@
 includes:
   - create: ./tasks/create.yaml
+  - create: ./tasks/deploy.yaml
 
 tasks:
 
