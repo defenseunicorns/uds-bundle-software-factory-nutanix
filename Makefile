@@ -73,7 +73,8 @@ build/software-factory-namespaces: | build ## Build namespaces package
 	cd build && ./zarf package create ../packages/namespaces/ --confirm --output-directory .
 
 build/dubbd-rke2-nutanix: | build ## Build dubbd-rke2-nutanix package
-	cd packages/dubbd && ../../build/zarf package create . --confirm --output-directory ../../build
+	echo "nah"
+	# cd packages/dubbd && ../../build/zarf package create . --confirm --output-directory ../../build
 
 build/idam-gitlab: | build ## Build idam-gitlab package
 	cd build && ./zarf package create ../packages/idam-gitlab/ --confirm --output-directory .
