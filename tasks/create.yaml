@@ -11,11 +11,17 @@ tasks:
       - cmd: mkdir build -p
 
   # Bundles
-  - name: bundle
+  - name: dubbd-bundle
     description: Create the UDS Bundle with SWF and DUBBD
     actions:
       - cmd: uds create ./bundles/dubbd-swf --architecture=${ARCH} --confirm
       - cmd: mv ./bundles/dubbd-swf/uds-bundle-software-factory* ./build
+
+  - name: uds-core-bundle
+    description: Create the UDS Bundle with SWF on UDS Core
+    actions:
+      - cmd: uds create ./bundles/uds-core-swf --architecture=${ARCH} --confirm
+      - cmd: mv ./bundles/uds-core-swf/uds-bundle-uds-core-swf* ./build
 
   # Packages
   - name: kyverno-exceptions-package
@@ -57,3 +63,8 @@ tasks:
     description: Create the dubbd package
     actions:
       - cmd: ZARF_CONFIG=./packages/dubbd/zarf-config.yaml zarf package create ./packages/dubbd --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+
+  - name: dubbd-legacy-reqs-package
+    description: Create package to satisfy legacy reqs. This is needed untill we are 100% off Legacy versions of SWF apps
+    actions:
+      - cmd: ZARF_CONFIG=./packages/dubbd-legacy-reqs/zarf-config.yaml zarf package create ./packages/dubbd-legacy-reqs --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build

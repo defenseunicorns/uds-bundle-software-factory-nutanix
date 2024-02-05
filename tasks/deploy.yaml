@@ -1,11 +1,21 @@
 tasks:
 
-  - name: bundle-to-dev
-    descriptions: Deploy the dubbd version of the bundle to test
+  - name: dubbd-bundle-to-dev
+    description: Deploy the dubbd version of the bundle to test
     actions:
-      - cmd: UDS_CONFIG=./uds-config/dev-cluster/uds-config.yaml uds deploy ./build/uds-bundle-software-factory-*.tar.zst --confirm
+      - cmd: UDS_CONFIG=./uds-config/dubbd-swf/dev-cluster/uds-config.yaml uds deploy ./build/uds-bundle-software-factory-*.tar.zst --confirm
 
-  - name: bundle-to-test
-    descriptions: Deploy the dubbd version of the bundle to test
+  - name: dubbd-bundle-to-test
+    description: Deploy the dubbd version of the bundle to test
     actions:
-      - cmd: UDS_CONFIG=./uds-config/test-cluster/uds-config.yaml uds deploy ./build/uds-bundle-software-factory-*.tar.zst --confirm
+      - cmd: UDS_CONFIG=./uds-config/dubbd-swf/test-cluster/uds-config.yaml uds deploy ./build/uds-bundle-software-factory-*.tar.zst --confirm
+
+  - name: uds-core-bundle-to-dev
+    description: Deploy UDS Core version of the bundle to dev
+    actions:
+      - cmd: UDS_CONFIG=./uds-config/uds-core-swf/dev-cluster/uds-config.yaml uds deploy ./build/uds-bundle-uds-core-swf*.tar.zst --confirm
+
+  - name: uds-core-bundle-to-test
+    description: Deploy UDS Core version of the bundle to tes
+    actions:
+      - cmd: UDS_CONFIG=./uds-config/uds-core-swf/tes-cluster/uds-config.yaml uds deploy ./build/uds-bundle-uds-core-swf*.tar.zst --confirm

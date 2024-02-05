@@ -22,6 +22,5 @@ components:
       - name: mattermost-postgres-manifests
         namespace: mattermost
         files:
-          - policy-exceptions/externalName.yaml
           - secret.yaml
           - service.yaml

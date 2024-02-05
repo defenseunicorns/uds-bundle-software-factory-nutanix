@@ -18,6 +18,5 @@ components:
       - name: gitlab-postgres-manifests
         namespace: gitlab
         files:
-          - policy-exceptions/externalName.yaml
           - secret.yaml
           - service.yaml

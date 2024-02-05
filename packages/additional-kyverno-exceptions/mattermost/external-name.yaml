@@ -1,7 +1,7 @@
 apiVersion: kyverno.io/v2beta1
 kind: PolicyException
 metadata:
-  name: mattermost-object-storage-external-names-exception
+  name: mattermost-external-names-exception
   namespace: mattermost
 spec:
   exceptions:
@@ -17,3 +17,4 @@ spec:
         - mattermost
         names:
         - mattermost-object-store
+        - mattermost-postgres

@@ -18,6 +18,5 @@ components:
       - name: sonarqube-postgres-manifests
         namespace: sonarqube
         files:
-          - policy-exceptions/externalName.yaml
           - secret.yaml
           - service.yaml
