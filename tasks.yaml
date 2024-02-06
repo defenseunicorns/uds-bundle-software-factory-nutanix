@@ -29,7 +29,7 @@ tasks:
       - task: create:namespaces-package
       - task: create:idam-packages
       - task: create:object-store-packages
-      - task: create:dubbd-legacy-deps
+      - task: create:dubbd-legacy-reqs-package
       - task: create:uds-core-bundle
 
   ################

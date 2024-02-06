@@ -25,7 +25,8 @@ packages:
     ref: 0.0.5-amd64
 
   - name: core
-    repository: ghcr.io/defenseunicorns/packages/uds/core
+    # repository: ghcr.io/defenseunicorns/packages/uds/core
+    repository: ghcr.io/blancharda/uds-core-ish/core
     ref: 0.10.0-upstream
     overrides:
       loki:
@@ -55,7 +56,7 @@ packages:
 
   # legacy requirements of DUBBD like flux (TODO -- remove someday)
   - name: dubbd-legacy-reqs
-    path: build
+    path: ../../build
     ref: 0.0.1
 
   # Change the realm file keycloak imports from
