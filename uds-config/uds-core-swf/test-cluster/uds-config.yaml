@@ -35,8 +35,7 @@ packages:
     GITLAB_BACKUP_EXTRA_ARGS: "--skip artifiacts,registry"
     GITLAB_REDIS_ENDPOINT: "redis-master.gitlab-redis.svc.cluster.local"
     BUCKET_SUFFIX: "-test"
-  sonarqube-database-manifests:
-    SONARQUBE_DB_EXTERNAL_NAME: "sonarqube-pg.mtsi.bigbang.dev"
+  sonarqube-database-secret:
     SONARQUBE_DB_PASSWORD: "replace-me-db-passwords"
   sonarqube:
     DOMAIN: "mtsi.bigbang.dev"
@@ -44,6 +43,7 @@ packages:
     # db config
     SONARQUBE_DB_NAME: "sonarqubedb"
     SONARQUBE_DB_USERNAME: "postgres"
+    SONARQUBE_DB_ENDPOINT: "sonarqube-pg.mtsi-dev.bigbang.dev"
   jira-database-manifests:
     JIRA_DB_EXTERNAL_NAME: "jira-pg.mtsi.bigbang.dev"
     JIRA_DB_PASSWORD: "replace-me-db-passwords"

@@ -124,13 +124,13 @@ packages:
     ref: 0.1.4
 
   # Sonarqube
-  - name: sonarqube-database-manifests
+  - name: sonarqube-database-secret
     path: ../../build
     ref: 0.0.1
 
   - name: sonarqube
-    repository: ghcr.io/defenseunicorns/uds-capability/sonarqube
-    ref: 0.1.4
+    repository: ghcr.io/defenseunicorns/packages/uds/sonarqube
+    ref: 8.0.3-uds.4-registry1
     imports:
       - name: SONARQUBE_IDAM_ENABLED
         package: software-factory-idam-sonarqube

@@ -62,9 +62,10 @@ variables:
     GITLAB_BACKUP_SCHEDULE: "0 3 * * *"
     GITLAB_BACKUP_EXTRA_ARGS: "--skip artifiacts,registry"
     BUCKET_SUFFIX: "-dev"
-  sonarqube-database-manifests:
-    SONARQUBE_DB_EXTERNAL_NAME: "sonarqube-pg.mtsi-dev.bigbang.dev"
+  sonarqube-database-secret:
     SONARQUBE_DB_PASSWORD: "replace-me-db-passwords"
+  sonarqube-database-service:
+    SONARQUBE_DB_EXTERNAL_NAME: "sonarqube-pg.mtsi-dev.bigbang.dev"
   sonarqube:
     DOMAIN: "mtsi-dev.bigbang.dev"
     SONARQUBE_IDAM_REALM_URL: "https://keycloak.mtsi-dev.bigbang.dev/auth/realms/baby-yoda"

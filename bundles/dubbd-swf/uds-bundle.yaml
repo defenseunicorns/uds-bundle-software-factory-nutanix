@@ -117,7 +117,11 @@ packages:
     ref: 0.1.4
 
   # Sonarqube
-  - name: sonarqube-database-manifests
+  - name: sonarqube-database-secret
+    path: ../../build
+    ref: 0.0.1
+
+  - name: sonarqube-database-service
     path: ../../build
     ref: 0.0.1
 

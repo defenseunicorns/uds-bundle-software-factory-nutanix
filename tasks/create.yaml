@@ -33,13 +33,14 @@ tasks:
     description: Create database manifest packages
     actions:
       - cmd: zarf package create ./packages/databases/confluence --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
-      - cmd: zarf package create ./packages/databases/gitlab/service --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
       - cmd: zarf package create ./packages/databases/gitlab/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: zarf package create ./packages/databases/gitlab/service --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
       - cmd: zarf package create ./packages/databases/jira --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
       - cmd: zarf package create ./packages/databases/keycloak --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
       - cmd: zarf package create ./packages/databases/mattermost --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
       - cmd: zarf package create ./packages/databases/nexus --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
-      - cmd: zarf package create ./packages/databases/sonarqube --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: zarf package create ./packages/databases/sonarqube/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: zarf package create ./packages/databases/sonarqube/service --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
 
   - name: gitlab-redis-secret-package
     description: Create package for the gitlab redis secret
