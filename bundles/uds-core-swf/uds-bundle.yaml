@@ -96,7 +96,7 @@ packages:
   # Gitlab
   - name: gitlab-redis
     repository: ghcr.io/defenseunicorns/uds-capability/redis
-    ref: 0.1.1-amd64
+    ref: 0.1.2
 
   - name: gitlab-redis-secret
     path: ../../build
