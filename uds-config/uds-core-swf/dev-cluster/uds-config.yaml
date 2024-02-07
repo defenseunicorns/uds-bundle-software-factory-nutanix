@@ -6,8 +6,6 @@ packages:
     REGISTRY_HPA_ENABLE: false
   metallb:
     IP_ADDRESS_POOL: "24.0.132.248/30"
-  software-factory-idam-gitlab:
-    DOMAIN: "mtsi.bigbang.dev"
   software-factory-idam-realm:
     DOMAIN: "mtsi.bigbang.dev"
   keycloak-database-manifests:
@@ -18,22 +16,25 @@ packages:
     KEYCLOAK_DB_PASSWORD: "replace-me-db-passwords"
     KEYCLOAK_DB_NAME: "keycloakdb"
     KEYCLOAK_DB_ENDPOINT: "keycloak-postgres.keycloak.svc.cluster.local"
-  gitlab-database-manifests:
-    GITLAB_DB_EXTERNAL_NAME: "gitlab-pg.mtsi.bigbang.dev"
+  gitlab-database-secret:
     GITLAB_DB_PASSWORD: "replace-me-db-passwords"
   gitlab-object-store:
     ENDPOINT: "http://swf.objects.mtsi.bigbang.dev"
     ACCESS_KEY: "replace-me-object-store-access-key"
     SECRET_KEY: "replace-me-object-store-secret-key"
+  gitlab-redis:
+    APP: "gitlab"
   gitlab:
     DOMAIN: "mtsi.bigbang.dev"
     GITLAB_DB_NAME: "gitlabdb"
     GITLAB_DB_USERNAME: "postgres"
+    GITLAB_DB_ENDPOINT: "gitlab-pg.mtsi-dev.bigbang.dev"
     GITLAB_PAGES_ENABLED: "true"
     GITLAB_SIGNUP_ENABLED: "false"
     GITLAB_BACKUP_SCHEDULE: "0 3 * * *"
     GITLAB_BACKUP_EXTRA_ARGS: "--skip artifiacts,registry"
     BUCKET_SUFFIX: "-test"
+    GITLAB_REDIS_ENDPOINT: "redis-master.gitlab-redis.svc.cluster.local"
   sonarqube-database-manifests:
     SONARQUBE_DB_EXTERNAL_NAME: "sonarqube-pg.mtsi.bigbang.dev"
     SONARQUBE_DB_PASSWORD: "replace-me-db-passwords"

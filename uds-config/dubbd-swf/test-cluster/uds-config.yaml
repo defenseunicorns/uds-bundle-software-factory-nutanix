@@ -45,9 +45,10 @@ packages:
     KEYCLOAK_DB_PASSWORD: "replace-me-db-passwords"
     KEYCLOAK_DB_NAME: "keycloakdb"
     KEYCLOAK_DB_ENDPOINT: "keycloak-postgres.keycloak.svc.cluster.local"
-  gitlab-database-manifests:
-    GITLAB_DB_EXTERNAL_NAME: "gitlab-pg.mtsi.bigbang.dev"
+  gitlab-database-secret:
     GITLAB_DB_PASSWORD: "replace-me-db-passwords"
+  gitlab-database-service:
+    GITLAB_DB_EXTERNAL_NAME: "gitlab-pg.mtsi.bigbang.dev"
   gitlab-object-store:
     ENDPOINT: "http://swf.objects.mtsi.bigbang.dev"
     ACCESS_KEY: "replace-me-object-store-access-key"

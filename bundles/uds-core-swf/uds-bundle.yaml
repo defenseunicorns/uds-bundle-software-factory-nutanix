@@ -80,15 +80,6 @@ packages:
       - name: REALM_IMPORT_FILE
         package: software-factory-idam-realm
 
-  # GitLab SSO secret and variables
-  - name: software-factory-idam-gitlab
-    path: ../../build
-    ref: 1.0.1
-    exports:
-      - name: GITLAB_IDAM_ENABLED
-      - name: GITLAB_IDAM_ALLOWED_SSOS
-      - name: GITLAB_IDAM_PROVIDERS
-
   # SonarQube SSO secret and variables
   - name: software-factory-idam-sonarqube
     path: ../../build
@@ -104,27 +95,24 @@ packages:
 
   # Gitlab
   - name: gitlab-redis
-    repository: ghcr.io/defenseunicorns/uds-capability/gitlab/dev-dependency/gitlab-redis
-    ref: 0.1.17
+    repository: ghcr.io/defenseunicorns/uds-capability/redis
+    ref: 0.1.1-amd64
+
+  - name: gitlab-redis-secret
+    path: ../../build
+    ref: 0.0.1
 
   - name: gitlab-object-store
     path: ../../build
     ref: 0.0.1
 
-  - name: gitlab-database-manifests
+  - name: gitlab-database-secret
     path: ../../build
     ref: 0.0.1
 
   - name: gitlab
-    repository: ghcr.io/defenseunicorns/uds-capability/gitlab
-    ref: 0.1.17
-    imports:
-      - name: GITLAB_IDAM_ENABLED
-        package: software-factory-idam-gitlab
-      - name: GITLAB_IDAM_PROVIDERS
-        package: software-factory-idam-gitlab
-      - name: GITLAB_IDAM_ALLOWED_SSOS
-        package: software-factory-idam-gitlab
+    repository: ghcr.io/defenseunicorns/packages/uds/gitlab
+    ref: 16.8.1-uds.2-registry1
 
   # Gitlab Runner
   - name: gitlab-runner-rbac

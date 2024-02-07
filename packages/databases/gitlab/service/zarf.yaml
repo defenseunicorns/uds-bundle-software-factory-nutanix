@@ -1,22 +1,19 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
 kind: ZarfPackageConfig
 metadata:
-  name: gitlab-database-manifests
+  name: gitlab-database-service
   version: "0.0.1"
   architecture: amd64
 
 variables:
   - name: GITLAB_DB_EXTERNAL_NAME
     default: "replace-me"
-  - name: GITLAB_DB_PASSWORD
-    default: "replace-me"
 
 components:
-  - name: gitlab-postgres-manifests
+  - name: gitlab-postgres-external-service
     required: true
     manifests:
-      - name: gitlab-postgres-manifests
+      - name: gitlab-postgres-external-service
         namespace: gitlab
         files:
-          - secret.yaml
           - service.yaml

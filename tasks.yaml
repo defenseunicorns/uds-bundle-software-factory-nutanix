@@ -26,6 +26,7 @@ tasks:
     actions:
       - task: create:build-dir
       - task: create:database-manifest-packages
+      - task: create:gitlab-redis-secret-package
       - task: create:namespaces-package
       - task: create:idam-packages
       - task: create:object-store-packages

@@ -88,7 +88,11 @@ packages:
     path: ../../build
     ref: 0.0.1
 
-  - name: gitlab-database-manifests
+  - name: gitlab-database-secret
+    path: ../../build
+    ref: 0.0.1
+
+  - name: gitlab-database-service
     path: ../../build
     ref: 0.0.1
 
