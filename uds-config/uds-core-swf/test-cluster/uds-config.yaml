@@ -71,7 +71,7 @@ packages:
     DB_PASSWORD: "replace-me-db-passwords"
     DB_USERNAME: "postgres"
     DB_NAME: "mattermostdb"
-    DB_ENDPOINT: "mattermost-pg.mtsi-dev.bigbang.dev"
+    DB_ENDPOINT: "mattermost-pg.mtsi.bigbang.dev"
     DB_OPTIONS: "?connect_timeout=10"
     OBJECT_STORE_SECURE: "false"
     OBJECT_STORE_ENDPOINT: "swf.objects.mtsi.bigbang.dev"
