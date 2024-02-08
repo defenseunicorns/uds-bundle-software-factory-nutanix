@@ -32,10 +32,12 @@ tasks:
   - name: database-manifest-packages
     description: Create database manifest packages
     actions:
-      - cmd: zarf package create ./packages/databases/confluence --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: zarf package create ./packages/databases/confluence/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: zarf package create ./packages/databases/confluence/service --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
       - cmd: zarf package create ./packages/databases/gitlab/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
       - cmd: zarf package create ./packages/databases/gitlab/service --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
-      - cmd: zarf package create ./packages/databases/jira --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: zarf package create ./packages/databases/jira/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: zarf package create ./packages/databases/jira/service --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
       - cmd: zarf package create ./packages/databases/keycloak --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
       - cmd: zarf package create ./packages/databases/mattermost --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
       - cmd: zarf package create ./packages/databases/nexus --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build

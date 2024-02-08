@@ -145,7 +145,11 @@ packages:
         package: software-factory-idam-sonarqube
 
   # Jira
-  - name: jira-database-manifests
+  - name: jira-database-secret
+    path: ../../build
+    ref: 0.0.1
+
+  - name: jira-database-service
     path: ../../build
     ref: 0.0.1
 
@@ -154,7 +158,11 @@ packages:
     ref: 0.1.7
 
   # Confluence
-  - name: confluence-database-manifests
+  - name: confluence-database-secret
+    path: ../../build
+    ref: 0.0.1
+
+  - name: confluence-database-service
     path: ../../build
     ref: 0.0.1
 

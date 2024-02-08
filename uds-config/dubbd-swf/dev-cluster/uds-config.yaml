@@ -71,9 +71,10 @@ variables:
     SONARQUBE_IDAM_REALM_URL: "https://keycloak.mtsi-dev.bigbang.dev/auth/realms/baby-yoda"
     SONARQUBE_DB_NAME: "sonarqubedb"
     SONARQUBE_DB_USERNAME: "postgres"
-  jira-database-manifests:
-    JIRA_DB_EXTERNAL_NAME: "jira-pg.mtsi-dev.bigbang.dev"
+  jira-database-secret:
     JIRA_DB_PASSWORD: "replace-me-db-passwords"
+  jira-database-service:
+    JIRA_DB_EXTERNAL_NAME: "jira-pg.mtsi-dev.bigbang.dev"
   jira:
     DOMAIN: "mtsi-dev.bigbang.dev"
     JIRA_DB_NAME: "jiradb"

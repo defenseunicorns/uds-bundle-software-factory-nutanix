@@ -148,22 +148,54 @@ packages:
         package: software-factory-idam-sonarqube
 
   # Jira
-  - name: jira-database-manifests
+  - name: jira-database-secret
     path: ../../build
     ref: 0.0.1
 
   - name: jira
-    repository: ghcr.io/defenseunicorns/uds-capability/jira
-    ref: 0.1.7
+    repository: ghcr.io/defenseunicorns/packages/uds/jira
+    ref: 1.17.0-uds.1-registry1
+    overrides:
+      jira:
+        jira:
+          variables:
+            - name: LOCAL_HOME_ENABLED
+              path: "valumes.localHome.persistentVolumeClaim.create"
+              description: "Local Home Toggle"
+              default: "true"
+            - name: RWO_STORAGE_CLASS
+              path: "valumes.localHome.persistentVolumeClaim.storageClassName"
+              description: "RWO storage class name"
+              default: "ceph-block"
+            - name: LOCAL_HOME_SIZE
+              path: "valumes.localHome.persistentVolumeClaim.resources.requests.storage"
+              description: "Storage size"
+              default: "128Gi"
 
   # Confluence
-  - name: confluence-database-manifests
+  - name: confluence-database-secret
     path: ../../build
     ref: 0.0.1
 
   - name: confluence
-    repository: ghcr.io/defenseunicorns/uds-capability/confluence
-    ref: 0.1.6
+    repository: ghcr.io/defenseunicorns/packages/uds/confluence
+    ref: 1.17.0-uds.1-registry1
+    overrides:
+      confluence:
+        confluence:
+          variables:
+            - name: LOCAL_HOME_ENABLED
+              path: "valumes.localHome.persistentVolumeClaim.create"
+              description: "Local Home Toggle"
+              default: "true"
+            - name: RWO_STORAGE_CLASS
+              path: "valumes.localHome.persistentVolumeClaim.storageClassName"
+              description: "RWO storage class name"
+              default: "ceph-block"
+            - name: LOCAL_HOME_SIZE
+              path: "valumes.localHome.persistentVolumeClaim.resources.requests.storage"
+              description: "Storage size"
+              default: "128Gi"
 
    # Mattermost Operator with a Mattermost instance
   - name: mattermost-object-store

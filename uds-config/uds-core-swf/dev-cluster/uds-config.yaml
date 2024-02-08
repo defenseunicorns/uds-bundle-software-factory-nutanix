@@ -9,7 +9,7 @@ packages:
   software-factory-idam-realm:
     DOMAIN: "mtsi.bigbang.dev"
   keycloak-database-manifests:
-    KEYCLOAK_DB_EXTERNAL_NAME: "keycloak-pg.mtsi.bigbang.dev"
+    KEYCLOAK_DB_EXTERNAL_NAME: "keycloak-pg.mtsi-dev.bigbang.dev"
   uds-idam:
     DOMAIN: "mtsi.bigbang.dev"
     KEYCLOAK_DB_USERNAME: "postgres"
@@ -39,13 +39,12 @@ packages:
     SONARQUBE_DB_PASSWORD: "replace-me-db-passwords"
   sonarqube:
     DOMAIN: "mtsi.bigbang.dev"
-    SONARQUBE_IDAM_REALM_URL: "https://keycloak.mtsi.bigbang.dev/auth/realms/baby-yoda"
+    SONARQUBE_IDAM_REALM_URL: "https://keycloak.mtsi-dev.bigbang.dev/auth/realms/baby-yoda"
     # db config
     SONARQUBE_DB_NAME: "sonarqubedb"
     SONARQUBE_DB_USERNAME: "postgres"
     SONARQUBE_DB_ENDPOINT: "sonarqube-pg.mtsi-dev.bigbang.dev"
-  jira-database-manifests:
-    JIRA_DB_EXTERNAL_NAME: "jira-pg.mtsi.bigbang.dev"
+  jira-database-secret:
     JIRA_DB_PASSWORD: "replace-me-db-passwords"
   jira:
     DOMAIN: "mtsi.bigbang.dev"
@@ -54,8 +53,8 @@ packages:
     JIRA_LOCAL_HOME_ENABLED: "true"
     JIRA_LOCAL_HOME_SIZE: "128Gi"
     JIRA_RWO_STORAGE_CLASS: "ceph-block"
-  confluence-database-manifests:
-    CONFLUENCE_DB_EXTERNAL_NAME: "confluence-pg.mtsi.bigbang.dev"
+    JIRA_DB_ENDPOINT: "jira-pg.mtsi-dev.bigbang.dev"
+  confluence-database-secret:
     CONFLUENCE_DB_PASSWORD: "replace-me-db-passwords"
   confluence:
     DOMAIN: "mtsi.bigbang.dev"
@@ -64,8 +63,9 @@ packages:
     CONFLUENCE_LOCAL_HOME_ENABLED: "true"
     CONFLUENCE_LOCAL_HOME_SIZE: "128Gi"
     CONFLUENCE_RWO_STORAGE_CLASS: "ceph-block"
+    CONFLUENCE_DB_ENDPOINT: "confluence-pg.mtsi-dev.bigbang.dev"
   mattermost-database-manifests:
-    MATTERMOST_DB_EXTERNAL_NAME: "mattermost-pg.mtsi.bigbang.dev"
+    MATTERMOST_DB_EXTERNAL_NAME: "mattermost-pg.mtsi-dev.bigbang.dev"
     MATTERMOST_DB_PASSWORD: "replace-me-db-passwords"
     MATTERMOST_DB_USERNAME: "postgres"
     MATTERMOST_DB_NAME: "mattermostdb"
@@ -99,7 +99,7 @@ packages:
     MATTERMOST_SSO_EMAIL_SIGNIN_ENABLED: ""
     MATTERMOST_SSO_USERNAME_SIGNIN_ENABLED: ""
   nexus-database-manifests:
-    NEXUS_DB_EXTERNAL_NAME: "nexus-pg.mtsi.bigbang.dev"
+    NEXUS_DB_EXTERNAL_NAME: "nexus-pg.mtsi-dev.bigbang.dev"
     NEXUS_DB_PASSWORD: "replace-me-db-passwords"
   nexus:
     DOMAIN: "mtsi.bigbang.dev"

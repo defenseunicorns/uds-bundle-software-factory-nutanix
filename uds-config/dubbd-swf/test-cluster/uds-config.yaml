@@ -72,9 +72,10 @@ packages:
     # db config
     SONARQUBE_DB_NAME: "sonarqubedb"
     SONARQUBE_DB_USERNAME: "postgres"
-  jira-database-manifests:
-    JIRA_DB_EXTERNAL_NAME: "jira-pg.mtsi.bigbang.dev"
+  jira-database-secret:
     JIRA_DB_PASSWORD: "replace-me-db-passwords"
+  jira-database-service:
+    JIRA_DB_EXTERNAL_NAME: "jira-pg.mtsi.bigbang.dev"
   jira:
     DOMAIN: "mtsi.bigbang.dev"
     JIRA_DB_NAME: "jiradb"

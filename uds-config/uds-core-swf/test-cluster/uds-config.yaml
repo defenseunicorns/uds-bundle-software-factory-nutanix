@@ -43,9 +43,8 @@ packages:
     # db config
     SONARQUBE_DB_NAME: "sonarqubedb"
     SONARQUBE_DB_USERNAME: "postgres"
-    SONARQUBE_DB_ENDPOINT: "sonarqube-pg.mtsi-dev.bigbang.dev"
-  jira-database-manifests:
-    JIRA_DB_EXTERNAL_NAME: "jira-pg.mtsi.bigbang.dev"
+    SONARQUBE_DB_ENDPOINT: "sonarqube-pg.mtsi.bigbang.dev"
+  jira-database-secret:
     JIRA_DB_PASSWORD: "replace-me-db-passwords"
   jira:
     DOMAIN: "mtsi.bigbang.dev"
@@ -54,8 +53,8 @@ packages:
     JIRA_LOCAL_HOME_ENABLED: "true"
     JIRA_LOCAL_HOME_SIZE: "128Gi"
     JIRA_RWO_STORAGE_CLASS: "ceph-block"
-  confluence-database-manifests:
-    CONFLUENCE_DB_EXTERNAL_NAME: "confluence-pg.mtsi.bigbang.dev"
+    JIRA_DB_ENDPOINT: "jira-pg.mtsi.bigbang.dev"
+  confluence-database-secret:
     CONFLUENCE_DB_PASSWORD: "replace-me-db-passwords"
   confluence:
     DOMAIN: "mtsi.bigbang.dev"
@@ -64,6 +63,7 @@ packages:
     CONFLUENCE_LOCAL_HOME_ENABLED: "true"
     CONFLUENCE_LOCAL_HOME_SIZE: "128Gi"
     CONFLUENCE_RWO_STORAGE_CLASS: "ceph-block"
+    CONFLUENCE_DB_ENDPOINT: "confluence-pg.mtsi.bigbang.dev"
   mattermost-database-manifests:
     MATTERMOST_DB_EXTERNAL_NAME: "mattermost-pg.mtsi.bigbang.dev"
     MATTERMOST_DB_PASSWORD: "replace-me-db-passwords"
