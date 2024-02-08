@@ -65,7 +65,7 @@ packages:
     CONFLUENCE_RWO_STORAGE_CLASS: "ceph-block"
     CONFLUENCE_DB_ENDPOINT: "confluence-pg.mtsi.bigbang.dev"
   mattermost:
-    DOMAIN: "mtsi-dev.bigbang.dev"
+    DOMAIN: "mtsi.bigbang.dev"
     ACCESS_KEY: "replace-me-object-store-access-key"
     SECRET_KEY: "replace-me-object-store-secret-key"
     DB_PASSWORD: "replace-me-db-passwords"
@@ -75,7 +75,7 @@ packages:
     DB_OPTIONS: "?connect_timeout=10"
     OBJECT_STORE_SECURE: "false"
     OBJECT_STORE_ENDPOINT: "swf.objects.mtsi.bigbang.dev"
-    OBJECT_STORE_BUCKET: "mattermost-bucket-dev"
+    OBJECT_STORE_BUCKET: "mattermost-bucket-test"
   nexus-database-manifests:
     NEXUS_DB_EXTERNAL_NAME: "nexus-pg.mtsi.bigbang.dev"
     NEXUS_DB_PASSWORD: "replace-me-db-passwords"
