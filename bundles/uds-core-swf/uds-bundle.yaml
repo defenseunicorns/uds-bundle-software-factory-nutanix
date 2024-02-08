@@ -197,18 +197,42 @@ packages:
               description: "Storage size"
               default: "128Gi"
 
-   # Mattermost Operator with a Mattermost instance
-  - name: mattermost-object-store
-    path: ../../build
-    ref: 0.0.1
-
-  - name: mattermost-database-manifests
-    path: ../../build
-    ref: 0.0.1
-
+  # Mattermost
   - name: mattermost
-    repository: ghcr.io/defenseunicorns/uds-capability/mattermost
-    ref: 0.1.9
+    repository: ghcr.io/defenseunicorns/packages/uds/mattermost
+    ref: 9.4.1-uds.2-registry1
+    overrides:
+      mattermost:
+        uds-mattermost-config:
+          variables:
+            - name: OBJECT_STORE_SECURE
+              path: "objectStorage.secure"
+              description: "Object storage ssl"
+              default: "false"
+            - name: OBJECT_STORE_ENDPOINT
+              path: "objectStorage.endpoint"
+              description: "Object storage endpoint"
+              default: "swf.objects.mtsi.bigbang.dev"
+            - name: OBJECT_STORE_BUCKET
+              path: "objectStorage.bucket"
+              description: "Object storage bucket"
+              default: "mattermost-bucket-dev"
+            - name: DB_ENDPOINT
+              path: "postgres.host"
+              description: "Postgres DB endpoint"
+              default: "mattermost-pg.mtsi-dev.bigbang.dev"
+            - name: DB_USERNAME
+              path: "postgres.username"
+              description: "Postgres DB username"
+              default: "postgres"
+            - name: DB_NAME
+              path: "postgres.dbName"
+              description: "Postgres DB database name"
+              default: "mattermostdb"
+            - name: DB_OPTIONS
+              path: "postgres.connectionOptions"
+              description: "Postgres DB connection options"
+              default: "?connect_timeout=10"
 
   # Nexus
   - name: nexus-database-manifests

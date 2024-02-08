@@ -7,11 +7,11 @@ packages:
   metallb:
     IP_ADDRESS_POOL: "24.0.132.248/30"
   software-factory-idam-realm:
-    DOMAIN: "mtsi.bigbang.dev"
+    DOMAIN: "mtsi-dev.bigbang.dev"
   keycloak-database-manifests:
     KEYCLOAK_DB_EXTERNAL_NAME: "keycloak-pg.mtsi-dev.bigbang.dev"
   uds-idam:
-    DOMAIN: "mtsi.bigbang.dev"
+    DOMAIN: "mtsi-dev.bigbang.dev"
     KEYCLOAK_DB_USERNAME: "postgres"
     KEYCLOAK_DB_PASSWORD: "replace-me-db-passwords"
     KEYCLOAK_DB_NAME: "keycloakdb"
@@ -25,7 +25,7 @@ packages:
   gitlab-redis:
     APP: "gitlab"
   gitlab:
-    DOMAIN: "mtsi.bigbang.dev"
+    DOMAIN: "mtsi-dev.bigbang.dev"
     GITLAB_DB_NAME: "gitlabdb"
     GITLAB_DB_USERNAME: "postgres"
     GITLAB_DB_ENDPOINT: "gitlab-pg.mtsi-dev.bigbang.dev"
@@ -33,12 +33,12 @@ packages:
     GITLAB_SIGNUP_ENABLED: "false"
     GITLAB_BACKUP_SCHEDULE: "0 3 * * *"
     GITLAB_BACKUP_EXTRA_ARGS: "--skip artifiacts,registry"
-    BUCKET_SUFFIX: "-test"
+    BUCKET_SUFFIX: "-dev"
     GITLAB_REDIS_ENDPOINT: "redis-master.gitlab-redis.svc.cluster.local"
   sonarqube-database-secret:
     SONARQUBE_DB_PASSWORD: "replace-me-db-passwords"
   sonarqube:
-    DOMAIN: "mtsi.bigbang.dev"
+    DOMAIN: "mtsi-dev.bigbang.dev"
     SONARQUBE_IDAM_REALM_URL: "https://keycloak.mtsi-dev.bigbang.dev/auth/realms/baby-yoda"
     # db config
     SONARQUBE_DB_NAME: "sonarqubedb"
@@ -47,7 +47,7 @@ packages:
   jira-database-secret:
     JIRA_DB_PASSWORD: "replace-me-db-passwords"
   jira:
-    DOMAIN: "mtsi.bigbang.dev"
+    DOMAIN: "mtsi-dev.bigbang.dev"
     JIRA_DB_NAME: "jiradb"
     JIRA_DB_USERNAME: "postgres"
     JIRA_LOCAL_HOME_ENABLED: "true"
@@ -57,52 +57,30 @@ packages:
   confluence-database-secret:
     CONFLUENCE_DB_PASSWORD: "replace-me-db-passwords"
   confluence:
-    DOMAIN: "mtsi.bigbang.dev"
+    DOMAIN: "mtsi-dev.bigbang.dev"
     CONFLUENCE_DB_NAME: "confluencedb"
     CONFLUENCE_DB_USERNAME: "postgres"
     CONFLUENCE_LOCAL_HOME_ENABLED: "true"
     CONFLUENCE_LOCAL_HOME_SIZE: "128Gi"
     CONFLUENCE_RWO_STORAGE_CLASS: "ceph-block"
     CONFLUENCE_DB_ENDPOINT: "confluence-pg.mtsi-dev.bigbang.dev"
-  mattermost-database-manifests:
-    MATTERMOST_DB_EXTERNAL_NAME: "mattermost-pg.mtsi-dev.bigbang.dev"
-    MATTERMOST_DB_PASSWORD: "replace-me-db-passwords"
-    MATTERMOST_DB_USERNAME: "postgres"
-    MATTERMOST_DB_NAME: "mattermostdb"
-  mattermost-object-store:
+  mattermost:
+    DOMAIN: "mtsi-dev.bigbang.dev"
     ACCESS_KEY: "replace-me-object-store-access-key"
     SECRET_KEY: "replace-me-object-store-secret-key"
-    CA_CERT: |
-      -----BEGIN CERTIFICATE-----
-      replace-me-ca-cert-to-trust
-      -----END CERTIFICATE-----
-  mattermost:
-    DOMAIN: "mtsi.bigbang.dev"
-    MATTERMOST_BUCKET_SUFFIX: "-test"
-    MATTERMOST_FILE_STORE_ENDPOINT: "swf.objects.mtsi.bigbang.dev"
-    MATTERMOST_VOLUMES: |
-      - name: ca-cert
-        secret:
-          secretName: ca-secret
-          defaultMode: 0644
-    MATTERMOST_VOLUME_MOUNTS: |
-      - name: ca-cert
-        mountPath: /etc/ssl/certs
-        readOnly: true
-    MATTERMOST_SSO_ENABLED: "false"
-    MATTERMOST_SSO_CLIENT_ID: ""
-    MATTERMOST_SSO_CLIENT_SECRET: ""
-    MATTERMOST_SSO_AUTH_ENDPOINT: ""
-    MATTERMOST_SSO_TOKEN_ENDPOINT: ""
-    MATTERMOST_SSO_USER_API_ENDPOINT: ""
-    MATTERMOST_SSO_EMAIL_SIGNUP_ENABLED: ""
-    MATTERMOST_SSO_EMAIL_SIGNIN_ENABLED: ""
-    MATTERMOST_SSO_USERNAME_SIGNIN_ENABLED: ""
+    DB_PASSWORD: "replace-me-db-passwords"
+    DB_USERNAME: "postgres"
+    DB_NAME: "mattermostdb"
+    DB_ENDPOINT: "mattermost-pg.mtsi-dev.bigbang.dev"
+    DB_OPTIONS: "?connect_timeout=10"
+    OBJECT_STORE_SECURE: "false"
+    OBJECT_STORE_ENDPOINT: "swf.objects.mtsi.bigbang.dev"
+    OBJECT_STORE_BUCKET: "mattermost-bucket-dev"
   nexus-database-manifests:
     NEXUS_DB_EXTERNAL_NAME: "nexus-pg.mtsi-dev.bigbang.dev"
     NEXUS_DB_PASSWORD: "replace-me-db-passwords"
   nexus:
-    DOMAIN: "mtsi.bigbang.dev"
+    DOMAIN: "mtsi-dev.bigbang.dev"
     NEXUS_DB_NAME: "nexusdb"
     NEXUS_DB_USERNAME: "postgres"
     NEXUS_SSO_ENABLED: "false"
