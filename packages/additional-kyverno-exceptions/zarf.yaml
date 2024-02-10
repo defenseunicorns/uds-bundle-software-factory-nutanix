@@ -12,7 +12,7 @@ components:
       - name: sonarqube-idam-kyverno-policy-exception
         namespace: keycloak
         files:
-          - sonarqube/non-root-user.yaml
+          - sonarqube/non-root.yaml
   - name: sonarqube-kyverno-policy-exception
     required: true
     manifests:
@@ -26,7 +26,7 @@ components:
       - name: jira-kyverno-policy-exception
         namespace: jira
         files:
-          - jira/non-root-user.yaml
+          - jira/non-root.yaml
           - jira/external-name.yaml
   - name: gitlab-kyverno-policy-exceptions
     required: true
@@ -54,6 +54,7 @@ components:
       - name: keycloak-kyverno-policy-exceptions
         files:
           - keycloak/external-name.yaml
+          - keycloak/non-root-group.yaml
   - name: nexus-kyverno-policy-exceptions
     required: true
     manifests:

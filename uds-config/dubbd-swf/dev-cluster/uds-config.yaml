@@ -5,7 +5,7 @@ variables:
     # TODO - remove this if/when functionality is restored upstream
     REGISTRY_HPA_ENABLE: false
   metallb:
-    IP_ADDRESS_POOL: "24.0.132.244/30"
+    IP_ADDRESS_POOL: "10.0.120.50-10.0.120.59"
   dubbd-rke2-nutanix:
     # TODO - replace these blanket exceptions with more targeted kyverno policy exceptions
     EXEMPT_NAMESPACES: '["zarf", "rook-ceph", "metallb-system", "kube-system", "velero"]'

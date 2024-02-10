@@ -8,9 +8,9 @@ spec:
   - policyName: require-non-root-user
     ruleNames:
     - non-root-user
-  - policyName: restrict-host-path-write
+  - policyName: require-non-root-group
     ruleNames:
-    - require-readonly-hostpath
+    - run-as-group
   match:
     any:
     - resources:
