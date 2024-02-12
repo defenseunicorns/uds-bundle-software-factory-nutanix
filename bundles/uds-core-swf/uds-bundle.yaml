@@ -115,13 +115,9 @@ packages:
     ref: 16.8.1-uds.2-registry1
 
   # Gitlab Runner
-  - name: gitlab-runner-rbac
-    repository: ghcr.io/defenseunicorns/uds-capability/gitlab-runner/dev-dependency/gitlab-runner-rbac
-    ref: 0.1.4
-
   - name: gitlab-runner
-    repository: ghcr.io/defenseunicorns/uds-capability/gitlab-runner
-    ref: 0.1.4
+    repository: ghcr.io/defenseunicorns/packages/uds/gitlab-runner
+    ref: 16.8.0-uds.0-registry1
 
   # Sonarqube
   - name: sonarqube-database-secret
