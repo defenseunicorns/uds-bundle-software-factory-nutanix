@@ -55,7 +55,7 @@ tasks:
 
   - name: deploy-uds-core-bundle-to-dev
     actions:
-      - task: deploy:uds-core-bundle-to-test
+      - task: deploy:uds-core-bundle-to-dev
 
   - name: deploy-uds-core-bundle-to-test
     actions:
