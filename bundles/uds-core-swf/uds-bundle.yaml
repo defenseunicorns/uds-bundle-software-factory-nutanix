@@ -27,7 +27,7 @@ packages:
   - name: core
     # repository: ghcr.io/defenseunicorns/packages/uds/core
     repository: ghcr.io/blancharda/uds-core-ish/core
-    ref: 0.10.0-upstream
+    ref: 0.12.0-upstream
     overrides:
       loki:
         loki:
@@ -95,8 +95,8 @@ packages:
 
   # Gitlab
   - name: gitlab-redis
-    repository: ghcr.io/defenseunicorns/uds-capability/redis
-    ref: 0.1.2
+    repository: ghcr.io/defenseunicorns/packages/uds/dev-redis
+    ref: 0.0.1
 
   - name: gitlab-redis-secret
     path: ../../build
@@ -231,13 +231,9 @@ packages:
               default: "?connect_timeout=10"
 
   # Nexus
-  - name: nexus-database-manifests
-    path: ../../build
-    ref: 0.0.1
-
   - name: nexus
-    repository: ghcr.io/defenseunicorns/uds-capability/nexus
-    ref: 0.1.7
+    repository: ghcr.io/defenseunicorns/packages/uds/nexus
+    ref: 3.64.0-uds.1-registry1
 
   # Add all virtualservices as internal dns entries for auth callbacks
   - name: software-factory-idam-dns

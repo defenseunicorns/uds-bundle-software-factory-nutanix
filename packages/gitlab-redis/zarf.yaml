@@ -11,7 +11,7 @@ components:
     actions:
       onDeploy:
         before:
-          - cmd: kubectl get secret -n gitlab-redis redis --template='{{ index .data "redis-password" }}' | base64 -d
+          - cmd: kubectl get secret -n dev-redis redis --template='{{ index .data "redis-password" }}' | base64 -d
             mute: true
             setVariables:
               - name: REDIS_PASSWORD
