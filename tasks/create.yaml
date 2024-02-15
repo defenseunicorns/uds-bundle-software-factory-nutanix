@@ -40,6 +40,7 @@ tasks:
       - cmd: zarf package create ./packages/databases/jira/service --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
       - cmd: zarf package create ./packages/databases/keycloak --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
       - cmd: zarf package create ./packages/databases/mattermost --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: zarf package create ./packages/databases/nexus --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
       - cmd: zarf package create ./packages/databases/sonarqube/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
       - cmd: zarf package create ./packages/databases/sonarqube/service --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
 
