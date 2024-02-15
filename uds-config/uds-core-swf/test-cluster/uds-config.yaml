@@ -8,6 +8,11 @@ variables:
     IP_ADDRESS_POOL: "10.0.120.70-10.0.120.79"
   software-factory-idam-realm:
     DOMAIN: "mtsi.bigbang.dev"
+  core:
+    ADMIN_TLS_CERT: replace-me-cert
+    ADMIN_TLS_KEY: replace-me-key
+    TENANT_TLS_CERT: replace-me-cert
+    TENANT_TLS_KEY: replace-me-key
   keycloak-database-manifests:
     KEYCLOAK_DB_EXTERNAL_NAME: "keycloak-pg.mtsi.bigbang.dev"
   uds-idam:
@@ -16,6 +21,7 @@ variables:
     KEYCLOAK_DB_PASSWORD: "replace-me-db-passwords"
     KEYCLOAK_DB_NAME: "keycloakdb"
     KEYCLOAK_DB_ENDPOINT: "keycloak-postgres.keycloak.svc.cluster.local"
+    KEYCLOAK_VALUES: "our-keycloak-values.yaml"
   gitlab-database-secret:
     GITLAB_DB_PASSWORD: "replace-me-db-passwords"
   gitlab-object-store:
@@ -28,13 +34,13 @@ variables:
     DOMAIN: "mtsi.bigbang.dev"
     GITLAB_DB_NAME: "gitlabdb"
     GITLAB_DB_USERNAME: "postgres"
-     GITLAB_DB_ENDPOINT: "gitlab-pg.mtsi.bigbang.dev"
+    GITLAB_DB_ENDPOINT: "gitlab-pg.mtsi.bigbang.dev"
     GITLAB_PAGES_ENABLED: "true"
     GITLAB_SIGNUP_ENABLED: "false"
     GITLAB_BACKUP_SCHEDULE: "0 3 * * *"
     GITLAB_BACKUP_EXTRA_ARGS: "--skip artifiacts,registry"
-    GITLAB_REDIS_ENDPOINT: "redis-master.gitlab-redis.svc.cluster.local"
     BUCKET_SUFFIX: "-test"
+    GITLAB_REDIS_ENDPOINT: "redis-master.dev-redis.svc.cluster.local"
   sonarqube-database-secret:
     SONARQUBE_DB_PASSWORD: "replace-me-db-passwords"
   sonarqube:
@@ -72,17 +78,16 @@ variables:
     DB_USERNAME: "postgres"
     DB_NAME: "mattermostdb"
     DB_ENDPOINT: "mattermost-pg.mtsi.bigbang.dev"
-    DB_OPTIONS: "?connect_timeout=10"
+    DB_OPTIONS: "?connect_timeout=10&sslmode=disable"
     OBJECT_STORE_SECURE: "false"
     OBJECT_STORE_ENDPOINT: "swf.objects.mtsi.bigbang.dev"
     OBJECT_STORE_BUCKET: "mattermost-bucket-test"
-  nexus-database-manifests:
-    NEXUS_DB_EXTERNAL_NAME: "nexus-pg.mtsi.bigbang.dev"
-    NEXUS_DB_PASSWORD: "replace-me-db-passwords"
   nexus:
     DOMAIN: "mtsi.bigbang.dev"
     NEXUS_DB_NAME: "nexusdb"
     NEXUS_DB_USERNAME: "postgres"
+    NEXUS_DB_ENDPOINT: "nexus-pg.mtsi.bigbang.dev"
+    POSTGRES_DB_PASSWORD: "replace-me-db-passwords"
     NEXUS_SSO_ENABLED: "false"
     NEXUS_SSO_IDP_ENTITY_ID: ""
     NEXUS_SSO_IDP_USERNAME_ATTRIBUTE: ""
