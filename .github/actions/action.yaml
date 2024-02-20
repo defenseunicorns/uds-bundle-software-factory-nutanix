@@ -1,0 +1,20 @@
+# action.yml
+name: "Setup Environment"
+description: "UDS Environment Setup"
+
+runs:
+  using: "composite"
+  steps:
+
+    - name: Set up Homebrew
+      uses: Homebrew/actions/setup-homebrew@master
+
+    - name: Install Zarf
+      shell: bash
+      # renovate: datasource=github-tags depName=defenseunicorns/zarf versioning=semver
+      run: brew install defenseunicorns/tap/zarf@0.32.1
+
+    - name: Install UDS CLI
+      shell: bash
+      # renovate: datasource=github-tags depName=defenseunicorns/uds-cli versioning=semver
+      run: brew install defenseunicorns/tap/uds@0.7.0

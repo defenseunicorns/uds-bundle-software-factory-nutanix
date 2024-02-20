@@ -1,19 +1,19 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
 kind: ZarfPackageConfig
 metadata:
-  name: keycloak-database-manifests
+  name: sonarqube-database-service
   version: "0.0.1"
   architecture: amd64
 
 variables:
-  - name: KEYCLOAK_DB_EXTERNAL_NAME
+  - name: SONARQUBE_DB_EXTERNAL_NAME
     default: "replace-me"
 
 components:
-  - name: keycloak-postgres-manifests
+  - name: sonarqube-postgres-service
     required: true
     manifests:
-      - name: keycloak-postgres-manifests
-        namespace: keycloak
+      - name: sonarqube-postgres-service
+        namespace: sonarqube
         files:
           - service.yaml

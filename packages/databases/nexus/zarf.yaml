@@ -18,6 +18,5 @@ components:
       - name: nexus-postgres-manifests
         namespace: nexus
         files:
-          - policy-exceptions/externalName.yaml
           - secret.yaml
           - service.yaml

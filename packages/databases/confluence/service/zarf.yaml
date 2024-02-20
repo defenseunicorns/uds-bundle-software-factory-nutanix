@@ -1,19 +1,19 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
 kind: ZarfPackageConfig
 metadata:
-  name: keycloak-database-manifests
+  name: confluence-database-service
   version: "0.0.1"
   architecture: amd64
 
 variables:
-  - name: KEYCLOAK_DB_EXTERNAL_NAME
+  - name: CONFLUENCE_DB_EXTERNAL_NAME
     default: "replace-me"
 
 components:
-  - name: keycloak-postgres-manifests
+  - name: confluence-postgres-service
     required: true
     manifests:
-      - name: keycloak-postgres-manifests
-        namespace: keycloak
+      - name: confluence-postgres-service
+        namespace: confluence
         files:
           - service.yaml

@@ -1,0 +1,79 @@
+variables:
+  - name: ARCH
+    description: "What architecture to use"
+    default: "amd64"
+
+tasks:
+  # Build directory
+  - name: build-dir
+    description: Create build directory
+    actions:
+      - cmd: mkdir build -p
+
+  # Bundles
+  - name: dubbd-bundle
+    description: Create the UDS Bundle with SWF and DUBBD
+    actions:
+      - cmd: uds create ./bundles/dubbd-swf --architecture=${ARCH} --confirm
+      - cmd: mv ./bundles/dubbd-swf/uds-bundle-software-factory* ./build
+
+  - name: uds-core-bundle
+    description: Create the UDS Bundle with SWF on UDS Core
+    actions:
+      - cmd: uds create ./bundles/uds-core-swf --architecture=${ARCH} --confirm
+      - cmd: mv ./bundles/uds-core-swf/uds-bundle-uds-core-swf* ./build
+
+  # Packages
+  - name: kyverno-exceptions-package
+    description: Create kyverno exceptions Zarf Package
+    actions:
+      - cmd: zarf package create ./packages/additional-kyverno-exceptions --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+
+  - name: database-manifest-packages
+    description: Create database manifest packages
+    actions:
+      - cmd: zarf package create ./packages/databases/confluence/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: zarf package create ./packages/databases/confluence/service --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: zarf package create ./packages/databases/gitlab/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: zarf package create ./packages/databases/gitlab/service --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: zarf package create ./packages/databases/jira/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: zarf package create ./packages/databases/jira/service --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: zarf package create ./packages/databases/keycloak --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: zarf package create ./packages/databases/mattermost --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: zarf package create ./packages/databases/nexus --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: zarf package create ./packages/databases/sonarqube/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: zarf package create ./packages/databases/sonarqube/service --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+
+  - name: gitlab-redis-secret-package
+    description: Create package for the gitlab redis secret
+    actions:
+      - cmd: zarf package create ./packages/gitlab-redis --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+
+  - name: namespaces-package
+    description: Create the namespaces package
+    actions:
+      - cmd: zarf package create ./packages/namespaces --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+
+  - name: idam-packages
+    description: Create the idam packages
+    actions:
+      - cmd: zarf package create ./packages/idam-dns --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: zarf package create ./packages/idam-gitlab --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: zarf package create ./packages/idam-realm --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: zarf package create ./packages/idam-sonarqube --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+
+  - name: object-store-packages
+    description: Create the object storage packages
+    actions:
+      - cmd: zarf package create ./packages/object-store/gitlab --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: zarf package create ./packages/object-store/mattermost --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+
+  - name: dubbd-package
+    description: Create the dubbd package
+    actions:
+      - cmd: ZARF_CONFIG=./packages/dubbd/zarf-config.yaml zarf package create ./packages/dubbd --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+
+  - name: dubbd-legacy-reqs-package
+    description: Create package to satisfy legacy reqs. This is needed untill we are 100% off Legacy versions of SWF apps
+    actions:
+      - cmd: ZARF_CONFIG=./packages/dubbd-legacy-reqs/zarf-config.yaml zarf package create ./packages/dubbd-legacy-reqs --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
