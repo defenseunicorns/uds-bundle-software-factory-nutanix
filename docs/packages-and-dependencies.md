@@ -37,41 +37,36 @@ The following are Ansible playbooks and collections run on the host VMs during t
 | [RHEL 8 STIGs](https://public.cyber.mil/stigs/supplemental-automation-content/) | 1.12 | Automated application of RHEL 8 STIG requirements used during the image build process. |
 
 ## UDS Software Factory Bundle
-The UDS Software Factory Bundle (SWF) is a collection of Zarf packages which include the full set of tooling and applications installed into the cluster to create a secure software development environment. A portion of the tooling (Defense Unicorns Big Bang Distribution) has been expanded into a separate section below for clarity. SWF installs the following:
+The UDS Software Factory Bundle (SWF) is a collection of Zarf packages which include the full set of tooling and applications installed into the cluster to create a secure software development environment. A portion of the tooling (Defense Unicorns UDS-Core) has been expanded into a separate section below for clarity. SWF installs the following:
 
 | Name | Package Version (internal) | Application Version | Description |
 |----|----|----|----|
 | [Rook Ceph Zarf Init](https://github.com/defenseunicorns/uds-capability-rook-ceph/pkgs/container/uds-capability%2Frook-ceph%2Finit) | v0.31.4-0.1.2 | N/A | A zarf component installed in the cluster for orchestrating further deployment of Zarf based packages |
 | [MetalLB](https://github.com/defenseunicorns/uds-capability-metallb/tree/v0.0.4) | 0.0.5 | v0.13.12 | Tool for providing load balancer capabilities for ingress into a Kubernetes deployment |
-| [DUBBD](https://github.com/defenseunicorns/uds-package-dubbd) | 0.18.0 | N/A | [DESCRIPTION BELOW](#Defense-Unicorns-Big-Bang-Distribution-(DUBBD)) |
+| [uds-core](https://github.com/defenseunicorns/uds-core) | 0.12.0 | N/A | [DESCRIPTION BELOW](#UDS-Core) |
 | [Keycloak](https://github.com/defenseunicorns/uds-idam) | 0.2.0 | 21.1.1 | An identity and access management (IDAM) tool used to authenticate users for access to applications |
-| [Redis](https://github.com/defenseunicorns/uds-capability-gitlab/tree/main/utils/pkg-deps/gitlab/redis) | 0.0.2 | 7.0.12 | A key-value store used as a data backend for several applications in the stack |
-| [Minio](https://github.com/defenseunicorns/uds-capability-gitlab/tree/main/utils/pkg-deps/gitlab/minio) | 0.0.2 | 5.0.13 | An S3 compliant object storage solution backed by in-cluster storage providers. Allows applications to simulate access to cloud based storage against in-cluster resources |
-| [Gitlab](https://github.com/defenseunicorns/uds-capability-gitlab/tree/main) | 0.1.17 | 16.8.1 | A source control management tool used in the software development lifecycle for storing, updating, building and deploying custom software |
-| [Gitlab Runner](https://github.com/defenseunicorns/uds-capability-gitlab-runner/tree/main) | 0.1.4 | v16.6.0 | A counterpart to Gitlab (above) in which automated software builds, tests and deployments are executed |
-| [Sonarqube](https://github.com/defenseunicorns/uds-capability-sonarqube) | 0.1.4 | 9.9.3-community | A code inspection tool used during automated pipelines to evaluate security considerations of custom software and packaged images |
-| [Jira](https://github.com/defenseunicorns/uds-capability-jira) | 0.1.7 | 9.12.2 | A collaboration tool used for team management and task organization |
-| [Confluence](https://github.com/defenseunicorns/uds-capability-confluence) | 0.1.6 | 8.7.2 | A knowledge management tool used by teams to organize information |
-| [Mattermost Operator](https://github.com/defenseunicorns/uds-capability-mattermost-operator) | 0.1.9 | 1.20.1 | A Kubernetes operator installed to manage deployment and configuration of Mattermost instances within the cluster |
-| [Mattermost](https://github.com/defenseunicorns/uds-capability-mattermost-operator) | 0.1.9 | 9.3.0 | An instance of Mattermost, a self-hosted chat and collaboration platform |
-| [Nexus](https://github.com/defenseunicorns/uds-capability-nexus) | 0.1.5 | 3.64.0-03 | An artifact repository used for storing compiled application libraries, packages, images and other such artifacts |
+| [Redis](https://github.com/defenseunicorns/uds-package-dependencies) | 0.0.1 | 7.0.12 | A key-value store used as a data backend for several applications in the stack |
+| [Gitlab](https://github.com/defenseunicorns/uds-package-gitlab) | 16.8.1-uds.2-registry1 | 16.8.1 | A source control management tool used in the software development lifecycle for storing, updating, building and deploying custom software |
+| [Gitlab Runner](https://github.com/defenseunicorns/uds-package-gitlab-runner) | 16.8.0-uds.0-registry1 | v16.8.0 | A counterpart to Gitlab (above) in which automated software builds, tests and deployments are executed |
+| [Sonarqube](https://github.com/defenseunicorns/uds-package-sonarqube) | 8.0.3-uds.4-registry1 | 9.9.3-community | A code inspection tool used during automated pipelines to evaluate security considerations of custom software and packaged images |
+| [Jira](https://github.com/defenseunicorns/uds-package-jira) | 1.17.0-uds.1-registry1 | 9.12.0 | A collaboration tool used for team management and task organization |
+| [Confluence](https://github.com/defenseunicorns/uds-package-confluence) | 1.17.0-uds.1-registry1 | 8.7.1 | A knowledge management tool used by teams to organize information |
+| [Mattermost](https://github.com/defenseunicorns/uds-package-mattermost) | 9.4.1-uds.2-registry1 | 9.4.2 | An instance of Mattermost, a self-hosted chat and collaboration platform |
+| [Nexus](https://github.com/defenseunicorns/uds-package-nexus) | 3.64.0-uds.1-registry1 | 3.64.0-03 | An artifact repository used for storing compiled application libraries, packages, images and other such artifacts |
 
-## Defense Unicorns Big Bang Distribution (DUBBD)
- DUBBD is an opinionated configuration of Platform One's Big Bang product. It is a collection of tools that provide administrative capabilities such as centralized logging, monitoring, alerting and runtime security to a kubernetes cluster. The following applications and tools are installed:
+## UDS Core
+ UDS Core is a collection of tools that provide administrative capabilities such as deployment automation, centralized logging, monitoring, alerting and runtime security to a kubernetes cluster. The following applications and tools are installed:
 
 | Package | Version | Description |
 |----|----|----|
-| [Flux](https://github.com/fluxcd/flux2/releases) | 2.2.2 | A GitOps based manager for scheduling deployments in the cluster |
-| [Big Bang](https://repo1.dso.mil/big-bang/bigbang) | 2.19.1 | Big Bang is a suite of DevSecOps tools which can be installed in Kubernetes to help secure, monitor and manage cluster workloads |
-| [Kyverno](https://repo1.dso.mil/big-bang/product/packages/kyverno) | 1.11.4 | Kyverno is a policy management engine for Kubernetes used to restrict permissions in the cluster and enforce NIST based security control requirements |
-| [Istio Operator](https://repo1.dso.mil/big-bang/product/packages/istio-operator) | 1.19.6 | Kubernetes operator which manages deployments and configuration of the Istio service mesh (in-cluster networking) |
-| [Istio Controlplane](https://repo1.dso.mil/big-bang/product/packages/istio-controlplane) | 1.19.6 | A package detailing the configuration of the deployed service mesh -- used by the operator to apply the desired state in the cluster |
-| [Loki](https://repo1.dso.mil/big-bang/product/packages/loki) | 2.9.3 | A Grafana product for aggregating and querying log data |
-| [Promtail](https://repo1.dso.mil/big-bang/product/packages/promtail) | 2.9.2 | A logging daemon installed on each cluster node to capture logs from the host and all cluster workload processes. Logs are shipped to Loki |
-| [Kiali](https://repo1.dso.mil/big-bang/product/packages/kiali) | 1.78.0 | A status dashboard and debugging utility for the Istio service mesh to assist with monitoring in-cluster networking |
-| [Prometheus](https://repo1.dso.mil/big-bang/product/packages/monitoring) | 2.49.1 | A Grafana product for storing and querying time series based data such as system performance metrics (CPU/MEM usage) |
-| [Grafana](https://repo1.dso.mil/big-bang/product/packages/monitoring) | 10.2.3 | A Grafana product to provide a frontend interface to display and query performance information from Prometheus, log data from Loki, and request tracing information from Tempo |
-| [AlertManager](https://repo1.dso.mil/big-bang/product/packages/monitoring) | 0.26.0 | A tool for configuring alerts based cluster events, log data (Loki), performance indicators (Prometheus) or other custom triggers |
-| [Neuvector](https://repo1.dso.mil/big-bang/product/packages/neuvector) | 5.2.2 | A kubernetes security suite that provides CVE scanning for hosts and images, as well as runtime security monitoring and protection |
-| [Tempo](https://repo1.dso.mil/big-bang/product/packages/tempo) | 2.3.0 | A Grafana product for collecting, storing and querying request tracing information; used to help understand how a user's request to an application traversed across the system |
-| [Velero](https://repo1.dso.mil/big-bang/product/packages/velero) | 1.12.2 | A tool for orchistrating backups of cluster state and storage |
+| [Flux](https://github.com/fluxcd/flux2/releases) | 2.2.2 | A GitOps based manager for scheduling deployments in the cluster (NOTE: will be removed soon) |
+| [Istio](https://istio.io/latest/) | 1.20.3 | A package detailing the configuration of the deployed service mesh -- used by the operator to apply the desired state in the cluster |
+| [Loki](https://grafana.com/oss/loki/) | 2.9.4 | A Grafana product for aggregating and querying log data |
+| [Promtail](https://grafana.com/docs/loki/latest/send-data/promtail/) | 2.9.2 | A logging daemon installed on each cluster node to capture logs from the host and all cluster workload processes. Logs are shipped to Loki |
+| [Prometheus](https://prometheus.io/) | 2.49.1 | A product for storing and querying time series based data such as system performance metrics (CPU/MEM usage) |
+| [Grafana](https://github.com/grafana/grafana) | 10.3.1 | A Grafana product to provide a frontend interface to display and query performance information from Prometheus, log data from Loki, and request tracing information from Tempo |
+| [Neuvector](https://www.suse.com/neuvector/) | 5.2.2 | A kubernetes security suite that provides CVE scanning for hosts and images, as well as runtime security monitoring and protection |
+| [Velero](https://repo1.dso.mil/big-bang/product/packages/velero) | TBD | A tool for orchistrating backups of cluster state and storage |
+| [Authservice](https://github.com/istio-ecosystem/authservice) | 0.5.3 | A tool for simplifying and automating auth workflows via Istio integration |
+| [Metrics Server](https://github.com/kubernetes-sigs/metrics-server) | 0.6.4 | A container metrics aggregation and exporter for kubernetes |
+| [Pepr](https://pepr.dev/) | 0.25.0 | Declarative automation for managing deployments and security policy enorcement |

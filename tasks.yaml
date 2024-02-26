@@ -6,23 +6,7 @@ tasks:
   ################
   #  Create
   ################
-  # Default bundle for now is DUBBD version
   - name: create-bundle
-    actions:
-      - task: create-dubbd-bundle
-
-  - name: create-dubbd-bundle
-    actions:
-      - task: create:build-dir
-      - task: create:kyverno-exceptions-package
-      - task: create:database-manifest-packages
-      - task: create:namespaces-package
-      - task: create:idam-packages
-      - task: create:object-store-packages
-      - task: create:dubbd-package
-      - task: create:dubbd-bundle
-
-  - name: create-uds-core-bundle
     actions:
       - task: create:build-dir
       - task: create:database-manifest-packages
@@ -31,33 +15,16 @@ tasks:
       - task: create:idam-packages
       - task: create:object-store-packages
       - task: create:dubbd-legacy-reqs-package
-      - task: create:uds-core-bundle
+      - task: create:bundle
 
   ################
   #  Deploy
   ################
-  # Default bundle for now is DUBBD version
   - name: deploy-bundle-to-dev
-    actions:
-      - task: deploy-dubbd-bundle-to-dev
-
-  - name: deploy-bundle-to-test
-    actions:
-      - task: deploy-dubbd-bundle-to-test
-
-  - name: deploy-dubbd-bundle-to-dev
-    actions:
-      - task: deploy:dubbd-bundle-to-dev
-
-  - name: deploy-dubbd-bundle-to-test
-    actions:
-      - task: deploy:dubbd-bundle-to-test
-
-  - name: deploy-uds-core-bundle-to-dev
     actions:
       - task: deploy:uds-core-bundle-to-dev
 
-  - name: deploy-uds-core-bundle-to-test
+  - name: deploy-bundle-to-test
     actions:
       - task: deploy:uds-core-bundle-test
 

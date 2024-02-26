@@ -8,10 +8,19 @@ The full list of packages and dependencies installed by the bundle (and an assum
 [DEVELOPMENT_MAINTENANCE.md](docs/DEVELOPMENT_MAINTENANCE.md)
 
 ## Installation ("quickstart")
+Once the below [Prerequisites](#prerequisites) are met, these are the steps to deploy.
+1) Gather your files in your working directory. Bundle tarball can be referenced via OCI or downloaded for local use.
+  - uds-config.yaml [Instructions on creating this file](#Configuration)
+  - our-keycloak-values.yaml [Needed at deploy time](our-keycloak-values.yaml)
+  - uds-bundle-software-factory-nutanix-amd64-0.x.x.tar.zst [Instructions on OCI reference usage](#deployment). [Instructions on local reference](#(optional)-local-deployment-reference)
+2) Deploy the bundle with the above files in your working directory by [following these instructions](#deployment)
+
 ### Prerequisites
 **Tools**:
-* [zarf](https://github.com/defenseunicorns/zarf)
-* [uds](https://github.com/defenseunicorns/uds-cli)
+* [zarf version v0.32.1](https://github.com/defenseunicorns/zarf/tree/v0.32.1)
+- `sudo curl -sL https://github.com/defenseunicorns/zarf/releases/download/v0.32.1/zarf_v0.32.1_Linux_amd64`
+* [uds version v0.7.0](https://github.com/defenseunicorns/uds-cli/tree/v0.7.0)
+- `sudo curl -sL https://github.com/defenseunicorns/uds-cli/releases/download/v0.7.0/uds-cli_v0.7.0_Linux_amd64`
 * (OPTIONAL) [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
 * (OPTIONAL) [helm](https://github.com/helm/helm)
 
@@ -19,9 +28,9 @@ The full list of packages and dependencies installed by the bundle (and an assum
 
 **Infrastructure**:
 * Kubernetes cluster
-* Access to the cluster with enough privilage to deploy
+* Access to the cluster with enough privilege to deploy
 * A valid domain
-  > NOTE: `*.bigbang.dev` may be used for demomonstration and test deployments.
+  > NOTE: `*.bigbang.dev` may be used for demonstration and test deployments.
 * Wildcard certificates to cover your domain (alternatively, expand for full SAN list)
   <details>
     <summary>Individual SAN list </summary>
@@ -89,7 +98,7 @@ The full list of packages and dependencies installed by the bundle (and an assum
 Deployment configuration is managed via a `uds-config.yaml` file in the deployment directory. Some values in the configuration will be sensitive, **we do not recommend checking this into source control in its entierty**. Best practice would involve either storing the configuration in an external secrets manager (like Vault), or managing deployments via CD and generating the config file dynamically at deploy time using CD managed secrets.
 
 For demonstration purposes, you can setup a local configfile as follows:
-* Copy an example configuration from `uds-config/test-cluster` to your working directory
+* Copy an example configuration from [uds-config/uds-core-swf/dev-cluster/uds-config.yaml](uds-config/uds-core-swf/dev-cluster/uds-config.yaml) to your working directory
 * Update the config according to your environment taking care to set:
   * domain variables
   * certificate values
@@ -116,7 +125,7 @@ uds deploy uds-bundle-software-factory-nutanix-amd64-0.1.4.tar.zst --confirm
 ```
 
 ## Additional Notes
-You can use the uds tasks in this project to build and deploy.
+You can reference the uds tasks in this project to learn how to build and deploy.
 
 ```bash
 # List the available tasks to run

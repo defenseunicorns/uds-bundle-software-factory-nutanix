@@ -7,8 +7,10 @@ variables:
     # TODO - remove this if/when functionality is restored upstream
     REGISTRY_HPA_ENABLE: false
   metallb:
+    # Replace with a valid IP address range
     IP_ADDRESS_POOL: "10.0.120.50-10.0.120.59"
   core:
+    # CERT values must be base64 encoded
     ADMIN_TLS_CERT: replace-me-cert
     ADMIN_TLS_KEY: replace-me-key
     TENANT_TLS_CERT: replace-me-cert
