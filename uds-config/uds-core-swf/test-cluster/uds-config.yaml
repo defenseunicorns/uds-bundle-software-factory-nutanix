@@ -1,14 +1,16 @@
 options:
   log_level: info
+shared:
+  DOMAIN: mtsi.bigbang.dev
 variables:
   init:
     # TODO - remove this if/when functionality is restored upstream
     REGISTRY_HPA_ENABLE: false
   metallb:
+    # Replace with a valid IP address range
     IP_ADDRESS_POOL: "10.0.120.70-10.0.120.79"
-  software-factory-idam-realm:
-    DOMAIN: "mtsi.bigbang.dev"
   core:
+    # CERT values must be base64 encoded
     ADMIN_TLS_CERT: replace-me-cert
     ADMIN_TLS_KEY: replace-me-key
     TENANT_TLS_CERT: replace-me-cert
@@ -16,7 +18,6 @@ variables:
   keycloak-database-manifests:
     KEYCLOAK_DB_EXTERNAL_NAME: "keycloak-pg.mtsi.bigbang.dev"
   uds-idam:
-    DOMAIN: "mtsi.bigbang.dev"
     KEYCLOAK_DB_USERNAME: "postgres"
     KEYCLOAK_DB_PASSWORD: "replace-me-db-passwords"
     KEYCLOAK_DB_NAME: "keycloakdb"
@@ -31,7 +32,6 @@ variables:
   gitlab-redis:
     APP: "gitlab"
   gitlab:
-    DOMAIN: "mtsi.bigbang.dev"
     GITLAB_DB_NAME: "gitlabdb"
     GITLAB_DB_USERNAME: "postgres"
     GITLAB_DB_ENDPOINT: "gitlab-pg.mtsi.bigbang.dev"
@@ -44,7 +44,6 @@ variables:
   sonarqube-database-secret:
     SONARQUBE_DB_PASSWORD: "replace-me-db-passwords"
   sonarqube:
-    DOMAIN: "mtsi.bigbang.dev"
     SONARQUBE_IDAM_REALM_URL: "https://keycloak.mtsi.bigbang.dev/auth/realms/baby-yoda"
     # db config
     SONARQUBE_DB_NAME: "sonarqubedb"
@@ -53,7 +52,6 @@ variables:
   jira-database-secret:
     JIRA_DB_PASSWORD: "replace-me-db-passwords"
   jira:
-    DOMAIN: "mtsi.bigbang.dev"
     JIRA_DB_NAME: "jiradb"
     JIRA_DB_USERNAME: "postgres"
     JIRA_LOCAL_HOME_ENABLED: "true"
@@ -63,7 +61,6 @@ variables:
   confluence-database-secret:
     CONFLUENCE_DB_PASSWORD: "replace-me-db-passwords"
   confluence:
-    DOMAIN: "mtsi.bigbang.dev"
     CONFLUENCE_DB_NAME: "confluencedb"
     CONFLUENCE_DB_USERNAME: "postgres"
     CONFLUENCE_LOCAL_HOME_ENABLED: "true"
@@ -71,7 +68,6 @@ variables:
     CONFLUENCE_RWO_STORAGE_CLASS: "ceph-block"
     CONFLUENCE_DB_ENDPOINT: "confluence-pg.mtsi.bigbang.dev"
   mattermost:
-    DOMAIN: "mtsi.bigbang.dev"
     ACCESS_KEY: "replace-me-object-store-access-key"
     SECRET_KEY: "replace-me-object-store-secret-key"
     DB_PASSWORD: "replace-me-db-passwords"
@@ -83,7 +79,6 @@ variables:
     OBJECT_STORE_ENDPOINT: "swf.objects.mtsi.bigbang.dev"
     OBJECT_STORE_BUCKET: "mattermost-bucket-test"
   nexus:
-    DOMAIN: "mtsi.bigbang.dev"
     NEXUS_DB_NAME: "nexusdb"
     NEXUS_DB_USERNAME: "postgres"
     NEXUS_DB_ENDPOINT: "nexus-pg.mtsi.bigbang.dev"

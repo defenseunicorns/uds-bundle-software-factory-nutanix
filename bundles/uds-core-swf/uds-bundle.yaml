@@ -1,9 +1,11 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/uds-cli/v0.5.1/uds.schema.json
 kind: UDSBundle
 metadata:
-  name: uds-core-swf
+  name: software-factory-nutanix
   description: A UDS bundle for deploying a software factory to an RKE2 cluster
-  version: "0.0.1"
+  # x-release-please-start-version
+  version: "0.1.5"
+  # x-release-please-end
   architecture: amd64
 
 packages:
