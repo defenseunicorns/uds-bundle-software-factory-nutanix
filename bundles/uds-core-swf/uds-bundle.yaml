@@ -158,15 +158,15 @@ packages:
         jira:
           variables:
             - name: LOCAL_HOME_ENABLED
-              path: "valumes.localHome.persistentVolumeClaim.create"
+              path: "volumes.localHome.persistentVolumeClaim.create"
               description: "Local Home Toggle"
               default: "true"
             - name: RWO_STORAGE_CLASS
-              path: "valumes.localHome.persistentVolumeClaim.storageClassName"
+              path: "volumes.localHome.persistentVolumeClaim.storageClassName"
               description: "RWO storage class name"
               default: "ceph-block"
             - name: LOCAL_HOME_SIZE
-              path: "valumes.localHome.persistentVolumeClaim.resources.requests.storage"
+              path: "volumes.localHome.persistentVolumeClaim.resources.requests.storage"
               description: "Storage size"
               default: "128Gi"
 
@@ -183,15 +183,15 @@ packages:
         confluence:
           variables:
             - name: LOCAL_HOME_ENABLED
-              path: "valumes.localHome.persistentVolumeClaim.create"
+              path: "volumes.localHome.persistentVolumeClaim.create"
               description: "Local Home Toggle"
               default: "true"
             - name: RWO_STORAGE_CLASS
-              path: "valumes.localHome.persistentVolumeClaim.storageClassName"
+              path: "volumes.localHome.persistentVolumeClaim.storageClassName"
               description: "RWO storage class name"
               default: "ceph-block"
             - name: LOCAL_HOME_SIZE
-              path: "valumes.localHome.persistentVolumeClaim.resources.requests.storage"
+              path: "volumes.localHome.persistentVolumeClaim.resources.requests.storage"
               description: "Storage size"
               default: "128Gi"
 
