@@ -47,6 +47,26 @@ packages:
               description: "The TLS key for the admin gateway (must be base64 encoded)"
               path: tls.key
       istio-tenant-gateway:
+        gateway:
+          values:
+            - path: "service.ports"
+              value:
+                - name: status-port
+                  port: 15021
+                  protocol: TCP
+                  targetPort: 15021
+                - name: http2
+                  port: 80
+                  protocol: TCP
+                  targetPort: 80
+                - name: https
+                  port: 443
+                  protocol: TCP
+                  targetPort: 443
+                - name: tcp-ssh
+                  port: 22
+                  protocol: TCP
+                  targetPort: 2022
         uds-istio-config:
           variables:
             - name: TENANT_TLS_CERT
