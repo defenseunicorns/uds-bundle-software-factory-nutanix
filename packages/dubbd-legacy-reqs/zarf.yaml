@@ -6,6 +6,11 @@ metadata:
   architecture: "amd64"
   version: "0.0.1"
 
+variables:
+  - name: DOMAIN
+    description: "Domain to be used in VS hosts and gateway config"
+    default: "mtsi.bigbang.dev"
+
 components:
   - name: install-flux
     required: true
@@ -28,3 +33,4 @@ components:
         files:
           - manifests/gitlab-ssh-virtualservice.yaml
           - manifests/gitlab-ssh-networkpolicies.yaml
+          - manifests/gitlab-ssh-gateway.yaml
