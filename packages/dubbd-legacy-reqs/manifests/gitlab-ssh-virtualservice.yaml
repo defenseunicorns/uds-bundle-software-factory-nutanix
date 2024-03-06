@@ -8,9 +8,9 @@ metadata:
   namespace: gitlab
 spec:
   gateways:
-  - istio-system/tenant
+  - istio-tenant-gateway/gitlab-ssh-gateway
   hosts:
-  - gitlab.mtsi.bigbang.dev
+  - gitlab.###ZARF_VAR_DOMAIN###
   tcp:
   - match:
     - port: 2022
