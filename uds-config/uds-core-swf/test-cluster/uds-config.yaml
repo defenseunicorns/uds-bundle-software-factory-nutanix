@@ -41,6 +41,39 @@ variables:
     GITLAB_BACKUP_EXTRA_ARGS: "--skip artifiacts,registry"
     BUCKET_SUFFIX: "-test"
     GITLAB_REDIS_ENDPOINT: "redis-master.dev-redis.svc.cluster.local"
+    WEBSERVICE_REPLICAS: 2
+    WEBSERVICE_RESOURCES:
+      limits:
+        cpu: 8000m
+        memory: 8G
+      requests:
+        cpu: 8000m
+        memory: 8G
+    MIGRATIONS_RESOURCES:
+      limits:
+        cpu: 500m
+        memory: 4G
+    WORKHORSE_RESOURCES:
+      limits:
+        memory: 100M
+      requests:
+        cpu: 10m
+        memory: 10M
+    SIDEKIQ_REPLICAS: 1
+    SIDEKIQ_RESOURCES:
+      limits:
+        cpu: 4000m
+        memory: 15G
+      requests:
+        cpu: 4000m
+        memory: 15G
+    GITALY_RESOURCES:
+      limits:
+        cpu: 4000m
+        memory: 15G
+      requests:
+        cpu: 4000m
+        memory: 15G
   sonarqube-database-secret:
     SONARQUBE_DB_PASSWORD: "replace-me-db-passwords"
   sonarqube:
