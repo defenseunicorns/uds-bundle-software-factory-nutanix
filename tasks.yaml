@@ -22,11 +22,11 @@ tasks:
   ################
   - name: deploy-bundle-to-dev
     actions:
-      - task: deploy:uds-core-bundle-to-dev
+      - task: deploy:bundle-to-dev
 
   - name: deploy-bundle-to-test
     actions:
-      - task: deploy:uds-core-bundle-test
+      - task: deploy:bundle-to-test
 
   #### Clean ####
   - name: clean
