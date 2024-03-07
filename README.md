@@ -52,7 +52,8 @@ Once the below [Prerequisites](#prerequisites) are met, these are the steps to d
   </details>
 
   > NOTE: If using the example domain (`*.bigbang.dev`), a valid corresponding certificate and key can be found [in the Platform1 Big Bang repo](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/chart/ingress-certs.yaml?ref_type=heads).
-* Object Storage with provisioned buckets (expand for details)
+* Object Storage with provisioned buckets (expand for details).
+These are the default bucket names. Gitlab allows you to add a suffix in your `uds-config.yaml`, so reflect that if you configure a suffix. Also, Velero and Mattermost allow you to configure your bucket name in your `uds-config.yaml`. Reflect that if you configure those differently then the below defaults.
   <details>
     <summary> Velero </summary>
 
@@ -61,23 +62,23 @@ Once the below [Prerequisites](#prerequisites) are met, these are the steps to d
   <details>
     <summary> Gitlab </summary>
 
-    * gitlab-artifacts
-    * gitlab-backups
-    * gitlab-ci-secure-files
-    * gitlab-dependency-proxy
-    * gitlab-lfs
-    * gitlab-mr-diffs
-    * gitlab-packages
-    * gitlab-pages
-    * gitlab-terraform-state
-    * gitlab-uploads
-    * gitlab-registry
-    * gitlab-tmp
+    * uds-gitlab-artifacts
+    * uds-gitlab-backups
+    * uds-gitlab-ci-secure-files
+    * uds-gitlab-dependency-proxy
+    * uds-gitlab-lfs
+    * uds-gitlab-mr-diffs
+    * uds-gitlab-packages
+    * uds-gitlab-pages
+    * uds-gitlab-terraform-state
+    * uds-gitlab-uploads
+    * uds-gitlab-registry
+    * uds-gitlab-tmp
   </details>
   <details>
     <summary> Mattermost </summary>
 
-    * mattermost-objects
+    * mattermost-bucket
   </details>
 * Postgres databases (expand for details):
   <details>
