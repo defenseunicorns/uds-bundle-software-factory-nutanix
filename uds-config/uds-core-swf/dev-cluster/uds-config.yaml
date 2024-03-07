@@ -39,7 +39,6 @@ variables:
     GITLAB_BACKUP_EXTRA_ARGS: "--skip artifiacts,registry"
     BUCKET_SUFFIX: "-dev"
     GITLAB_REDIS_ENDPOINT: "redis-master.dev-redis.svc.cluster.local"
-    # # Overrides for scaled down cluster for local dev and CI
     WEBSERVICE_REPLICAS: 2
     WEBSERVICE_RESOURCES:
       limits:
