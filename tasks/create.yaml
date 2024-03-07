@@ -24,7 +24,6 @@ tasks:
       - cmd: zarf package create ./packages/databases/confluence/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
       - cmd: zarf package create ./packages/databases/gitlab/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
       - cmd: zarf package create ./packages/databases/jira/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
-      - cmd: zarf package create ./packages/databases/keycloak --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
       - cmd: zarf package create ./packages/databases/sonarqube/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
 
   - name: gitlab-redis-secret-package
@@ -41,16 +40,8 @@ tasks:
     description: Create the idam packages
     actions:
       - cmd: zarf package create ./packages/idam-dns --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
-      - cmd: zarf package create ./packages/idam-gitlab --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
-      - cmd: zarf package create ./packages/idam-realm --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
-      - cmd: zarf package create ./packages/idam-sonarqube --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
 
   - name: object-store-packages
     description: Create the object storage packages
     actions:
       - cmd: zarf package create ./packages/object-store/gitlab --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
-
-  - name: dubbd-legacy-reqs-package
-    description: Create package to satisfy legacy reqs. This is needed until we are 100% off Legacy versions of SWF apps
-    actions:
-      - cmd: ZARF_CONFIG=./packages/dubbd-legacy-reqs/zarf-config.yaml zarf package create ./packages/dubbd-legacy-reqs --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build

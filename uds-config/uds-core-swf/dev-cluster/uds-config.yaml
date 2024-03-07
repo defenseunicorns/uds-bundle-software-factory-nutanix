@@ -15,14 +15,10 @@ variables:
     ADMIN_TLS_KEY: replace-me-key
     TENANT_TLS_CERT: replace-me-cert
     TENANT_TLS_KEY: replace-me-key
-  keycloak-database-manifests:
-    KEYCLOAK_DB_EXTERNAL_NAME: "keycloak-pg.mtsi-dev.bigbang.dev"
-  uds-idam:
     KEYCLOAK_DB_USERNAME: "postgres"
     KEYCLOAK_DB_PASSWORD: "replace-me-db-passwords"
     KEYCLOAK_DB_NAME: "keycloakdb"
-    KEYCLOAK_DB_ENDPOINT: "keycloak-postgres.keycloak.svc.cluster.local"
-    KEYCLOAK_VALUES: "our-keycloak-values.yaml"
+    KEYCLOAK_DB_ENDPOINT: "keycloak-pg.mtsi-dev.bigbang.dev"
   gitlab-database-secret:
     GITLAB_DB_PASSWORD: "replace-me-db-passwords"
   gitlab-object-store:
@@ -42,7 +38,6 @@ variables:
   sonarqube-database-secret:
     SONARQUBE_DB_PASSWORD: "replace-me-db-passwords"
   sonarqube:
-    SONARQUBE_IDAM_REALM_URL: "https://keycloak.mtsi-dev.bigbang.dev/auth/realms/baby-yoda"
     # db config
     SONARQUBE_DB_NAME: "sonarqubedb"
     SONARQUBE_DB_USERNAME: "postgres"
