@@ -1,0 +1,21 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  annotations:
+    meta.helm.sh/release-name: gitlab
+    meta.helm.sh/release-namespace: gitlab
+  name: gitlab-ssh
+  namespace: gitlab
+spec:
+  gateways:
+  - istio-tenant-gateway/gitlab-ssh-gateway
+  hosts:
+  - gitlab.###ZARF_VAR_DOMAIN###
+  tcp:
+  - match:
+    - port: 2022
+    route:
+    - destination:
+        host: gitlab-gitlab-shell.gitlab.svc.cluster.local
+        port:
+          number: 22

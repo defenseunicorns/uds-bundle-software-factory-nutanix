@@ -95,6 +95,11 @@ packages:
               description: "The TLS key for the tenant gateway (must be base64 encoded)"
               path: tls.key
 
+  # Additional manifests needed
+  - name: additional-manifests
+    path: ../../build
+    ref: 0.0.1
+
   # Gitlab
   - name: gitlab-redis
     repository: ghcr.io/defenseunicorns/packages/uds/dev-redis

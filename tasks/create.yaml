@@ -45,3 +45,8 @@ tasks:
     description: Create the object storage packages
     actions:
       - cmd: zarf package create ./packages/object-store/gitlab --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+
+  - name: additional-manifests-package
+    description: Create package create additional manifests needed.
+    actions:
+      - cmd: zarf package create ./packages/additional-manifests --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
