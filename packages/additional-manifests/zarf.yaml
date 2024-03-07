@@ -21,3 +21,9 @@ components:
           - manifests/gitlab-ssh-virtualservice.yaml
           - manifests/gitlab-ssh-networkpolicies.yaml
           - manifests/gitlab-ssh-gateway.yaml
+  - name: envoy-filter-tenant-ingress
+    required: true
+    manifests:
+      - name: envoy-filter-tenant-ingress
+        files:
+          - manifests/envoy-filter.yaml

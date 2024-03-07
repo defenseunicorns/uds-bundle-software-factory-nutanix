@@ -25,8 +25,6 @@ variables:
     ENDPOINT: "http://swf.objects.mtsi.bigbang.dev"
     ACCESS_KEY: "replace-me-object-store-access-key"
     SECRET_KEY: "replace-me-object-store-secret-key"
-  gitlab-redis:
-    APP: "gitlab"
   gitlab:
     GITLAB_DB_NAME: "gitlabdb"
     GITLAB_DB_USERNAME: "postgres"

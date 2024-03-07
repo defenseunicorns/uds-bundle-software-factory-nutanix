@@ -99,7 +99,7 @@ These are the default bucket names. Gitlab allows you to add a suffix in your `u
 Deployment configuration is managed via a `uds-config.yaml` file in the deployment directory. Some values in the configuration will be sensitive, **we do not recommend checking this into source control in its entierty**. Best practice would involve either storing the configuration in an external secrets manager (like Vault), or managing deployments via CD and generating the config file dynamically at deploy time using CD managed secrets.
 
 For demonstration purposes, you can setup a local configfile as follows:
-* Copy an example configuration from [uds-config/uds-core-swf/dev-cluster/uds-config.yaml](uds-config/uds-core-swf/dev-cluster/uds-config.yaml) to your working directory
+* Copy an example configuration from [config/dev-cluster/uds-config.yaml](config/dev-cluster/uds-config.yaml) to your working directory
 * Update the config according to your environment taking care to set:
   * domain variables
   * certificate values
