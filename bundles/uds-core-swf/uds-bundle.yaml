@@ -130,6 +130,12 @@ packages:
             - name: WEBSERVICE_REPLICAS
               description: "Gitlab Webservice Min Replicas"
               path: "gitlab.webservice.minReplicas"
+            - name: WEBSERVICE_WORKERS
+              description: "Gitlab Webservice Worker Count"
+              path: "gitlab.webservice.workerProcesses"
+            - name: WEBSERVICE_HPA
+              description: "Gitlab Webservice HPA settings"
+              path: "gitlab.webservice.hpa"
             - name: WEBSERVICE_RESOURCES
               description: "Gitlab Webservice Resources"
               path: "gitlab.webservice.resources"
@@ -139,6 +145,9 @@ packages:
             - name: SIDEKIQ_REPLICAS
               description: "Gitlab Sidekiq Min Replicas"
               path: "gitlab.sidekiq.minReplicas"
+            - name: SIDEKIQ_HPA
+              description: "Gitlab Sidekiq HPA settings"
+              path: "gitlab.sidekiq.hpa"
             - name: SIDEKIQ_RESOURCES
               description: "Gitlab Sidekiq Resources"
               path: "gitlab.sidekiq.resources"
