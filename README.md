@@ -11,7 +11,6 @@ The full list of packages and dependencies installed by the bundle (and an assum
 Once the below [Prerequisites](#prerequisites) are met, these are the steps to deploy.
 1) Gather your files in your working directory. Bundle tarball can be referenced via OCI or downloaded for local use.
   - uds-config.yaml [Instructions on creating this file](#Configuration)
-  - our-keycloak-values.yaml [Needed at deploy time](our-keycloak-values.yaml)
   - uds-bundle-software-factory-nutanix-amd64-0.x.x.tar.zst [Instructions on OCI reference usage](#deployment). [Instructions on local reference](#(optional)-local-deployment-reference)
 2) Deploy the bundle with the above files in your working directory by [following these instructions](#deployment)
 
