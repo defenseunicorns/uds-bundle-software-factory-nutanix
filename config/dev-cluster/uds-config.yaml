@@ -35,14 +35,18 @@ variables:
     GITLAB_BACKUP_EXTRA_ARGS: "--skip artifiacts,registry"
     BUCKET_SUFFIX: "-dev"
     GITLAB_REDIS_ENDPOINT: "redis-master.dev-redis.svc.cluster.local"
-    WEBSERVICE_REPLICAS: 2
+    WEBSERVICE_REPLICAS: 3
+    WEBSERVICE_WORKERS: 4
+    WEBSERVICE_HPA:
+      cpu:
+        targetAverageValue: 1600m
     WEBSERVICE_RESOURCES:
       limits:
         cpu: 8000m
         memory: 8G
       requests:
-        cpu: 8000m
-        memory: 8G
+        cpu: 4000m
+        memory: 5G
     MIGRATIONS_RESOURCES:
       limits:
         cpu: 500m
@@ -53,14 +57,17 @@ variables:
       requests:
         cpu: 10m
         memory: 10M
-    SIDEKIQ_REPLICAS: 1
+    SIDEKIQ_REPLICAS: 3
+    SIDEKIQ_HPA:
+      cpu:
+        targetAverageValue: 700m
     SIDEKIQ_RESOURCES:
       limits:
-        cpu: 4000m
-        memory: 15G
+        cpu: 2000m
+        memory: 4G
       requests:
-        cpu: 4000m
-        memory: 15G
+        cpu: 1000m
+        memory: 2G
     GITALY_RESOURCES:
       limits:
         cpu: 4000m
