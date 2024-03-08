@@ -2,9 +2,9 @@ tasks:
   - name: bundle-to-dev
     description: Deploy UDS Core version of the bundle to dev
     actions:
-      - cmd: UDS_CONFIG=./uds-config/uds-core-swf/dev-cluster/uds-config.yaml uds deploy ./build/uds-bundle-*.tar.zst --confirm
+      - cmd: UDS_CONFIG=./config/dev-cluster/uds-config.yaml uds deploy ./build/uds-bundle-*.tar.zst --confirm
 
   - name: bundle-to-test
     description: Deploy UDS Core version of the bundle to test
     actions:
-      - cmd: UDS_CONFIG=./uds-config/uds-core-swf/test-cluster/uds-config.yaml uds deploy ./build/uds-bundle-*.tar.zst --confirm
+      - cmd: UDS_CONFIG=./config/test-cluster/uds-config.yaml uds deploy ./build/uds-bundle-*.tar.zst --confirm

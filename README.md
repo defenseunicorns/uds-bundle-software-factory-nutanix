@@ -17,10 +17,10 @@ Once the below [Prerequisites](#prerequisites) are met, these are the steps to d
 
 ### Prerequisites
 **Tools**:
-* [zarf version v0.32.1](https://github.com/defenseunicorns/zarf/tree/v0.32.1)
-- `sudo curl -sL https://github.com/defenseunicorns/zarf/releases/download/v0.32.1/zarf_v0.32.1_Linux_amd64`
-* [uds version v0.7.0](https://github.com/defenseunicorns/uds-cli/tree/v0.7.0)
-- `sudo curl -sL https://github.com/defenseunicorns/uds-cli/releases/download/v0.7.0/uds-cli_v0.7.0_Linux_amd64`
+* [zarf version v0.32.4](https://github.com/defenseunicorns/zarf/tree/v0.32.4)
+- `sudo curl -sL https://github.com/defenseunicorns/zarf/releases/download/v0.32.4/zarf_v0.32.4_Linux_amd64`
+* [uds version v0.9.3](https://github.com/defenseunicorns/uds-cli/tree/v0.9.3)
+- `sudo curl -sL https://github.com/defenseunicorns/uds-cli/releases/download/v0.9.3/uds-cli_v0.9.3_Linux_amd64`
 * (OPTIONAL) [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
 * (OPTIONAL) [helm](https://github.com/helm/helm)
 
@@ -99,7 +99,7 @@ These are the default bucket names. Gitlab allows you to add a suffix in your `u
 Deployment configuration is managed via a `uds-config.yaml` file in the deployment directory. Some values in the configuration will be sensitive, **we do not recommend checking this into source control in its entierty**. Best practice would involve either storing the configuration in an external secrets manager (like Vault), or managing deployments via CD and generating the config file dynamically at deploy time using CD managed secrets.
 
 For demonstration purposes, you can setup a local configfile as follows:
-* Copy an example configuration from [uds-config/uds-core-swf/dev-cluster/uds-config.yaml](uds-config/uds-core-swf/dev-cluster/uds-config.yaml) to your working directory
+* Copy an example configuration from [config/dev-cluster/uds-config.yaml](config/dev-cluster/uds-config.yaml) to your working directory
 * Update the config according to your environment taking care to set:
   * domain variables
   * certificate values

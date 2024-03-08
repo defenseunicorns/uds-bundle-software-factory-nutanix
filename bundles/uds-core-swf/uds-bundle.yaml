@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/uds-cli/v0.5.1/uds.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/uds-cli/v0.9.3/uds.schema.json
 kind: UDSBundle
 metadata:
   name: software-factory-nutanix
@@ -12,9 +12,9 @@ packages:
   # Zarf init
   - name: init
     repository: ghcr.io/defenseunicorns/uds-capability/rook-ceph/init
-    optional-components:
+    optionalComponents:
       - git-server
-    ref: v0.32.1-0.2.1
+    ref: v0.32.4-0.2.3
 
   # Namespace pre-reqs for swf capabilities
   - name: software-factory-namespaces
@@ -28,9 +28,28 @@ packages:
 
   - name: core
     # repository: ghcr.io/defenseunicorns/packages/uds/core
-    repository: ghcr.io/blancharda/uds-core-ish/core
-    ref: 0.12.0-upstream
+    repository: ghcr.io/defenseunicorns/uds-bundle-software-factory-nutanix/custom-uds-core/core
+    ref: 0.14.5-upstream
     overrides:
+      keycloak:
+        keycloak:
+          variables:
+            - name: KEYCLOAK_DB_USERNAME
+              description: "keycloak database username"
+              path: postgresql.username
+              default: "postgres"
+            - name: KEYCLOAK_DB_PASSWORD
+              description: "keycloak database password"
+              path: postgresql.password
+              default: "replace-me"
+            - name: KEYCLOAK_DB_NAME
+              description: "keycloak database name"
+              path: postgresql.database
+              default: "keycloakdb"
+            - name: KEYCLOAK_DB_ENDPOINT
+              description: "keycloak database name"
+              path: postgresql.host
+              default: "postgresql"
       loki:
         loki:
           values:
@@ -75,46 +94,11 @@ packages:
             - name: TENANT_TLS_KEY
               description: "The TLS key for the tenant gateway (must be base64 encoded)"
               path: tls.key
-            
 
-  # legacy requirements of DUBBD like flux (TODO -- remove someday)
-  - name: dubbd-legacy-reqs
+  # Additional manifests needed
+  - name: additional-manifests
     path: ../../build
     ref: 0.0.1
-
-  # Change the realm file keycloak imports from
-  - name: software-factory-idam-realm
-    path: ../../build
-    ref: 1.0.1
-    optional-components:
-      - exported-variables
-    exports:
-      - name: REALM_IMPORT_FILE
-
-  # Identity and Access Management
-  - name: keycloak-database-manifests
-    path: ../../build
-    ref: 0.0.1
-
-  - name: uds-idam
-    repository: ghcr.io/defenseunicorns/uds-capability/uds-idam
-    ref: 0.2.0-amd64
-    imports:
-      - name: REALM_IMPORT_FILE
-        package: software-factory-idam-realm
-
-  # SonarQube SSO secret and variables
-  - name: software-factory-idam-sonarqube
-    path: ../../build
-    ref: 1.0.1
-    exports:
-      - name: SONARQUBE_IDAM_ENABLED
-      - name: SONARQUBE_IDAM_CLIENT_ID
-      - name: SONARQUBE_IDAM_PROVIDER_NAME
-      - name: SONARQUBE_IDAM_SAML_CERT
-      - name: SONARQUBE_IDAM_ATTR_LOGIN
-      - name: SONARQUBE_IDAM_ATTR_NAME
-      - name: SONARQUBE_IDAM_PROVIDER_EMAIL
 
   # Gitlab
   - name: gitlab-redis
@@ -135,7 +119,7 @@ packages:
 
   - name: gitlab
     repository: ghcr.io/defenseunicorns/packages/uds/gitlab
-    ref: 16.8.1-uds.2-registry1
+    ref: 16.9.1-uds.1-registry1
     overrides:
       gitlab:
         gitlab:
@@ -181,21 +165,6 @@ packages:
   - name: sonarqube
     repository: ghcr.io/defenseunicorns/packages/uds/sonarqube
     ref: 8.0.3-uds.4-registry1
-    imports:
-      - name: SONARQUBE_IDAM_ENABLED
-        package: software-factory-idam-sonarqube
-      - name: SONARQUBE_IDAM_CLIENT_ID
-        package: software-factory-idam-sonarqube
-      - name: SONARQUBE_IDAM_PROVIDER_NAME
-        package: software-factory-idam-sonarqube
-      - name: SONARQUBE_IDAM_SAML_CERT
-        package: software-factory-idam-sonarqube
-      - name: SONARQUBE_IDAM_ATTR_LOGIN
-        package: software-factory-idam-sonarqube
-      - name: SONARQUBE_IDAM_ATTR_NAME
-        package: software-factory-idam-sonarqube
-      - name: SONARQUBE_IDAM_PROVIDER_EMAIL
-        package: software-factory-idam-sonarqube
 
   # Jira
   - name: jira-database-secret
@@ -229,7 +198,7 @@ packages:
 
   - name: confluence
     repository: ghcr.io/defenseunicorns/packages/uds/confluence
-    ref: 1.17.0-uds.1-registry1
+    ref: 1.17.0-uds.2-registry1
     overrides:
       confluence:
         confluence:
@@ -293,5 +262,5 @@ packages:
   - name: software-factory-idam-dns
     path: ../../build
     ref: 1.0.0
-    optional-components:
+    optionalComponents:
       - create-internal-dns-entries

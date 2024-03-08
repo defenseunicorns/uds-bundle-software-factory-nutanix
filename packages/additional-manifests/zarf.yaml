@@ -1,8 +1,8 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/v0.32.1/zarf.schema.json
 kind: ZarfPackageConfig
 metadata:
-  name: dubbd-legacy-reqs
-  description: "Installs Flux and some custom gitlab resources"
+  name: additional-manifests
+  description: "Installs additional needed manifests"
   architecture: "amd64"
   version: "0.0.1"
 
@@ -12,19 +12,6 @@ variables:
     default: "mtsi.bigbang.dev"
 
 components:
-  - name: install-flux
-    required: true
-    manifests:
-      - name: bb-flux
-        namespace: flux-system
-        kustomizations:
-          - https://repo1.dso.mil/big-bang/bigbang.git//base/flux?ref=2.19.1
-    images:
-      - registry1.dso.mil/ironbank/fluxcd/helm-controller:v0.37.1
-      - registry1.dso.mil/ironbank/fluxcd/kustomize-controller:v1.2.1
-      - registry1.dso.mil/ironbank/fluxcd/notification-controller:v1.2.3
-      - registry1.dso.mil/ironbank/fluxcd/source-controller:v1.2.2
-
   - name: gitlab-ssh
     required: true
     manifests:
@@ -34,3 +21,9 @@ components:
           - manifests/gitlab-ssh-virtualservice.yaml
           - manifests/gitlab-ssh-networkpolicies.yaml
           - manifests/gitlab-ssh-gateway.yaml
+  - name: envoy-filter-tenant-ingress
+    required: true
+    manifests:
+      - name: envoy-filter-tenant-ingress
+        files:
+          - manifests/envoy-filter.yaml
