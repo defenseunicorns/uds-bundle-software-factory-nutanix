@@ -27,9 +27,8 @@ packages:
     ref: 0.0.5-amd64
 
   - name: core
-    # repository: ghcr.io/defenseunicorns/packages/uds/core
-    repository: ghcr.io/defenseunicorns/uds-bundle-software-factory-nutanix/custom-uds-core/core
-    ref: 0.14.5-upstream
+    repository: ghcr.io/defenseunicorns/packages/uds/core
+    ref: 0.15.0-upstream
     overrides:
       keycloak:
         keycloak:
