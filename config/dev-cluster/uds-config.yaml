@@ -75,6 +75,8 @@ variables:
       requests:
         cpu: 4000m
         memory: 15G
+    REGISTRY_REPLICAS: 2
+    SHELL_REPLICAS: 2
   sonarqube-database-secret:
     SONARQUBE_DB_PASSWORD: "replace-me-db-passwords"
   sonarqube:
