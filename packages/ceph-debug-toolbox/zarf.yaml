@@ -9,8 +9,8 @@ components:
     required: true
     manifests:
       - name: ceph-toolbox
-        namespace: confluence
+        namespace: rook-ceph
         files:
           - https://raw.githubusercontent.com/rook/rook/v1.13.5/deploy/examples/toolbox.yaml
     images: 
-      - quay.io/ceph/ceph:v18.2.2
+      - quay.io/ceph/ceph:v18.2.1
