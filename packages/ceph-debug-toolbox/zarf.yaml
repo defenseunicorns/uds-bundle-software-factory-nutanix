@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: ceph-toolbox
+  version: "0.0.1"
+
+components:
+  - name: ceph-toolbox
+    required: true
+    manifests:
+      - name: ceph-toolbox
+        namespace: confluence
+        files:
+          - https://raw.githubusercontent.com/rook/rook/master/deploy/examples/toolbox.yaml
+    images: 
+      - quay.io/ceph/ceph:v18.2.2
