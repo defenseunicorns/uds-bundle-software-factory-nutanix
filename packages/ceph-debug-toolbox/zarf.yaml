@@ -11,6 +11,6 @@ components:
       - name: ceph-toolbox
         namespace: confluence
         files:
-          - https://raw.githubusercontent.com/rook/rook/master/deploy/examples/toolbox.yaml
+          - https://raw.githubusercontent.com/rook/rook/v1.13.5/deploy/examples/toolbox.yaml
     images: 
       - quay.io/ceph/ceph:v18.2.2
