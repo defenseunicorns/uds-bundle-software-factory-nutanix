@@ -11,6 +11,7 @@ components:
       - name: ceph-toolbox
         namespace: rook-ceph
         files:
-          - https://raw.githubusercontent.com/rook/rook/v1.13.5/deploy/examples/toolbox.yaml
+          # - https://raw.githubusercontent.com/rook/rook/v1.13.5/deploy/examples/toolbox.yaml
+          - deployment.yaml
     images: 
       - quay.io/ceph/ceph:v18.2.1
