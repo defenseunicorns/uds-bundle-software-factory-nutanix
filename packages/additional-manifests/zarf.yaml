@@ -4,7 +4,7 @@ metadata:
   name: additional-manifests
   description: "Installs additional needed manifests"
   architecture: "amd64"
-  version: "0.0.1"
+  version: "0.0.2"
 
 variables:
   - name: DOMAIN
@@ -12,18 +12,19 @@ variables:
     default: "mtsi.bigbang.dev"
 
 components:
-  - name: gitlab-ssh
+  - name: gitlab-additional-manifests
     required: true
     manifests:
-      - name: gitlab-ssh-virtualservice
+      - name: gitlab-additional-manifests
         namespace: gitlab
         files:
-          - manifests/gitlab-ssh-virtualservice.yaml
-          - manifests/gitlab-ssh-networkpolicies.yaml
-          - manifests/gitlab-ssh-gateway.yaml
-  - name: envoy-filter-tenant-ingress
+          - gitlab/gitlab-ssh-virtualservice.yaml
+          - gitlab/gitlab-ssh-networkpolicies.yaml
+          - gitlab/gitlab-ssh-gateway.yaml
+          - gitlab/envoy-filter.yaml
+  - name: pepr-policy-exemptions
     required: true
     manifests:
-      - name: envoy-filter-tenant-ingress
+      - name: pepr-policy-exemptions
         files:
-          - manifests/envoy-filter.yaml
+          - pepr-policy-exemptions/rook-ceph-exemption.yaml

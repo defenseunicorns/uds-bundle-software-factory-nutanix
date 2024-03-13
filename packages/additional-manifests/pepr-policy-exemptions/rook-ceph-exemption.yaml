@@ -1,0 +1,19 @@
+apiVersion: uds.dev/v1alpha1
+kind: Exemption
+metadata:
+  name: rook-ceph
+  namespace: uds-policy-exemptions
+spec:
+  exemptions:
+    - policies:
+        - DisallowHostNamespaces
+        - DisallowPrivileged
+        - RequireNonRootUser
+        - RestrictSELinuxType
+        - RestrictHostPathWrite
+        - RestrictVolumeTypes
+      matcher:
+        namespace: rook-ceph
+        name: "^rook-ceph-*"
+      title: "rook-ceph exemptions"
+      description: "Rook ceph needs exemptions"
