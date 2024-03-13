@@ -126,6 +126,14 @@ spec:
             items:
               - key: data
                 path: mon-endpoints
+        - hostPath:
+          path: /dev
+          type: ""
+          name: devices
+        - hostPath:
+            path: /var/lib/rook/rook-ceph/cd940091-c635-449f-92d4-d017f5f8175d_32ca9167-1d8d-4611-b862-4c5df148e60c
+            type: DirectoryOrCreate
+          name: activate-osd
         - name: ceph-config
           emptyDir: {}
       tolerations:
