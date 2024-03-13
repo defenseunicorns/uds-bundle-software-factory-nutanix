@@ -108,8 +108,6 @@ spec:
               readOnly: true
             - mountPath: /dev
               name: devices
-            - mountPath: /run/udev
-              name: run-udev
             - mountPath: /var/lib/ceph/osd/ceph-0
               name: activate-osd
       volumes:
