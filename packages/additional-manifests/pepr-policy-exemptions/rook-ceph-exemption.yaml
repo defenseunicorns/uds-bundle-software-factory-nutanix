@@ -6,12 +6,12 @@ metadata:
 spec:
   exemptions:
     - policies:
-        - DisallowHostNamespaces
-        - DisallowPrivileged
-        - RequireNonRootUser
-        - RestrictSELinuxType
-        - RestrictHostPathWrite
-        - RestrictVolumeTypes
+      - DisallowHostNamespaces
+      - DisallowPrivileged
+      - RequireNonRootUser
+      - DropAllCapabilities
+      - RestrictHostPathWrite
+      - RestrictVolumeTypes
       matcher:
         namespace: rook-ceph
         name: "^rook-ceph-*"
