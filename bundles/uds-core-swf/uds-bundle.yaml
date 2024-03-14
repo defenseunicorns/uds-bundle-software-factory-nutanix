@@ -15,6 +15,16 @@ packages:
     optionalComponents:
       - git-server
     ref: v0.32.4-0.2.3
+    overrides:
+      rook-ceph-cluster:
+        rook-ceph-cluster:
+          variables:
+            - path: cephClusterSpec.resources.osd.requests.memory
+              name: CEPH_OSD_MEM_REQUESTS
+            - path: cephClusterSpec.resources.osd.limits.memory
+              name: CEPH_OSD_MEM_LIMITS
+            - path: toolbox.enabled
+              name: ENABLE_CEPH_TOOLBOX
 
   # Namespace pre-reqs for swf capabilities
   - name: software-factory-namespaces
@@ -97,7 +107,7 @@ packages:
   # Additional manifests needed
   - name: additional-manifests
     path: ../../build
-    ref: 0.0.1
+    ref: 0.0.2
 
   # Gitlab
   - name: gitlab-redis
