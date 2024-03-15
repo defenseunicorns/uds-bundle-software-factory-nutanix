@@ -14,7 +14,7 @@ packages:
     repository: ghcr.io/defenseunicorns/uds-capability/rook-ceph/init
     optionalComponents:
       - git-server
-    ref: v0.32.4-0.2.3
+    ref: v0.32.5-0.2.4
     overrides:
       rook-ceph-cluster:
         rook-ceph-cluster:
