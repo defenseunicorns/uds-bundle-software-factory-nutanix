@@ -21,32 +21,32 @@ tasks:
   - name: database-manifest-packages
     description: Create database manifest packages
     actions:
-      - cmd: zarf package create ./packages/databases/confluence/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
-      - cmd: zarf package create ./packages/databases/gitlab/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
-      - cmd: zarf package create ./packages/databases/jira/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
-      - cmd: zarf package create ./packages/databases/sonarqube/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: uds zarf package create ./packages/databases/confluence/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: uds zarf package create ./packages/databases/gitlab/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: uds zarf package create ./packages/databases/jira/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: uds zarf package create ./packages/databases/sonarqube/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
 
   - name: gitlab-redis-secret-package
     description: Create package for the gitlab redis secret
     actions:
-      - cmd: zarf package create ./packages/gitlab-redis --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: uds zarf package create ./packages/gitlab-redis --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
 
   - name: namespaces-package
     description: Create the namespaces package
     actions:
-      - cmd: zarf package create ./packages/namespaces --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: uds zarf package create ./packages/namespaces --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
 
   - name: idam-packages
     description: Create the idam packages
     actions:
-      - cmd: zarf package create ./packages/idam-dns --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: uds zarf package create ./packages/idam-dns --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
 
   - name: object-store-packages
     description: Create the object storage packages
     actions:
-      - cmd: zarf package create ./packages/object-store/gitlab --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: uds zarf package create ./packages/object-store/gitlab --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
 
   - name: additional-manifests-package
     description: Create package create additional manifests needed.
     actions:
-      - cmd: zarf package create ./packages/additional-manifests --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: uds zarf package create ./packages/additional-manifests --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
