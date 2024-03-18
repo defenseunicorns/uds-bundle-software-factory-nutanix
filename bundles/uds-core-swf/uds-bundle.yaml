@@ -40,6 +40,15 @@ packages:
     repository: ghcr.io/defenseunicorns/packages/uds/core
     ref: 0.16.1-upstream
     overrides:
+      velero:
+        velero:
+          variables:
+            - name: VELERO_SNAPSHOTS_ENABLED
+              path: snapshotsEnabled
+            - name: VELERO_VOLUME_SNAPSHOT_LOCATION
+              path: configuration.volumeSnapshotLocation
+            - name: VELERO_SCHEDULES
+              path: schedules
       keycloak:
         keycloak:
           variables:
