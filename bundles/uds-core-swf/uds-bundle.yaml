@@ -38,7 +38,7 @@ packages:
 
   - name: core
     repository: ghcr.io/defenseunicorns/packages/uds/core
-    ref: 0.15.0-upstream
+    ref: 0.16.1-upstream
     overrides:
       keycloak:
         keycloak:
