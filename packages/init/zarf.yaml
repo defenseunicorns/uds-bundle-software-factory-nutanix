@@ -72,7 +72,7 @@ components:
         valuesFiles:
           - values/nutanix-snapshot-values.yaml
 
-   - name: nutanix-csi-storage
+  - name: nutanix-csi-storage
     required: true
     charts:
       # renovate: datasource=helm
@@ -102,7 +102,6 @@ components:
       - registry.k8s.io/sig-storage/csi-snapshotter:v6.3.2
       - registry.k8s.io/sig-storage/csi-resizer:v1.9.2
       - registry.k8s.io/sig-storage/livenessprobe:v2.11.0
-    images:
       - "###ZARF_PKG_TMPL_REGISTRY_IMAGE_DOMAIN######ZARF_PKG_TMPL_REGISTRY_IMAGE###:###ZARF_PKG_TMPL_REGISTRY_IMAGE_TAG###"
 
   # Creates the pod+git mutating webhook

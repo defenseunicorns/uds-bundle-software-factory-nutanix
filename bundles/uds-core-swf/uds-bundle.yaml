@@ -14,7 +14,7 @@ packages:
     path: ../../build
     optionalComponents:
       - git-server
-    ref: 0.0.1
+    ref: v0.32.5
     overrides:
       nutanix-csi-storage:
         nutanix-csi-storage:
