@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.4](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.3...v0.2.4) (2024-03-20)
+
+
+### Features
+
+* Configure velero ([0e1db1f](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/0e1db1fad4e5a19a97f3f2bf5f21bd1652b9ec23))
+
+
+### Bug Fixes
+
+* revert init to 0.32.4 to match uds zarf ([3576a24](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/3576a24083f1bad3bef39a3ad55b717c526eb345))
+
+
+### Miscellaneous
+
+* upgrade gitlab 16.9.2-uds.0-registry1 ([0e1db1f](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/0e1db1fad4e5a19a97f3f2bf5f21bd1652b9ec23))
+* upgrade init to v0.32.5-0.2.4 ([#41](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/41)) ([0e1db1f](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/0e1db1fad4e5a19a97f3f2bf5f21bd1652b9ec23))
+* upgrade uds to v0.9.4 and remove zarf ([0e1db1f](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/0e1db1fad4e5a19a97f3f2bf5f21bd1652b9ec23))
+
 ## [0.2.3](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.2...v0.2.3) (2024-03-14)
 
 
