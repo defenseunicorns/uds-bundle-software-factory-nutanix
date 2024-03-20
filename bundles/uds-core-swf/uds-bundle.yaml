@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/uds-cli/v0.9.3/uds.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/uds-cli/v0.9.4/uds.schema.json
 kind: UDSBundle
 metadata:
   name: software-factory-nutanix
@@ -42,13 +42,75 @@ packages:
     overrides:
       velero:
         velero:
-          variables:
-            - name: VELERO_SNAPSHOTS_ENABLED
-              path: snapshotsEnabled
-            - name: VELERO_VOLUME_SNAPSHOT_LOCATION
-              path: configuration.volumeSnapshotLocation
-            - name: VELERO_SCHEDULES
-              path: schedules
+          values:
+            - path: snapshotsEnabled
+              value: true
+            - path: configuration.volumeSnapshotLocation
+              value:
+                - name: default
+                  provider: aws
+                  config:
+                    region: "us-east-1"
+                  credential:
+                    name: "velero-bucket-credentials"
+                    key: "cloud"
+            - path: schedules
+              value:
+                uds-jira-backup:
+                  disabled: false
+                  schedule: "0 3 * * *"
+                  useOwnerReferencesInBackup: false
+                  template:
+                    csiSnapshotTimeout: 0s
+                    includeClusterResources: true
+                    snapshotVolumes: true
+                    includedNamespaces:
+                      - jira
+                    ttl: "240h"
+                uds-confluence-backup:
+                  disabled: false
+                  schedule: "0 3 * * *"
+                  useOwnerReferencesInBackup: false
+                  template:
+                    csiSnapshotTimeout: 0s
+                    includeClusterResources: true
+                    snapshotVolumes: true
+                    includedNamespaces:
+                      - confluence
+                    ttl: "240h"
+                uds-mattermost-backup:
+                  disabled: false
+                  schedule: "0 3 * * *"
+                  useOwnerReferencesInBackup: false
+                  template:
+                    csiSnapshotTimeout: 0s
+                    includeClusterResources: true
+                    snapshotVolumes: true
+                    includedNamespaces:
+                      - mattermost
+                    ttl: "240h"
+                uds-nexus-backup:
+                  disabled: false
+                  schedule: "0 3 * * *"
+                  useOwnerReferencesInBackup: false
+                  template:
+                    csiSnapshotTimeout: 0s
+                    includeClusterResources: true
+                    snapshotVolumes: true
+                    includedNamespaces:
+                      - nexus
+                    ttl: "240h"
+                uds-gitlab-backup:
+                  disabled: false
+                  schedule: "0 3 * * *"
+                  useOwnerReferencesInBackup: false
+                  template:
+                    csiSnapshotTimeout: 0s
+                    includeClusterResources: true
+                    snapshotVolumes: true
+                    includedNamespaces:
+                      - gitlab
+                    ttl: "240h"
       keycloak:
         keycloak:
           variables:
