@@ -1,0 +1,117 @@
+kind: ZarfInitConfig
+metadata:
+  name: init
+  description: "Nutanix CSI Driver Custom Zarf Init Package"
+  architecture: amd64
+  version: "0.0.1" # This version is not used by zarf, but is used for tracking with the published versions
+
+components:
+  # (Optional) Deploys a k3s cluster
+  - name: k3s
+    import:
+      url: oci://ghcr.io/defenseunicorns/packages/init:v0.32.5
+
+  # This package moves the injector & registries binaries
+  - name: zarf-injector
+    required: true
+    import:
+      url: oci://ghcr.io/defenseunicorns/packages/init:v0.32.5
+
+  # Creates the temporary seed-registry
+  - name: zarf-seed-registry
+    required: true
+    import:
+      url: oci://ghcr.io/defenseunicorns/packages/init:v0.32.5
+    charts:
+      - name: docker-registry
+        valuesFiles:
+          - values/registry-values.yaml
+    # On upgrades ensure we retain the existing PV
+    actions:
+      onDeploy:
+        before:
+          - description: Set persistence for upgrade seed registry
+            cmd: ./zarf tools kubectl get pvc zarf-docker-registry -n zarf >/dev/null 2>&1 && echo true || echo false
+            mute: true
+            setVariables:
+              - name: UPGRADE_PERSISTENCE
+          - description: Set env vars for upgrade seed registry
+            mute: true
+            cmd: |
+              ./zarf tools kubectl get pvc zarf-docker-registry -n zarf >/dev/null 2>&1 && \
+              echo "" || \
+              echo "- name: REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY
+                value: \"/var/lib/registry\""
+            setVariables:
+              - name: UPGRADE_ENV_VARS
+                autoIndent: true
+
+  # Push nutanix csi images to seed-registry
+  - name: nutanix-csi-images-initial
+    required: true
+    description: Push rook ceph images to the zarf registry
+    images:
+      - registry.k8s.io/sig-storage/snapshot-controller:v6.3.2
+      - registry.k8s.io/sig-storage/snapshot-validation-webhook:v6.3.2
+      - quay.io/karbon/ntnx-csi:v2.6.6
+      - registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.9.1
+      - registry.k8s.io/sig-storage/csi-provisioner:v3.6.2
+      - registry.k8s.io/sig-storage/csi-snapshotter:v6.3.2
+      - registry.k8s.io/sig-storage/csi-resizer:v1.9.2
+      - registry.k8s.io/sig-storage/livenessprobe:v2.11.0
+
+  # Deploy rook/ceph operator
+  - name: nutanix-csi-snapshot
+    required: true
+    charts:
+      # renovate: datasource=helm
+      - name: nutanix-csi-snapshot
+        url: https://nutanix.github.io/helm
+        version: v6.3.2
+        namespace: ntnx-system
+        valuesFiles:
+          - values/nutanix-snapshot-values.yaml
+
+   - name: nutanix-csi-storage
+    required: true
+    charts:
+      # renovate: datasource=helm
+      - name: nutanix-csi-storage
+        url: https://nutanix.github.io/helm
+        version: v2.6.6
+        namespace: ntnx-system
+        valuesFiles:
+          - values/nutanix-storage-values.yaml
+
+  # Creates the permanent registry
+  - name: zarf-registry
+    required: true
+    import:
+      url: oci://ghcr.io/defenseunicorns/packages/init:v0.32.5
+
+  # Push rook/ceph (and registry) images to permanent registry
+  - name: nutanix-csi-images
+    required: true
+    description: Push rook ceph images to the zarf registry
+    images:
+      - registry.k8s.io/sig-storage/snapshot-controller:v6.3.2
+      - registry.k8s.io/sig-storage/snapshot-validation-webhook:v6.3.2
+      - quay.io/karbon/ntnx-csi:v2.6.6
+      - registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.9.1
+      - registry.k8s.io/sig-storage/csi-provisioner:v3.6.2
+      - registry.k8s.io/sig-storage/csi-snapshotter:v6.3.2
+      - registry.k8s.io/sig-storage/csi-resizer:v1.9.2
+      - registry.k8s.io/sig-storage/livenessprobe:v2.11.0
+    images:
+      - "###ZARF_PKG_TMPL_REGISTRY_IMAGE_DOMAIN######ZARF_PKG_TMPL_REGISTRY_IMAGE###:###ZARF_PKG_TMPL_REGISTRY_IMAGE_TAG###"
+
+  # Creates the pod+git mutating webhook
+  - name: zarf-agent
+    required: true
+    import:
+      url: oci://ghcr.io/defenseunicorns/packages/init:v0.32.5
+
+  # (Optional) Adds a git server to the cluster
+  - name: git-server
+    import:
+      url: oci://ghcr.io/defenseunicorns/packages/init:v0.32.5

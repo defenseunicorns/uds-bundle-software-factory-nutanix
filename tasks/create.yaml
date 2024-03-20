@@ -50,3 +50,8 @@ tasks:
     description: Create package create additional manifests needed.
     actions:
       - cmd: zarf package create ./packages/additional-manifests --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+
+  - name: init-package
+    description: Create init package with Nutanix CSI driver.
+    actions:
+      - cmd: zarf package create ./packages/init --set AGENT_IMAGE_TAG=$(zarf version) --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
