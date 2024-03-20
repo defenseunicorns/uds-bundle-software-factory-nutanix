@@ -15,6 +15,7 @@ tasks:
       - task: create:idam-packages
       - task: create:object-store-packages
       - task: create:additional-manifests-package
+      - task: create:init-package
       - task: create:bundle
 
   ################
