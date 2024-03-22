@@ -244,7 +244,7 @@ packages:
   # Gitlab Runner
   - name: gitlab-runner
     repository: ghcr.io/defenseunicorns/packages/uds/gitlab-runner
-    ref: 16.8.0-uds.0-registry1
+    ref: 16.9.1-uds.2-registry1
 
   # Sonarqube
   - name: sonarqube-database-secret
@@ -346,10 +346,3 @@ packages:
   - name: nexus
     repository: ghcr.io/defenseunicorns/packages/uds/nexus
     ref: 3.64.0-uds.1-registry1
-
-  # Add all virtualservices as internal dns entries for auth callbacks
-  - name: software-factory-idam-dns
-    path: ../../build
-    ref: 1.0.0
-    optionalComponents:
-      - create-internal-dns-entries

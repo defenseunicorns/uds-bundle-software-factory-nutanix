@@ -12,7 +12,6 @@ tasks:
       - task: create:database-manifest-packages
       - task: create:gitlab-redis-secret-package
       - task: create:namespaces-package
-      - task: create:idam-packages
       - task: create:object-store-packages
       - task: create:additional-manifests-package
       - task: create:bundle
