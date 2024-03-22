@@ -346,10 +346,3 @@ packages:
   - name: nexus
     repository: ghcr.io/defenseunicorns/packages/uds/nexus
     ref: 3.64.0-uds.1-registry1
-
-  # Add all virtualservices as internal dns entries for auth callbacks
-  - name: software-factory-idam-dns
-    path: ../../build
-    ref: 1.0.0
-    optionalComponents:
-      - create-internal-dns-entries
