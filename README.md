@@ -16,8 +16,8 @@ Once the below [Prerequisites](#prerequisites) are met, these are the steps to d
 
 ### Prerequisites
 **Tools**:
-* [uds version v0.9.4](https://github.com/defenseunicorns/uds-cli/tree/v0.9.4)
-- `sudo curl -sL https://github.com/defenseunicorns/uds-cli/releases/download/v0.9.4/uds-cli_v0.9.4_Linux_amd64`
+* [uds version v0.10.1](https://github.com/defenseunicorns/uds-cli/tree/v0.10.1)
+- `sudo curl -sL https://github.com/defenseunicorns/uds-cli/releases/download/v0.10.1/uds-cli_v0.10.1_Linux_amd64`
 * (OPTIONAL) [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
 * (OPTIONAL) [helm](https://github.com/helm/helm)
 
@@ -48,7 +48,19 @@ Once the below [Prerequisites](#prerequisites) are met, these are the steps to d
 
   > NOTE: If using the example domain (`*.bigbang.dev`), a valid corresponding certificate and key can be found [in the Platform1 Big Bang repo](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/chart/ingress-certs.yaml?ref_type=heads).
 * Object Storage with provisioned buckets (expand for details).
-These are the default bucket names. Gitlab allows you to add a suffix in your `uds-config.yaml`, so reflect that if you configure a suffix. Also, Velero and Mattermost allow you to configure your bucket name in your `uds-config.yaml`. Reflect that if you configure those differently then the below defaults.
+These are the default bucket names. Gitlab allows you to add a suffix in your `uds-config.yaml`, so reflect that if you configure a suffix. Also, Loki, Velero and Mattermost allow you to configure your bucket name in your `uds-config.yaml`. Reflect that if you configure those differently then the below defaults.
+  <details>
+    <summary> Loki </summary>
+
+    * loki-chunks-bucket
+    * loki-ruler-bucket
+    * loki-admin-bucket
+  </details>
+  <details>
+    <summary> Velero </summary>
+
+    * velero-backups
+  </details>
   <details>
     <summary> Velero </summary>
 
