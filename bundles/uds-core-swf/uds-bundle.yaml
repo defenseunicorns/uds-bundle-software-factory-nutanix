@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/uds-cli/v0.9.3/uds.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/uds-cli/v0.9.4/uds.schema.json
 kind: UDSBundle
 metadata:
   name: software-factory-nutanix
@@ -14,7 +14,7 @@ packages:
     path: ../../build
     optionalComponents:
       - git-server
-    ref: v0.32.5
+    ref: 0.32.4
     overrides:
       nutanix-csi-storage:
         nutanix-csi-storage:
@@ -40,8 +40,79 @@ packages:
 
   - name: core
     repository: ghcr.io/defenseunicorns/packages/uds/core
-    ref: 0.15.0-upstream
+    ref: 0.16.1-upstream
     overrides:
+      velero:
+        velero:
+          values:
+            - path: snapshotsEnabled
+              value: true
+            - path: configuration.volumeSnapshotLocation
+              value:
+                - name: default
+                  provider: aws
+                  config:
+                    region: "us-east-1"
+                  credential:
+                    name: "velero-bucket-credentials"
+                    key: "cloud"
+            - path: schedules
+              value:
+                uds-jira-backup:
+                  disabled: false
+                  schedule: "0 3 * * *"
+                  useOwnerReferencesInBackup: false
+                  template:
+                    csiSnapshotTimeout: 0s
+                    includeClusterResources: true
+                    snapshotVolumes: true
+                    includedNamespaces:
+                      - jira
+                    ttl: "240h"
+                uds-confluence-backup:
+                  disabled: false
+                  schedule: "0 3 * * *"
+                  useOwnerReferencesInBackup: false
+                  template:
+                    csiSnapshotTimeout: 0s
+                    includeClusterResources: true
+                    snapshotVolumes: true
+                    includedNamespaces:
+                      - confluence
+                    ttl: "240h"
+                uds-mattermost-backup:
+                  disabled: false
+                  schedule: "0 3 * * *"
+                  useOwnerReferencesInBackup: false
+                  template:
+                    csiSnapshotTimeout: 0s
+                    includeClusterResources: true
+                    snapshotVolumes: true
+                    includedNamespaces:
+                      - mattermost
+                    ttl: "240h"
+                uds-nexus-backup:
+                  disabled: false
+                  schedule: "0 3 * * *"
+                  useOwnerReferencesInBackup: false
+                  template:
+                    csiSnapshotTimeout: 0s
+                    includeClusterResources: true
+                    snapshotVolumes: true
+                    includedNamespaces:
+                      - nexus
+                    ttl: "240h"
+                uds-gitlab-backup:
+                  disabled: false
+                  schedule: "0 3 * * *"
+                  useOwnerReferencesInBackup: false
+                  template:
+                    csiSnapshotTimeout: 0s
+                    includeClusterResources: true
+                    snapshotVolumes: true
+                    includedNamespaces:
+                      - gitlab
+                    ttl: "240h"
       keycloak:
         keycloak:
           variables:
@@ -130,7 +201,7 @@ packages:
 
   - name: gitlab
     repository: ghcr.io/defenseunicorns/packages/uds/gitlab
-    ref: 16.9.1-uds.1-registry1
+    ref: 16.9.2-uds.0-registry1
     overrides:
       gitlab:
         gitlab:
@@ -198,15 +269,14 @@ packages:
       jira:
         jira:
           variables:
-            - name: LOCAL_HOME_ENABLED
+            - name: JIRA_LOCAL_HOME_ENABLED
               path: "volumes.localHome.persistentVolumeClaim.create"
               description: "Local Home Toggle"
               default: "true"
-            - name: RWO_STORAGE_CLASS
+            - name: JIRA_RWO_STORAGE_CLASS
               path: "volumes.localHome.persistentVolumeClaim.storageClassName"
               description: "RWO storage class name"
-              default: "ceph-block"
-            - name: LOCAL_HOME_SIZE
+            - name: JIRA_LOCAL_HOME_SIZE
               path: "volumes.localHome.persistentVolumeClaim.resources.requests.storage"
               description: "Storage size"
               default: "128Gi"
@@ -223,15 +293,14 @@ packages:
       confluence:
         confluence:
           variables:
-            - name: LOCAL_HOME_ENABLED
+            - name: CONFLUENCE_LOCAL_HOME_ENABLED
               path: "volumes.localHome.persistentVolumeClaim.create"
               description: "Local Home Toggle"
               default: "true"
-            - name: RWO_STORAGE_CLASS
+            - name: CONFLUENCE_RWO_STORAGE_CLASS
               path: "volumes.localHome.persistentVolumeClaim.storageClassName"
               description: "RWO storage class name"
-              default: "ceph-block"
-            - name: LOCAL_HOME_SIZE
+            - name: CONFLUENCE_LOCAL_HOME_SIZE
               path: "volumes.localHome.persistentVolumeClaim.resources.requests.storage"
               description: "Storage size"
               default: "128Gi"

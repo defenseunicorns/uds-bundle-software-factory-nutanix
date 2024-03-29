@@ -8,9 +8,15 @@ spec:
     - policies:
       - DisallowHostNamespaces
       - DisallowPrivileged
-      - RequireNonRootUser
+      - DisallowSELinuxOptions
       - DropAllCapabilities
+      - RequireNonRootUser
+      - RestrictCapabilities
       - RestrictHostPathWrite
+      - RestrictHostPorts
+      - RestrictProcMount
+      - RestrictSeccomp
+      - RestrictSELinuxType
       - RestrictVolumeTypes
       matcher:
         namespace: rook-ceph

@@ -9,19 +9,19 @@ components:
   # (Optional) Deploys a k3s cluster
   - name: k3s
     import:
-      url: oci://ghcr.io/defenseunicorns/packages/init:v0.32.5
+      url: oci://ghcr.io/defenseunicorns/packages/init:v0.32.4
 
   # This package moves the injector & registries binaries
   - name: zarf-injector
     required: true
     import:
-      url: oci://ghcr.io/defenseunicorns/packages/init:v0.32.5
+      url: oci://ghcr.io/defenseunicorns/packages/init:v0.32.4
 
   # Creates the temporary seed-registry
   - name: zarf-seed-registry
     required: true
     import:
-      url: oci://ghcr.io/defenseunicorns/packages/init:v0.32.5
+      url: oci://ghcr.io/defenseunicorns/packages/init:v0.32.4
     charts:
       - name: docker-registry
         valuesFiles:
@@ -61,16 +61,16 @@ components:
       - registry.k8s.io/sig-storage/livenessprobe:v2.11.0
 
   # Deploy rook/ceph operator
-  - name: nutanix-csi-snapshot
-    required: true
-    charts:
-      # renovate: datasource=helm
-      - name: nutanix-csi-snapshot
-        url: https://nutanix.github.io/helm
-        version: v6.3.2
-        namespace: ntnx-system
-        valuesFiles:
-          - values/nutanix-snapshot-values.yaml
+  # - name: nutanix-csi-snapshot
+  #   required: true
+  #   charts:
+  #     # renovate: datasource=helm
+  #     - name: nutanix-csi-snapshot
+  #       url: https://nutanix.github.io/helm
+  #       version: v6.3.2
+  #       namespace: ntnx-system
+  #       valuesFiles:
+  #         - values/nutanix-snapshot-values.yaml
 
   - name: nutanix-csi-storage
     required: true
@@ -82,12 +82,18 @@ components:
         namespace: ntnx-system
         valuesFiles:
           - values/nutanix-storage-values.yaml
+    actions:
+      onDeploy:
+        before:
+          - cmd: |
+              ./zarf tools kubectl patch serviceaccount default -n ntnx-system -p '{"imagePullSecrets": [{"name": "private-registry"}]}'
+            description: "Add pull secrets for nutanix CSI"
 
   # Creates the permanent registry
   - name: zarf-registry
     required: true
     import:
-      url: oci://ghcr.io/defenseunicorns/packages/init:v0.32.5
+      url: oci://ghcr.io/defenseunicorns/packages/init:v0.32.4
 
   # Push rook/ceph (and registry) images to permanent registry
   - name: nutanix-csi-images
@@ -108,9 +114,9 @@ components:
   - name: zarf-agent
     required: true
     import:
-      url: oci://ghcr.io/defenseunicorns/packages/init:v0.32.5
+      url: oci://ghcr.io/defenseunicorns/packages/init:v0.32.4
 
   # (Optional) Adds a git server to the cluster
   - name: git-server
     import:
-      url: oci://ghcr.io/defenseunicorns/packages/init:v0.32.5
+      url: oci://ghcr.io/defenseunicorns/packages/init:v0.32.4

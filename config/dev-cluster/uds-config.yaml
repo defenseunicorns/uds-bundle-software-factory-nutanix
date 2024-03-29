@@ -22,6 +22,11 @@ variables:
     KEYCLOAK_DB_PASSWORD: "replace-me-db-passwords"
     KEYCLOAK_DB_NAME: "keycloakdb"
     KEYCLOAK_DB_ENDPOINT: "keycloak-pg.mtsi-dev.bigbang.dev"
+    VELERO_BUCKET_PROVIDER_URL: "http://swf.objects.mtsi.bigbang.dev"
+    VELERO_BUCKET: "velero-bucket-dev"
+    VELERO_BUCKET_REGION: "us-east-1"
+    VELERO_BUCKET_KEY: "replace-me-object-store-access-key"
+    VELERO_BUCKET_KEY_SECRET: "replace-me-object-store-secret-key"
   gitlab-database-secret:
     GITLAB_DB_PASSWORD: "replace-me-db-passwords"
   gitlab-object-store:
