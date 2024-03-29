@@ -100,7 +100,6 @@ variables:
     JIRA_DB_USERNAME: "postgres"
     JIRA_LOCAL_HOME_ENABLED: "true"
     JIRA_LOCAL_HOME_SIZE: "128Gi"
-    JIRA_RWO_STORAGE_CLASS: "ceph-block"
     JIRA_DB_ENDPOINT: "jira-pg.mtsi.bigbang.dev"
   confluence-database-secret:
     CONFLUENCE_DB_PASSWORD: "replace-me-db-passwords"
@@ -109,7 +108,6 @@ variables:
     CONFLUENCE_DB_USERNAME: "postgres"
     CONFLUENCE_LOCAL_HOME_ENABLED: "true"
     CONFLUENCE_LOCAL_HOME_SIZE: "128Gi"
-    CONFLUENCE_RWO_STORAGE_CLASS: "ceph-block"
     CONFLUENCE_DB_ENDPOINT: "confluence-pg.mtsi.bigbang.dev"
   mattermost:
     ACCESS_KEY: "replace-me-object-store-access-key"
