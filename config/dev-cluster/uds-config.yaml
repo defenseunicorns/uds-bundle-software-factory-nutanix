@@ -6,9 +6,10 @@ variables:
   init:
     # TODO - remove this if/when functionality is restored upstream
     REGISTRY_HPA_ENABLE: false
-    CEPH_OSD_MEM_REQUESTS: "4Gi"
-    CEPH_OSD_MEM_LIMITS: "4Gi"
-    ENABLE_CEPH_TOOLBOX: "true"
+    PRISM_ENDPOINT: "PRISM element IP address"
+    PRISM_USERNAME: "csi-user-prism-element-user"
+    PRISM_PASSWORD: "csi-user-passoword"
+    STORAGE_CONTAINER: "nutanix-storage-container"
   metallb:
     # Replace with a valid IP address range
     IP_ADDRESS_POOL: "10.0.120.50-10.0.120.59"
