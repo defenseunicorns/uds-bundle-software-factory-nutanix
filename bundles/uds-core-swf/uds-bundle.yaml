@@ -38,7 +38,7 @@ packages:
 
   - name: core
     repository: ghcr.io/defenseunicorns/packages/uds/core
-    ref: 0.16.1-upstream
+    ref: 0.17.0-registry1
     overrides:
       velero:
         velero:
@@ -199,7 +199,7 @@ packages:
 
   - name: gitlab
     repository: ghcr.io/defenseunicorns/packages/uds/gitlab
-    ref: 16.9.2-uds.0-registry1
+    ref: 16.9.2-uds.4-registry1
     overrides:
       gitlab:
         gitlab:
@@ -244,7 +244,7 @@ packages:
   # Gitlab Runner
   - name: gitlab-runner
     repository: ghcr.io/defenseunicorns/packages/uds/gitlab-runner
-    ref: 16.9.1-uds.2-registry1
+    ref: 16.10.0-uds.0-registry1
 
   # Sonarqube
   - name: sonarqube-database-secret
@@ -253,7 +253,7 @@ packages:
 
   - name: sonarqube
     repository: ghcr.io/defenseunicorns/packages/uds/sonarqube
-    ref: 8.0.3-uds.4-registry1
+    ref: 8.0.3-uds.6-registry1
 
   # Jira
   - name: jira-database-secret
@@ -262,7 +262,7 @@ packages:
 
   - name: jira
     repository: ghcr.io/defenseunicorns/packages/uds/jira
-    ref: 1.17.0-uds.1-registry1
+    ref: 1.17.0-uds.2-registry1
     overrides:
       jira:
         jira:
@@ -287,7 +287,7 @@ packages:
 
   - name: confluence
     repository: ghcr.io/defenseunicorns/packages/uds/confluence
-    ref: 1.17.0-uds.2-registry1
+    ref: 1.18.0-uds.0-registry1
     overrides:
       confluence:
         confluence:
@@ -308,7 +308,7 @@ packages:
   # Mattermost
   - name: mattermost
     repository: ghcr.io/defenseunicorns/packages/uds/mattermost
-    ref: 9.4.1-uds.2-registry1
+    ref: 9.4.1-uds.3-registry1
     overrides:
       mattermost:
         uds-mattermost-config:
