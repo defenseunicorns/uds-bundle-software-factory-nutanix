@@ -12,6 +12,8 @@ variables:
   metallb:
     # Replace with a valid IP address range
     IP_ADDRESS_POOL: "10.0.120.50-10.0.120.59"
+  keycloak-configuration:
+    CONFIG_PKG_FULLPATH: "zarf-package-keycloak-identity-config-amd64-0.0.1.tar.zst"
   core:
     # CERT values must be base64 encoded
     ADMIN_TLS_CERT: replace-me-cert

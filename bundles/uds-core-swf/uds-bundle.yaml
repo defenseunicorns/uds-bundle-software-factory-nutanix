@@ -36,6 +36,10 @@ packages:
     repository: ghcr.io/defenseunicorns/packages/metallb
     ref: 0.0.5-amd64
 
+  - name: keycloak-configuration
+    path: ../../build
+    ref: 0.0.1            
+  
   - name: core
     repository: ghcr.io/defenseunicorns/packages/uds/core
     ref: 0.16.1-upstream

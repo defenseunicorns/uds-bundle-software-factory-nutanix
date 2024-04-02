@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: keycloak-config-wrapper
+  version: "0.0.1"
+
+variables:
+  - name: CONFIG_PKG_FULLPATH
+    # default: "intentionally empty"
+    description: "Path to the custom keycloak configuration zarf package (MUST BE PROVIDED -- no default)"
+    pattern: "(.|\s)*\S(.|\s)*" # MUST NOT BE EMPTY
+
+components:
+  - name: keycloak-config-wrapper
+    required: true
+    actions:
+      onDeploy:
+        after:
+          - description: "Load local zarf pkg if it was provided"
+            cmd: |
+              ./zarf package deploy ${ZARF_VAR_CONFIG_PKG_FULLPATH}
