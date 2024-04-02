@@ -36,7 +36,7 @@ packages:
     repository: ghcr.io/defenseunicorns/packages/metallb
     ref: 0.0.5-amd64
 
-  - name: keycloak-configuration
+  - name: keycloak-config-wrapper
     path: ../../build
     ref: 0.0.1            
   
