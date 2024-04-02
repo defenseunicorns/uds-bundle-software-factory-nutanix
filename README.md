@@ -16,8 +16,8 @@ Once the below [Prerequisites](#prerequisites) are met, these are the steps to d
 
 ### Prerequisites
 **Tools**:
-* [uds version v0.9.4](https://github.com/defenseunicorns/uds-cli/tree/v0.9.4)
-- `sudo curl -sL https://github.com/defenseunicorns/uds-cli/releases/download/v0.9.4/uds-cli_v0.9.4_Linux_amd64`
+* [uds version v0.10.3](https://github.com/defenseunicorns/uds-cli/tree/v0.10.3)
+- `sudo curl -sL https://github.com/defenseunicorns/uds-cli/releases/download/v0.10.3/uds-cli_v0.10.3_Linux_amd64`
 * (OPTIONAL) [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
 * (OPTIONAL) [helm](https://github.com/helm/helm)
 
@@ -118,18 +118,18 @@ For demonstration purposes, you can setup a local configfile as follows:
 ### Deployment
 Select a target version number and gather the OCI image reference [from the packages page](https://github.com/orgs/defenseunicorns/packages?repo_name=uds-bundle-software-factory-nutanix). With the above prerequisites and configuration complete, you can deploy the bundle directly via OCI:
 ```
-uds deploy oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix:0.1.x --architecure amd64 --confirm
+uds deploy oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix:0.x.x --architecure amd64 --confirm
 ```
 
 ### (OPTIONAL) Local Deployment Reference
 Situationally, it may be useful to download the deployment artifact so that it may be referenced offline. This can be accomplished by first downloading the target release:
 ```
-uds pull oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix:0.1.x --architecture amd64
+uds pull oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix:0.x.x --architecture amd64
 ```
 
 And subsequently deploying from the local file:
 ```
-uds deploy uds-bundle-software-factory-nutanix-amd64-0.1.4.tar.zst --confirm
+uds deploy uds-bundle-software-factory-nutanix-amd64-0.x.x.tar.zst --confirm
 ```
 
 ## Additional Notes

@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  private-ca.crt: ###ZARF_VAR_PRIVATE_CA###
+kind: Secret
+metadata:
+  creationTimestamp: null
+  name: private-ca

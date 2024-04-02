@@ -22,6 +22,7 @@ components:
           - gitlab/gitlab-ssh-networkpolicies.yaml
           - gitlab/gitlab-ssh-gateway.yaml
           - gitlab/envoy-filter.yaml
+          - gitlab/private-ca.yaml
   - name: pepr-policy-exemptions
     required: true
     manifests:

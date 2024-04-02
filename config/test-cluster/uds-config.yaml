@@ -133,7 +133,7 @@ variables:
     NEXUS_DB_NAME: "nexusdb"
     NEXUS_DB_USERNAME: "postgres"
     NEXUS_DB_ENDPOINT: "nexus-pg.mtsi.bigbang.dev"
-    NEXUS_DB_PASSWORD: "replace-me-db-passwords"
+    POSTGRES_DB_PASSWORD: "replace-me-db-passwords"
     NEXUS_SSO_ENABLED: "false"
     NEXUS_SSO_IDP_ENTITY_ID: ""
     NEXUS_SSO_IDP_USERNAME_ATTRIBUTE: ""
