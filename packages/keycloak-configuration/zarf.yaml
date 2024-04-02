@@ -18,4 +18,4 @@ components:
         after:
           - description: "Load local zarf pkg if it was provided"
             cmd: |
-              ./zarf package deploy ${ZARF_VAR_CONFIG_PKG_FULLPATH}
+              ./zarf package deploy ${ZARF_VAR_CONFIG_PKG_FULLPATH} --confirm

@@ -11,6 +11,7 @@ tasks:
       - task: create:build-dir
       - task: create:database-manifest-packages
       - task: create:gitlab-redis-secret-package
+      - task: create:keycloak-configuration-package
       - task: create:namespaces-package
       - task: create:object-store-packages
       - task: create:additional-manifests-package
