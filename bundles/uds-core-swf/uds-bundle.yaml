@@ -14,7 +14,7 @@ packages:
     repository: ghcr.io/defenseunicorns/uds-capability/rook-ceph/init
     optionalComponents:
       - git-server
-    ref: v0.32.6-0.2.5
+    ref: v0.32.4-0.2.3
     overrides:
       rook-ceph-cluster:
         rook-ceph-cluster:
@@ -302,7 +302,7 @@ packages:
 
   - name: jira
     repository: ghcr.io/defenseunicorns/packages/uds/jira
-    ref: 1.17.0-uds.2-registry1
+    ref: 1.17.2-uds.0-registry1
     overrides:
       jira:
         jira:
@@ -346,7 +346,7 @@ packages:
   # Mattermost
   - name: mattermost
     repository: ghcr.io/defenseunicorns/packages/uds/mattermost
-    ref: 9.4.1-uds.3-registry1
+    ref: 9.6.1-uds.0-registry1
     overrides:
       mattermost:
         uds-mattermost-config:
