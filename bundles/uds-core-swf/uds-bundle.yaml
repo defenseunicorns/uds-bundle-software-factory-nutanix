@@ -358,15 +358,13 @@ packages:
             - name: OBJECT_STORE_ENDPOINT
               path: "objectStorage.endpoint"
               description: "Object storage endpoint"
-              default: "swf.objects.mtsi.bigbang.dev"
             - name: OBJECT_STORE_BUCKET
               path: "objectStorage.bucket"
               description: "Object storage bucket"
-              default: "mattermost-bucket-dev"
+              default: "mattermost-bucket"
             - name: DB_ENDPOINT
               path: "postgres.host"
               description: "Postgres DB endpoint"
-              default: "mattermost-pg.mtsi-dev.bigbang.dev"
             - name: DB_USERNAME
               path: "postgres.username"
               description: "Postgres DB username"
