@@ -19,7 +19,7 @@ components:
           - description: "Load local zarf pkg if it was provided"
             cmd: |
               if [[ "${ZARF_VAR_CONFIG_PKG_FULLPATH}" == "default" ]]; then
-                echo "Identity config filepath is unset ('default') -- SKIPPING CUSTOM PACKAGE LOAD
+                echo "Identity config filepath is unset ('default') -- SKIPPING CUSTOM PACKAGE LOAD"
                 exit 0
               fi
               ./zarf package deploy ${ZARF_VAR_CONFIG_PKG_FULLPATH} --confirm
