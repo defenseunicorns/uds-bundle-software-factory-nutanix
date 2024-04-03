@@ -120,11 +120,13 @@ And subsequently deploying from the local file:
 uds deploy uds-bundle-software-factory-nutanix-amd64-0.1.4.tar.zst --confirm
 ```
 ## Custom Keycloak Plugin
-Custom Keycloak plugins or themes can optionally added via the following process:
+The Keycloak installation provided as part of UDS Core loads themes and plugins from an init-container. You can optionally provide custom items by building your own version of the image used for the init process, and loading that into the cluster with zarf.
+
+The general process is as follows:
 1. Compile your desired plugin/theme into a jar
 1. Clone the [uds-identity-config](https://github.com/defenseunicorns/uds-identity-config) git repo
 1. Add your custom jar in `src/extra-jars`
-1. Build the Zarf package to transport your custom addition (be sure to set a unique image name and tag): 
+1. Build the docker image and Zarf package to transport your custom addition (be sure to set a unique image name and tag): 
     ```
     uds run build-zarf-pkg \
       --set IMAGE_NAME=<image name> \
