@@ -1,6 +1,5 @@
 includes:
   - create: ./tasks/create.yaml
-  - deploy: ./tasks/deploy.yaml
 
 tasks:
   ################
@@ -15,17 +14,6 @@ tasks:
       - task: create:object-store-packages
       - task: create:additional-manifests-package
       - task: create:bundle
-
-  ################
-  #  Deploy
-  ################
-  - name: deploy-bundle-to-dev
-    actions:
-      - task: deploy:bundle-to-dev
-
-  - name: deploy-bundle-to-test
-    actions:
-      - task: deploy:bundle-to-test
 
   #### Clean ####
   - name: clean
