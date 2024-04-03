@@ -6,8 +6,8 @@ metadata:
 
 variables:
   - name: CONFIG_PKG_FULLPATH
-    # default: "intentionally empty"
-    description: "Path to the custom keycloak configuration zarf package (MUST BE PROVIDED -- no default)"
+    default: "default"
+    description: "Path to the custom keycloak configuration zarf package (MUST BE PROVIDED)"
     pattern: "(.|\s)*\S(.|\s)*" # MUST NOT BE EMPTY
 
 components:
@@ -18,4 +18,8 @@ components:
         after:
           - description: "Load local zarf pkg if it was provided"
             cmd: |
+              if [[ "${ZARF_VAR_CONFIG_PKG_FULLPATH}" == "default" ]]; then
+                echo "Identity config filepath is unset ('default') -- SKIPPING CUSTOM PACKAGE LOAD
+                exit 0
+              fi
               ./zarf package deploy ${ZARF_VAR_CONFIG_PKG_FULLPATH} --confirm
