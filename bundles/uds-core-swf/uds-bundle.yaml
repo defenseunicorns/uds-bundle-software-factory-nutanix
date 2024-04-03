@@ -118,6 +118,9 @@ packages:
       keycloak:
         keycloak:
           variables:
+            - name: KEYCLOAK_CONFIG_IMAGE
+              description: "Image registry and tag to use for the config image"
+              path: configImage
             - name: KEYCLOAK_DB_USERNAME
               description: "keycloak database username"
               path: postgresql.username
