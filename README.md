@@ -119,6 +119,36 @@ And subsequently deploying from the local file:
 ```
 uds deploy uds-bundle-software-factory-nutanix-amd64-0.1.4.tar.zst --confirm
 ```
+## Custom Keycloak Plugin
+Custom Keycloak plugins or themes can optionally added via the following process:
+1. Compile your desired plugin/theme into a jar
+1. Clone the [uds-identity-config](https://github.com/defenseunicorns/uds-identity-config) git repo
+1. Add your custom jar in `src/extra-jars`
+1. Build the Zarf package to transport your custom addition (be sure to set a unique image name and tag): 
+    ```
+    uds run build-zarf-pkg \
+      --set IMAGE_NAME=<image name> \
+      --set VERSION=<version>
+    ```
+    > NOTE: The resulting zarf package will contain the plugin and theme defined in the repo AND your custom addition from `src/extra-jars`
+1. Copy the resulting Zarf tar.zst to a location accessible by your UDS deploy of the software factory bundle
+1. Provide the filepath to your custom configuration Zarf package at deploy time by setting the keycloak-configruation `CONFIG_PKG_FULLPATH` variable in your config (see example below)
+1. Configure keycloak to load the image name and tag provided in step(4) by setting the `KEYCLOAK_CONFIG_IMAGE` variable in your config (see example below)
+
+
+### Example Config Additions
+```
+variables:
+  keycloak-configuration:
+    CONFIG_PKG_FULLPATH: "/home/user/zarf-package-keycloak-identity-config-amd64-0.0.1.tar.zst"
+  
+  core:
+    KEYCLOAK_CONFIG_IMAGE: "<image_name>:<version>"
+```
+
+### Required Tooling
+* uds-cli
+* docker
 
 ## Additional Notes
 You can reference the uds tasks in this project to learn how to build and deploy.
