@@ -13,13 +13,14 @@ variables:
     # Replace with a valid IP address range
     IP_ADDRESS_POOL: "10.0.120.50-10.0.120.59"
   keycloak-configuration:
-    CONFIG_PKG_FULLPATH: "zarf-package-keycloak-identity-config-amd64-0.0.1.tar.zst"
+    CONFIG_PKG_FULLPATH: "OPTIONAL -- replace with path to keycloak config zarf pkg"
   core:
     # CERT values must be base64 encoded
     ADMIN_TLS_CERT: replace-me-cert
     ADMIN_TLS_KEY: replace-me-key
     TENANT_TLS_CERT: replace-me-cert
     TENANT_TLS_KEY: replace-me-key
+    KEYCLOAK_CONFIG_IMAGE: "OPTIONAL -- container image for keycloak config"
     KEYCLOAK_DB_USERNAME: "postgres"
     KEYCLOAK_DB_PASSWORD: "replace-me-db-passwords"
     KEYCLOAK_DB_NAME: "keycloakdb"
