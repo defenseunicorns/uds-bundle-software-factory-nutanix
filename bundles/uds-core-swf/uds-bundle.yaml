@@ -38,11 +38,16 @@ packages:
 
   - name: keycloak-config-wrapper
     path: ../../build
-    ref: 0.0.1            
+    ref: 0.0.1        
+    exports:
+      - name: KEYCLOAK_CONFIG_IMAGE    
   
   - name: core
     repository: ghcr.io/defenseunicorns/packages/uds/core
     ref: 0.18.0-registry1
+    imports:
+      - name: KEYCLOAK_CONFIG_IMAGE
+        package: keycloak-config-wrapper
     overrides:
       velero:
         velero:

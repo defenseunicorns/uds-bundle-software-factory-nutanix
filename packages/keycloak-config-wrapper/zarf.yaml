@@ -5,21 +5,80 @@ metadata:
   version: "0.0.1"
 
 variables:
-  - name: CONFIG_PKG_FULLPATH
+  - name: CUSTOM_JAR_PATH
     default: "default"
-    description: "Path to the custom keycloak configuration zarf package (MUST BE PROVIDED)"
+    description: "Path to a complied custom keycloak plugin or theme"
     pattern: "(.|\s)*\S(.|\s)*" # MUST NOT BE EMPTY
+  - name: IDENTITY_CONFIG_IMG_BASE
+    # renovate: datasource=github-tags depName=defenseunicorns/uds-identity-config versioning=semver
+    default: "ghcr.io/defenseunicorns/uds/identity-config:0.3.6"
+    description: Image to use as the base for uds-identity-config additions
 
 components:
   - name: keycloak-config-wrapper
     required: true
+    description: >
+      *** REQUIRES DOCKER ***
+      Loads the required images for keycloak kustomization into Docker to be used in an offline build
+    only:
+      cluster:
+        architecture: amd64
+    files:
+      # Transfer the images for docker to use in the air gap
+      - source: uds-identity-config.tar
+        target: uds-identity-config.tar
+      - source: Dockerfile
+        target: Dockerfile
+      - source: zarfception.yaml
+        target: zarf.yaml
     actions:
+      onCreate:
+        before:
+          # download the pre-built base image w/ zarf pull
+          - cmd: ./zarf tools registry pull --platform linux/amd64 ${IDENTITY_CONFIG_IMG_BASE} uds-idenitity-config.tar
+            description: Pull the uds-identity-config image
+
       onDeploy:
-        after:
-          - description: "Load local zarf pkg if it was provided"
-            cmd: |
-              if [ "${ZARF_VAR_CONFIG_PKG_FULLPATH}" = "default" ]; then
-                echo "Identity config filepath is unset ('default') -- SKIPPING CUSTOM PACKAGE LOAD"
+        before:
+          # Check deploy system arch
+          - cmd: if [ "$(uname -m)" != "x86_64" ]; then echo "this package architecture is amd64, but the target system has a different architecture. These architectures must be the same" && exit 1; fi
+            description: Check that the host architecture matches the package architecture
+            maxRetries: 0
+
+          # Set the output var
+          - cmd: |
+              COUNT=`ls -1 *.jar 2>/dev/null | wc -l`
+              if [ $COUNT = 0 ]; then 
+                # no jars found -- use the base image
+                echo "${IDENTITY_CONFIG_IMG_BASE}"
+              else
+                # jars were found... attempt to make a new name
+                echo "custom-uds-identity-config:$(date +\"%Y%m%d%H%M%S\")"
+              fi 
+            description: check for any local jar files -- if none exist, SKIP THE REST
+            setVariables:
+              - name: KEYCLOAK_CONFIG_IMAGE
+
+          # check for jar files (EXIT EARLY)
+          - cmd: |
+              COUNT=`ls -1 *.jar 2>/dev/null | wc -l`
+              if [ $COUNT = 0 ]; then 
+                echo "No local JAR files detected -- SKIPPING CUSTOM PLUGIN LOAD"
                 exit 0
-              fi
-              ./zarf package deploy ${ZARF_VAR_CONFIG_PKG_FULLPATH} --confirm
+              fi 
+            description: check for any local jar files -- if none exist, SKIP THE REST
+
+          # load the base docker image 
+          - cmd: docker image load -i uds-identity-config.tar
+            description: Load the uds-identity-config image into Docker
+
+          # build the new output image
+          - cmd: docker build -t ${ZARF_VAR_KEYCLOAK_CONFIG_IMAGE} .
+            description: Build the Dockerfile to add local jar to^
+
+          # build the zarf wrapper wrapper (yo dawg... 'zarfception.yaml') -- collect the local image
+          - cmd: ./zarf package create .
+        
+        after:
+          # deploy the zarf wrapper for the local image
+          - cmd: ./zarf deploy zarf-package*.tar.zst --confirm --set IMG=${ZARF_VAR_KEYCLOAK_CONFIG_IMAGE}
