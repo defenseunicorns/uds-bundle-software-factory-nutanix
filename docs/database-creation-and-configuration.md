@@ -5,7 +5,7 @@ You will need databases created and configured for use by these capabilities in 
 ```yaml
 variables:
   keycloak-database-manifests:
-    KEYCLOAK_DB_EXTERNAL_NAME: "keycloak-pg.mtsi-dev.bigbang.dev" # Replace with domain entry for your database
+    KEYCLOAK_DB_EXTERNAL_NAME: "keycloak-pg.some.url" # Replace with domain entry for your database
   uds-idam:
     KEYCLOAK_DB_USERNAME: "postgres" # Our example uses this user
     KEYCLOAK_DB_PASSWORD: "replace-me-db-passwords" # Replace
@@ -17,7 +17,7 @@ variables:
 ```yaml
 variables:
   gitlab-database-manifests:
-    GITLAB_DB_EXTERNAL_NAME: "gitlab-pg.mtsi-dev.bigbang.dev" # Replace with domain entry for your database
+    GITLAB_DB_EXTERNAL_NAME: "gitlab-pg.some.url" # Replace with domain entry for your database
     GITLAB_DB_PASSWORD: "replace-me-db-passwords" # Replace
   gitlab:
     GITLAB_DB_NAME: "gitlabdb" # Our example uses this database name
@@ -28,7 +28,7 @@ variables:
 ```yaml
 variables:
   sonarqube-database-manifests:
-    SONARQUBE_DB_EXTERNAL_NAME: "sonarqube-pg.mtsi-dev.bigbang.dev" # Replace with domain entry for your database
+    SONARQUBE_DB_EXTERNAL_NAME: "sonarqube-pg.some.url" # Replace with domain entry for your database
     SONARQUBE_DB_PASSWORD: "replace-me-db-passwords" # Replace
   sonarqube:
     SONARQUBE_DB_NAME: "sonarqubedb" # Our example uses this database name
@@ -39,7 +39,7 @@ variables:
 ```yaml
 variables:
   jira-database-manifests:
-    JIRA_DB_EXTERNAL_NAME: "jira-pg.mtsi-dev.bigbang.dev" # Replace with domain entry for your database
+    JIRA_DB_EXTERNAL_NAME: "jira-pg.some.url" # Replace with domain entry for your database
     JIRA_DB_PASSWORD: "replace-me-db-passwords" #Replace
   jira:
     JIRA_DB_NAME: "jiradb" # Our example uses this database name
@@ -50,7 +50,7 @@ variables:
 ```yaml
 variables:
   confluence-database-manifests:
-    CONFLUENCE_DB_EXTERNAL_NAME: "confluence-pg.mtsi-dev.bigbang.dev" # Replace with domain entry for your database
+    CONFLUENCE_DB_EXTERNAL_NAME: "confluence-pg.some.url" # Replace with domain entry for your database
     CONFLUENCE_DB_PASSWORD: "replace-me-db-passwords" # Replace
   confluence:
     CONFLUENCE_DB_NAME: "confluencedb" # Our example uses this database name
@@ -61,7 +61,7 @@ variables:
 ```yaml
 variables:
   mattermost-database-manifests:
-    MATTERMOST_DB_EXTERNAL_NAME: "mattermost-pg.mtsi-dev.bigbang.dev" # Replace with domain entry for your database
+    MATTERMOST_DB_EXTERNAL_NAME: "mattermost-pg.some.url" # Replace with domain entry for your database
     MATTERMOST_DB_PASSWORD: "replace-me-db-passwords" # Replace
     MATTERMOST_DB_USERNAME: "postgres" # Our example uses this user
     MATTERMOST_DB_NAME: "mattermostdb" # Our example uses this database name
@@ -71,7 +71,7 @@ variables:
 ```yaml
 variables:
   nexus-database-manifests:
-    NEXUS_DB_EXTERNAL_NAME: "nexus-pg.mtsi-dev.bigbang.dev" # Replace with domain entry for your database
+    NEXUS_DB_EXTERNAL_NAME: "nexus-pg.some.url" # Replace with domain entry for your database
     NEXUS_DB_PASSWORD: "replace-me-db-passwords" # Replace
   nexus:
     NEXUS_DB_NAME: "nexusdb" # Our example uses this database name

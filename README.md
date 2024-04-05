@@ -16,8 +16,8 @@ Once the below [Prerequisites](#prerequisites) are met, these are the steps to d
 
 ### Prerequisites
 **Tools**:
-* [uds version v0.9.4](https://github.com/defenseunicorns/uds-cli/tree/v0.9.4)
-- `sudo curl -sL https://github.com/defenseunicorns/uds-cli/releases/download/v0.9.4/uds-cli_v0.9.4_Linux_amd64`
+* [uds version v0.10.3](https://github.com/defenseunicorns/uds-cli/tree/v0.10.3)
+- `sudo curl -sL https://github.com/defenseunicorns/uds-cli/releases/download/v0.10.3/uds-cli_v0.10.3_Linux_amd64`
 * (OPTIONAL) [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
 * (OPTIONAL) [helm](https://github.com/helm/helm)
 
@@ -48,7 +48,19 @@ Once the below [Prerequisites](#prerequisites) are met, these are the steps to d
 
   > NOTE: If using the example domain (`*.bigbang.dev`), a valid corresponding certificate and key can be found [in the Platform1 Big Bang repo](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/chart/ingress-certs.yaml?ref_type=heads).
 * Object Storage with provisioned buckets (expand for details).
-These are the default bucket names. Gitlab allows you to add a suffix in your `uds-config.yaml`, so reflect that if you configure a suffix. Also, Velero and Mattermost allow you to configure your bucket name in your `uds-config.yaml`. Reflect that if you configure those differently then the below defaults.
+These are the default bucket names. Gitlab allows you to add a suffix in your `uds-config.yaml`, so reflect that if you configure a suffix. Also, Loki, Velero and Mattermost allow you to configure your bucket name in your `uds-config.yaml`. Reflect that if you configure those differently then the below defaults.
+  <details>
+    <summary> Loki </summary>
+
+    * loki-chunks-bucket
+    * loki-ruler-bucket
+    * loki-admin-bucket
+  </details>
+  <details>
+    <summary> Velero </summary>
+
+    * velero-backups
+  </details>
   <details>
     <summary> Velero </summary>
 
@@ -94,7 +106,7 @@ These are the default bucket names. Gitlab allows you to add a suffix in your `u
 Deployment configuration is managed via a `uds-config.yaml` file in the deployment directory. Some values in the configuration will be sensitive, **we do not recommend checking this into source control in its entierty**. Best practice would involve either storing the configuration in an external secrets manager (like Vault), or managing deployments via CD and generating the config file dynamically at deploy time using CD managed secrets.
 
 For demonstration purposes, you can setup a local configfile as follows:
-* Copy an example configuration from [config/dev-cluster/uds-config.yaml](config/dev-cluster/uds-config.yaml) to your working directory
+* Copy an example configuration from [config/uds-config.yaml](config/uds-config.yaml) to your working directory
 * Update the config according to your environment taking care to set:
   * domain variables
   * certificate values
@@ -106,18 +118,23 @@ For demonstration purposes, you can setup a local configfile as follows:
 ### Deployment
 Select a target version number and gather the OCI image reference [from the packages page](https://github.com/orgs/defenseunicorns/packages?repo_name=uds-bundle-software-factory-nutanix). With the above prerequisites and configuration complete, you can deploy the bundle directly via OCI:
 ```
-uds deploy oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix:0.1.x --architecure amd64 --confirm
+uds deploy oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix:0.x.x --architecure amd64 --confirm
 ```
 
 ### (OPTIONAL) Local Deployment Reference
 Situationally, it may be useful to download the deployment artifact so that it may be referenced offline. This can be accomplished by first downloading the target release:
 ```
-uds pull oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix:0.1.x --architecture amd64
+uds pull oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix:0.x.x --architecture amd64
 ```
 
 And subsequently deploying from the local file:
 ```
-uds deploy uds-bundle-software-factory-nutanix-amd64-0.1.4.tar.zst --confirm
+uds deploy uds-bundle-software-factory-nutanix-amd64-0.x.x.tar.zst --confirm
+```
+
+>NOTE: There is a new default terminal user interface for UDS. When running a deploy from a pipeline you can choose to have the normal terminal output by using the `--no-tea` flag with your uds deploy.
+```
+uds deploy uds-bundle-software-factory-nutanix-amd64-0.x.x.tar.zst --confirm --no-tea
 ```
 
 ## Additional Notes
@@ -129,11 +146,5 @@ uds run --list
 
 # Run the create-bundle task
 uds run create-bundle
-
-# Run the deploy-bundle-to-dev task
-uds run deploy-bundle-to-dev
-
-# Run the deploy-bundle-to-test task
-uds run deploy-bundle-to-test
 ```
 
