@@ -381,4 +381,4 @@ packages:
   # Nexus
   - name: nexus
     repository: ghcr.io/defenseunicorns/packages/uds/nexus
-    ref: 3.64.0-uds.2-registry1
+    ref: 3.66.0-uds.1-registry1

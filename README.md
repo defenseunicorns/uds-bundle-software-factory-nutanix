@@ -132,6 +132,11 @@ And subsequently deploying from the local file:
 uds deploy uds-bundle-software-factory-nutanix-amd64-0.x.x.tar.zst --confirm
 ```
 
+>NOTE: There is a new default terminal user interface for UDS. When running a deploy from a pipeline you can choose to have the normal terminal output by using the `--no-tea` flag with your uds deploy.
+```
+uds deploy uds-bundle-software-factory-nutanix-amd64-0.x.x.tar.zst --confirm --no-tea
+```
+
 ## Additional Notes
 You can reference the uds tasks in this project to learn how to build and deploy.
 
