@@ -35,7 +35,7 @@ components:
       onCreate:
         before:
           # download the pre-built base image w/ zarf pull
-          - cmd: ./zarf tools registry pull --platform linux/amd64 ${IDENTITY_CONFIG_IMG_BASE} uds-idenitity-config.tar
+          - cmd: ./zarf tools registry pull --platform linux/amd64 ${ZARF_VAR_IDENTITY_CONFIG_IMG_BASE} uds-idenitity-config.tar
             description: Pull the uds-identity-config image
 
       onDeploy:
@@ -50,7 +50,7 @@ components:
               COUNT=`ls -1 *.jar 2>/dev/null | wc -l`
               if [ $COUNT = 0 ]; then 
                 # no jars found -- use the base image
-                echo "${IDENTITY_CONFIG_IMG_BASE}"
+                echo "${ZARF_VAR_IDENTITY_CONFIG_IMG_BASE}"
               else
                 # jars were found... attempt to make a new name
                 echo "custom-uds-identity-config:$(date +\"%Y%m%d%H%M%S\")"
