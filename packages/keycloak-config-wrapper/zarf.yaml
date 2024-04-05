@@ -9,10 +9,11 @@ variables:
     default: "default"
     description: "Path to a complied custom keycloak plugin or theme"
     pattern: "(.|\s)*\S(.|\s)*" # MUST NOT BE EMPTY
+
+constants:
   - name: IDENTITY_CONFIG_IMG_BASE
-    # renovate: datasource=github-tags depName=defenseunicorns/uds-identity-config versioning=semver
-    default: "ghcr.io/defenseunicorns/uds/identity-config:0.3.6"
     description: Image to use as the base for uds-identity-config additions
+    value: '###ZARF_PKG_TMPL_IDENTITY_CONFIG_IMG_BASE###'
 
 components:
   - name: keycloak-config-wrapper
@@ -35,7 +36,7 @@ components:
       onCreate:
         before:
           # download the pre-built base image w/ zarf pull
-          - cmd: ./zarf tools registry pull --platform linux/amd64 ${ZARF_VAR_IDENTITY_CONFIG_IMG_BASE} uds-idenitity-config.tar
+          - cmd: ./zarf tools registry pull --platform linux/amd64 '###ZARF_PKG_TMPL_IDENTITY_CONFIG_IMG_BASE###' uds-idenitity-config.tar
             description: Pull the uds-identity-config image
 
       onDeploy:

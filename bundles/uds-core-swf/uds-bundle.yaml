@@ -40,7 +40,7 @@ packages:
     path: ../../build
     ref: 0.0.1        
     exports:
-      - name: KEYCLOAK_CONFIG_IMAGE    
+      - name: KEYCLOAK_CONFIG_IMAGE 
   
   - name: core
     repository: ghcr.io/defenseunicorns/packages/uds/core
