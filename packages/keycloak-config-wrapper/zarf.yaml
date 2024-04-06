@@ -4,17 +4,6 @@ metadata:
   name: keycloak-config-wrapper
   version: "0.0.1"
 
-variables:
-  - name: CUSTOM_JAR_PATH
-    default: "default"
-    description: "Path to a complied custom keycloak plugin or theme"
-    pattern: "(.|\s)*\S(.|\s)*" # MUST NOT BE EMPTY
-
-constants:
-  - name: IDENTITY_CONFIG_IMG_BASE
-    description: Image to use as the base for uds-identity-config additions
-    value: '###ZARF_PKG_TMPL_IDENTITY_CONFIG_IMG_BASE###'
-
 components:
   - name: keycloak-config-wrapper
     required: true
@@ -36,7 +25,8 @@ components:
       onCreate:
         before:
           # download the pre-built base image w/ zarf pull
-          - cmd: ./zarf tools registry pull --platform linux/amd64 '###ZARF_PKG_TMPL_IDENTITY_CONFIG_IMG_BASE###' uds-idenitity-config.tar
+          # renovate: datasource=github-tags depName=defenseunicorns/uds-identity-config versioning=semver 
+          - cmd: ./zarf tools registry pull --platform linux/amd64 ghcr.io/defenseunicorns/uds/identity-config:0.3.6 uds-idenitity-config.tar
             description: Pull the uds-identity-config image
 
       onDeploy:
@@ -51,7 +41,8 @@ components:
               COUNT=`ls -1 *.jar 2>/dev/null | wc -l`
               if [ $COUNT = 0 ]; then 
                 # no jars found -- use the base image
-                echo "${ZARF_VAR_IDENTITY_CONFIG_IMG_BASE}"
+                # renovate: datasource=github-tags depName=defenseunicorns/uds-identity-config versioning=semver 
+                echo "ghcr.io/defenseunicorns/uds/identity-config:0.3.6"
               else
                 # jars were found... attempt to make a new name
                 echo "custom-uds-identity-config:$(date +\"%Y%m%d%H%M%S\")"
