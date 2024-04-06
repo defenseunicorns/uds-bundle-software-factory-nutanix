@@ -45,7 +45,7 @@ components:
                 echo "ghcr.io/defenseunicorns/uds/identity-config:0.3.6"
               else
                 # jars were found... attempt to make a new name
-                echo "custom-uds-identity-config:$(date +\"%Y%m%d%H%M%S\")"
+                echo "custom-uds-identity-config:$(date +%Y%m%d%H%M%S)"
               fi 
             description: check for any local jar files -- SET THE KEYCLOAK IMG VAR ACCORDINGLY
             setVariables:
@@ -70,4 +70,3 @@ components:
 
               # deploy the zarf wrapper for the local image
               ./zarf deploy zarf-package*.tar.zst --confirm --set IMG=${ZARF_VAR_KEYCLOAK_CONFIG_IMAGE}
-              
