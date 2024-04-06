@@ -26,7 +26,7 @@ components:
         before:
           # download the pre-built base image w/ zarf pull
           # renovate: datasource=github-tags depName=defenseunicorns/uds-identity-config versioning=semver 
-          - cmd: ./zarf tools registry pull --platform linux/amd64 ghcr.io/defenseunicorns/uds/identity-config:0.3.6 uds-idenitity-config.tar
+          - cmd: ./zarf tools registry pull --platform linux/amd64 ghcr.io/defenseunicorns/uds/identity-config:0.3.6 uds-identity-config.tar
             description: Pull the uds-identity-config image
 
       onDeploy:
