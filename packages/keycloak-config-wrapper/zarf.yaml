@@ -80,3 +80,9 @@ components:
 
               # deploy the zarf wrapper for the local image
               ./zarf deploy zarf-package*.tar.zst --confirm --set IMG=${ZARF_VAR_KEYCLOAK_CONFIG_IMAGE}
+        
+        # CLEANUP attempted deploys
+        onSuccess:
+          - cmd: rm -rf tmp_deploy
+        onFailure:
+          - cmd: rm -rf tmp_deploy
