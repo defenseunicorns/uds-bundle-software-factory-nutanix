@@ -79,7 +79,7 @@ components:
               ./zarf package create . --confirm --set LOCAL_IMG=${ZARF_VAR_KEYCLOAK_CONFIG_IMAGE}
 
               # deploy the zarf wrapper for the local image
-              ./zarf deploy zarf-package*.tar.zst --confirm --set IMG=${ZARF_VAR_KEYCLOAK_CONFIG_IMAGE}
+              ./zarf package deploy zarf-package*.tar.zst --confirm --set IMG=${ZARF_VAR_KEYCLOAK_CONFIG_IMAGE}
         
         # CLEANUP attempted deploys
         onSuccess:
