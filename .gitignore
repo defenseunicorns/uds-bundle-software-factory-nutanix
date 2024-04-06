@@ -3,6 +3,7 @@
 *.tar.gz
 *.tar.zst
 *.tar
+*.jar
 ~/
 .DS_Store
 defense-unicorns-distro/preflight.sh
