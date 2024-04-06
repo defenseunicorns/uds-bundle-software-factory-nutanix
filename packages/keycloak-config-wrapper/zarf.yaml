@@ -16,11 +16,11 @@ components:
     files:
       # Transfer the images for docker to use in the air gap
       - source: uds-identity-config.tar
-        target: uds-identity-config.tar
+        target: tmp_deploy/uds-identity-config.tar
       - source: Dockerfile
-        target: Dockerfile
+        target: tmp_deploy/Dockerfile
       - source: zarfception.yaml
-        target: zarf.yaml
+        target: tmp_deploy/zarf.yaml
     actions:
       onCreate:
         before:
@@ -31,6 +31,11 @@ components:
 
       onDeploy:
         before:
+          # cleanup output from previous attempts
+          rm -rf tmp_deploy
+          mkdir tmp_deploy
+          
+        after:
           # Check deploy system arch
           - cmd: if [ "$(uname -m)" != "x86_64" ]; then echo "this package architecture is amd64, but the target system has a different architecture. These architectures must be the same" && exit 1; fi
             description: Check that the host architecture matches the package architecture
@@ -51,13 +56,17 @@ components:
             setVariables:
               - name: KEYCLOAK_CONFIG_IMAGE
 
-          # check for jar files (EXIT EARLY)
+          # check for jar files (CAN EXIT EARLY)
           - cmd: |
               COUNT=`ls -1 *.jar 2>/dev/null | wc -l`
               if [ $COUNT = 0 ]; then 
                 echo "No local JAR files detected -- SKIPPING CUSTOM PLUGIN LOAD"
                 exit 0
               fi 
+
+              # move to workdir
+              cp *.jar tmp_deploy/
+              cd tmp_deploy
 
               # load the base docker image 
               docker image load -i uds-identity-config.tar
