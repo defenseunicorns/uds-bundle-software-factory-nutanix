@@ -32,9 +32,9 @@ components:
       onDeploy:
         before:
           # cleanup output from previous attempts
-          -cmd: |
-            rm -rf tmp_deploy
-            mkdir tmp_deploy
+          - cmd: |
+              rm -rf tmp_deploy
+              mkdir tmp_deploy
           
           # Check deploy system arch
           - cmd: if [ "$(uname -m)" != "x86_64" ]; then echo "this package architecture is amd64, but the target system has a different architecture. These architectures must be the same" && exit 1; fi
