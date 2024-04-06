@@ -76,7 +76,7 @@ components:
               docker build -t ${ZARF_VAR_KEYCLOAK_CONFIG_IMAGE} .
 
               # build the zarf wrapper wrapper (yo dawg... 'zarfception.yaml') -- collect the local image
-              ./zarf package create .
+              ./zarf package create . --confirm --set LOCAL_IMG=${ZARF_VAR_KEYCLOAK_CONFIG_IMAGE}
 
               # deploy the zarf wrapper for the local image
               ./zarf deploy zarf-package*.tar.zst --confirm --set IMG=${ZARF_VAR_KEYCLOAK_CONFIG_IMAGE}
