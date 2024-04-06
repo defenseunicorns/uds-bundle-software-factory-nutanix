@@ -34,7 +34,7 @@ tasks:
   - name: keycloak-config-wrapper-package
     description: Create the keycloak configurations shim loader
     actions:
-      - cmd: ./uds zarf package create ./packages/keycloak-config-wrapper --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build      
+      - cmd: (cd ./packages/keycloak-config-wrapper; ./uds zarf package create . --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ../../build)
 
   - name: namespaces-package
     description: Create the namespaces package
