@@ -40,14 +40,11 @@ packages:
     path: ../../build
     ref: 0.0.1        
     exports:
-      - name: KEYCLOAK_CONFIG_IMAGE 
+      - name: IDENTITY_CONFIG_IMG 
   
   - name: core
     repository: ghcr.io/defenseunicorns/packages/uds/core
     ref: 0.18.0-registry1
-    imports:
-      - name: KEYCLOAK_CONFIG_IMAGE
-        package: keycloak-config-wrapper
     overrides:
       velero:
         velero:
@@ -122,10 +119,10 @@ packages:
                     ttl: "240h"
       keycloak:
         keycloak:
+          values:
+            - path: configImage
+              value: ${IDENTITY_CONFIG_IMG}
           variables:
-            - name: KEYCLOAK_CONFIG_IMAGE
-              description: "Image registry and tag to use for the config image"
-              path: configImage
             - name: KEYCLOAK_DB_USERNAME
               description: "keycloak database username"
               path: postgresql.username
