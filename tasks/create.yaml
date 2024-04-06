@@ -31,10 +31,10 @@ tasks:
     actions:
       - cmd: ./uds zarf package create ./packages/gitlab-redis --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
 
-  - name: keycloak-configuration-package
+  - name: keycloak-config-wrapper-package
     description: Create the keycloak configurations shim loader
     actions:
-      - cmd: ./uds zarf package create ./packages/keycloak-configuration --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: ./uds zarf package create ./packages/keycloak-config-wrapper --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build      
 
   - name: namespaces-package
     description: Create the namespaces package
