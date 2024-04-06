@@ -47,7 +47,7 @@ components:
                 # jars were found... attempt to make a new name
                 echo "custom-uds-identity-config:$(date +\"%Y%m%d%H%M%S\")"
               fi 
-            description: check for any local jar files -- if none exist, SKIP THE REST
+            description: check for any local jar files -- SET THE KEYCLOAK IMG VAR ACCORDINGLY
             setVariables:
               - name: KEYCLOAK_CONFIG_IMAGE
 
@@ -58,19 +58,16 @@ components:
                 echo "No local JAR files detected -- SKIPPING CUSTOM PLUGIN LOAD"
                 exit 0
               fi 
-            description: check for any local jar files -- if none exist, SKIP THE REST
 
-          # load the base docker image 
-          - cmd: docker image load -i uds-identity-config.tar
-            description: Load the uds-identity-config image into Docker
+              # load the base docker image 
+              docker image load -i uds-identity-config.tar
 
-          # build the new output image
-          - cmd: docker build -t ${ZARF_VAR_KEYCLOAK_CONFIG_IMAGE} .
-            description: Build the Dockerfile to add local jar to^
+              # build the new output image
+              docker build -t ${ZARF_VAR_KEYCLOAK_CONFIG_IMAGE} .
 
-          # build the zarf wrapper wrapper (yo dawg... 'zarfception.yaml') -- collect the local image
-          - cmd: ./zarf package create .
-        
-        after:
-          # deploy the zarf wrapper for the local image
-          - cmd: ./zarf deploy zarf-package*.tar.zst --confirm --set IMG=${ZARF_VAR_KEYCLOAK_CONFIG_IMAGE}
+              # build the zarf wrapper wrapper (yo dawg... 'zarfception.yaml') -- collect the local image
+              ./zarf package create .
+
+              # deploy the zarf wrapper for the local image
+              ./zarf deploy zarf-package*.tar.zst --confirm --set IMG=${ZARF_VAR_KEYCLOAK_CONFIG_IMAGE}
+              
