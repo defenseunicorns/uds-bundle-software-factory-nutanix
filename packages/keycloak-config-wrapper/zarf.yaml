@@ -32,10 +32,10 @@ components:
       onDeploy:
         before:
           # cleanup output from previous attempts
-          rm -rf tmp_deploy
-          mkdir tmp_deploy
+          -cmd: |
+            rm -rf tmp_deploy
+            mkdir tmp_deploy
           
-        after:
           # Check deploy system arch
           - cmd: if [ "$(uname -m)" != "x86_64" ]; then echo "this package architecture is amd64, but the target system has a different architecture. These architectures must be the same" && exit 1; fi
             description: Check that the host architecture matches the package architecture
@@ -55,7 +55,8 @@ components:
             description: check for any local jar files -- SET THE KEYCLOAK IMG VAR ACCORDINGLY
             setVariables:
               - name: KEYCLOAK_CONFIG_IMAGE
-
+          
+        after:
           # check for jar files (CAN EXIT EARLY)
           - cmd: |
               COUNT=`ls -1 *.jar 2>/dev/null | wc -l`
