@@ -2,6 +2,7 @@
 **/*.tfstate.backup
 *.tar.gz
 *.tar.zst
+*.tar
 ~/
 .DS_Store
 defense-unicorns-distro/preflight.sh
