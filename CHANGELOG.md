@@ -30,6 +30,13 @@ variables:
     NEXUS_DB_PASSWORD: "replace-me-db-passwords"
 ```
 
+There are new object storage buckets needed for loki.
+```
+loki-chunks-bucket
+loki-ruler-bucket
+loki-admin-bucket
+```
+
 ### Features
 
 * Configure velero ([0e1db1f](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/0e1db1fad4e5a19a97f3f2bf5f21bd1652b9ec23))
@@ -58,7 +65,6 @@ variables:
 * update uds-cli to v0.10.3 ([6196853](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/6196853cd6f281dc692a1a612489faba7c45295e))
 * update uds-core to 0.18.0 ([#77](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/77)) ([6196853](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/6196853cd6f281dc692a1a612489faba7c45295e))
 * update zarf init/rook to v0.32.6-0.2.5 ([6196853](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/6196853cd6f281dc692a1a612489faba7c45295e))
-* upgrade init to v0.32.5-0.2.4 ([#41](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/41)) ([0e1db1f](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/0e1db1fad4e5a19a97f3f2bf5f21bd1652b9ec23))
 
 ## [0.2.3](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.2...v0.2.3) (2024-03-14)
 
