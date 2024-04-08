@@ -4,6 +4,31 @@ All notable changes to this project will be documented in this file.
 
 ## [0.2.4](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.3...v0.2.4) (2024-04-05)
 
+### Release Notes
+There are some configuration values to add and update in your `uds-config.yaml` file
+```yaml
+variables:
+  core:
+    # Creates a default admin account. Change the password on first login!
+    KEYCLOAK_INSECURE_ADMIN_PASSWORD_GENERATION: true
+    # New Loki configs for loki simple scalable deployment
+    LOKI_CHUNKS_BUCKET: "loki-chunks-bucket"
+    LOKI_RULER_BUCKET: "loki-ruler-bucket"
+    LOKI_ADMIN_BUCKET: "loki-admin-bucket"
+    LOKI_S3_ENDPOINT: "http://replace.with.object.store.url"
+    LOKI_S3_REGION: "us-east-1"
+    LOKI_S3_ACCESS_KEY_ID: "replace-me-object-store-access-key"
+    LOKI_S3_SECRET_ACCESS_KEY: "replace-me-object-store-secret-key"
+    # New Velero configs
+    VELERO_BUCKET_PROVIDER_URL: "http://replace.with.object.store.url"
+    VELERO_BUCKET: "velero-bucket"
+    VELERO_BUCKET_REGION: "us-east-1"
+    VELERO_BUCKET_KEY: "replace-me-object-store-access-key"
+    VELERO_BUCKET_KEY_SECRET: "replace-me-object-store-secret-key"
+  nexus:
+    # Updated the name of this variable
+    NEXUS_DB_PASSWORD: "replace-me-db-passwords"
+```
 
 ### Features
 
@@ -16,7 +41,6 @@ All notable changes to this project will be documented in this file.
 * gitlab redis secret fix ([#44](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/44)) ([16e23b7](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/16e23b7907ac1452a5c0dac0107e7f509f78fe64))
 * gitlab workhorse resource config ([6196853](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/6196853cd6f281dc692a1a612489faba7c45295e))
 * jira variable override names ([6196853](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/6196853cd6f281dc692a1a612489faba7c45295e))
-* revert init to 0.32.4 to match uds zarf ([3576a24](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/3576a24083f1bad3bef39a3ad55b717c526eb345))
 
 
 ### Miscellaneous
@@ -34,9 +58,7 @@ All notable changes to this project will be documented in this file.
 * update uds-cli to v0.10.3 ([6196853](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/6196853cd6f281dc692a1a612489faba7c45295e))
 * update uds-core to 0.18.0 ([#77](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/77)) ([6196853](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/6196853cd6f281dc692a1a612489faba7c45295e))
 * update zarf init/rook to v0.32.6-0.2.5 ([6196853](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/6196853cd6f281dc692a1a612489faba7c45295e))
-* upgrade gitlab 16.9.2-uds.0-registry1 ([0e1db1f](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/0e1db1fad4e5a19a97f3f2bf5f21bd1652b9ec23))
 * upgrade init to v0.32.5-0.2.4 ([#41](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/41)) ([0e1db1f](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/0e1db1fad4e5a19a97f3f2bf5f21bd1652b9ec23))
-* upgrade uds to v0.9.4 and remove zarf ([0e1db1f](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/0e1db1fad4e5a19a97f3f2bf5f21bd1652b9ec23))
 
 ## [0.2.3](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.2...v0.2.3) (2024-03-14)
 
