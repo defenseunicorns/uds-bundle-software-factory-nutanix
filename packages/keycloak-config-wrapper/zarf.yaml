@@ -25,6 +25,8 @@ components:
           container: uds-config-loader
           path: /home/nonroot
         compress: false
+    images:
+      - ghcr.io/defenseunicorns/uds/identity-config:0.3.6"
     actions:
       onDeploy:
         before:
