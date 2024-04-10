@@ -1,0 +1,50 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: identity-config-loader
+  namespace: keycloak
+spec:
+  template:
+    metadata:
+      labels:
+        app: data-loader
+    spec:
+      initContainers:
+        - name: uds-config-loader
+          # renovate: datasource=github-tags depName=defenseunicorns/uds-identity-config versioning=semver 
+          image: ghcr.io/defenseunicorns/uds/identity-config:0.3.6"
+          command: 
+            [
+              "sh",
+              "-c",
+              # This command looks for the Zarf "data injection marker" which is a timestamped file that is injected after everything else and marks the injection as complete.
+              'while [ ! -f /data/###ZARF_DATA_INJECTION_MARKER### ]; do echo "waiting for zarf data sync" && sleep 1; done; echo "we are done waiting!"',
+            ]
+          securityContext:
+            runAsUser: 65532
+            runAsGroup: 65532
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+          volumeMounts:
+            - name: providers
+              mountPath: /opt/keycloak/providers
+      containers:
+        - name: uds-config-sync
+          # renovate: datasource=github-tags depName=defenseunicorns/uds-identity-config versioning=semver 
+          image: ghcr.io/defenseunicorns/uds/identity-config:0.3.6"
+          securityContext:
+            runAsUser: 65532
+            runAsGroup: 65532
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+          volumeMounts:
+            - name: providers
+              mountPath: /opt/keycloak/providers
+      volumes:
+        - name: providers
+          persistentVolumeClaim: 
+            claimName: keycloak-providers

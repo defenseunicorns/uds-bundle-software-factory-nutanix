@@ -7,28 +7,25 @@ metadata:
 components:
   - name: keycloak-config-wrapper
     required: true
-    description: >
-      *** REQUIRES DOCKER ***
-      Loads the required images for keycloak kustomization into Docker to be used in an offline build
+    description: Loads a local jar file into the cluster via zarf data injection.
     only:
       cluster:
         architecture: amd64
-    files:
-      # Transfer the images for docker to use in the air gap
-      - source: uds-identity-config.tar
-        target: tmp_deploy/uds-identity-config.tar
-      - source: Dockerfile
-        target: tmp_deploy/Dockerfile
-      - source: zarfception.yaml
-        target: tmp_deploy/zarf.yaml
+    manifests:
+      #create a job from the pre-existing init image
+      - name: data-loader
+        namespace: keycloak
+        files: 
+          - init-job.yaml
+    dataInjections:
+      - source: tmp_deploy
+        target:
+          namespace: keycloak
+          selector: app=data-loader
+          container: uds-config-loader
+          path: /home/nonroot
+        compress: false
     actions:
-      onCreate:
-        before:
-          # download the pre-built base image w/ zarf pull
-          # renovate: datasource=github-tags depName=defenseunicorns/uds-identity-config versioning=semver 
-          - cmd: ./zarf tools registry pull --platform linux/amd64 ghcr.io/defenseunicorns/uds/identity-config:0.3.6 uds-identity-config.tar
-            description: Pull the uds-identity-config image
-
       onDeploy:
         before:
           # cleanup output from previous attempts
@@ -41,45 +38,8 @@ components:
             description: Check that the host architecture matches the package architecture
             maxRetries: 0
 
-          # Set the output var
-          - cmd: |
-              COUNT=`ls -1 *.jar 2>/dev/null | wc -l`
-              if [ $COUNT = 0 ]; then 
-                # no jars found -- use the base image
-                # renovate: datasource=github-tags depName=defenseunicorns/uds-identity-config versioning=semver 
-                echo "ghcr.io/defenseunicorns/uds/identity-config:0.3.6"
-              else
-                # jars were found... attempt to make a new name
-                echo "custom-uds-identity-config:$(date +%Y%m%d%H%M%S)"
-              fi 
-            description: check for any local jar files -- SET THE KEYCLOAK IMG VAR ACCORDINGLY
-            setVariables:
-              - name: IDENTITY_CONFIG_IMG
-          
-        after:
-          # check for jar files (CAN EXIT EARLY)
-          - cmd: |
-              COUNT=`ls -1 *.jar 2>/dev/null | wc -l`
-              if [ $COUNT = 0 ]; then 
-                echo "No local JAR files detected -- SKIPPING CUSTOM PLUGIN LOAD"
-                exit 0
-              fi 
-
-              # move to workdir
-              cp *.jar tmp_deploy/
-              cd tmp_deploy
-
-              # load the base docker image 
-              docker image load -i uds-identity-config.tar
-
-              # build the new output image
-              docker build -t ${ZARF_VAR_IDENTITY_CONFIG_IMG} .
-
-              # build the zarf wrapper wrapper (yo dawg... 'zarfception.yaml') -- collect the local image
-              ./zarf package create . --confirm --set LOCAL_IMG=${ZARF_VAR_IDENTITY_CONFIG_IMG}
-
-              # deploy the zarf wrapper for the local image
-              ./zarf package deploy zarf-package*.tar.zst --confirm --set IMG=${ZARF_VAR_IDENTITY_CONFIG_IMG}
+          # populate workdir
+          - cmd: cp *.jar tmp_deploy/
         
         # CLEANUP attempted deploys
         onSuccess:
