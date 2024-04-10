@@ -26,7 +26,7 @@ components:
           path: /home/nonroot
         compress: false
     images:
-      - ghcr.io/defenseunicorns/uds/identity-config:0.3.6"
+      - ghcr.io/defenseunicorns/uds/identity-config:0.3.6
     actions:
       onCreate:
         before:
