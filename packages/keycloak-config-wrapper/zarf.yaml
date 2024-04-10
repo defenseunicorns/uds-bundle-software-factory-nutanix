@@ -28,6 +28,12 @@ components:
     images:
       - ghcr.io/defenseunicorns/uds/identity-config:0.3.6"
     actions:
+      onCreate:
+        before:
+          # cleanup output from previous attempts
+          - cmd: |
+              rm -rf tmp_deploy
+              mkdir tmp_deploy
       onDeploy:
         before:
           # cleanup output from previous attempts
