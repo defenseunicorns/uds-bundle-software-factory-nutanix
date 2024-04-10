@@ -44,6 +44,7 @@ spec:
           volumeMounts:
             - name: providers
               mountPath: /opt/keycloak/providers
+      restartPolicy: Never
       volumes:
         - name: providers
           persistentVolumeClaim: 
