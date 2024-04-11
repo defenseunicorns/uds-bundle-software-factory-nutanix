@@ -47,7 +47,7 @@ components:
 
         after:
           # wait for the job to finish
-          ./zarf tools wait-for job -n keycloak identity-config-loader '{.status.succeeded}'=1
+          - cmd: ./zarf tools wait-for job -n keycloak identity-config-loader '{.status.succeeded}'=1
           
         onSuccess:
           # bounce keycloak statefulset
