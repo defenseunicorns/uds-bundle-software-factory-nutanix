@@ -36,8 +36,9 @@ components:
               mkdir tmp_deploy
       onDeploy:
         before:
-          # cleanup output from previous attempts
+          # cleanup previous attempts
           - cmd: |
+              ./zarf tools kubectl delete job -n keycloak identity-config-loader 2>/dev/null
               rm -rf tmp_deploy
               mkdir tmp_deploy
           
