@@ -38,7 +38,7 @@ components:
         before:
           # cleanup previous attempts
           - cmd: |
-              ./zarf tools kubectl delete job -n keycloak identity-config-loader 2>/dev/null
+              ./zarf tools kubectl delete job -n keycloak identity-config-loader 2>/dev/null || true
               rm -rf tmp_deploy
               mkdir tmp_deploy
           
