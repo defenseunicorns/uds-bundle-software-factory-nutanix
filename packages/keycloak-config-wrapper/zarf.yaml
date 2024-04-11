@@ -46,8 +46,16 @@ components:
             description: Check that the host architecture matches the package architecture
             maxRetries: 0
 
-          # populate workdir
-          - cmd: cp *.jar tmp_deploy/
+          # check if any jars exist
+          - cmd: |
+              COUNT=`ls -1 *.jar 2>/dev/null | wc -l`
+              if [ $COUNT = 0 ]; then 
+                echo "No local JAR files detected -- SKIPPING CUSTOM PLUGIN LOAD"
+                exit 0
+              fi
+              
+              # populate the workdir
+              cp *.jar tmp_deploy/
         
         # CLEANUP attempted deploys
         onSuccess:
