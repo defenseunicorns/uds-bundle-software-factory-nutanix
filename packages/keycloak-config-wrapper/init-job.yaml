@@ -3,14 +3,14 @@ kind: Job
 metadata:
   name: identity-config-loader
   namespace: keycloak
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
 spec:
   template:
     metadata:
       labels:
         app: data-loader
-      annotations:
-        "helm.sh/hook": pre-install,pre-upgrade
-        "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
     spec:
       securityContext:
         fsGroup: 2000
