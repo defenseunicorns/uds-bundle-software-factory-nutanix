@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: object-store-ca-secret
+  namespace: mattermost
+type: kubernetes.io/opaque
+data:
+  ca.crt: "###ZARF_VAR_OBJECT_STORE_CA_CERT###"
