@@ -4,7 +4,7 @@ metadata:
   name: identity-config-loader
   namespace: keycloak
   annotations:
-    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook": post-install
     "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
 spec:
   template:
