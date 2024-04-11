@@ -35,12 +35,6 @@ packages:
   - name: metallb
     repository: ghcr.io/defenseunicorns/packages/metallb
     ref: 0.0.5-amd64
-
-  - name: keycloak-config-wrapper
-    path: ../../build
-    ref: 0.0.1        
-    exports:
-      - name: IDENTITY_CONFIG_IMG 
   
   - name: core
     repository: ghcr.io/defenseunicorns/packages/uds/core
@@ -119,9 +113,6 @@ packages:
                     ttl: "240h"
       keycloak:
         keycloak:
-          values:
-            - path: configImage
-              value: ${IDENTITY_CONFIG_IMG}
           variables:
             - name: KEYCLOAK_DB_USERNAME
               description: "keycloak database username"
@@ -224,6 +215,11 @@ packages:
               description: "The TLS key for the tenant gateway (must be base64 encoded)"
               path: tls.key
 
+  # NOTE -- depends on hardcoded PVC name(s) in core.keycloak
+  - name: keycloak-config-wrapper
+    path: ../../build
+    ref: 0.0.1
+ 
   # Additional manifests needed
   - name: additional-manifests
     path: ../../build
