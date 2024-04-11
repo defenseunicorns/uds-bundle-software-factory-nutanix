@@ -8,6 +8,8 @@ spec:
     metadata:
       labels:
         app: data-loader
+      annotations:
+        "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
     spec:
       securityContext:
         fsGroup: 2000
