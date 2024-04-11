@@ -18,7 +18,7 @@ components:
         files: 
           - init-job.yaml
     dataInjections:
-      - source: "./*.jar"
+      - source: .
         target:
           namespace: keycloak
           selector: app=data-loader
