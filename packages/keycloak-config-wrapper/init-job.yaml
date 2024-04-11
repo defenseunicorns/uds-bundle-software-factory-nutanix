@@ -11,8 +11,8 @@ spec:
     spec:
       securityContext:
         fsGroup: 2000
-      initContainers:
-        - name: uds-config-loader
+      containers:
+        - name: uds-config-sync
           # renovate: datasource=github-tags depName=defenseunicorns/uds-identity-config versioning=semver 
           image: ghcr.io/defenseunicorns/uds/identity-config:0.3.6
           command: 
@@ -20,19 +20,8 @@ spec:
               "sh",
               "-c",
               # This command looks for the Zarf "data injection marker" which is a timestamped file that is injected after everything else and marks the injection as complete.
-              'while [ ! -f /home/nonroot/###ZARF_DATA_INJECTION_MARKER### ]; do echo "waiting for zarf data sync" && sleep 1; done; echo "we are done waiting!"',
+              'while [ ! -f /home/nonroot/###ZARF_DATA_INJECTION_MARKER### ]; do echo "waiting for zarf data sync" && sleep 1; done; echo "we are done waiting!"; /home/nonroot/sync.sh',
             ]
-          securityContext:
-            runAsUser: 65532
-            runAsGroup: 65532
-          resources:
-            requests:
-              cpu: "100m"
-              memory: "128Mi"
-      containers:
-        - name: uds-config-sync
-          # renovate: datasource=github-tags depName=defenseunicorns/uds-identity-config versioning=semver 
-          image: ghcr.io/defenseunicorns/uds/identity-config:0.3.6
           securityContext:
             runAsUser: 65532
             runAsGroup: 65532
@@ -54,7 +43,7 @@ spec:
         - name: providers
           persistentVolumeClaim: 
             claimName: keycloak-providers
-        # jars are only copied into providers -- the rest won't matter
+        # jars are only copied into providers -- the rest won't matter, but are needed for file permissions in the sync script
         - name: conf
           emptyDir: {}
         - name: data

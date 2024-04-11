@@ -22,7 +22,7 @@ components:
         target:
           namespace: keycloak
           selector: app=data-loader
-          container: uds-config-loader
+          container: uds-config-sync
           path: /home/nonroot
         compress: false
     actions:
