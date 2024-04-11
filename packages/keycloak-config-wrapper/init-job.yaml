@@ -9,6 +9,8 @@ spec:
       labels:
         app: data-loader
     spec:
+      securityContext:
+        fsGroup: 2000
       initContainers:
         - name: uds-config-loader
           # renovate: datasource=github-tags depName=defenseunicorns/uds-identity-config versioning=semver 
