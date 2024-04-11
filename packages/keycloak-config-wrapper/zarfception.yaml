@@ -44,3 +44,7 @@ components:
                 echo "No local JAR files detected -- SKIPPING CUSTOM PLUGIN LOAD"
                 exit 0
               fi
+
+        onSuccess:
+          # bounce keycloak statefulset
+          - cmd: ./zarf tools kubectl rollout restart statefulset -n keycloak keycloak
