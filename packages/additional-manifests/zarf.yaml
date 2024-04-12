@@ -10,8 +10,8 @@ variables:
   - name: DOMAIN
     description: "Domain to be used in VS hosts and gateway config"
     default: "mtsi.bigbang.dev"
-  - name: OBJECT_STORE_CA_CERT
-    description: "Object Store CA Cert to trust"
+  - name: ADDITIONAL_CA_CERT
+    description: "Additional CA Certs"
 
 components:
   - name: gitlab-additional-manifests
