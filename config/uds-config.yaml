@@ -2,7 +2,7 @@ options:
   log_level: info
 shared:
   DOMAIN: replace.with.your.domain
-  OBJECT_STORE_CA_CERT: replace-me-object-store-ca-cert
+  ADDITIONAL_CA_CERT: replace-me-additional-ca-cert
 variables:
   init:
     REGISTRY_HPA_ENABLE: false
@@ -137,7 +137,7 @@ variables:
     VOLUMES:
       - name: ca-cert
         secret:
-          secretName: object-store-ca-secret
+          secretName: ca-secret
           defaultMode: 0644
   nexus:
     NEXUS_DB_NAME: "nexusdb"

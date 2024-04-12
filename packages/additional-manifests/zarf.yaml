@@ -35,4 +35,4 @@ components:
     manifests:
       - name: mattermost-cert-secrets
         files:
-          - mattermost/object-store-ca-cert.yaml
+          - mattermost/ca-cert.yaml
