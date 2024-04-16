@@ -1,0 +1,384 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/uds-cli/v0.10.3/uds.schema.json
+kind: UDSBundle
+metadata:
+  name: software-factory-nutanix
+  description: A UDS bundle for deploying a software factory to an RKE2 cluster
+  # x-release-please-start-version
+  version: "0.2.4"
+  # x-release-please-end
+  architecture: amd64
+
+packages:
+  # Zarf init
+  - name: init
+    repository: ghcr.io/defenseunicorns/uds-capability/rook-ceph/init
+    optionalComponents:
+      - git-server
+    ref: v0.32.6-0.2.5
+    overrides:
+      rook-ceph-cluster:
+        rook-ceph-cluster:
+          variables:
+            - path: cephClusterSpec.resources.osd.requests.memory
+              name: CEPH_OSD_MEM_REQUESTS
+            - path: cephClusterSpec.resources.osd.limits.memory
+              name: CEPH_OSD_MEM_LIMITS
+            - path: toolbox.enabled
+              name: ENABLE_CEPH_TOOLBOX
+
+  # Namespace pre-reqs for swf capabilities
+  - name: software-factory-namespaces
+    path: ../../build
+    ref: 1.0.0
+
+  # MetalLB
+  - name: metallb
+    repository: ghcr.io/defenseunicorns/packages/metallb
+    ref: 0.0.5-amd64
+
+  - name: core
+    repository: ghcr.io/defenseunicorns/packages/uds/core
+    ref: 0.18.0-registry1
+    overrides:
+      velero:
+        velero:
+          values:
+            - path: snapshotsEnabled
+              value: true
+            - path: configuration.volumeSnapshotLocation
+              value:
+                - name: default
+                  provider: aws
+                  config:
+                    region: "us-east-1"
+                  credential:
+                    name: "velero-bucket-credentials"
+                    key: "cloud"
+            - path: schedules
+              value:
+                uds-jira-backup:
+                  disabled: false
+                  schedule: "0 3 * * *"
+                  useOwnerReferencesInBackup: false
+                  template:
+                    csiSnapshotTimeout: 0s
+                    includeClusterResources: true
+                    snapshotVolumes: true
+                    includedNamespaces:
+                      - jira
+                    ttl: "240h"
+                uds-confluence-backup:
+                  disabled: false
+                  schedule: "0 3 * * *"
+                  useOwnerReferencesInBackup: false
+                  template:
+                    csiSnapshotTimeout: 0s
+                    includeClusterResources: true
+                    snapshotVolumes: true
+                    includedNamespaces:
+                      - confluence
+                    ttl: "240h"
+                uds-mattermost-backup:
+                  disabled: false
+                  schedule: "0 3 * * *"
+                  useOwnerReferencesInBackup: false
+                  template:
+                    csiSnapshotTimeout: 0s
+                    includeClusterResources: true
+                    snapshotVolumes: true
+                    includedNamespaces:
+                      - mattermost
+                    ttl: "240h"
+                uds-nexus-backup:
+                  disabled: false
+                  schedule: "0 3 * * *"
+                  useOwnerReferencesInBackup: false
+                  template:
+                    csiSnapshotTimeout: 0s
+                    includeClusterResources: true
+                    snapshotVolumes: true
+                    includedNamespaces:
+                      - nexus
+                    ttl: "240h"
+                uds-gitlab-backup:
+                  disabled: false
+                  schedule: "0 3 * * *"
+                  useOwnerReferencesInBackup: false
+                  template:
+                    csiSnapshotTimeout: 0s
+                    includeClusterResources: true
+                    snapshotVolumes: true
+                    includedNamespaces:
+                      - gitlab
+                    ttl: "240h"
+      keycloak:
+        keycloak:
+          variables:
+            - name: KEYCLOAK_DB_USERNAME
+              description: "keycloak database username"
+              path: postgresql.username
+              default: "postgres"
+            - name: KEYCLOAK_DB_PASSWORD
+              description: "keycloak database password"
+              path: postgresql.password
+              default: "replace-me"
+            - name: KEYCLOAK_DB_NAME
+              description: "keycloak database name"
+              path: postgresql.database
+              default: "keycloakdb"
+            - name: KEYCLOAK_DB_ENDPOINT
+              description: "keycloak database name"
+              path: postgresql.host
+              default: "postgresql"
+            - name: KEYCLOAK_INSECURE_ADMIN_PASSWORD_GENERATION
+              description: "Generate an insecure admin password for dev/test"
+              path: insecureAdminPasswordGeneration.enabled
+      loki:
+        loki:
+          values:
+            # Override default dns service name for Loki Gateway
+            - path: "global.dnsService"
+              value: "rke2-coredns-rke2-coredns"
+          variables:
+            - name: LOKI_CHUNKS_BUCKET
+              description: "The object storage bucket for Loki chunks"
+              path: loki.storage.bucketNames.chunks
+              default: "loki-chunks-bucket"
+            - name: LOKI_RULER_BUCKET
+              description: "The object storage bucket for Loki ruler"
+              path: loki.storage.bucketNames.ruler
+              default: "loki-ruler-bucket"
+            - name: LOKI_ADMIN_BUCKET
+              description: "The object storage bucket for Loki admin"
+              path: loki.storage.bucketNames.admin
+              default: "loki-admin-bucket"
+            - name: LOKI_S3_ENDPOINT
+              description: "The S3 endpoint"
+              path: loki.storage.s3.endpoint
+            - name: LOKI_S3_REGION
+              description: "The S3 region"
+              path: loki.storage.s3.region
+            - name: LOKI_S3_ACCESS_KEY_ID
+              description: "The S3 Access Key ID"
+              path: loki.storage.s3.accessKeyId
+            - name: LOKI_S3_SECRET_ACCESS_KEY
+              path: loki.storage.s3.secretAccessKey
+              description: "The S3 Secret Access Key"
+            - name: LOKI_WRITE_REPLICAS
+              path: write.replicas
+              description: "Loki write replicas"
+              default: "1"
+            - name: LOKI_READ_REPLICAS
+              path: read.replicas
+              description: "Loki read replicas"
+              default: "1"
+            - name: LOKI_BACKEND_REPLICAS
+              path: backend.replicas
+              description: "Loki backend replicas"
+              default: "1"
+      istio-admin-gateway:
+        uds-istio-config:
+          variables:
+            - name: ADMIN_TLS_CERT
+              description: "The TLS cert for the admin gateway (must be base64 encoded)"
+              path: tls.cert
+            - name: ADMIN_TLS_KEY
+              description: "The TLS key for the admin gateway (must be base64 encoded)"
+              path: tls.key
+      istio-tenant-gateway:
+        gateway:
+          values:
+            - path: "service.ports"
+              value:
+                - name: status-port
+                  port: 15021
+                  protocol: TCP
+                  targetPort: 15021
+                - name: http2
+                  port: 80
+                  protocol: TCP
+                  targetPort: 80
+                - name: https
+                  port: 443
+                  protocol: TCP
+                  targetPort: 443
+                - name: tcp-ssh
+                  port: 22
+                  protocol: TCP
+                  targetPort: 2022
+        uds-istio-config:
+          variables:
+            - name: TENANT_TLS_CERT
+              description: "The TLS cert for the tenant gateway (must be base64 encoded)"
+              path: tls.cert
+            - name: TENANT_TLS_KEY
+              description: "The TLS key for the tenant gateway (must be base64 encoded)"
+              path: tls.key
+
+  # Additional manifests needed
+  - name: additional-manifests
+    path: ../../build
+    ref: 0.0.2
+
+  # Gitlab
+  - name: gitlab-redis
+    repository: ghcr.io/defenseunicorns/packages/uds/dev-redis
+    ref: 0.0.1
+
+  - name: gitlab-redis-secret
+    path: ../../build
+    ref: 0.0.1
+
+  - name: gitlab-object-store
+    path: ../../build
+    ref: 0.0.1
+
+  - name: gitlab-database-secret
+    path: ../../build
+    ref: 0.0.1
+
+  - name: gitlab
+    repository: ghcr.io/defenseunicorns/packages/uds/gitlab
+    ref: 16.10.1-uds.1-registry1
+    overrides:
+      gitlab:
+        gitlab:
+          variables:
+            - name: MIGRATIONS_RESOURCES
+              description: "Gitlab Migrations Resources"
+              path: "gitlab.migrations.resources"
+            - name: WEBSERVICE_REPLICAS
+              description: "Gitlab Webservice Min Replicas"
+              path: "gitlab.webservice.minReplicas"
+            - name: WEBSERVICE_WORKERS
+              description: "Gitlab Webservice Worker Count"
+              path: "gitlab.webservice.workerProcesses"
+            - name: WEBSERVICE_HPA
+              description: "Gitlab Webservice HPA settings"
+              path: "gitlab.webservice.hpa"
+            - name: WEBSERVICE_RESOURCES
+              description: "Gitlab Webservice Resources"
+              path: "gitlab.webservice.resources"
+            - name: WORKHORSE_RESOURCES
+              description: "Gitlab Workhorse Resources"
+              path: "gitlab.webservice.workhorse.resources"
+            - name: SIDEKIQ_REPLICAS
+              description: "Gitlab Sidekiq Min Replicas"
+              path: "gitlab.sidekiq.minReplicas"
+            - name: SIDEKIQ_HPA
+              description: "Gitlab Sidekiq HPA settings"
+              path: "gitlab.sidekiq.hpa"
+            - name: SIDEKIQ_RESOURCES
+              description: "Gitlab Sidekiq Resources"
+              path: "gitlab.sidekiq.resources"
+            - name: GITALY_RESOURCES
+              description: "Gitlab Gitaly Resources"
+              path: "gitlab.gitaly.resources"
+            - name: REGISTRY_REPLICAS
+              description: "Gitlab Registry Min Replicas"
+              path: "registry.hpa.minReplicas"
+            - name: SHELL_REPLICAS
+              description: "Gitlab Shell Min Replicas"
+              path: "gitlab.gitlab-shell.minReplicas"
+
+  # Gitlab Runner
+  - name: gitlab-runner
+    repository: ghcr.io/defenseunicorns/packages/uds/gitlab-runner
+    ref: 16.10.0-uds.0-registry1
+
+  # Sonarqube
+  - name: sonarqube-database-secret
+    path: ../../build
+    ref: 0.0.1
+
+  - name: sonarqube
+    repository: ghcr.io/defenseunicorns/packages/uds/sonarqube
+    ref: 8.0.3-uds.6-registry1
+
+  # Jira
+  - name: jira-database-secret
+    path: ../../build
+    ref: 0.0.1
+
+  - name: jira
+    repository: ghcr.io/defenseunicorns/packages/uds/jira
+    ref: 1.17.2-uds.0-registry1
+    overrides:
+      jira:
+        jira:
+          variables:
+            - name: JIRA_LOCAL_HOME_ENABLED
+              path: "volumes.localHome.persistentVolumeClaim.create"
+              description: "Local Home Toggle"
+              default: "true"
+            - name: JIRA_RWO_STORAGE_CLASS
+              path: "volumes.localHome.persistentVolumeClaim.storageClassName"
+              description: "RWO storage class name"
+            - name: JIRA_LOCAL_HOME_SIZE
+              path: "volumes.localHome.persistentVolumeClaim.resources.requests.storage"
+              description: "Storage size"
+              default: "128Gi"
+
+  # Confluence
+  - name: confluence-database-secret
+    path: ../../build
+    ref: 0.0.1
+
+  - name: confluence
+    repository: ghcr.io/defenseunicorns/packages/uds/confluence
+    ref: 1.18.0-uds.0-registry1
+    overrides:
+      confluence:
+        confluence:
+          variables:
+            - name: CONFLUENCE_LOCAL_HOME_ENABLED
+              path: "volumes.localHome.persistentVolumeClaim.create"
+              description: "Local Home Toggle"
+              default: "true"
+            - name: CONFLUENCE_RWO_STORAGE_CLASS
+              path: "volumes.localHome.persistentVolumeClaim.storageClassName"
+              description: "RWO storage class name"
+            - name: CONFLUENCE_LOCAL_HOME_SIZE
+              path: "volumes.localHome.persistentVolumeClaim.resources.requests.storage"
+              description: "Storage size"
+              default: "128Gi"
+
+  # Mattermost
+  - name: mattermost
+    repository: ghcr.io/defenseunicorns/packages/uds/mattermost
+    ref: 9.6.1-uds.0-registry1
+    overrides:
+      mattermost:
+        uds-mattermost-config:
+          variables:
+            - name: OBJECT_STORE_SECURE
+              path: "objectStorage.secure"
+              description: "Object storage ssl"
+              default: "false"
+            - name: OBJECT_STORE_ENDPOINT
+              path: "objectStorage.endpoint"
+              description: "Object storage endpoint"
+            - name: OBJECT_STORE_BUCKET
+              path: "objectStorage.bucket"
+              description: "Object storage bucket"
+              default: "mattermost-bucket"
+            - name: DB_ENDPOINT
+              path: "postgres.host"
+              description: "Postgres DB endpoint"
+            - name: DB_USERNAME
+              path: "postgres.username"
+              description: "Postgres DB username"
+              default: "postgres"
+            - name: DB_NAME
+              path: "postgres.dbName"
+              description: "Postgres DB database name"
+              default: "mattermostdb"
+            - name: DB_OPTIONS
+              path: "postgres.connectionOptions"
+              description: "Postgres DB connection options"
+              default: "?connect_timeout=10"
+
+  # Nexus
+  - name: nexus
+    repository: ghcr.io/defenseunicorns/packages/uds/nexus
+    ref: 3.66.0-uds.1-registry1

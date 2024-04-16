@@ -19,6 +19,9 @@ jobs:
           repository: ${{ github.repository }}
           ref: ${{ github.ref_name }}
 
+      - name: Environment setup
+        uses: ./.github/actions/setup
+
       - name: Login to Registry1
         uses: docker/login-action@v3
         with:
@@ -53,8 +56,8 @@ jobs:
       # Build and publish bundle
       ####
       - name: Build bundle
-        run: make build/all
+        run: uds run create-bundle
 
       - name: Publish bundle
-        run: ./uds publish uds-bundle-software-factory-nutanix-amd64-*.tar.zst oci://ghcr.io/defenseunicorns/uds-bundle --no-progress
+        run: uds publish uds-bundle-software-factory-nutanix-amd64-*.tar.zst oci://ghcr.io/defenseunicorns/uds-bundle --no-progress
         working-directory: build

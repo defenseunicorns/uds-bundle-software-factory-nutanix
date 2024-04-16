@@ -11,7 +11,7 @@
       ],
       "versioning": "always-bump-patch",
       "extra-files": [
-        "uds-bundle.yaml"
+        "bundles/uds-core-swf/uds-bundle.yaml"
       ]
     }
   }

@@ -1,0 +1,21 @@
+includes:
+  - create: ./tasks/create.yaml
+
+tasks:
+  ################
+  #  Create
+  ################
+  - name: create-bundle
+    actions:
+      - task: create:build-dir
+      - task: create:database-manifest-packages
+      - task: create:gitlab-redis-secret-package
+      - task: create:namespaces-package
+      - task: create:object-store-packages
+      - task: create:additional-manifests-package
+      - task: create:bundle
+
+  #### Clean ####
+  - name: clean
+    actions:
+      - cmd: rm -rf ./build/*

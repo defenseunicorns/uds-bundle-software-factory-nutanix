@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: gitlab-redis-secret
+  version: "0.0.1"
+  architecture: amd64
+
+components:
+  - name: redis-password
+    required: true
+    actions:
+      onDeploy:
+        before:
+          - cmd: ./zarf tools kubectl get secret -n dev-redis redis --template='{{ index .data "redis-password" }}' | base64 -d
+            mute: true
+            setVariables:
+              - name: REDIS_PASSWORD
+                sensitive: true
+  - name: gitlab-redis
+    required: true
+    manifests:
+      - name: gitlab-redis
+        namespace: gitlab
+        files:
+          - redis-secret.yaml

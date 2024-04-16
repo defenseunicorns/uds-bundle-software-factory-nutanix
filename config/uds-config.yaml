@@ -1,0 +1,147 @@
+options:
+  log_level: info
+shared:
+  DOMAIN: replace.with.your.domain
+variables:
+  init:
+    REGISTRY_HPA_ENABLE: false
+    CEPH_OSD_MEM_REQUESTS: "4Gi"
+    CEPH_OSD_MEM_LIMITS: "4Gi"
+    ENABLE_CEPH_TOOLBOX: "true"
+  metallb:
+    # Replace with a valid IP address range
+    IP_ADDRESS_POOL: "10.0.0.10-10.0.0.20"
+  core:
+    # CERT values must be base64 encoded
+    ADMIN_TLS_CERT: replace-me-cert
+    ADMIN_TLS_KEY: replace-me-key
+    TENANT_TLS_CERT: replace-me-cert
+    TENANT_TLS_KEY: replace-me-key
+    KEYCLOAK_DB_USERNAME: "postgres"
+    KEYCLOAK_DB_PASSWORD: "replace-me-db-passwords"
+    KEYCLOAK_DB_NAME: "keycloakdb"
+    KEYCLOAK_DB_ENDPOINT: "keycloak-pg.replace.with.db.url"
+    KEYCLOAK_INSECURE_ADMIN_PASSWORD_GENERATION: true
+    LOKI_CHUNKS_BUCKET: "loki-chunks-bucket"
+    LOKI_RULER_BUCKET: "loki-ruler-bucket"
+    LOKI_ADMIN_BUCKET: "loki-admin-bucket"
+    LOKI_S3_ENDPOINT: "http://replace.with.object.store.url"
+    LOKI_S3_REGION: "us-east-1"
+    LOKI_S3_ACCESS_KEY_ID: "replace-me-object-store-access-key"
+    LOKI_S3_SECRET_ACCESS_KEY: "replace-me-object-store-secret-key"
+    VELERO_BUCKET_PROVIDER_URL: "http://replace.with.object.store.url"
+    VELERO_BUCKET: "velero-bucket"
+    VELERO_BUCKET_REGION: "us-east-1"
+    VELERO_BUCKET_KEY: "replace-me-object-store-access-key"
+    VELERO_BUCKET_KEY_SECRET: "replace-me-object-store-secret-key"
+  gitlab-database-secret:
+    GITLAB_DB_PASSWORD: "replace-me-db-passwords"
+  gitlab-object-store:
+    ENDPOINT: "http://replace.with.object.store.url"
+    ACCESS_KEY: "replace-me-object-store-access-key"
+    SECRET_KEY: "replace-me-object-store-secret-key"
+  gitlab:
+    GITLAB_DB_NAME: "gitlabdb"
+    GITLAB_DB_USERNAME: "postgres"
+    GITLAB_DB_ENDPOINT: "gitlab-pg.replace.with.db.url"
+    GITLAB_PAGES_ENABLED: "true"
+    GITLAB_SIGNUP_ENABLED: "false"
+    GITLAB_BACKUP_SCHEDULE: "0 3 * * *"
+    GITLAB_BACKUP_EXTRA_ARGS: "--skip artifiacts,registry"
+    BUCKET_SUFFIX: ""
+    GITLAB_REDIS_ENDPOINT: "redis-master.dev-redis.svc.cluster.local"
+    WEBSERVICE_REPLICAS: 3
+    WEBSERVICE_WORKERS: 4
+    WEBSERVICE_HPA:
+      cpu:
+        targetAverageValue: 1600m
+    WEBSERVICE_RESOURCES:
+      limits:
+        cpu: 8000m
+        memory: 8G
+      requests:
+        cpu: 4000m
+        memory: 5G
+    MIGRATIONS_RESOURCES:
+      limits:
+        cpu: 500m
+        memory: 4G
+    WORKHORSE_RESOURCES:
+      limits:
+        memory: 100M
+      requests:
+        cpu: 10m
+        memory: 10M
+    SIDEKIQ_REPLICAS: 3
+    SIDEKIQ_HPA:
+      cpu:
+        targetAverageValue: 700m
+    SIDEKIQ_RESOURCES:
+      limits:
+        cpu: 2000m
+        memory: 4G
+      requests:
+        cpu: 1000m
+        memory: 2G
+    GITALY_RESOURCES:
+      limits:
+        cpu: 4000m
+        memory: 15G
+      requests:
+        cpu: 4000m
+        memory: 15G
+    REGISTRY_REPLICAS: 2
+    SHELL_REPLICAS: 2
+  sonarqube-database-secret:
+    SONARQUBE_DB_PASSWORD: "replace-me-db-passwords"
+  sonarqube:
+    # db config
+    SONARQUBE_DB_NAME: "sonarqubedb"
+    SONARQUBE_DB_USERNAME: "postgres"
+    SONARQUBE_DB_ENDPOINT: "sonarqube-pg.replace.with.db.url"
+  jira-database-secret:
+    JIRA_DB_PASSWORD: "replace-me-db-passwords"
+  jira:
+    JIRA_DB_NAME: "jiradb"
+    JIRA_DB_USERNAME: "postgres"
+    JIRA_LOCAL_HOME_ENABLED: "true"
+    JIRA_LOCAL_HOME_SIZE: "128Gi"
+    JIRA_RWO_STORAGE_CLASS: "ceph-block"
+    JIRA_DB_ENDPOINT: "jira-pg.replace.with.db.url"
+  confluence-database-secret:
+    CONFLUENCE_DB_PASSWORD: "replace-me-db-passwords"
+  confluence:
+    CONFLUENCE_DB_NAME: "confluencedb"
+    CONFLUENCE_DB_USERNAME: "postgres"
+    CONFLUENCE_LOCAL_HOME_ENABLED: "true"
+    CONFLUENCE_LOCAL_HOME_SIZE: "128Gi"
+    CONFLUENCE_RWO_STORAGE_CLASS: "ceph-block"
+    CONFLUENCE_DB_ENDPOINT: "confluence-pg.replace.with.db.url"
+  mattermost:
+    ACCESS_KEY: "replace-me-object-store-access-key"
+    SECRET_KEY: "replace-me-object-store-secret-key"
+    DB_PASSWORD: "replace-me-db-passwords"
+    DB_USERNAME: "postgres"
+    DB_NAME: "mattermostdb"
+    DB_ENDPOINT: "mattermost-pg.replace.with.db.url"
+    DB_OPTIONS: "?connect_timeout=10&sslmode=disable"
+    OBJECT_STORE_SECURE: "false"
+    OBJECT_STORE_ENDPOINT: "replace.with.object.store.url"
+    OBJECT_STORE_BUCKET: "mattermost-bucket"
+  nexus:
+    NEXUS_DB_NAME: "nexusdb"
+    NEXUS_DB_USERNAME: "postgres"
+    NEXUS_DB_ENDPOINT: "nexus-pg.replace.with.db.url"
+    NEXUS_DB_PASSWORD: "replace-me-db-passwords"
+    NEXUS_SSO_ENABLED: "false"
+    NEXUS_SSO_IDP_ENTITY_ID: ""
+    NEXUS_SSO_IDP_USERNAME_ATTRIBUTE: ""
+    NEXUS_SSO_IDP_FIRSTNAME_ATTRIBUTE: ""
+    NEXUS_SSO_IDP_LASTNAME_ATTRIBUTE: ""
+    NEXUS_SSO_IDP_EMAIL_ATTRIBUTE: ""
+    NEXUS_SSO_IDP_GROUPS_ATTRIBUTE: ""
+    NEXUS_SSO_IDP_VALIDATE_RESPONSE_SIGNATURE: ""
+    NEXUS_SSO_IDP_VALIDATE_ASSERTION_SIGNATURE: ""
+    NEXUS_SSO_IDP_METADATA: ''
+    NEXUS_SSO_REALM: "[]"
+    NEXUS_SSO_ROLE: "[]"

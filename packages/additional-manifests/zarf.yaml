@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/v0.32.1/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: additional-manifests
+  description: "Installs additional needed manifests"
+  architecture: "amd64"
+  version: "0.0.2"
+
+variables:
+  - name: DOMAIN
+    description: "Domain to be used in VS hosts and gateway config"
+    default: "mtsi.bigbang.dev"
+
+components:
+  - name: gitlab-additional-manifests
+    required: true
+    manifests:
+      - name: gitlab-additional-manifests
+        namespace: gitlab
+        files:
+          - gitlab/gitlab-ssh-virtualservice.yaml
+          - gitlab/gitlab-ssh-networkpolicies.yaml
+          - gitlab/gitlab-ssh-gateway.yaml
+          - gitlab/envoy-filter.yaml
+  - name: pepr-policy-exemptions
+    required: true
+    manifests:
+      - name: pepr-policy-exemptions
+        files:
+          - pepr-policy-exemptions/rook-ceph-exemption.yaml

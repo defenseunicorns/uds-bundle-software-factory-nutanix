@@ -1,64 +1,150 @@
 # uds-bundle-software-factory-nutanix
-Detailed list of packages and dependencies in this bundle:
-[packages-and-dependencies.md](docs/packages-and-dependencies.md)
+The UDS Software Factory (SWF) bundle can be used to deploy an opinionated kubernetes based devsecops stack and development environment.
+The full list of packages and dependencies installed by the bundle (and an assumed underlying environment) can be [viewed here](docs/packages-and-dependencies.md).
+
+> NOTE: this project is young and rapidly iterating, stay up to date on changes by subscribing to release notifications
 
 ## Developer Info
-
 [DEVELOPMENT_MAINTENANCE.md](docs/DEVELOPMENT_MAINTENANCE.md)
 
-## Key Points
-This project is continually improving and being iterated on. Stay tuned to the latest updates.
-### Things you will need
-- You need an appropriately provisioned kubernetes cluster to deploy to.
-- You need all databases and object storage provisioned with connection configurations ready to plug into your `uds-config.yaml`. Click the links for more documentation on creation and configuration of your [databases](docs/database-creation-and-configuration.md) and [object store](docs/object-store-creation-and-configuration.md)
-- You need domain configuration and certs ready for use
-- You need [zarf](https://github.com/defenseunicorns/zarf) and [uds](https://github.com/defenseunicorns/uds-cli)
-- You need a bundle artifact. You can build it from this repository, download it or reference it directly from the [oci registry](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/pkgs/container/uds-bundle%2Fsoftware-factory-nutanix)
-- You need a `uds-config.yaml` that is set up for your environment.
-- You need a `deploy-dubbd-values.yaml` to configure some resource increases needed for this bundle.
+## Installation ("quickstart")
+Once the below [Prerequisites](#prerequisites) are met, these are the steps to deploy.
+1) Gather your files in your working directory. Bundle tarball can be referenced via OCI or downloaded for local use.
+  - uds-config.yaml [Instructions on creating this file](#Configuration)
+  - uds-bundle-software-factory-nutanix-amd64-0.x.x.tar.zst [Instructions on OCI reference usage](#deployment). [Instructions on local reference](#(optional)-local-deployment-reference)
+2) Deploy the bundle with the above files in your working directory by [following these instructions](#deployment)
 
-## The Bundle
+### Prerequisites
+**Tools**:
+* [uds version v0.10.3](https://github.com/defenseunicorns/uds-cli/tree/v0.10.3)
+- `sudo curl -sL https://github.com/defenseunicorns/uds-cli/releases/download/v0.10.3/uds-cli_v0.10.3_Linux_amd64`
+* (OPTIONAL) [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
+* (OPTIONAL) [helm](https://github.com/helm/helm)
 
-When disconnected, you can download the tarball for this bundle to use for deployment from the oci compliant github container registry connected to this repo [here](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/pkgs/container/uds-bundle%2Fsoftware-factory-nutanix). You can also deploy the bundle directly from the oci registry if you are in a connected environment.
+**Infrastructure**:
+* Kubernetes cluster
+* Access to the cluster with enough privilege to deploy
+* A valid domain
+  > NOTE: `*.bigbang.dev` may be used for demonstration and test deployments.
+* Wildcard certificates to cover your domain (alternatively, expand for full SAN list)
+  <details>
+    <summary>Individual SAN list </summary>
 
-## uds-config.yaml
-Once you have the bundle where you need or have access to it via oci, you can then set up a `uds-config.yaml` configuration for your environment. This configuration will be used during deployment.
+	* `confluence.your.domain`
+	* `gitlab.your.domain`
+	* `*.pages.your.domain`
+	* `registry.your.domain`
+	* `gitlab.your.domain`
+	* `jira.your.domain`
+	* `keycloak.your.domain`
+	* `kiali.your.domain`
+	* `chat.your.domain`
+	* `grafana.your.domain`
+	* `neuvector.your.domain`
+	* `nexus.your.domain`
+	* `sonarqube.your.domain`
+    * `tracing.your.domain`
+  </details>
 
-Below are the example configurations used in this project to configure deploy time variables for the zarf packages in the bundle.
-- [uds-config.yaml](uds-config/dev-cluster/uds-config.yaml) Example of our nutanix Dev cluster config
-- [uds-config.yaml](uds-config/test-cluster/uds-config.yaml) Example of our nutanix Test cluster config
+  > NOTE: If using the example domain (`*.bigbang.dev`), a valid corresponding certificate and key can be found [in the Platform1 Big Bang repo](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/chart/ingress-certs.yaml?ref_type=heads).
+* Object Storage with provisioned buckets (expand for details).
+These are the default bucket names. Gitlab allows you to add a suffix in your `uds-config.yaml`, so reflect that if you configure a suffix. Also, Loki, Velero and Mattermost allow you to configure your bucket name in your `uds-config.yaml`. Reflect that if you configure those differently then the below defaults.
+  <details>
+    <summary> Loki </summary>
 
-There will be sensitive values you will need to update before deployment. You can search `replace-me` in the above `uds-config.yaml` files for quick reference sensitive values needing updated.
+    * loki-chunks-bucket
+    * loki-ruler-bucket
+    * loki-admin-bucket
+  </details>
+  <details>
+    <summary> Velero </summary>
 
-## Certs
-Currently we are deploying the bundle, and then updating the certs in the cluster to our own `mtsi.bigbang.dev` and `mtsi-dev.bigbang.dev` certs using this [update-certs.sh](scripts/update-certs.sh) script. In a future version we will update this example to put the certs in the `uds-config.yaml` to be setup at deploy time.
+    * velero-backups
+  </details>
+  <details>
+    <summary> Velero </summary>
 
-## High Level Steps
-You can follow the breadcrumbs starting at the [Makefile](Makefile) target `make all/dev-cluster`. This Makefile downloads configured versions of zarf and uds to the build directory, places the `uds-config.yaml` and `deploy-dubbd-values.yaml` in that build directory and performs the deploy command from there. Steps numbered below. Or follow along in the Makefile.
+    * velero-backups
+  </details>
+  <details>
+    <summary> Gitlab </summary>
 
-These breadcrumbs will show you how to:
-1) download the tools you need like zarf and uds.
-```bash
-.PHONY: build/zarf
-build/zarf: | build ## Download the Zarf to the build dir
-	if [ -f build/zarf ] && [ "$$(build/zarf version)" = "$(ZARF_VERSION)" ] ; then exit 0; fi && \
-	echo "Downloading zarf" && \
-	curl -sL https://github.com/defenseunicorns/zarf/releases/download/$(ZARF_VERSION)/zarf_$(ZARF_VERSION)_$(UNAME_S)_$(ARCH) -o build/zarf && \
-	chmod +x build/zarf
+    * uds-gitlab-artifacts
+    * uds-gitlab-backups
+    * uds-gitlab-ci-secure-files
+    * uds-gitlab-dependency-proxy
+    * uds-gitlab-lfs
+    * uds-gitlab-mr-diffs
+    * uds-gitlab-packages
+    * uds-gitlab-pages
+    * uds-gitlab-terraform-state
+    * uds-gitlab-uploads
+    * uds-gitlab-registry
+    * uds-gitlab-tmp
+  </details>
+  <details>
+    <summary> Mattermost </summary>
 
-.PHONY: build/uds
-build/uds: | build ## Download uds-cli to the build dir
-	if [ -f build/uds ] && [ "$$(build/uds version)" = "$(UDS_CLI_VERSION)" ] ; then exit 0; fi && \
-	echo "Downloading uds-cli" && \
-	curl -sL https://github.com/defenseunicorns/uds-cli/releases/download/$(UDS_CLI_VERSION)/uds-cli_$(UDS_CLI_VERSION)_$(UNAME_S)_$(ARCH) -o build/uds && \
-	chmod +x build/uds
+    * mattermost-bucket
+  </details>
+* Postgres databases (expand for details):
+  <details>
+    <summary> Full list of databases </summary>
+
+  * Keycloak
+  * Gitlab
+  * Sonarqube
+  * Jira
+  * Confluence
+  * Mattermost
+  * Nexus
+  </details>
+
+> NOTE: All database and object storage credentials must be provided via username and password in the uds-config.
+
+### Configuration
+Deployment configuration is managed via a `uds-config.yaml` file in the deployment directory. Some values in the configuration will be sensitive, **we do not recommend checking this into source control in its entierty**. Best practice would involve either storing the configuration in an external secrets manager (like Vault), or managing deployments via CD and generating the config file dynamically at deploy time using CD managed secrets.
+
+For demonstration purposes, you can setup a local configfile as follows:
+* Copy an example configuration from [config/uds-config.yaml](config/uds-config.yaml) to your working directory
+* Update the config according to your environment taking care to set:
+  * domain variables
+  * certificate values
+  * bucket names and credentials
+  * database names and credentials
+
+> NOTE: The config must be named `uds-config.yaml` and either be present in your working directory or have the environment variable UDS_CONFIG set to its location at deploy time
+
+### Deployment
+Select a target version number and gather the OCI image reference [from the packages page](https://github.com/orgs/defenseunicorns/packages?repo_name=uds-bundle-software-factory-nutanix). With the above prerequisites and configuration complete, you can deploy the bundle directly via OCI:
 ```
-You can also use brew to install zarf and uds-cli
-```bash
-brew tap defenseunicorns/tap && brew install uds && brew install zarf
+uds deploy oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix:0.x.x --architecure amd64 --confirm
 ```
-2) build all the zarf packages that support this bundle
-1) build the bundle itself
-1) place the `uds-config.yaml` and the `deploy-dubbd-values.yaml` in the directory where the deployment will take place
-1) deploy the software factory.
-1) update the certs with our certs (This step will be replaced with adding the certs to the configuration in a future version)
+
+### (OPTIONAL) Local Deployment Reference
+Situationally, it may be useful to download the deployment artifact so that it may be referenced offline. This can be accomplished by first downloading the target release:
+```
+uds pull oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix:0.x.x --architecture amd64
+```
+
+And subsequently deploying from the local file:
+```
+uds deploy uds-bundle-software-factory-nutanix-amd64-0.x.x.tar.zst --confirm
+```
+
+>NOTE: There is a new default terminal user interface for UDS. When running a deploy from a pipeline you can choose to have the normal terminal output by using the `--no-tea` flag with your uds deploy.
+```
+uds deploy uds-bundle-software-factory-nutanix-amd64-0.x.x.tar.zst --confirm --no-tea
+```
+
+## Additional Notes
+You can reference the uds tasks in this project to learn how to build and deploy.
+
+```bash
+# List the available tasks to run
+uds run --list
+
+# Run the create-bundle task
+uds run create-bundle
+```
+
