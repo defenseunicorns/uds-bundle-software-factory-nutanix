@@ -14,7 +14,7 @@ packages:
     repository: ghcr.io/defenseunicorns/uds-capability/rook-ceph/init
     optionalComponents:
       - git-server
-    ref: v0.32.6-0.2.5
+    ref: v0.33.0-0.2.6
     overrides:
       rook-ceph-cluster:
         rook-ceph-cluster:
@@ -38,7 +38,7 @@ packages:
 
   - name: core
     repository: ghcr.io/defenseunicorns/packages/uds/core
-    ref: 0.18.0-registry1
+    ref: 0.19.0-registry1
     overrides:
       velero:
         velero:
@@ -239,7 +239,7 @@ packages:
 
   - name: gitlab
     repository: ghcr.io/defenseunicorns/packages/uds/gitlab
-    ref: 16.10.1-uds.1-registry1
+    ref: 16.10.2-uds.0-registry1
     overrides:
       gitlab:
         gitlab:
