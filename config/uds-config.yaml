@@ -2,7 +2,7 @@ options:
   log_level: info
 shared:
   DOMAIN: replace.with.your.domain
-  ADDITIONAL_CA_CERT: replace-me-additional-ca-cert
+  ADDITIONAL_CA_CHAIN: replace-me-with-additional-ca-chain
 variables:
   init:
     REGISTRY_HPA_ENABLE: false

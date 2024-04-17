@@ -30,9 +30,9 @@ components:
       - name: pepr-policy-exemptions
         files:
           - pepr-policy-exemptions/rook-ceph-exemption.yaml
-  - name: mattermost-cert-secrets
+  - name: mattermost-ca-secret
     required: true
     manifests:
-      - name: mattermost-cert-secrets
+      - name: mattermost-ca-secret
         files:
-          - mattermost/ca-cert.yaml
+          - mattermost/ca-secret.yaml
