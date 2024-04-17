@@ -2,6 +2,7 @@ options:
   log_level: info
 shared:
   DOMAIN: replace.with.your.domain
+  # ADDITIONAL_CA_CHAIN value must be base64 encoded
   ADDITIONAL_CA_CHAIN: replace-me-with-additional-ca-chain
 variables:
   init:
@@ -13,7 +14,7 @@ variables:
     # Replace with a valid IP address range
     IP_ADDRESS_POOL: "10.0.0.10-10.0.0.20"
   core:
-    # CERT values must be base64 encoded
+    # TLS CERT and KEY values must be base64 encoded
     ADMIN_TLS_CERT: replace-me-cert
     ADMIN_TLS_KEY: replace-me-key
     TENANT_TLS_CERT: replace-me-cert
