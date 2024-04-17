@@ -38,7 +38,7 @@ The UDS Software Factory Bundle (SWF) is a collection of Zarf packages which inc
 
 | Name | Package Version (internal) | Application Version | Description |
 |----|----|----|----|
-| [Rook Ceph Zarf Init](https://github.com/defenseunicorns/uds-capability-rook-ceph/pkgs/container/uds-capability%2Frook-ceph%2Finit) | v0.33.0-0.2.6 | N/A | A zarf component installed in the cluster for orchestrating further deployment of Zarf based packages |
+| [Rook Ceph Zarf Init](https://github.com/defenseunicorns/uds-capability-rook-ceph/pkgs/container/uds-capability%2Frook-ceph%2Finit) | v0.33.0-0.2.7 | N/A | A zarf component installed in the cluster for orchestrating further deployment of Zarf based packages |
 | [MetalLB](https://github.com/defenseunicorns/uds-capability-metallb/tree/v0.0.5) | 0.0.5 | v0.13.12 | Tool for providing load balancer capabilities for ingress into a Kubernetes deployment |
 | [uds-core](https://github.com/defenseunicorns/uds-core) | 0.19.0 | N/A | [DESCRIPTION BELOW](#UDS-Core) |
 | [Redis](https://github.com/defenseunicorns/uds-package-dependencies) | 0.0.1 | 7.0.12 | A key-value store used as a data backend for several applications in the stack |
