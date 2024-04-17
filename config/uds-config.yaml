@@ -1,10 +1,9 @@
 options:
   log_level: info
 shared:
-  DOMAIN: mtsi.bigbang.dev
+  DOMAIN: replace.with.your.domain
 variables:
   init:
-    # TODO - remove this if/when functionality is restored upstream
     REGISTRY_HPA_ENABLE: false
     PRISM_ENDPOINT: "PRISM element IP address"
     PRISM_USERNAME: "csi-user-prism-element-user"
@@ -12,7 +11,7 @@ variables:
     STORAGE_CONTAINER: "nutanix-storage-container"
   metallb:
     # Replace with a valid IP address range
-    IP_ADDRESS_POOL: "10.0.120.70-10.0.120.79"
+    IP_ADDRESS_POOL: "10.0.0.10-10.0.0.20"
   core:
     # CERT values must be base64 encoded
     ADMIN_TLS_CERT: replace-me-cert
@@ -22,27 +21,35 @@ variables:
     KEYCLOAK_DB_USERNAME: "postgres"
     KEYCLOAK_DB_PASSWORD: "replace-me-db-passwords"
     KEYCLOAK_DB_NAME: "keycloakdb"
-    KEYCLOAK_DB_ENDPOINT: "keycloak-pg.mtsi.bigbang.dev"
-    VELERO_BUCKET_PROVIDER_URL: "http://swf.objects.mtsi.bigbang.dev"
-    VELERO_BUCKET: "velero-bucket-test"
+    KEYCLOAK_DB_ENDPOINT: "keycloak-pg.replace.with.db.url"
+    KEYCLOAK_INSECURE_ADMIN_PASSWORD_GENERATION: true
+    LOKI_CHUNKS_BUCKET: "loki-chunks-bucket"
+    LOKI_RULER_BUCKET: "loki-ruler-bucket"
+    LOKI_ADMIN_BUCKET: "loki-admin-bucket"
+    LOKI_S3_ENDPOINT: "http://replace.with.object.store.url"
+    LOKI_S3_REGION: "us-east-1"
+    LOKI_S3_ACCESS_KEY_ID: "replace-me-object-store-access-key"
+    LOKI_S3_SECRET_ACCESS_KEY: "replace-me-object-store-secret-key"
+    VELERO_BUCKET_PROVIDER_URL: "http://replace.with.object.store.url"
+    VELERO_BUCKET: "velero-bucket"
     VELERO_BUCKET_REGION: "us-east-1"
     VELERO_BUCKET_KEY: "replace-me-object-store-access-key"
     VELERO_BUCKET_KEY_SECRET: "replace-me-object-store-secret-key"
   gitlab-database-secret:
     GITLAB_DB_PASSWORD: "replace-me-db-passwords"
   gitlab-object-store:
-    ENDPOINT: "http://swf.objects.mtsi.bigbang.dev"
+    ENDPOINT: "http://replace.with.object.store.url"
     ACCESS_KEY: "replace-me-object-store-access-key"
     SECRET_KEY: "replace-me-object-store-secret-key"
   gitlab:
     GITLAB_DB_NAME: "gitlabdb"
     GITLAB_DB_USERNAME: "postgres"
-    GITLAB_DB_ENDPOINT: "gitlab-pg.mtsi.bigbang.dev"
+    GITLAB_DB_ENDPOINT: "gitlab-pg.replace.with.db.url"
     GITLAB_PAGES_ENABLED: "true"
     GITLAB_SIGNUP_ENABLED: "false"
     GITLAB_BACKUP_SCHEDULE: "0 3 * * *"
     GITLAB_BACKUP_EXTRA_ARGS: "--skip artifiacts,registry"
-    BUCKET_SUFFIX: "-test"
+    BUCKET_SUFFIX: ""
     GITLAB_REDIS_ENDPOINT: "redis-master.dev-redis.svc.cluster.local"
     WEBSERVICE_REPLICAS: 3
     WEBSERVICE_WORKERS: 4
@@ -92,7 +99,7 @@ variables:
     # db config
     SONARQUBE_DB_NAME: "sonarqubedb"
     SONARQUBE_DB_USERNAME: "postgres"
-    SONARQUBE_DB_ENDPOINT: "sonarqube-pg.mtsi.bigbang.dev"
+    SONARQUBE_DB_ENDPOINT: "sonarqube-pg.replace.with.db.url"
   jira-database-secret:
     JIRA_DB_PASSWORD: "replace-me-db-passwords"
   jira:
@@ -100,7 +107,7 @@ variables:
     JIRA_DB_USERNAME: "postgres"
     JIRA_LOCAL_HOME_ENABLED: "true"
     JIRA_LOCAL_HOME_SIZE: "128Gi"
-    JIRA_DB_ENDPOINT: "jira-pg.mtsi.bigbang.dev"
+    JIRA_DB_ENDPOINT: "jira-pg.replace.with.db.url"
   confluence-database-secret:
     CONFLUENCE_DB_PASSWORD: "replace-me-db-passwords"
   confluence:
@@ -108,23 +115,23 @@ variables:
     CONFLUENCE_DB_USERNAME: "postgres"
     CONFLUENCE_LOCAL_HOME_ENABLED: "true"
     CONFLUENCE_LOCAL_HOME_SIZE: "128Gi"
-    CONFLUENCE_DB_ENDPOINT: "confluence-pg.mtsi.bigbang.dev"
+    CONFLUENCE_DB_ENDPOINT: "confluence-pg.replace.with.db.url"
   mattermost:
     ACCESS_KEY: "replace-me-object-store-access-key"
     SECRET_KEY: "replace-me-object-store-secret-key"
     DB_PASSWORD: "replace-me-db-passwords"
     DB_USERNAME: "postgres"
     DB_NAME: "mattermostdb"
-    DB_ENDPOINT: "mattermost-pg.mtsi.bigbang.dev"
+    DB_ENDPOINT: "mattermost-pg.replace.with.db.url"
     DB_OPTIONS: "?connect_timeout=10&sslmode=disable"
     OBJECT_STORE_SECURE: "false"
-    OBJECT_STORE_ENDPOINT: "swf.objects.mtsi.bigbang.dev"
-    OBJECT_STORE_BUCKET: "mattermost-bucket-test"
+    OBJECT_STORE_ENDPOINT: "replace.with.object.store.url"
+    OBJECT_STORE_BUCKET: "mattermost-bucket"
   nexus:
     NEXUS_DB_NAME: "nexusdb"
     NEXUS_DB_USERNAME: "postgres"
-    NEXUS_DB_ENDPOINT: "nexus-pg.mtsi.bigbang.dev"
-    POSTGRES_DB_PASSWORD: "replace-me-db-passwords"
+    NEXUS_DB_ENDPOINT: "nexus-pg.replace.with.db.url"
+    NEXUS_DB_PASSWORD: "replace-me-db-passwords"
     NEXUS_SSO_ENABLED: "false"
     NEXUS_SSO_IDP_ENTITY_ID: ""
     NEXUS_SSO_IDP_USERNAME_ATTRIBUTE: ""

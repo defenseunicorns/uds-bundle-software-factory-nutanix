@@ -14,44 +14,39 @@ tasks:
   - name: bundle
     description: Create the UDS Bundle with SWF on UDS Core
     actions:
-      - cmd: uds create ./bundles/uds-core-swf --architecture=${ARCH} --confirm
+      - cmd: ./uds create ./bundles/uds-core-swf --architecture=${ARCH} --confirm
       - cmd: mv ./bundles/uds-core-swf/uds-bundle-* ./build
 
   # Packages
   - name: database-manifest-packages
     description: Create database manifest packages
     actions:
-      - cmd: uds zarf package create ./packages/databases/confluence/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
-      - cmd: uds zarf package create ./packages/databases/gitlab/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
-      - cmd: uds zarf package create ./packages/databases/jira/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
-      - cmd: uds zarf package create ./packages/databases/sonarqube/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: ./uds zarf package create ./packages/databases/confluence/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: ./uds zarf package create ./packages/databases/gitlab/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: ./uds zarf package create ./packages/databases/jira/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: ./uds zarf package create ./packages/databases/sonarqube/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
 
   - name: gitlab-redis-secret-package
     description: Create package for the gitlab redis secret
     actions:
-      - cmd: uds zarf package create ./packages/gitlab-redis --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: ./uds zarf package create ./packages/gitlab-redis --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
 
   - name: namespaces-package
     description: Create the namespaces package
     actions:
-      - cmd: uds zarf package create ./packages/namespaces --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
-
-  - name: idam-packages
-    description: Create the idam packages
-    actions:
-      - cmd: uds zarf package create ./packages/idam-dns --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: ./uds zarf package create ./packages/namespaces --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
 
   - name: object-store-packages
     description: Create the object storage packages
     actions:
-      - cmd: uds zarf package create ./packages/object-store/gitlab --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: ./uds zarf package create ./packages/object-store/gitlab --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
 
   - name: additional-manifests-package
     description: Create package create additional manifests needed.
     actions:
-      - cmd: uds zarf package create ./packages/additional-manifests --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: ./uds zarf package create ./packages/additional-manifests --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
 
   - name: init-package
     description: Create init package with Nutanix CSI driver.
     actions:
-      - cmd: ZARF_CONFIG=./packages/init/zarf-config.yaml uds zarf package create ./packages/init --set AGENT_IMAGE_TAG=v$(uds zarf version) --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: ZARF_CONFIG=./packages/init/zarf-config.yaml ./uds zarf package create ./packages/init --set AGENT_IMAGE_TAG=v$(uds zarf version) --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build

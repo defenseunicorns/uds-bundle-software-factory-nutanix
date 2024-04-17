@@ -1,10 +1,10 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/uds-cli/v0.9.4/uds.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/uds-cli/v0.10.3/uds.schema.json
 kind: UDSBundle
 metadata:
   name: software-factory-nutanix
   description: A UDS bundle for deploying a software factory to an RKE2 cluster
   # x-release-please-start-version
-  version: "0.2.3"
+  version: "0.2.4"
   # x-release-please-end
   architecture: amd64
 
@@ -14,7 +14,7 @@ packages:
     path: ../../build
     optionalComponents:
       - git-server
-    ref: 0.32.4
+    ref: 0.33.0
     overrides:
       nutanix-csi-storage:
         nutanix-csi-storage:
@@ -40,7 +40,7 @@ packages:
 
   - name: core
     repository: ghcr.io/defenseunicorns/packages/uds/core
-    ref: 0.16.1-upstream
+    ref: 0.18.0-registry1
     overrides:
       velero:
         velero:
@@ -132,12 +132,52 @@ packages:
               description: "keycloak database name"
               path: postgresql.host
               default: "postgresql"
+            - name: KEYCLOAK_INSECURE_ADMIN_PASSWORD_GENERATION
+              description: "Generate an insecure admin password for dev/test"
+              path: insecureAdminPasswordGeneration.enabled
       loki:
         loki:
           values:
             # Override default dns service name for Loki Gateway
             - path: "global.dnsService"
               value: "rke2-coredns-rke2-coredns"
+          variables:
+            - name: LOKI_CHUNKS_BUCKET
+              description: "The object storage bucket for Loki chunks"
+              path: loki.storage.bucketNames.chunks
+              default: "loki-chunks-bucket"
+            - name: LOKI_RULER_BUCKET
+              description: "The object storage bucket for Loki ruler"
+              path: loki.storage.bucketNames.ruler
+              default: "loki-ruler-bucket"
+            - name: LOKI_ADMIN_BUCKET
+              description: "The object storage bucket for Loki admin"
+              path: loki.storage.bucketNames.admin
+              default: "loki-admin-bucket"
+            - name: LOKI_S3_ENDPOINT
+              description: "The S3 endpoint"
+              path: loki.storage.s3.endpoint
+            - name: LOKI_S3_REGION
+              description: "The S3 region"
+              path: loki.storage.s3.region
+            - name: LOKI_S3_ACCESS_KEY_ID
+              description: "The S3 Access Key ID"
+              path: loki.storage.s3.accessKeyId
+            - name: LOKI_S3_SECRET_ACCESS_KEY
+              path: loki.storage.s3.secretAccessKey
+              description: "The S3 Secret Access Key"
+            - name: LOKI_WRITE_REPLICAS
+              path: write.replicas
+              description: "Loki write replicas"
+              default: "1"
+            - name: LOKI_READ_REPLICAS
+              path: read.replicas
+              description: "Loki read replicas"
+              default: "1"
+            - name: LOKI_BACKEND_REPLICAS
+              path: backend.replicas
+              description: "Loki backend replicas"
+              default: "1"
       istio-admin-gateway:
         uds-istio-config:
           variables:
@@ -201,7 +241,7 @@ packages:
 
   - name: gitlab
     repository: ghcr.io/defenseunicorns/packages/uds/gitlab
-    ref: 16.9.2-uds.0-registry1
+    ref: 16.10.1-uds.1-registry1
     overrides:
       gitlab:
         gitlab:
@@ -223,7 +263,7 @@ packages:
               path: "gitlab.webservice.resources"
             - name: WORKHORSE_RESOURCES
               description: "Gitlab Workhorse Resources"
-              path: "gitlab.workhorse.resources"
+              path: "gitlab.webservice.workhorse.resources"
             - name: SIDEKIQ_REPLICAS
               description: "Gitlab Sidekiq Min Replicas"
               path: "gitlab.sidekiq.minReplicas"
@@ -246,7 +286,7 @@ packages:
   # Gitlab Runner
   - name: gitlab-runner
     repository: ghcr.io/defenseunicorns/packages/uds/gitlab-runner
-    ref: 16.8.0-uds.0-registry1
+    ref: 16.10.0-uds.0-registry1
 
   # Sonarqube
   - name: sonarqube-database-secret
@@ -255,7 +295,7 @@ packages:
 
   - name: sonarqube
     repository: ghcr.io/defenseunicorns/packages/uds/sonarqube
-    ref: 8.0.3-uds.4-registry1
+    ref: 8.0.3-uds.6-registry1
 
   # Jira
   - name: jira-database-secret
@@ -264,7 +304,7 @@ packages:
 
   - name: jira
     repository: ghcr.io/defenseunicorns/packages/uds/jira
-    ref: 1.17.0-uds.1-registry1
+    ref: 1.17.2-uds.0-registry1
     overrides:
       jira:
         jira:
@@ -288,7 +328,7 @@ packages:
 
   - name: confluence
     repository: ghcr.io/defenseunicorns/packages/uds/confluence
-    ref: 1.17.0-uds.2-registry1
+    ref: 1.18.0-uds.0-registry1
     overrides:
       confluence:
         confluence:
@@ -308,7 +348,7 @@ packages:
   # Mattermost
   - name: mattermost
     repository: ghcr.io/defenseunicorns/packages/uds/mattermost
-    ref: 9.4.1-uds.2-registry1
+    ref: 9.6.1-uds.0-registry1
     overrides:
       mattermost:
         uds-mattermost-config:
@@ -320,15 +360,13 @@ packages:
             - name: OBJECT_STORE_ENDPOINT
               path: "objectStorage.endpoint"
               description: "Object storage endpoint"
-              default: "swf.objects.mtsi.bigbang.dev"
             - name: OBJECT_STORE_BUCKET
               path: "objectStorage.bucket"
               description: "Object storage bucket"
-              default: "mattermost-bucket-dev"
+              default: "mattermost-bucket"
             - name: DB_ENDPOINT
               path: "postgres.host"
               description: "Postgres DB endpoint"
-              default: "mattermost-pg.mtsi-dev.bigbang.dev"
             - name: DB_USERNAME
               path: "postgres.username"
               description: "Postgres DB username"
@@ -345,11 +383,4 @@ packages:
   # Nexus
   - name: nexus
     repository: ghcr.io/defenseunicorns/packages/uds/nexus
-    ref: 3.64.0-uds.1-registry1
-
-  # Add all virtualservices as internal dns entries for auth callbacks
-  - name: software-factory-idam-dns
-    path: ../../build
-    ref: 1.0.0
-    optionalComponents:
-      - create-internal-dns-entries
+    ref: 3.66.0-uds.1-registry1
