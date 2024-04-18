@@ -2,6 +2,52 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.5](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.4...v0.2.5) (2024-04-18)
+
+### Release Notes
+- Download and use uds v0.10.4 with this release
+- Contains Gitlab security updates
+- Contains Gitlab Web IDE is fixed
+- View [updated dependency doc](docs/packages-and-dependencies.md) for all package version updates in this release
+- Mattermost should be in a better state. Some plugins may still need more work
+- You can now add a CA cert chain to trust and mattermost will consume that config and mount it to its ssl certs
+- You can update your `uds-config.yaml` to contain the new variables shown below. `VOLUME_MOUNTS` and `VOLUMES` must be those values as the bundle will create the secret containing what you provide in the `ADDITIONAL_CA_CHAIN`. You can leave these variables out if you don't need them.
+```yaml
+shared:
+  # ADDITIONAL_CA_CHAIN value must be base64 encoded
+  ADDITIONAL_CA_CHAIN: replace-me-with-additional-ca-chain
+variables:
+  mattermost:
+    VOLUME_MOUNTS:
+      - name: ca-cert
+        mountPath: /etc/ssl/certs
+        readOnly: true
+    VOLUMES:
+      - name: ca-cert
+        secret:
+          secretName: ca-secret
+          defaultMode: 0644
+```
+
+### Features
+
+* add ability to add additional cert chain for mattermost ([1eb5528](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/1eb5528b815135b16497aaad90c99625ecea76e4))
+
+
+### Bug Fixes
+
+* mattermost object storage configuration ([#81](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/81)) ([1eb5528](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/1eb5528b815135b16497aaad90c99625ecea76e4))
+
+
+### Miscellaneous
+
+* add renovate config ([0beebda](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/0beebda63c0c4a16dcf4ea9f1da2a77ce931a308))
+* cleanup namespaces package ([cff40a9](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/cff40a90a16b9cdf8938ce8d0f0108c5e3e9328e))
+* update gitlab to 16.10.2-uds.0 ([0beebda](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/0beebda63c0c4a16dcf4ea9f1da2a77ce931a308))
+* update init package to v0.33.0-0.2.7 ([#83](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/83)) ([0beebda](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/0beebda63c0c4a16dcf4ea9f1da2a77ce931a308))
+* update uds-cli to 0.10.4 ([0beebda](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/0beebda63c0c4a16dcf4ea9f1da2a77ce931a308))
+* update uds-core to v0.19.0 ([0beebda](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/0beebda63c0c4a16dcf4ea9f1da2a77ce931a308))
+
 ## [0.2.4](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.3...v0.2.4) (2024-04-05)
 
 ### Release Notes
