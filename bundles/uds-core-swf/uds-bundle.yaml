@@ -1,10 +1,10 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/uds-cli/v0.10.3/uds.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/uds-cli/v0.10.4/uds.schema.json
 kind: UDSBundle
 metadata:
   name: software-factory-nutanix
   description: A UDS bundle for deploying a software factory to an RKE2 cluster
   # x-release-please-start-version
-  version: "0.2.3"
+  version: "0.2.5"
   # x-release-please-end
   architecture: amd64
 
@@ -14,7 +14,7 @@ packages:
     repository: ghcr.io/defenseunicorns/uds-capability/rook-ceph/init
     optionalComponents:
       - git-server
-    ref: v0.32.6-0.2.5
+    ref: v0.33.0-0.2.7
     overrides:
       rook-ceph-cluster:
         rook-ceph-cluster:
@@ -38,7 +38,7 @@ packages:
   
   - name: core
     repository: ghcr.io/defenseunicorns/packages/uds/core
-    ref: 0.18.0-registry1
+    ref: 0.19.0-registry1
     overrides:
       velero:
         velero:
@@ -244,7 +244,7 @@ packages:
 
   - name: gitlab
     repository: ghcr.io/defenseunicorns/packages/uds/gitlab
-    ref: 16.10.1-uds.1-registry1
+    ref: 16.10.2-uds.0-registry1
     overrides:
       gitlab:
         gitlab:
@@ -354,6 +354,14 @@ packages:
     ref: 9.6.1-uds.0-registry1
     overrides:
       mattermost:
+        mattermost-enterprise-edition:
+          variables:
+            - name: VOLUMES
+              path: "mattermostApp.extraVolumes"
+              description: "Used to mount ca certs"
+            - name: VOLUME_MOUNTS
+              path: "mattermostApp.extraVolumeMounts"
+              description: "Used to mount ca certs"
         uds-mattermost-config:
           variables:
             - name: OBJECT_STORE_SECURE
@@ -367,6 +375,10 @@ packages:
               path: "objectStorage.bucket"
               description: "Object storage bucket"
               default: "mattermost-bucket"
+            - name: OBJECT_STORE_REGION
+              path: "objectStorage.region"
+              description: "Object storage region"
+              default: "us-east-1"
             - name: DB_ENDPOINT
               path: "postgres.host"
               description: "Postgres DB endpoint"

@@ -27,12 +27,6 @@ namespaces:
   - name: mattermost
     labels:
       istio-injection: enabled
-  - name: mattermost-minio
-    labels:
-      istio-injection: enabled
-  - name: mattermost-operator
-    labels:
-      istio-injection: enabled
   - name: nexus
     labels:
       istio-injection: enabled

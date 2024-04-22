@@ -2,6 +2,116 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.5](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.4...v0.2.5) (2024-04-18)
+
+### Release Notes
+- Download and use uds v0.10.4 with this release
+- Contains Gitlab security updates
+- Contains Gitlab Web IDE is fixed
+- View [updated dependency doc](docs/packages-and-dependencies.md) for all package version updates in this release
+- Mattermost should be in a better state. Some plugins may still need more work
+- You can now add a CA cert chain to trust and mattermost will consume that config and mount it to its ssl certs
+- You can update your `uds-config.yaml` to contain the new variables shown below. `VOLUME_MOUNTS` and `VOLUMES` must be those values as the bundle will create the secret containing what you provide in the `ADDITIONAL_CA_CHAIN`. You can leave these variables out if you don't need them.
+```yaml
+shared:
+  # ADDITIONAL_CA_CHAIN value must be base64 encoded
+  ADDITIONAL_CA_CHAIN: replace-me-with-additional-ca-chain
+variables:
+  mattermost:
+    VOLUME_MOUNTS:
+      - name: ca-cert
+        mountPath: /etc/ssl/certs
+        readOnly: true
+    VOLUMES:
+      - name: ca-cert
+        secret:
+          secretName: ca-secret
+          defaultMode: 0644
+```
+
+### Features
+
+* add ability to add additional cert chain for mattermost ([1eb5528](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/1eb5528b815135b16497aaad90c99625ecea76e4))
+
+
+### Bug Fixes
+
+* mattermost object storage configuration ([#81](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/81)) ([1eb5528](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/1eb5528b815135b16497aaad90c99625ecea76e4))
+
+
+### Miscellaneous
+
+* add renovate config ([0beebda](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/0beebda63c0c4a16dcf4ea9f1da2a77ce931a308))
+* cleanup namespaces package ([cff40a9](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/cff40a90a16b9cdf8938ce8d0f0108c5e3e9328e))
+* update gitlab to 16.10.2-uds.0 ([0beebda](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/0beebda63c0c4a16dcf4ea9f1da2a77ce931a308))
+* update init package to v0.33.0-0.2.7 ([#83](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/83)) ([0beebda](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/0beebda63c0c4a16dcf4ea9f1da2a77ce931a308))
+* update uds-cli to 0.10.4 ([0beebda](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/0beebda63c0c4a16dcf4ea9f1da2a77ce931a308))
+* update uds-core to v0.19.0 ([0beebda](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/0beebda63c0c4a16dcf4ea9f1da2a77ce931a308))
+
+## [0.2.4](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.3...v0.2.4) (2024-04-05)
+
+### Release Notes
+There are some configuration values to add and update in your `uds-config.yaml` file
+```yaml
+variables:
+  core:
+    # Creates a default admin account. Change the password on first login!
+    KEYCLOAK_INSECURE_ADMIN_PASSWORD_GENERATION: true
+    # New Loki configs for loki simple scalable deployment
+    LOKI_CHUNKS_BUCKET: "loki-chunks-bucket"
+    LOKI_RULER_BUCKET: "loki-ruler-bucket"
+    LOKI_ADMIN_BUCKET: "loki-admin-bucket"
+    LOKI_S3_ENDPOINT: "http://replace.with.object.store.url"
+    LOKI_S3_REGION: "us-east-1"
+    LOKI_S3_ACCESS_KEY_ID: "replace-me-object-store-access-key"
+    LOKI_S3_SECRET_ACCESS_KEY: "replace-me-object-store-secret-key"
+    # New Velero configs
+    VELERO_BUCKET_PROVIDER_URL: "http://replace.with.object.store.url"
+    VELERO_BUCKET: "velero-bucket"
+    VELERO_BUCKET_REGION: "us-east-1"
+    VELERO_BUCKET_KEY: "replace-me-object-store-access-key"
+    VELERO_BUCKET_KEY_SECRET: "replace-me-object-store-secret-key"
+  nexus:
+    # Updated the name of this variable
+    NEXUS_DB_PASSWORD: "replace-me-db-passwords"
+```
+
+There are new object storage buckets needed for loki.
+```
+loki-chunks-bucket
+loki-ruler-bucket
+loki-admin-bucket
+```
+
+### Features
+
+* Configure velero ([0e1db1f](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/0e1db1fad4e5a19a97f3f2bf5f21bd1652b9ec23))
+
+
+### Bug Fixes
+
+* confluence variable override names ([6196853](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/6196853cd6f281dc692a1a612489faba7c45295e))
+* gitlab redis secret fix ([#44](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/44)) ([16e23b7](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/16e23b7907ac1452a5c0dac0107e7f509f78fe64))
+* gitlab workhorse resource config ([6196853](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/6196853cd6f281dc692a1a612489faba7c45295e))
+* jira variable override names ([6196853](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/6196853cd6f281dc692a1a612489faba7c45295e))
+
+
+### Miscellaneous
+
+* add new keycloak admin and loki scalable configs ([6196853](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/6196853cd6f281dc692a1a612489faba7c45295e))
+* remove core dns package ([16e23b7](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/16e23b7907ac1452a5c0dac0107e7f509f78fe64))
+* update confluence to 1.18.0-uds.0 ([6196853](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/6196853cd6f281dc692a1a612489faba7c45295e))
+* update gitlab to 16.10.1-uds.1 ([6196853](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/6196853cd6f281dc692a1a612489faba7c45295e))
+* update gitlab-runner to 16.10.0-uds.0 ([6196853](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/6196853cd6f281dc692a1a612489faba7c45295e))
+* update jira to 1.17.2-uds.0 ([6196853](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/6196853cd6f281dc692a1a612489faba7c45295e))
+* update mattermost to 9.6.1-uds.0 ([6196853](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/6196853cd6f281dc692a1a612489faba7c45295e))
+* update nexus to 3.66.0-uds.1-registry1 ([6196853](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/6196853cd6f281dc692a1a612489faba7c45295e))
+* update sonarqube to 8.0.3-uds.6 ([6196853](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/6196853cd6f281dc692a1a612489faba7c45295e))
+* update uds tasks to use ./uds ([16e23b7](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/16e23b7907ac1452a5c0dac0107e7f509f78fe64))
+* update uds-cli to v0.10.3 ([6196853](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/6196853cd6f281dc692a1a612489faba7c45295e))
+* update uds-core to 0.18.0 ([#77](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/77)) ([6196853](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/6196853cd6f281dc692a1a612489faba7c45295e))
+* update zarf init/rook to v0.32.6-0.2.5 ([6196853](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/6196853cd6f281dc692a1a612489faba7c45295e))
+
 ## [0.2.3](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.2...v0.2.3) (2024-03-14)
 
 
