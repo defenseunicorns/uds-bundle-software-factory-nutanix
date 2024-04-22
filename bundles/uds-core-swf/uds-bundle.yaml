@@ -114,8 +114,14 @@ packages:
       keycloak:
         keycloak:
           values:
+            - path: "devMode"
+              value: "false"
+            - path: "autoscaling.enabled"
+              value: "true"
             - path: "persistence.providers.enabled"
               value: "true"
+            - path: "persistence.accessMode""
+              value: "ReadWriteMany"
           variables:
             - name: KEYCLOAK_DB_USERNAME
               description: "keycloak database username"
