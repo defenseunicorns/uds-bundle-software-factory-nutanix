@@ -122,6 +122,8 @@ packages:
               value: "true"
             - path: "persistence.accessMode"
               value: "ReadWriteMany"
+            - path: "persistence.storageClassName"
+              value: "ceph-filesystem"
           variables:
             - name: KEYCLOAK_DB_USERNAME
               description: "keycloak database username"
