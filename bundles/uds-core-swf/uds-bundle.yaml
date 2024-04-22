@@ -120,7 +120,7 @@ packages:
               value: "true"
             - path: "persistence.providers.enabled"
               value: "true"
-            - path: "persistence.accessMode""
+            - path: "persistence.accessMode"
               value: "ReadWriteMany"
           variables:
             - name: KEYCLOAK_DB_USERNAME
