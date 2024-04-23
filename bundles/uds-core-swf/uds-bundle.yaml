@@ -42,9 +42,15 @@ packages:
     overrides:
       kube-prometheus-stack:
         kube-prometheus-stack:
-          variables:
-            - name: PROMETHEUS_KUBE_STATE_METRICS_RESOURCES
-              path: kube-state-metrics.resources
+          values:
+            - path: kube-state-metrics.resources
+              value:
+                limits:
+                  cpu: 500m
+                  memory: 512Mi
+                requests:
+                  cpu: 20m
+                  memory: 128Mi
       velero:
         velero:
           values:
