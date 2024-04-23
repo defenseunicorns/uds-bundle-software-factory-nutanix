@@ -1,0 +1,16 @@
+apiVersion: uds.dev/v1alpha1
+kind: Exemption
+metadata:
+  name: mattermost-rtcd
+  namespace: uds-policy-exemptions
+spec:
+  exemptions:
+    - policies:
+      - DisallowHostNamespaces
+      - RestrictHostPorts
+      - DisallowPrivileged
+      matcher:
+        namespace: mattermost
+        name: "^mattermost-rtcd*"
+      title: "mattermost rtcd exemptions"
+      description: "mattermost needs exemptions for rtcd for a value we can't override"

@@ -1,0 +1,81 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: calls-api
+  namespace: mattermost
+spec:
+  selector:
+    app.kubernetes.io/name: mattermost-enterprise-edition
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80
+    - name: https
+      protocol: TCP
+      port: 443
+      targetPort: 443
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: rtc-udp
+  namespace: mattermost
+spec:
+  selector:
+    app.kubernetes.io/name: mattermost-enterprise-edition
+  ports:
+    - name: rtc-udp
+      protocol: UDP
+      port: 8443
+      targetPort: 8443
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: rtc-tcp
+  namespace: mattermost
+spec:
+  selector:
+    app.kubernetes.io/name: mattermost-enterprise-edition
+  ports:
+    - name: rtc-tcp
+      protocol: TCP
+      port: 8443
+      targetPort: 8443
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: rtcd-api
+  namespace: mattermost
+spec:
+  selector:
+    app: rtcd
+  ports:
+    - name: rtcd-api
+      protocol: TCP
+      port: 8045
+      targetPort: 8045
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: stun
+  namespace: mattermost
+spec:
+  selector:
+    app.kubernetes.io/name: mattermost-enterprise-edition
+  ports:
+    - name: stun
+      protocol: UDP
+      port: 3478
+      targetPort: 3478
