@@ -36,6 +36,13 @@ variables:
     VELERO_BUCKET_REGION: "us-east-1"
     VELERO_BUCKET_KEY: "replace-me-object-store-access-key"
     VELERO_BUCKET_KEY_SECRET: "replace-me-object-store-secret-key"
+    PROMETHEUS_KUBE_STATE_METRICS_RESOURCES:
+      limits:
+        cpu: 500m
+        memory: 512Mi
+      requests:
+        cpu: 10m
+        memory: 128Mi
   gitlab-database-secret:
     GITLAB_DB_PASSWORD: "replace-me-db-passwords"
   gitlab-object-store:

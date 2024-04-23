@@ -35,11 +35,16 @@ packages:
   - name: metallb
     repository: ghcr.io/defenseunicorns/packages/metallb
     ref: 0.0.5-amd64
-  
+
   - name: core
     repository: ghcr.io/defenseunicorns/packages/uds/core
     ref: 0.20.0-registry1
     overrides:
+      kube-prometheus-stack:
+        kube-prometheus-stack:
+          variables:
+            - name: PROMETHEUS_KUBE_STATE_METRICS_RESOURCES
+              path: kube-state-metrics.resources
       velero:
         velero:
           values:
@@ -231,7 +236,7 @@ packages:
   - name: keycloak-config-wrapper
     path: ../../build
     ref: 0.0.1
- 
+
   # Additional manifests needed
   - name: additional-manifests
     path: ../../build
