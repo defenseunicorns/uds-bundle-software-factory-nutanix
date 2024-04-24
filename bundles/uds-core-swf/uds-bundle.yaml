@@ -38,8 +38,19 @@ packages:
 
   - name: core
     repository: ghcr.io/defenseunicorns/packages/uds/core
-    ref: 0.19.0-registry1
+    ref: 0.20.0-registry1
     overrides:
+      kube-prometheus-stack:
+        kube-prometheus-stack:
+          values:
+            - path: kube-state-metrics.resources
+              value:
+                limits:
+                  cpu: 500m
+                  memory: 512Mi
+                requests:
+                  cpu: 20m
+                  memory: 128Mi
       velero:
         velero:
           values:
@@ -113,6 +124,18 @@ packages:
                     ttl: "240h"
       keycloak:
         keycloak:
+          values:
+            # TODO - test/debug
+            # - path: "devMode"
+            #   value: "false"
+            # - path: "autoscaling.enabled"
+            #   value: "true"
+            - path: "persistence.providers.enabled"
+              value: "true"
+            - path: "persistence.accessMode"
+              value: "ReadWriteMany"
+            - path: "persistence.storageClassName"
+              value: "ceph-filesystem"
           variables:
             - name: KEYCLOAK_DB_USERNAME
               description: "keycloak database username"
@@ -214,6 +237,11 @@ packages:
             - name: TENANT_TLS_KEY
               description: "The TLS key for the tenant gateway (must be base64 encoded)"
               path: tls.key
+
+  # NOTE -- depends on hardcoded PVC name(s) in core.keycloak
+  - name: keycloak-config-wrapper
+    path: ../../build
+    ref: 0.0.1
 
   # Additional manifests needed
   - name: additional-manifests
@@ -346,7 +374,7 @@ packages:
   # Mattermost
   - name: mattermost
     repository: ghcr.io/defenseunicorns/packages/uds/mattermost
-    ref: 9.6.1-uds.0-registry1
+    ref: 9.7.1-uds.0-registry1
     overrides:
       mattermost:
         mattermost-enterprise-edition:

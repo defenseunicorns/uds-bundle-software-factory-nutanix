@@ -136,6 +136,10 @@ uds deploy uds-bundle-software-factory-nutanix-amd64-0.x.x.tar.zst --confirm
 ```
 uds deploy uds-bundle-software-factory-nutanix-amd64-0.x.x.tar.zst --confirm --no-tea
 ```
+## Custom Keycloak Plugin
+The Keycloak installation provided as part of UDS Core loads themes and plugins from an init-container. You can optionally provide custom JARs at deploytime simply by adding them to the directory where you run `uds deploy`. This will result in a custom Zarf package being built locally (to include your custom JAR).
+
+> ANY CUSTOM JAR YOU ADD AT DEPLOY TIME WILL NOT BE INCLUDED IN THE BUNDLE SBOM
 
 ## Additional Notes
 You can reference the uds tasks in this project to learn how to build and deploy.
