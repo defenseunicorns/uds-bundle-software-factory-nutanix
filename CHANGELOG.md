@@ -5,15 +5,17 @@ All notable changes to this project will be documented in this file.
 ## [0.2.6](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.5...v0.2.6) (2024-04-24)
 
 ### Release Notes
-- Added [custom keycloak plugin support](./README.md#custom-keycloak-plugin)
+- Added custom keycloak plugin support. Below note is in the README.md of this repo.
 ```
 Custom Keycloak Plugin
-The Keycloak installation provided as part of UDS Core loads themes and plugins from an init-container. You can optionally provide custom JARs at deploytime simply by adding them to the directory where you run uds deploy. This will result in a custom Zarf package being built locally (to include your custom JAR).
+The Keycloak installation provided as part of UDS Core loads themes and plugins from an init-container.
+You can optionally provide custom JARs at deploytime simply by adding them to the directory where you
+run uds deploy. This will result in a custom Zarf package being built locally (to include your custom JAR).
 
 ANY CUSTOM JAR YOU ADD AT DEPLOY TIME WILL NOT BE INCLUDED IN THE BUNDLE SBOM
 ```
 - Package version updates to uds-core and mattermost
-- Updated [packages-and-dependencies doc](docs/packages-and-dependencies.md)
+- Updated [packages and dependencies doc](docs/packages-and-dependencies.md)
 
 ### Features
 
