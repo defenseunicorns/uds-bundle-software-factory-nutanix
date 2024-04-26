@@ -2,6 +2,8 @@ options:
   log_level: info
 shared:
   DOMAIN: replace.with.your.domain
+  # ADDITIONAL_CA_CHAIN value must be base64 encoded
+  ADDITIONAL_CA_CHAIN: replace-me-with-additional-ca-chain
 variables:
   init:
     REGISTRY_HPA_ENABLE: false
@@ -13,7 +15,7 @@ variables:
     # Replace with a valid IP address range
     IP_ADDRESS_POOL: "10.0.0.10-10.0.0.20"
   core:
-    # CERT values must be base64 encoded
+    # TLS CERT and KEY values must be base64 encoded
     ADMIN_TLS_CERT: replace-me-cert
     ADMIN_TLS_KEY: replace-me-key
     TENANT_TLS_CERT: replace-me-cert
@@ -127,6 +129,16 @@ variables:
     OBJECT_STORE_SECURE: "false"
     OBJECT_STORE_ENDPOINT: "replace.with.object.store.url"
     OBJECT_STORE_BUCKET: "mattermost-bucket"
+    OBJECT_STORE_REGION: "us-east-1"
+    VOLUME_MOUNTS:
+      - name: ca-cert
+        mountPath: /etc/ssl/certs
+        readOnly: true
+    VOLUMES:
+      - name: ca-cert
+        secret:
+          secretName: ca-secret
+          defaultMode: 0644
   nexus:
     NEXUS_DB_NAME: "nexusdb"
     NEXUS_DB_USERNAME: "postgres"

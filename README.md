@@ -16,8 +16,8 @@ Once the below [Prerequisites](#prerequisites) are met, these are the steps to d
 
 ### Prerequisites
 **Tools**:
-* [uds version v0.10.3](https://github.com/defenseunicorns/uds-cli/tree/v0.10.3)
-- `sudo curl -sL https://github.com/defenseunicorns/uds-cli/releases/download/v0.10.3/uds-cli_v0.10.3_Linux_amd64`
+* [uds version v0.10.4](https://github.com/defenseunicorns/uds-cli/tree/v0.10.4)
+- `sudo curl -sL https://github.com/defenseunicorns/uds-cli/releases/download/v0.10.4/uds-cli_v0.10.4_Linux_amd64`
 * (OPTIONAL) [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
 * (OPTIONAL) [helm](https://github.com/helm/helm)
 
@@ -136,6 +136,10 @@ uds deploy uds-bundle-software-factory-nutanix-amd64-0.x.x.tar.zst --confirm
 ```
 uds deploy uds-bundle-software-factory-nutanix-amd64-0.x.x.tar.zst --confirm --no-tea
 ```
+## Custom Keycloak Plugin
+The Keycloak installation provided as part of UDS Core loads themes and plugins from an init-container. You can optionally provide custom JARs at deploytime simply by adding them to the directory where you run `uds deploy`. This will result in a custom Zarf package being built locally (to include your custom JAR).
+
+> ANY CUSTOM JAR YOU ADD AT DEPLOY TIME WILL NOT BE INCLUDED IN THE BUNDLE SBOM
 
 ## Additional Notes
 You can reference the uds tasks in this project to learn how to build and deploy.

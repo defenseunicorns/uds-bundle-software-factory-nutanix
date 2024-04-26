@@ -1,0 +1,54 @@
+kind: ZarfPackageConfig
+metadata:
+  name: keycloak-config-wrapper
+  version: "0.0.1"
+
+components:
+  - name: keycloak-config-wrapper
+    required: true
+    description: Loads jar files at deploy time into a new zarf package
+    only:
+      cluster:
+        architecture: amd64
+    files:
+      # Transfer the files for zarf to use at deploytime
+      - source: init-job.yaml
+        target: tmp_deploy/init-job.yaml
+      - source: zarfception.yaml
+        target: tmp_deploy/zarf.yaml
+    actions:
+      onDeploy:
+        before:
+          # cleanup output from previous attempts
+          - cmd: |
+              rm -rf tmp_deploy
+              mkdir tmp_deploy
+          
+          # Check deploy system arch
+          - cmd: if [ "$(uname -m)" != "x86_64" ]; then echo "this package architecture is amd64, but the target system has a different architecture. These architectures must be the same" && exit 1; fi
+            description: Check that the host architecture matches the package architecture
+            maxRetries: 0
+        after:
+          # check for jar files (CAN EXIT EARLY)
+          - cmd: |
+              COUNT=`ls -1 *.jar 2>/dev/null | wc -l`
+              if [ $COUNT = 0 ]; then 
+                echo "No local JAR files detected -- SKIPPING CUSTOM PLUGIN LOAD"
+                exit 0
+              fi 
+
+              # move to workdir
+              cp *.jar tmp_deploy/
+              cd tmp_deploy
+
+              # build the zarf wrapper wrapper (yo dawg... 'zarfception.yaml') -- collect the local files
+              ./zarf package create . --confirm
+
+              # deploy the zarf wrapper
+              ./zarf package deploy zarf-package*.tar.zst --confirm 
+        
+        # CLEANUP attempted deploys
+        onSuccess:
+          - cmd: rm -rf tmp_deploy
+        onFailure:
+          - cmd: rm -rf tmp_deploy
