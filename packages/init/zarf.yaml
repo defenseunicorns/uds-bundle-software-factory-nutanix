@@ -5,23 +5,27 @@ metadata:
   architecture: amd64
   version: "0.0.1" # This version is not used by zarf, but is used for tracking with the published versions
 
+variables:
+  - name: DYNAMIC_FILE_STORE_NAME
+    description: "Name of Nutanix File Server to use for Dynamic File storageclass. Should match the name value for the file server in Prism."
+
 components:
   # (Optional) Deploys a k3s cluster
   - name: k3s
     import:
-      url: oci://ghcr.io/defenseunicorns/packages/init:v0.32.4
+      url: oci://ghcr.io/defenseunicorns/packages/init:v0.33.0
 
   # This package moves the injector & registries binaries
   - name: zarf-injector
     required: true
     import:
-      url: oci://ghcr.io/defenseunicorns/packages/init:v0.32.4
+      url: oci://ghcr.io/defenseunicorns/packages/init:v0.33.0
 
   # Creates the temporary seed-registry
   - name: zarf-seed-registry
     required: true
     import:
-      url: oci://ghcr.io/defenseunicorns/packages/init:v0.32.4
+      url: oci://ghcr.io/defenseunicorns/packages/init:v0.33.0
     charts:
       - name: docker-registry
         valuesFiles:
@@ -60,40 +64,33 @@ components:
       - registry.k8s.io/sig-storage/csi-resizer:v1.9.2
       - registry.k8s.io/sig-storage/livenessprobe:v2.11.0
 
-  # Deploy rook/ceph operator
-  # - name: nutanix-csi-snapshot
-  #   required: true
-  #   charts:
-  #     # renovate: datasource=helm
-  #     - name: nutanix-csi-snapshot
-  #       url: https://nutanix.github.io/helm
-  #       version: v6.3.2
-  #       namespace: ntnx-system
-  #       valuesFiles:
-  #         - values/nutanix-snapshot-values.yaml
+  - name: namespaces
+    required: true
+    charts:
+      - name: namespaces
+        version: 1.0.0
+        namespace: default
+        url: https://defenseunicorns.github.io/uds-support-charts/
+        valuesFiles:
+          - values/namespaces.yaml
 
   - name: nutanix-csi-storage
     required: true
     charts:
       # renovate: datasource=helm
       - name: nutanix-csi-storage
-        url: https://nutanix.github.io/helm
-        version: v2.6.6
+        url: https://github.com/jacobbmay/nutanix-helm.git # fork containing fix for imagepullsecrets needed for pods to pull images from zarf registry
+        version: v2.6.6-modified
+        gitPath: charts/nutanix-csi-storage
         namespace: ntnx-system
         valuesFiles:
           - values/nutanix-storage-values.yaml
-    actions:
-      onDeploy:
-        before:
-          - cmd: |
-              ./zarf tools kubectl patch serviceaccount default -n ntnx-system -p '{"imagePullSecrets": [{"name": "private-registry"}]}'
-            description: "Add pull secrets for nutanix CSI"
 
   # Creates the permanent registry
   - name: zarf-registry
     required: true
     import:
-      url: oci://ghcr.io/defenseunicorns/packages/init:v0.32.4
+      url: oci://ghcr.io/defenseunicorns/packages/init:v0.33.0
 
   # Push rook/ceph (and registry) images to permanent registry
   - name: nutanix-csi-images
@@ -114,9 +111,9 @@ components:
   - name: zarf-agent
     required: true
     import:
-      url: oci://ghcr.io/defenseunicorns/packages/init:v0.32.4
+      url: oci://ghcr.io/defenseunicorns/packages/init:v0.33.0
 
   # (Optional) Adds a git server to the cluster
   - name: git-server
     import:
-      url: oci://ghcr.io/defenseunicorns/packages/init:v0.32.4
+      url: oci://ghcr.io/defenseunicorns/packages/init:v0.33.0

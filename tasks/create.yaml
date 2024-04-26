@@ -49,4 +49,4 @@ tasks:
   - name: init-package
     description: Create init package with Nutanix CSI driver.
     actions:
-      - cmd: ZARF_CONFIG=./packages/init/zarf-config.yaml ./uds zarf package create ./packages/init --set AGENT_IMAGE_TAG=v$(uds zarf version) --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: ZARF_CONFIG=./packages/init/zarf-config.yaml ./uds zarf package create ./packages/init --set AGENT_IMAGE_TAG=$(uds zarf version) --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build

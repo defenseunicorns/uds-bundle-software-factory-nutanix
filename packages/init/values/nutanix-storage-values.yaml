@@ -47,7 +47,7 @@ fileClassRetention: "Delete"
 # fileClassAnnotations: {}
 # fileClassLabels: {}
 
-dynamicFileClass: false
+dynamicFileClass: true
 dynamicFileClassName: "nutanix-dynamicfile"
 dynamicFileClassRetention: "Delete"
 # dynamicFileClassDescription: ""
@@ -111,7 +111,7 @@ networkSegmentation: false
 #
 
 ## name of the file server. (As seen in the Prism Interface)
-# fileServerName:
+fileServerName: ###ZARF_VAR_DYNAMIC_FILE_STORE_NAME###
 
 # Squash-type for dynamic files.
 # Values are: none, root-squash, all-squash. Default is root-squash

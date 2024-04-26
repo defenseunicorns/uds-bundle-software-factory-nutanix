@@ -19,4 +19,4 @@ tasks:
   #### Clean ####
   - name: clean
     actions:
-      - cmd: rm -rf ./build/*
+      - cmd: rm -f ./build/*
