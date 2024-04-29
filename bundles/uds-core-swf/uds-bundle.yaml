@@ -15,18 +15,6 @@ packages:
     optionalComponents:
       - git-server
     ref: v0.33.0
-    overrides:
-      nutanix-csi-storage:
-        nutanix-csi-storage:
-          variables:
-            - path: prismEndPoint
-              name: PRISM_ENDPOINT
-            - path: username
-              name: PRISM_USERNAME
-            - path: password
-              name: PRISM_PASSWORD
-            - path: storageContainer
-              name: STORAGE_CONTAINER
 
   # Namespace pre-reqs for swf capabilities
   - name: software-factory-namespaces
@@ -137,7 +125,7 @@ packages:
             - path: "persistence.accessMode"
               value: "ReadWriteMany"
             - path: "persistence.storageClassName"
-              value: "ceph-filesystem"
+              value: "nutanix-dynamicfile"
           variables:
             - name: KEYCLOAK_DB_USERNAME
               description: "keycloak database username"

@@ -8,6 +8,14 @@ metadata:
 variables:
   - name: DYNAMIC_FILE_STORE_NAME
     description: "Name of Nutanix File Server to use for Dynamic File storageclass. Should match the name value for the file server in Prism."
+  - name: PRISM_ENDPOINT
+    description: "IP or hostname of Prism Element."
+  - name: PRISM_USERNAME
+    description: "Username of prism user to use for Nutanix CSI driver."
+  - name: PRISM_PASSWORD
+    description: "Password for prism user to use for Nutanix CSI driver."
+  - name: STORAGE_CONTAINER
+    description: "Name of Nutanix Storage Container for CSI driver to create volumes in."
 
 components:
   # (Optional) Deploys a k3s cluster

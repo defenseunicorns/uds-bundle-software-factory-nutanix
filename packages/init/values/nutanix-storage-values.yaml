@@ -66,14 +66,14 @@ defaultStorageClass: volume
 # needed if volumeClass or dynamicFileClass is set to true
 
 ## fully qualified domain name (FQDN) or the cluster virtual IP address (if one is not configured, use the virtual IP address of any Controller VM in the cluster).
-# prismEndPoint:
+prismEndPoint: ###ZARF_VAR_PRISM_ENDPOINT###
 prismPort: 9440
 
 ## username of the Prism Element (PE) cluster admin
-# username:
+username: ###ZARF_VAR_PRISM_USERNAME###
 
 ## password for the PE cluster admin.
-# password:
+password: ###ZARF_VAR_PRISM_PASSWORD###
 
 ## secret name that stores Nutanix cluster credentials
 secretName: ntnx-secret
@@ -88,7 +88,7 @@ createSecret: true
 #
 
 ## name of the Nutanix storage container
-# storageContainer:
+storageContainer: ###ZARF_VAR_STORAGE_CONTAINER###
 
 ## Filesystem used in volume PV
 fsType: xfs
