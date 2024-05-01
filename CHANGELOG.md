@@ -2,6 +2,48 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.7](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.6...v0.2.7) (2024-05-01)
+
+### Updated packages
+| Package | Old | New |
+| ---- | ---- | ---- |
+| uds-core | 0.20.0 | 0.21.0 |
+| istio | 1.20.3 | 1.21.2 |
+| mattermost | 9.7.1 | 9.7.2 |
+
+
+### Features
+
+* uds-core 0.21.0 ([#90](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/90)) ([cc69a2c](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/cc69a2c280943e259af9e1c5193a0db4a9988d5c))
+
+
+### Bug Fixes
+
+* fix pre uds-core package exemptions ([#88](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/88)) ([45b1845](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/45b18450daa089441f5865d2758b6704b134d941))
+
+---
+DETAILS
+### uds-core
+### [0.21.0](https://github.com/defenseunicorns/uds-core/compare/v0.20.0...v0.21.0) (2024-04-30)
+
+#### Features
+* add `monitor` to operator, fix monitoring setup ([#256](https://github.com/defenseunicorns/uds-core/issues/256)) ([bf67722](https://github.com/defenseunicorns/uds-core/commit/bf67722d4e7e02d44dd29c4436e9a8d2ef960fa5))
+
+#### Bug Fixes
+
+* loki s3 overrides ([#365](https://github.com/defenseunicorns/uds-core/issues/365)) ([3545066](https://github.com/defenseunicorns/uds-core/commit/354506647d65b0484332695abbbd58d91d9e7427))
+* update neuvector values for least privilege ([#373](https://github.com/defenseunicorns/uds-core/issues/373)) ([7f4de4f](https://github.com/defenseunicorns/uds-core/commit/7f4de4f729e60a258abc40ce34f9c397fae99181))
+
+
+### mattermost
+### [9.7.2-uds.0](https://github.com/defenseunicorns/uds-package-mattermost/compare/v9.7.1-uds.0...v9.7.2-uds.0) (2024-04-30)
+
+#### Miscellaneous
+
+* **deps:** update mattermost package dependencies ([#59](https://github.com/defenseunicorns/uds-package-mattermost/issues/59)) ([edf154b](https://github.com/defenseunicorns/uds-package-mattermost/commit/edf154b7c947a7cb4b107f10252a92a9c21c57c5))
+* **deps:** update mattermost support dependencies ([#55](https://github.com/defenseunicorns/uds-package-mattermost/issues/55)) ([fe798f6](https://github.com/defenseunicorns/uds-package-mattermost/commit/fe798f6111cd5dfb25ee78a0a58188754a4d4b1d))
+* release as v9.7.2-uds.0 ([#62](https://github.com/defenseunicorns/uds-package-mattermost/issues/62)) ([bc0b65f](https://github.com/defenseunicorns/uds-package-mattermost/commit/bc0b65fbe4b8289857d4f89a7106d1fbb7c89cf2))
+
 ## [0.2.6](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.5...v0.2.6) (2024-04-24)
 
 ### Release Notes
