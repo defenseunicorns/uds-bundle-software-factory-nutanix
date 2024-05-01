@@ -47,7 +47,7 @@ fileClassRetention: "Delete"
 # fileClassAnnotations: {}
 # fileClassLabels: {}
 
-dynamicFileClass: true
+dynamicFileClass: false
 dynamicFileClassName: "nutanix-dynamicfile"
 dynamicFileClassRetention: "Delete"
 # dynamicFileClassDescription: ""

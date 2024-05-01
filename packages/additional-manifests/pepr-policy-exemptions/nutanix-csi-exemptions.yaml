@@ -1,0 +1,26 @@
+apiVersion: uds.dev/v1alpha1
+kind: Exemption
+metadata:
+  name: nutanix-csi
+  namespace: uds-policy-exemptions
+spec:
+  exemptions:
+    - policies:
+        - DisallowHostNamespaces
+        - DisallowPrivileged
+        - DisallowSELinuxOptions
+        - DropAllCapabilities
+        - RequireNonRootUser
+        - RestrictCapabilities
+        - RestrictHostPathWrite
+        - RestrictHostPorts
+        - RestrictProcMount
+        - RestrictSeccomp
+        - RestrictSELinuxType
+        - RestrictVolumeTypes
+      matcher:
+        namespace: ntnx-system
+        name: "^nutanix-csi-*"
+        kind: pod
+      title: "nutanix-csi exemptions"
+      description: "Nutanix CSI needs exemptions"

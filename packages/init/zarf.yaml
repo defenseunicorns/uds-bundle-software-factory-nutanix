@@ -93,6 +93,24 @@ components:
         namespace: ntnx-system
         valuesFiles:
           - values/nutanix-storage-values.yaml
+    actions:
+      onDeploy:
+        before:
+          - description: Delete Storage Classes
+            cmd: ./uds zarf tools kubectl delete sc nutanix-volume --ignore-not-found=true
+
+  - name: nutanix-dynamicfile-manifests
+    required: true
+    manifests:
+      - name: nutanix-dynamicfile-manifests
+        namespace: ntnx-system
+        files:
+          - nutanix-dynamicfile.yaml
+    actions:
+      onDeploy:
+        before:
+          - description: Delete Storage Classes
+            cmd: ./uds zarf tools kubectl delete sc nutanix-dynamicfile --ignore-not-found=true
 
   # Creates the permanent registry
   - name: zarf-registry
