@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.7](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.6...v0.2.7) (2024-05-01)
+
+
+### Features
+
+* uds-core 0.21.0 ([#90](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/90)) ([cc69a2c](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/cc69a2c280943e259af9e1c5193a0db4a9988d5c))
+
+
+### Bug Fixes
+
+* fix pre uds-core package exemptions ([#88](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/88)) ([45b1845](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/45b18450daa089441f5865d2758b6704b134d941))
+
 ## [0.2.6](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.5...v0.2.6) (2024-04-24)
 
 ### Release Notes
