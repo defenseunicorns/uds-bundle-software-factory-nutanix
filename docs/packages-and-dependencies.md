@@ -55,7 +55,7 @@ The UDS Software Factory Bundle (SWF) is a collection of Zarf packages which inc
 
 | Package | Version | Description |
 |----|----|----|
-| [Istio](https://istio.io/latest/) | 1.20.3 | A package detailing the configuration of the deployed service mesh -- used by the operator to apply the desired state in the cluster |
+| [Istio](https://istio.io/latest/) | 1.21.2 | A package detailing the configuration of the deployed service mesh -- used by the operator to apply the desired state in the cluster |
 | [Loki](https://grafana.com/oss/loki/) | 2.9.6 | A Grafana product for aggregating and querying log data |
 | [Promtail](https://grafana.com/docs/loki/latest/send-data/promtail/) | 2.9.6 | A logging daemon installed on each cluster node to capture logs from the host and all cluster workload processes. Logs are shipped to Loki |
 | [Prometheus](https://prometheus.io/) | 2.51.2 | A product for storing and querying time series based data such as system performance metrics (CPU/MEM usage) |
