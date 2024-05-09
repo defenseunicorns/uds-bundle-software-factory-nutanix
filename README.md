@@ -102,6 +102,14 @@ These are the default bucket names. Gitlab allows you to add a suffix in your `u
 
 > NOTE: All database and object storage credentials must be provided via username and password in the uds-config.
 
+**Storage**:
+This bundle utilizes the Nutanix CSI Helm chart for persistent storage. Before the bundle can be deployed the following needs to be configured:
+* Prism Element user and password for the CSI provider to connect to Prism Element. Username, password, and Prism Element IP/Hostname will need passed to uds-config.yaml.
+* Nutanix Storage Container for RWO persistent volumes. Can either be a new container configured specifically for cluster storage, or an existing container depending on your needs/desires. Storage container name will need passed to uds-config.yaml.
+* Nutanix File Server configured to use for RWX persistent volumes. Make sure to configure the DNS records that it asks you to make. File Server name as it appears in Prism Element will need passed to uds-config.yaml.
+
+> NOTE: User/password and Nutanix File server must be configured in Prism Element not Prism Central.
+
 ### Configuration
 Deployment configuration is managed via a `uds-config.yaml` file in the deployment directory. Some values in the configuration will be sensitive, **we do not recommend checking this into source control in its entierty**. Best practice would involve either storing the configuration in an external secrets manager (like Vault), or managing deployments via CD and generating the config file dynamically at deploy time using CD managed secrets.
 
@@ -109,6 +117,7 @@ For demonstration purposes, you can setup a local configfile as follows:
 * Copy an example configuration from [config/uds-config.yaml](config/uds-config.yaml) to your working directory
 * Update the config according to your environment taking care to set:
   * domain variables
+  * init variables for Nutanix csi
   * certificate values
   * bucket names and credentials
   * database names and credentials
