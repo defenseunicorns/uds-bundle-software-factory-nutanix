@@ -102,7 +102,8 @@ These are the default bucket names. Gitlab allows you to add a suffix in your `u
 
 > NOTE: All database and object storage credentials must be provided via username and password in the uds-config.
 
-**Storage**:
+**Storage**
+
 This bundle utilizes the Nutanix CSI Helm chart for persistent storage. Before the bundle can be deployed the following needs to be configured:
 * Prism Element user and password for the CSI provider to connect to Prism Element. Username, password, and Prism Element IP/Hostname will need passed to uds-config.yaml.
 * Nutanix Storage Container for RWO persistent volumes. Can either be a new container configured specifically for cluster storage, or an existing container depending on your needs/desires. Storage container name will need passed to uds-config.yaml.
