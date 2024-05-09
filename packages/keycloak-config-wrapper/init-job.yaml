@@ -14,7 +14,7 @@ spec:
       containers:
         - name: uds-config-sync
           # renovate: datasource=github-tags depName=defenseunicorns/uds-identity-config versioning=semver 
-          image: ghcr.io/defenseunicorns/uds/identity-config:0.4.1
+          image: ghcr.io/defenseunicorns/uds/identity-config:0.4.2
           command: 
             [
               "sh",
