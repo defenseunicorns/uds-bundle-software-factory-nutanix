@@ -7,9 +7,11 @@ shared:
 variables:
   init:
     REGISTRY_HPA_ENABLE: false
-    CEPH_OSD_MEM_REQUESTS: "4Gi"
-    CEPH_OSD_MEM_LIMITS: "4Gi"
-    ENABLE_CEPH_TOOLBOX: "true"
+    PRISM_ENDPOINT: "PRISM element IP address"
+    PRISM_USERNAME: "csi-user-prism-element-user"
+    PRISM_PASSWORD: "csi-user-passoword"
+    STORAGE_CONTAINER: "nutanix-storage-container"
+    DYNAMIC_FILE_STORE_NAME: "nutanix-file-server-name"
   metallb:
     # Replace with a valid IP address range
     IP_ADDRESS_POOL: "10.0.0.10-10.0.0.20"
@@ -108,7 +110,6 @@ variables:
     JIRA_DB_USERNAME: "postgres"
     JIRA_LOCAL_HOME_ENABLED: "true"
     JIRA_LOCAL_HOME_SIZE: "128Gi"
-    JIRA_RWO_STORAGE_CLASS: "ceph-block"
     JIRA_DB_ENDPOINT: "jira-pg.replace.with.db.url"
   confluence-database-secret:
     CONFLUENCE_DB_PASSWORD: "replace-me-db-passwords"
@@ -117,7 +118,6 @@ variables:
     CONFLUENCE_DB_USERNAME: "postgres"
     CONFLUENCE_LOCAL_HOME_ENABLED: "true"
     CONFLUENCE_LOCAL_HOME_SIZE: "128Gi"
-    CONFLUENCE_RWO_STORAGE_CLASS: "ceph-block"
     CONFLUENCE_DB_ENDPOINT: "confluence-pg.replace.with.db.url"
   mattermost:
     ACCESS_KEY: "replace-me-object-store-access-key"

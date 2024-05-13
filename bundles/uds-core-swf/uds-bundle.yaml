@@ -11,20 +11,10 @@ metadata:
 packages:
   # Zarf init
   - name: init
-    repository: ghcr.io/defenseunicorns/uds-capability/rook-ceph/init
+    path: ../../build
     optionalComponents:
       - git-server
-    ref: v0.33.0-0.2.7
-    overrides:
-      rook-ceph-cluster:
-        rook-ceph-cluster:
-          variables:
-            - path: cephClusterSpec.resources.osd.requests.memory
-              name: CEPH_OSD_MEM_REQUESTS
-            - path: cephClusterSpec.resources.osd.limits.memory
-              name: CEPH_OSD_MEM_LIMITS
-            - path: toolbox.enabled
-              name: ENABLE_CEPH_TOOLBOX
+    ref: v0.33.0
 
   # Namespace pre-reqs for swf capabilities
   - name: software-factory-namespaces
@@ -135,7 +125,7 @@ packages:
             - path: "persistence.accessMode"
               value: "ReadWriteMany"
             - path: "persistence.storageClassName"
-              value: "ceph-filesystem"
+              value: "nutanix-dynamicfile"
           variables:
             - name: KEYCLOAK_DB_USERNAME
               description: "keycloak database username"
