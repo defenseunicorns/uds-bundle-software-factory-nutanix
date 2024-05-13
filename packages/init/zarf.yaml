@@ -87,7 +87,7 @@ components:
     charts:
       # renovate: datasource=helm
       - name: nutanix-csi-storage
-        url: https://github.com/jacobbmay/nutanix-helm.git # fork containing fix for imagepullsecrets needed for pods to pull images from zarf registry
+        url: https://github.com/defenseunicorns/nutanix-helm.git # fork containing fix for imagepullsecrets needed for pods to pull images from zarf registry
         version: v2.6.6-modified
         gitPath: charts/nutanix-csi-storage
         namespace: ntnx-system
@@ -118,10 +118,10 @@ components:
     import:
       url: oci://ghcr.io/defenseunicorns/packages/init:v0.33.0
 
-  # Push rook/ceph (and registry) images to permanent registry
+  # Push nutanix csi (and registry) images to permanent registry
   - name: nutanix-csi-images
     required: true
-    description: Push rook ceph images to the zarf registry
+    description: Push nutanix csi images to the zarf registry
     images:
       - registry.k8s.io/sig-storage/snapshot-controller:v6.3.2
       - registry.k8s.io/sig-storage/snapshot-validation-webhook:v6.3.2
