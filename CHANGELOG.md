@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.8](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.7...v0.2.8) (2024-05-06)
+
+
+### Bug Fixes
+
+* Adding identity config image to zarf pkg -- updating to match core ([c9bc813](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/c9bc81363c60a0bd33ab688ae13fccf04f52bdd4))
+
 ## [0.2.7](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.6...v0.2.7) (2024-05-01)
 
 ### Updated packages
