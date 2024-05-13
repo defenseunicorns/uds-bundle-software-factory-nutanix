@@ -87,7 +87,7 @@ components:
     charts:
       # renovate: datasource=helm
       - name: nutanix-csi-storage
-        url: https://github.com/jacobbmay/nutanix-helm.git # fork containing fix for imagepullsecrets needed for pods to pull images from zarf registry
+        url: https://github.com/defenseunicorns/nutanix-helm.git # fork containing fix for imagepullsecrets needed for pods to pull images from zarf registry
         version: v2.6.6-modified
         gitPath: charts/nutanix-csi-storage
         namespace: ntnx-system
