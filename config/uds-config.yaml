@@ -6,10 +6,6 @@ shared:
   ADDITIONAL_CA_CHAIN: replace-me-with-additional-ca-chain
 variables:
   init:
-    REGISTRY_HPA_ENABLE: true
-    REGISTRY_PVC_ENABLED: true
-    REGISTRY_PVC_ACCESS_MODE: ReadWriteMany
-    REGISTRY_HPA_AUTO_SIZE: true
     REGISTRY_AFFINITY_CUSTOM: |
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution:
@@ -21,7 +17,11 @@ variables:
                     operator: In
                     values:
                       - docker-registry
-              topologyKey: kubernetes.io/hostname
+              topologyKey: kubernetes.io/hostname    REGISTRY_HPA_AUTO_SIZE: true
+    REGISTRY_HPA_ENABLE: true
+    REGISTRY_PVC_ACCESS_MODE: ReadWriteMany
+    REGISTRY_PVC_ENABLED: true
+    REGISTRY_STORAGE_CLASS: "nutanix-dynamicfile"
     PRISM_ENDPOINT: "PRISM element IP address"
     PRISM_USERNAME: "csi-user-prism-element-user"
     PRISM_PASSWORD: "csi-user-passoword"
