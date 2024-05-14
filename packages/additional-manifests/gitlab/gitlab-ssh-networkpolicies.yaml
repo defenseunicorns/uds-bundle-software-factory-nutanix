@@ -8,11 +8,11 @@ spec:
   - from:
     - namespaceSelector:
         matchLabels:
-          app.kubernetes.io/name: istio-controlplane
+          kubernetes.io/metadata.name: istio-tenant-gateway
       podSelector:
         matchLabels:
           app: tenant-ingressgateway
-          istio: ingressgateway
+          istio: tenant-ingressgateway
     ports:
     - port: 2222
       protocol: TCP
