@@ -251,6 +251,11 @@ packages:
     path: ../../build
     ref: 0.0.2
 
+  # Additional manifests needed (TODO - remove)
+  - name: additional-manifests-2
+    path: ../../build
+    ref: 0.0.2
+
   # Gitlab
   - name: gitlab-redis
     repository: ghcr.io/defenseunicorns/packages/uds/dev-redis

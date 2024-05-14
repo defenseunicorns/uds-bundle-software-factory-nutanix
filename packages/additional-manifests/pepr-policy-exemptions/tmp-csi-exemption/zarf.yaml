@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
+
+# TODO -- see README above for details on when to remove
+kind: ZarfPackageConfig
+metadata:
+  name: additional-manifests-2
+  description: "Installs additional needed manifests"
+  architecture: "amd64"
+  version: "0.0.2"
+
+components:
+  - name: pepr-policy-exemptions
+    required: true
+    manifests:
+      - name: pepr-policy-exemptions
+        files:
+          - ../nutanix-csi-exemptions.yaml
