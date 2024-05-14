@@ -37,7 +37,7 @@ packages:
   # MetalLB
   - name: metallb
     repository: ghcr.io/defenseunicorns/packages/metallb
-    ref: 0.1.0-amd64
+    ref: 0.0.5-amd64
 
   - name: core
     repository: ghcr.io/defenseunicorns/packages/uds/core
