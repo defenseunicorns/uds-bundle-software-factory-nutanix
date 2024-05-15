@@ -18,7 +18,7 @@ components:
         target: tmp_deploy/zarf.yaml
     images:
       # renovate: datasource=github-tags depName=defenseunicorns/uds-identity-config versioning=semver 
-      - "ghcr.io/defenseunicorns/uds/identity-config:0.4.2"
+      - "ghcr.io/defenseunicorns/uds/identity-config:0.4.3"
     actions:
       onDeploy:
         before:

@@ -14,6 +14,7 @@ tasks:
       - task: create:namespaces-package
       - task: create:object-store-packages
       - task: create:additional-manifests-package
+      - task: create:additional-manifests-package-2
       - task: create:init-package
       - task: create:bundle
 

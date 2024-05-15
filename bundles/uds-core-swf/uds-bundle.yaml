@@ -41,7 +41,7 @@ packages:
 
   - name: core
     repository: ghcr.io/defenseunicorns/packages/uds/core
-    ref: 0.21.0-registry1
+    ref: 0.21.1-registry1
     overrides:
       kube-prometheus-stack:
         kube-prometheus-stack:
@@ -251,10 +251,15 @@ packages:
     path: ../../build
     ref: 0.0.2
 
+  # Additional manifests needed (TODO - remove)
+  - name: additional-manifests-2
+    path: ../../build
+    ref: 0.0.2
+
   # Gitlab
   - name: gitlab-redis
     repository: ghcr.io/defenseunicorns/packages/uds/dev-redis
-    ref: 0.0.1
+    ref: 0.0.2
 
   - name: gitlab-redis-secret
     path: ../../build
@@ -270,9 +275,22 @@ packages:
 
   - name: gitlab
     repository: ghcr.io/defenseunicorns/packages/uds/gitlab
-    ref: 16.10.2-uds.0-registry1
+    ref: 16.11.1-uds.0-registry1
     overrides:
       gitlab:
+        uds-gitlab-config:
+          values:
+            - path: storage.internal
+              value: false
+            - path: postgres.internal
+              value: false
+            - path: redis
+              value: 
+                internal: true
+                selector:
+                  app.kubernetes.io/instance: redis
+                namespace: dev-redis
+                port: 6379
         gitlab:
           variables:
             - name: MIGRATIONS_RESOURCES
@@ -315,7 +333,7 @@ packages:
   # Gitlab Runner
   - name: gitlab-runner
     repository: ghcr.io/defenseunicorns/packages/uds/gitlab-runner
-    ref: 16.10.0-uds.0-registry1
+    ref: 16.11.0-uds.0-registry1
 
   # Sonarqube
   - name: sonarqube-database-secret
@@ -333,7 +351,7 @@ packages:
 
   - name: jira
     repository: ghcr.io/defenseunicorns/packages/uds/jira
-    ref: 1.17.2-uds.0-registry1
+    ref: 1.19.0-uds.0-registry1
     overrides:
       jira:
         jira:
