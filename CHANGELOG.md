@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.9](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.8...v0.2.9) (2024-05-15)
+
+
+### Features
+
+* Custom init package for Nutanix CSI driver ([#42](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/42)) ([7fdd48f](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/7fdd48f388209e2561f23866f40854ac695e7df5))
+* nutanix csi ha zarf init ([#100](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/100)) ([4c1197b](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/4c1197b73d316a7af625e547fd58fd74841254be))
+* Replace ceph with nutanix-csi for persistent storage ([7fdd48f](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/7fdd48f388209e2561f23866f40854ac695e7df5))
+
+
+### Bug Fixes
+
+* gitlab ssh netpol ([#92](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/92)) ([952659b](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/952659bfbd6ebc9dd424d3f1f8c4a4ad0c1aac36))
+
+
+### Miscellaneous
+
+* **deps:** update all dependencies ([#85](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/85)) ([99b3776](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/99b3776ebdf0e766aa29de1984ce75b7866e67db))
+
 ## [0.2.8](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.7...v0.2.8) (2024-05-06)
 
 
