@@ -278,7 +278,7 @@ packages:
     ref: 16.11.1-uds.0-registry1
     overrides:
       gitlab:
-        gitlab:
+        uds-gitlab-config:
           values:
             - path: storage.internal
               value: false
@@ -291,7 +291,7 @@ packages:
                   app.kubernetes.io/instance: redis
                 namespace: dev-redis
                 port: 6379
-
+        gitlab:
           variables:
             - name: MIGRATIONS_RESOURCES
               description: "Gitlab Migrations Resources"
