@@ -279,6 +279,19 @@ packages:
     overrides:
       gitlab:
         gitlab:
+          values:
+            - path: storage.internal
+              value: false
+            - path: postgres.internal
+              value: false
+            - path: redis
+              value: 
+                internal: true
+                selector:
+                  app.kubernetes.io/instance: redis
+                namespace: dev-redis
+                port: 6379
+
           variables:
             - name: MIGRATIONS_RESOURCES
               description: "Gitlab Migrations Resources"
