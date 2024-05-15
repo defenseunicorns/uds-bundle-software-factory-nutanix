@@ -131,6 +131,7 @@ components:
       - registry.k8s.io/sig-storage/csi-snapshotter:v7.0.2
       - registry.k8s.io/sig-storage/csi-resizer:v1.10.1
       - registry.k8s.io/sig-storage/livenessprobe:v2.12.0
+      - velero/velero-plugin-for-csi:v0.7.1
       - "###ZARF_PKG_TMPL_REGISTRY_IMAGE_DOMAIN######ZARF_PKG_TMPL_REGISTRY_IMAGE###:###ZARF_PKG_TMPL_REGISTRY_IMAGE_TAG###"
 
   # Creates the pod+git mutating webhook
