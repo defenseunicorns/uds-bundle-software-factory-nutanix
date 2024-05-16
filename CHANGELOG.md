@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.10](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.9...v0.2.10) (2024-05-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* commented out everything not needed for the MVP ([#106](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/106))
+
+### Bug Fixes
+
+* commented out everything not needed for the MVP ([#106](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/106)) ([2dd26e6](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/2dd26e658a15ed722f8343c777563eff85a67823))
+
 ## [0.2.9](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.8...v0.2.9) (2024-05-15)
 
 ### Updated packages
