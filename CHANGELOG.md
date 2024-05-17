@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.11](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.10...v0.2.11) (2024-05-17)
+
+
+### Bug Fixes
+
+* Revert CSI image versions to Nutanix CSI chart defaults ([#110](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/110)) ([e6ea62e](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/e6ea62efe736abc5395b2f7ad3de59005a4a3b17))
+
 ## [0.2.10](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.9...v0.2.10) (2024-05-16)
 
 ### ⚠ BREAKING CHANGES
