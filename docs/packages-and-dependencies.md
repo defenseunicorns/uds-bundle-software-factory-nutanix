@@ -61,8 +61,8 @@ The UDS Software Factory Bundle (SWF) is a collection of Zarf packages which inc
 | [Prometheus](https://prometheus.io/) | 2.51.2 | A product for storing and querying time series based data such as system performance metrics (CPU/MEM usage) |
 | [Grafana](https://github.com/grafana/grafana) | 10.4.2 | A Grafana product to provide a frontend interface to display and query performance information from Prometheus, log data from Loki, and request tracing information from Tempo |
 | [Neuvector](https://www.suse.com/neuvector/) | 5.3.2 | A kubernetes security suite that provides CVE scanning for hosts and images, as well as runtime security monitoring and protection |
-| [Velero](https://repo1.dso.mil/big-bang/product/packages/velero) | 1.13.2 | A tool for orchistrating backups of cluster state and storage |
+| [Velero](https://repo1.dso.mil/big-bang/product/packages/velero) | 1.13.1 | A tool for orchistrating backups of cluster state and storage |
 | [Authservice](https://github.com/istio-ecosystem/authservice) | 0.5.3 | A tool for simplifying and automating auth workflows via Istio integration |
 | [Metrics Server](https://github.com/kubernetes-sigs/metrics-server) | 0.7.1 | A container metrics aggregation and exporter for kubernetes |
 | [Pepr](https://pepr.dev/) | 0.29.2 | Declarative automation for managing deployments and security policy enorcement |
-| [Keycloak](https://github.com/defenseunicorns/uds-core) | 24.0.4 | An identity and access management (IDAM) tool used to authenticate users for access to applications |
+| [Keycloak](https://github.com/defenseunicorns/uds-core) | 24.0.3 | An identity and access management (IDAM) tool used to authenticate users for access to applications |

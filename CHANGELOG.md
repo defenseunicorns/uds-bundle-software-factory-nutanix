@@ -2,12 +2,140 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.10](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.9...v0.2.10) (2024-05-16)
+
+### ⚠ BREAKING CHANGES
+
+* commented out everything not needed for the MVP ([#106](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/106))
+
+### Bug Fixes
+
+* commented out everything not needed for the MVP ([#106](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/106)) ([2dd26e6](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/2dd26e658a15ed722f8343c777563eff85a67823))
+
+---
+### DETAILS
+This release cuts the uds bundle down to the desired MVP applications
+
+Contains:
+- nutanix csi init package
+- metallb
+- uds-core
+- gitlab
+- nexus
+
+## [0.2.9](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.8...v0.2.9) (2024-05-15)
+
+### Updated packages
+| Package | Old | New |
+| ---- | ---- | ---- |
+| rook-ceph init | v0.33.0-0.2.7 | REMOVED |
+| nutanix CSI init | N/A | v2.6.8 |
+| uds-core | 0.21.0 | 0.21.1 |
+| gitlab | v16.10.2 | v16.11.1 |
+| gitlab-runner | v16.8.0 | v16.11.0 |
+| jira | 9.12.4 | 9.15.1 |
+
+### Features
+
+* Custom init package for Nutanix CSI driver ([#42](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/42)) ([7fdd48f](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/7fdd48f388209e2561f23866f40854ac695e7df5))
+* nutanix csi ha zarf init ([#100](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/100)) ([4c1197b](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/4c1197b73d316a7af625e547fd58fd74841254be))
+* Replace ceph with nutanix-csi for persistent storage ([7fdd48f](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/7fdd48f388209e2561f23866f40854ac695e7df5))
+
+
+### Bug Fixes
+
+* gitlab ssh netpol ([#92](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/92)) ([952659b](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/952659bfbd6ebc9dd424d3f1f8c4a4ad0c1aac36))
+
+
+### Miscellaneous
+
+* **deps:** update all dependencies ([#85](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/85)) ([99b3776](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/99b3776ebdf0e766aa29de1984ce75b7866e67db))
+
+---
+### DETAILS
+
+#### uds-core
+#### [0.21.1](https://github.com/defenseunicorns/uds-core/compare/v0.21.0...v0.21.1) (2024-05-02)
+
+
+##### Bug Fixes
+
+* slim-dev monitoring handling ([#383](https://github.com/defenseunicorns/uds-core/issues/383)) ([79927aa](https://github.com/defenseunicorns/uds-core/commit/79927aa58cbb12c849e52b50c00b74629b100b31))
+
+
+##### Miscellaneous
+
+* updating keycloak chart version to align with image ([#378](https://github.com/defenseunicorns/uds-core/issues/378)) ([a60fe2a](https://github.com/defenseunicorns/uds-core/commit/a60fe2afed9f7cff3bcad6b0f563232b47e8025b))
+
+---
+
+#### gitlab
+#### [16.11.1-uds.0](https://github.com/defenseunicorns/uds-package-gitlab/compare/v16.10.2-uds.0...v16.11.1-uds.0) (2024-05-02)
+
+
+#### ⚠ BREAKING CHANGES
+
+* sso failing deployment when it is disabled ([#115](https://github.com/defenseunicorns/uds-package-gitlab/issues/115))
+* allow [templating of network policies](./docs/networking.md) in the UDS Package ([#110](https://github.com/defenseunicorns/uds-package-gitlab/issues/110))
+
+##### Features
+
+* allow [templating of network policies](./docs/networking.md) in the UDS Package ([#110](https://github.com/defenseunicorns/uds-package-gitlab/issues/110)) ([5af09cb](https://github.com/defenseunicorns/uds-package-gitlab/commit/5af09cb47b30a258633bdb4c4d2268df3c9e456d))
+
+
+##### Bug Fixes
+
+* sso failing deployment when it is disabled ([#115](https://github.com/defenseunicorns/uds-package-gitlab/issues/115)) ([8cfdb58](https://github.com/defenseunicorns/uds-package-gitlab/commit/8cfdb58a05f9fe4d652b1ca2060d339660d809e4))
+
+
+##### Miscellaneous
+
+* allow GL pages through istio ([#106](https://github.com/defenseunicorns/uds-package-gitlab/issues/106)) ([9613f76](https://github.com/defenseunicorns/uds-package-gitlab/commit/9613f765ee346a370f1baaa10e0d35779532ca77))
+* **deps:** update gitlab package dependencies ([#112](https://github.com/defenseunicorns/uds-package-gitlab/issues/112)) ([a0e2c48](https://github.com/defenseunicorns/uds-package-gitlab/commit/a0e2c48f2f974683e055d1641fb510aa218c8c8e))
+* **deps:** update gitlab support dependencies ([#113](https://github.com/defenseunicorns/uds-package-gitlab/issues/113)) ([cde79b3](https://github.com/defenseunicorns/uds-package-gitlab/commit/cde79b313a83c1c24036d6456771eafb60f97ecb))
+* **deps:** update gitlab support dependencies ([#99](https://github.com/defenseunicorns/uds-package-gitlab/issues/99)) ([275ccd6](https://github.com/defenseunicorns/uds-package-gitlab/commit/275ccd6e86c3f1ea2d5b8d4f2780e497cedb375e))
+* migrate to upstream chart ([#72](https://github.com/defenseunicorns/uds-package-gitlab/issues/72)) ([b0e151e](https://github.com/defenseunicorns/uds-package-gitlab/commit/b0e151e76104cd3130e41cd185d433fd628dcfa0))
+* release v16.11.1-uds.0 ([#120](https://github.com/defenseunicorns/uds-package-gitlab/issues/120)) ([5c13d62](https://github.com/defenseunicorns/uds-package-gitlab/commit/5c13d6209aeb9fc8f7ce1da0d3c4ac4f22ae274e))
+* switch to new SSO secret template ([#111](https://github.com/defenseunicorns/uds-package-gitlab/issues/111)) ([acf28bc](https://github.com/defenseunicorns/uds-package-gitlab/commit/acf28bc7eccf2cf547a0191fc61d37105486608d))
+
+* updating keycloak chart version to align with image ([#378](https://github.com/defenseunicorns/uds-core/issues/378)) ([a60fe2a](https://github.com/defenseunicorns/uds-core/commit/a60fe2afed9f7cff3bcad6b0f563232b47e8025b))
+
+---
+
+#### gitlab-runner
+#### [16.11.0-uds.0](https://github.com/defenseunicorns/uds-package-gitlab-runner/compare/v16.10.0-uds.0...v16.11.0-uds.0) (2024-05-07)
+
+
+##### Miscellaneous
+
+* **deps:** update gitlab runner package dependencies ([#77](https://github.com/defenseunicorns/uds-package-gitlab-runner/issues/77)) ([a74125e](https://github.com/defenseunicorns/uds-package-gitlab-runner/commit/a74125ebd5469f5b0015d148e86c76dda19a0a7c))
+* **deps:** update gitlab runner support dependencies ([#71](https://github.com/defenseunicorns/uds-package-gitlab-runner/issues/71)) ([19eabac](https://github.com/defenseunicorns/uds-package-gitlab-runner/commit/19eabac881b710ba0fc0d7baa03aaf8b9d71db75))
+* **deps:** update gitlab runner support dependencies ([#75](https://github.com/defenseunicorns/uds-package-gitlab-runner/issues/75)) ([f8c97fb](https://github.com/defenseunicorns/uds-package-gitlab-runner/commit/f8c97fbf41a61b355f64d4583da1a809af6ceb0a))
+* hotfix the update to spoof the release ([#69](https://github.com/defenseunicorns/uds-package-gitlab-runner/issues/69)) ([5056b18](https://github.com/defenseunicorns/uds-package-gitlab-runner/commit/5056b189f7f6491e15b19cce079cbce3ff5fbf17))
+* improve jest test patterns ([#73](https://github.com/defenseunicorns/uds-package-gitlab-runner/issues/73)) ([6c60a90](https://github.com/defenseunicorns/uds-package-gitlab-runner/commit/6c60a90feaefc7873b2bd87ace27e1beb198845d))
+
+---
+
+#### jira
+#### [1.19.0-uds.0](https://github.com/defenseunicorns/uds-package-jira/compare/v1.17.2-uds.1...v1.19.0-uds.0) (2024-05-08)
+
+
+##### Features
+
+* update jira and chart, and cleanup repo ([711d62d](https://github.com/defenseunicorns/uds-package-jira/commit/711d62d57bd768d2cc9cdf99ffc1ed8ba1ffd7c3))
+
+
+##### Miscellaneous
+
+* release 1.19.0-uds.0 ([2faec99](https://github.com/defenseunicorns/uds-package-jira/commit/2faec99bb3eadbb88436842c0f0e8d6c921fcb1b))
+
 ## [0.2.8](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.7...v0.2.8) (2024-05-06)
 
 
 ### Bug Fixes
 
 * Adding identity config image to zarf pkg -- updating to match core ([c9bc813](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/c9bc81363c60a0bd33ab688ae13fccf04f52bdd4))
+
 
 ## [0.2.7](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.6...v0.2.7) (2024-05-01)
 
