@@ -63,14 +63,14 @@ components:
     required: true
     description: Push nutanix images to the zarf registry
     images:
-      - registry.k8s.io/sig-storage/snapshot-controller:v7.0.2
-      - registry.k8s.io/sig-storage/snapshot-validation-webhook:v7.0.2
-      - quay.io/karbon/ntnx-csi:v2.6.8
-      - registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.10.1
-      - registry.k8s.io/sig-storage/csi-provisioner:v4.0.1
-      - registry.k8s.io/sig-storage/csi-snapshotter:v7.0.2
-      - registry.k8s.io/sig-storage/csi-resizer:v1.10.1
-      - registry.k8s.io/sig-storage/livenessprobe:v2.12.0
+      - registry.k8s.io/sig-storage/snapshot-controller:v6.3.2
+      - registry.k8s.io/sig-storage/snapshot-validation-webhook:v6.3.2
+      - quay.io/karbon/ntnx-csi:v2.6.6
+      - registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.9.1
+      - registry.k8s.io/sig-storage/csi-provisioner:v3.6.2
+      - registry.k8s.io/sig-storage/csi-snapshotter:v6.3.2
+      - registry.k8s.io/sig-storage/csi-resizer:v1.9.2
+      - registry.k8s.io/sig-storage/livenessprobe:v2.11.0
       - docker.io/velero/velero-plugin-for-csi:v0.7.1
 
   - name: namespaces
@@ -124,14 +124,14 @@ components:
     required: true
     description: Push nutanix csi images to the zarf registry
     images:
-      - registry.k8s.io/sig-storage/snapshot-controller:v7.0.2
-      - registry.k8s.io/sig-storage/snapshot-validation-webhook:v7.0.2
-      - quay.io/karbon/ntnx-csi:v2.6.8
-      - registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.10.1
-      - registry.k8s.io/sig-storage/csi-provisioner:v4.0.1
-      - registry.k8s.io/sig-storage/csi-snapshotter:v7.0.2
-      - registry.k8s.io/sig-storage/csi-resizer:v1.10.1
-      - registry.k8s.io/sig-storage/livenessprobe:v2.12.0
+      - registry.k8s.io/sig-storage/snapshot-controller:v6.3.2
+      - registry.k8s.io/sig-storage/snapshot-validation-webhook:v6.3.2
+      - quay.io/karbon/ntnx-csi:v2.6.6
+      - registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.9.1
+      - registry.k8s.io/sig-storage/csi-provisioner:v3.6.2
+      - registry.k8s.io/sig-storage/csi-snapshotter:v6.3.2
+      - registry.k8s.io/sig-storage/csi-resizer:v1.9.2
+      - registry.k8s.io/sig-storage/livenessprobe:v2.11.0
       - docker.io/velero/velero-plugin-for-csi:v0.7.1
       - "###ZARF_PKG_TMPL_REGISTRY_IMAGE_DOMAIN######ZARF_PKG_TMPL_REGISTRY_IMAGE###:###ZARF_PKG_TMPL_REGISTRY_IMAGE_TAG###"
 
