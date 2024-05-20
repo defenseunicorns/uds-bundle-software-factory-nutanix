@@ -66,7 +66,7 @@ packages:
                     - mountPath: /target
                       name: plugins
                 - name: velero-plugin-for-csi
-                  image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi:v0.7.1
+                  image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi:v0.7.0
                   imagePullPolicy: IfNotPresent
                   volumeMounts:
                     - mountPath: /target
