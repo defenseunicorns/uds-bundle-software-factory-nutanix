@@ -1,14 +1,50 @@
 # Backup and Restore
 
 ## Velero
-This bundle has Velero configured to run automated backups and stores that data to the configured object storage bucket. To perform a restore you will want to get the name of the velero backup you want to use for your restore and perform a velero restore for the relevant namespace.
+This bundle has Velero configured to run automated backups and stores that data to the configured object storage bucket. The backup can be kicked off manually. Below is a start to finish process of taking a backup and restoring it, including restoring data on the Persistant Volume. 
 
-Example command to start a velero restore for a namespace:
+- Kick off backup
 ```bash
-kubectl exec -it -n velero svc/velero-velero -- /bin/bash -c \
-    "velero restore create my-confluence-restore-$(date +%s)  \
-    --from-backup velero-velero-uds-confluence-backup-20240129050033 --include-namespaces confluence --wait"
+$ kubectl exec -it -n velero svc/velero -- /bin/bash -c "velero backup create manual-nexus-velero-back
+up-$(date +%s) --include-namespaces nexus"
+
+Backup request "manual-nexus-velero-backup-1716311265" submitted successfully.
+Run `velero backup describe manual-nexus-velero-backup-1716311265` or `velero backup logs manual-nexus-velero-backup-1716311265` for more details.
 ```
+
+- Delete the PVC (Velero will not restore data if the backed up PV/PVC still exist)
+```bash
+$ kubectl delete pvc nexus-nexus-repository-manager-data 
+
+persistentvolumeclaim "nexus-nexus-repository-manager-data" deleted
+```
+
+- Remove the finalizers on the PVC, allowing it to be deleted
+  ```yaml
+    finalizers:
+      - kubernetes.io/pvc-protection
+  ```
+```bash
+$ kubectl edit pvc nexus-nexus-repository-manager-data 
+persistentvolumeclaim/nexus-nexus-repository-manager-data edited
+
+$ kubectl get pvc
+
+No resources found in nexus namespace.
+```
+
+- Run the restore
+```bash
+$ kubectl exec -it -n velero svc/velero -- /bin/bash -c "velero restore create velero-test-nexus-resto
+re-$(date +%s) --from-backup manual-nexus-velero-backup-1716311265 --include-namespaces nexus --wait"
+
+Restore request "velero-test-nexus-restore-1716311387" submitted successfully.
+Waiting for restore to complete. You may safely press ctrl-c to stop waiting - your restore will continue in the background.
+.........
+Restore completed with status: Completed. You may check for more information using the commands `velero restore describe velero-test-nexus-restore-1716311387` and `velero restore logs velero-test-nexus-restore-1716311387`.
+```
+
+At this point, the pods should restart with the new data. The pods can also be deleted and allowed to recreate. Data should be restored to the PV from the time of the backup.
 
 ## Gitlab
 Gitlab has its own utility to perform the backup and restore functionality. More details on how to use it shown are below.
