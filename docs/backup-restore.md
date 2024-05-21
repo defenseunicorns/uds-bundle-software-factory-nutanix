@@ -3,10 +3,10 @@
 ## Velero
 This bundle has Velero configured to run automated backups and stores that data to the configured object storage bucket. The backup can be kicked off manually. Below is a start to finish process of taking a backup and restoring it, including restoring data on the Persistant Volume. 
 
-- Kick off backup
+- Manually kick off a backup
 ```bash
-$ kubectl exec -it -n velero svc/velero -- /bin/bash -c "velero backup create manual-nexus-velero-back
-up-$(date +%s) --include-namespaces nexus"
+$ kubectl exec -it -n velero svc/velero -- /bin/bash -c "velero backup create \
+  manual-nexus-velero-backup-$(date +%s) --include-namespaces nexus"
 
 Backup request "manual-nexus-velero-backup-1716311265" submitted successfully.
 Run `velero backup describe manual-nexus-velero-backup-1716311265` or `velero backup logs manual-nexus-velero-backup-1716311265` for more details.
@@ -25,7 +25,8 @@ persistentvolumeclaim "nexus-nexus-repository-manager-data" deleted
       - kubernetes.io/pvc-protection
   ```
 ```bash
-$ kubectl edit pvc nexus-nexus-repository-manager-data 
+$ kubectl edit pvc nexus-nexus-repository-manager-data
+
 persistentvolumeclaim/nexus-nexus-repository-manager-data edited
 
 $ kubectl get pvc
@@ -35,8 +36,8 @@ No resources found in nexus namespace.
 
 - Run the restore
 ```bash
-$ kubectl exec -it -n velero svc/velero -- /bin/bash -c "velero restore create velero-test-nexus-resto
-re-$(date +%s) --from-backup manual-nexus-velero-backup-1716311265 --include-namespaces nexus --wait"
+$ kubectl exec -it -n velero svc/velero -- /bin/bash -c "velero restore create velero-test-nexus-restore-$(date +%s) \
+  --from-backup manual-nexus-velero-backup-1716311265 --include-namespaces nexus --wait"
 
 Restore request "velero-test-nexus-restore-1716311387" submitted successfully.
 Waiting for restore to complete. You may safely press ctrl-c to stop waiting - your restore will continue in the background.
