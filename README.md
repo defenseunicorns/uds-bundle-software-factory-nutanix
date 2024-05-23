@@ -62,11 +62,6 @@ These are the default bucket names. Gitlab allows you to add a suffix in your `u
     * velero-backups
   </details>
   <details>
-    <summary> Velero </summary>
-
-    * velero-backups
-  </details>
-  <details>
     <summary> Gitlab </summary>
 
     * uds-gitlab-artifacts
