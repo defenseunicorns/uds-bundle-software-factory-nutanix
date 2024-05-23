@@ -346,12 +346,12 @@ packages:
               description: "Gitlab Shell Min Replicas"
               path: "gitlab.gitlab-shell.minReplicas"
 
+  # Gitlab Runner
+  - name: gitlab-runner
+    repository: ghcr.io/defenseunicorns/packages/uds/gitlab-runner
+    ref: 16.11.0-uds.0-registry1
+    
   ### TODO - uncomment to replace functionality post MVP
-
-  # # Gitlab Runner
-  # - name: gitlab-runner
-  #   repository: ghcr.io/defenseunicorns/packages/uds/gitlab-runner
-  #   ref: 16.11.0-uds.0-registry1
 
   # # Sonarqube
   # - name: sonarqube-database-secret
