@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.12](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.11...v0.2.12) (2024-05-23)
+
+
+### Features
+
+* enable csi plugin for backups using nutanix csi and velero ([#112](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/112)) ([8e2326d](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/8e2326db9ae1e4d0a34e2cc52423932ca526cb53))
+* uncommenting the gitlab runner ([#115](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/115)) ([7659aa0](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/7659aa094b10d6b90c25d5586b6bf49952fce152))
+* update to uds-core 0.22.0 ([#116](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/116)) ([86ff035](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/86ff035c800e509c0a30df5b53f2e431c545eea5))
+
 ## [0.2.11](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.10...v0.2.11) (2024-05-17)
 
 
