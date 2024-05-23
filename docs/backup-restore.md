@@ -1,7 +1,7 @@
 # Backup and Restore
 
 ## Velero
-This bundle has Velero configured to run automated backups and stores that data to the configured object storage bucket. The backup can be kicked off manually. Below is a start to finish process of taking a backup and restoring it, including restoring data on the Persistant Volume. 
+This bundle has Velero configured to run automated backups and stores that data to the configured object storage bucket. The backup can be kicked off manually. Below is a start to finish process of taking a backup and restoring it, including restoring data on the Persistant Volume. If running a restore off of an automated backup, skip the first, manual step; the rest is the same.
 
 - Manually kick off a backup
 ```bash
@@ -47,7 +47,8 @@ Restore completed with status: Completed. You may check for more information usi
 
 At this point, the pods should restart with the new data. The pods can also be deleted and allowed to recreate. Data should be restored to the PV from the time of the backup.
 
-> NOTE - Unfortunately [according to the nutanix docs](https://portal.nutanix.com/page/documents/solutions/details?targetId=NVD-2177-Cloud-Native-6-5-OpenShift:application-backup-and-disaster-recovery.html#:~:text=As%20an%20alternative%20solution), NFS shares that are dynamically provisioned by the Nutanix Files CSI provisioner don't currently support the Kubernetes CSI Snapshot API -- meaning RWX volumes WILL NOT BE BACKED UP BY THIS PROCESS until an alternative solution like restic is in place.
+> [!WARNING]
+> Unfortunately [according to the nutanix docs](https://portal.nutanix.com/page/documents/solutions/details?targetId=NVD-2177-Cloud-Native-6-5-OpenShift:application-backup-and-disaster-recovery.html#:~:text=As%20an%20alternative%20solution), NFS shares that are dynamically provisioned by the Nutanix Files CSI provisioner don't currently support the Kubernetes CSI Snapshot API -- meaning RWX volumes WILL NOT BE BACKED UP BY THIS PROCESS until an alternative solution like restic is in place.
 
 ## Gitlab
 Gitlab has its own utility to perform the backup and restore functionality. More details on how to use it shown are below.
