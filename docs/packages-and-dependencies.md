@@ -40,7 +40,7 @@ The UDS Software Factory Bundle (SWF) is a collection of Zarf packages which inc
 |----|----|----|----|
 | [Nutanix CSI Driver Init](https://portal.nutanix.com/page/documents/details?targetId=CSI-Volume-Driver-v2_6:CSI-Volume-Driver-v2_6) | v0.33.0 | v2.6.8 | A zarf component installed in the cluster for orchestrating further deployment of Zarf based packages |
 | [MetalLB](https://github.com/defenseunicorns/uds-capability-metallb) | 0.0.5 | v0.13.12 | Tool for providing load balancer capabilities for ingress into a Kubernetes deployment |
-| [uds-core](https://github.com/defenseunicorns/uds-core) | 0.21.1 | N/A | [DESCRIPTION BELOW](#UDS-Core) |
+| [uds-core](https://github.com/defenseunicorns/uds-core) | 0.22.0 | N/A | [DESCRIPTION BELOW](#UDS-Core) |
 | [Redis](https://github.com/defenseunicorns/uds-package-dependencies) | 0.0.2 | 7.0.12 | A key-value store used as a data backend for several applications in the stack |
 | [Gitlab](https://github.com/defenseunicorns/uds-package-gitlab) | 16.11.1-uds.0-registry1 | 16.11.1 | A source control management tool used in the software development lifecycle for storing, updating, building and deploying custom software |
 | [Gitlab Runner](https://github.com/defenseunicorns/uds-package-gitlab-runner) | 16.11.0-uds.0-registry1 | v16.11.0 | A counterpart to Gitlab (above) in which automated software builds, tests and deployments are executed |
@@ -61,8 +61,8 @@ The UDS Software Factory Bundle (SWF) is a collection of Zarf packages which inc
 | [Prometheus](https://prometheus.io/) | 2.51.2 | A product for storing and querying time series based data such as system performance metrics (CPU/MEM usage) |
 | [Grafana](https://github.com/grafana/grafana) | 10.4.2 | A Grafana product to provide a frontend interface to display and query performance information from Prometheus, log data from Loki, and request tracing information from Tempo |
 | [Neuvector](https://www.suse.com/neuvector/) | 5.3.2 | A kubernetes security suite that provides CVE scanning for hosts and images, as well as runtime security monitoring and protection |
-| [Velero](https://repo1.dso.mil/big-bang/product/packages/velero) | 1.13.1 | A tool for orchistrating backups of cluster state and storage |
+| [Velero](https://repo1.dso.mil/big-bang/product/packages/velero) | 1.13.2 | A tool for orchistrating backups of cluster state and storage |
 | [Authservice](https://github.com/istio-ecosystem/authservice) | 0.5.3 | A tool for simplifying and automating auth workflows via Istio integration |
 | [Metrics Server](https://github.com/kubernetes-sigs/metrics-server) | 0.7.1 | A container metrics aggregation and exporter for kubernetes |
-| [Pepr](https://pepr.dev/) | 0.29.2 | Declarative automation for managing deployments and security policy enorcement |
-| [Keycloak](https://github.com/defenseunicorns/uds-core) | 24.0.3 | An identity and access management (IDAM) tool used to authenticate users for access to applications |
+| [Pepr](https://pepr.dev/) | 0.31.0 | Declarative automation for managing deployments and security policy enorcement |
+| [Keycloak](https://github.com/defenseunicorns/uds-core) | 24.0.4 | An identity and access management (IDAM) tool used to authenticate users for access to applications |
