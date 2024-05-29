@@ -312,7 +312,7 @@ packages:
             - path: global.certificates.customCAs
               value:
                 - secret: ca-secret
-            - path: init.containerSecurityContext
+            - path: gitlab.init.containerSecurityContext
               value:
                 fsGroup: 65534
                 runAsGroup: 65534
