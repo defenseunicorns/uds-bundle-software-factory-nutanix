@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.13](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.12...v0.2.13) (2024-05-29)
+
+
+### Features
+
+* gitlab update with SAML sso ([#117](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/117)) ([e7fea10](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/e7fea102afeb6aac0ceac01dd80bfdf241861082))
+
 ## [0.2.12](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.11...v0.2.12) (2024-05-23)
 
 ### Updated packages
