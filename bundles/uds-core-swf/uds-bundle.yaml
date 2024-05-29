@@ -291,7 +291,7 @@ packages:
 
   - name: gitlab
     repository: ghcr.io/defenseunicorns/packages/uds/gitlab
-    ref: 16.11.1-uds.0-registry1
+    ref: 17.0.1-uds.1-registry1
     overrides:
       gitlab:
         uds-gitlab-config:
@@ -308,6 +308,10 @@ packages:
                 namespace: dev-redis
                 port: 6379
         gitlab:
+          values:
+            - path: global.certificates.customCAs
+              value:
+                - secret: ca-secret
           variables:
             - name: MIGRATIONS_RESOURCES
               description: "Gitlab Migrations Resources"
