@@ -4,10 +4,54 @@ All notable changes to this project will be documented in this file.
 
 ## [0.2.13](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.12...v0.2.13) (2024-05-29)
 
+### Updated packages
+| Package | Old | New |
+| ---- | ---- | ---- |
+| gitlab | 16.11.1 | 17.0.1 |
 
 ### Features
 
 * gitlab update with SAML sso ([#117](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/117)) ([e7fea10](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/e7fea102afeb6aac0ceac01dd80bfdf241861082))
+
+### KNOWN ISSUES
+* The addition of the SAML client currently requires manual configuration of a handful of ClientScopes -- this will be automated in the future, refer to slack for instructions for now.
+* POTENTIAL issue with the migrations job
+
+> [!WARNING]
+> It is recommended that you backup the `gitlab-rails-secret` prior to installing this release
+
+---
+### DETAILS
+
+#### gitlab
+#### [17.0.1-uds.1](https://github.com/defenseunicorns/uds-package-gitlab/compare/v17.0.1-uds.0...v17.0.1-uds.1) (2024-05-24)
+
+
+##### ⚠ BREAKING CHANGES
+
+* add saml sso support as the default ([#118](https://github.com/defenseunicorns/uds-package-gitlab/issues/118)) ([d1bc561](https://github.com/defenseunicorns/uds-package-gitlab/commit/d1bc561baa43165a8267f4fe219f4aa4c96548ca))
+
+> **NOTE:** The above change should convert existing instances from OIDC to SAML seamlessly, but will _require_ UDS Core v0.22.0 or higher.
+
+##### Miscellaneous
+
+* **deps:** update support-deps to v37.377.2 ([#134](https://github.com/defenseunicorns/uds-package-gitlab/issues/134)) ([028c3b8](https://github.com/defenseunicorns/uds-package-gitlab/commit/028c3b8c53c073e14db8f2028fceba987b95d66d))
+
+#### [17.0.1-uds.0](https://github.com/defenseunicorns/uds-package-gitlab/compare/v16.11.1-uds.1...v17.0.1-uds.0) (2024-05-24)
+
+
+##### Bug Fixes
+
+* correct `objectStorage` secret Helm value key for toolbox backups ([366c703](https://github.com/defenseunicorns/uds-package-gitlab/commit/366c703a44681a4b4b77f611b77a840c0e3768b5))
+* address registry ingress prod issues with gitlab ([#131](https://github.com/defenseunicorns/uds-package-gitlab/issues/131)) ([ddea7ff](https://github.com/defenseunicorns/uds-package-gitlab/commit/ddea7ffa0133fd2c44bd358bad31207d123fa6f4))
+
+##### Miscellaneous
+
+* add basic smoke tests with sso, git commit, and file uploads ([#132](https://github.com/defenseunicorns/uds-package-gitlab/issues/132)) ([2c34cf9](https://github.com/defenseunicorns/uds-package-gitlab/commit/2c34cf96803e6bc921574f7024f361dc4b3a3690)), closes [#130](https://github.com/defenseunicorns/uds-package-gitlab/issues/130)
+* cleanup dev secrets to remove postgres refs ([#126](https://github.com/defenseunicorns/uds-package-gitlab/issues/126)) ([430ebba](https://github.com/defenseunicorns/uds-package-gitlab/commit/430ebbae9a7be246f0ade6c8894a32e169a173b6))
+* **deps:** update gitlab package dependencies ([#121](https://github.com/defenseunicorns/uds-package-gitlab/issues/121)) ([366c703](https://github.com/defenseunicorns/uds-package-gitlab/commit/366c703a44681a4b4b77f611b77a840c0e3768b5))
+* **deps:** update gitlab support dependencies ([#123](https://github.com/defenseunicorns/uds-package-gitlab/issues/123)) ([8ecd5b4](https://github.com/defenseunicorns/uds-package-gitlab/commit/8ecd5b44420d89611f123bd060df4687c90743b1))
+* update dev-secrets to use vendored kubectl command ([#129](https://github.com/defenseunicorns/uds-package-gitlab/issues/129)) ([eb7f356](https://github.com/defenseunicorns/uds-package-gitlab/commit/eb7f3569ce79edec1794daf4e2139fea4f07e58f))
 
 ## [0.2.12](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.11...v0.2.12) (2024-05-23)
 
