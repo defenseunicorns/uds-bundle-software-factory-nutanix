@@ -307,10 +307,11 @@ packages:
                   app.kubernetes.io/instance: redis
                 namespace: dev-redis
                 port: 6379
+        gitlab:
+          values:
             - path: certificates.customCAs
               value:
                 - secret: ca-secret
-        gitlab:
           variables:
             - name: MIGRATIONS_RESOURCES
               description: "Gitlab Migrations Resources"
