@@ -309,7 +309,7 @@ packages:
                 port: 6379
         gitlab:
           values:
-            - path: certificates.customCAs
+            - path: global.certificates.customCAs
               value:
                 - secret: ca-secret
           variables:
