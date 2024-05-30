@@ -54,6 +54,19 @@ packages:
                 requests:
                   cpu: 20m
                   memory: 128Mi
+      grafana:
+        grafana:
+          values:
+            - path: global.extraSecretMounts
+              value:
+                - name: additional-ca-certs
+                  # path from example configmap mount
+                  # mountPath: /etc/grafana/ssl/
+                  # actual path for ubi9
+                  mountPath: /etc/pki/tls/certs/
+                  subpath: "ca-bundle.crt"
+                  secretName: ca-secret
+                  readOnly: true
       velero:
         velero:
           values:

@@ -25,6 +25,13 @@ components:
           - gitlab/gitlab-ssh-gateway.yaml
           - gitlab/envoy-filter.yaml
           - gitlab/ca-secret.yaml
+  - name: grafana-additional-manifests
+    required: true
+    manifests:
+      - name: grafana-additional-manifests
+        namespace: grafana
+        files:
+          - grafana/ca-secret.yaml
   - name: pepr-policy-exemptions
     required: true
     manifests:
