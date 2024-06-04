@@ -7,6 +7,16 @@ metadata:
   architecture: amd64
 
 components:
+  - name: trust-manager-images
+    required: true
+    images:
+      - quay.io/jetstack/trust-manager:v0.11.0
+      - quay.io/jetstack/cert-manager-package-debian:20210119.0
+      - quay.io/jetstack/cert-manager-controller
+      - quay.io/jetstack/cert-manager-webhook
+      - quay.io/jetstack/cert-manager-cainjector
+      - quay.io/jetstack/cert-manager-acmesolver
+      - quay.io/jetstack/cert-manager-startupapicheck
   - name: trust-manager
     required: true
     charts:
