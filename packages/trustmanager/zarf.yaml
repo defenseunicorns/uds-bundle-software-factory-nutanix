@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: trust-manager
+  description: "Trust manager service for distributing trusted CA bundles to other namespaces"
+  version: "0.0.1"
+  architecture: amd64
+
+components:
+  - name: trust-manager
+    required: true
+    charts:
+      - name: cert-manager
+        version: 1.14.5
+        namespace: cert-manager
+        url: https://charts.jetstack.io/
+        valuesFiles:
+          - values/cert-manager.yaml
+      - name: trust-manager
+        version: 0.11.0
+        namespace: cert-manager
+        url: https://charts.jetstack.io/
