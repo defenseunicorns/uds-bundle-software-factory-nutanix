@@ -301,7 +301,7 @@ packages:
             - path: postgres.internal
               value: false
             - path: redis
-              value: 
+              value:
                 internal: true
                 selector:
                   app.kubernetes.io/instance: redis
@@ -354,7 +354,7 @@ packages:
   - name: gitlab-runner
     repository: ghcr.io/defenseunicorns/packages/uds/gitlab-runner
     ref: 16.11.0-uds.0-registry1
-    
+
   ### TODO - uncomment to replace functionality post MVP
 
   # # Sonarqube
@@ -464,4 +464,10 @@ packages:
   # Nexus
   - name: nexus
     repository: ghcr.io/defenseunicorns/packages/uds/nexus
-    ref: 3.66.0-uds.1-registry1
+    ref: 3.68.0-uds.0-registry1
+    overrides:
+      nexus:
+        uds-nexus-config:
+          variables:
+            - path: "sso.enabled"
+              name: NEXUS_SSO_ENABLED
