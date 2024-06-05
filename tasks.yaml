@@ -17,7 +17,7 @@ tasks:
       - task: create:additional-manifests-package-2
       - task: create:init-package
       - task: create:trustmanager-package
-      - task: create:trust-bundle-package
+      - task: create:trust-bundles-package
       - task: create:bundle
 
   #### Clean ####

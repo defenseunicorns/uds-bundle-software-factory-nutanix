@@ -67,7 +67,7 @@ tasks:
     actions:
       - cmd: ./uds zarf package create ./packages/trustmanager --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
 
-  - name: trust-bundle-package
+  - name: trust-bundles-package
     description: Create trust-bundle package for adding custom CAs.
     actions:
-      - cmd: ./uds zarf package create ./packages/trust-bundle --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: ./uds zarf package create ./packages/trust-bundles --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build

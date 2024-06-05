@@ -1,5 +1,4 @@
 global:
   imagePullSecrets:
     - name: "private-registry"
-crds:
-  enabled: true
+installCRDs: true
