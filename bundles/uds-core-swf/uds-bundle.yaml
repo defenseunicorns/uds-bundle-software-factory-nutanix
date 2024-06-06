@@ -467,6 +467,13 @@ packages:
     ref: 3.68.0-uds.0-registry1
     overrides:
       nexus:
+        nexus:
+          values:
+            - path: sso.realm
+              value:
+                - "NexusAuthenticatingRealm"
+                - "SamlRealm"
+                - "DefaultRole"
         uds-nexus-config:
           variables:
             - path: "sso.enabled"
