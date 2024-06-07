@@ -464,7 +464,7 @@ packages:
   # Nexus
   - name: nexus
     repository: ghcr.io/defenseunicorns/packages/uds/nexus
-    ref: 3.68.0-uds.0-registry1
+    ref: 3.68.0-uds.1-registry1
     overrides:
       nexus:
         nexus:
@@ -474,7 +474,23 @@ packages:
                 - "NexusAuthenticatingRealm"
                 - "SamlRealm"
                 - "DefaultRole"
+                - "User-Token-Realm"
+            - path: nexus.docker.enabled
+              value: true
+            - path: nexus.docker.registries
+              value:
+                - host: nexus-docker.${DOMAIN}
+                  port: 5000
         uds-nexus-config:
           variables:
             - path: "sso.enabled"
               name: NEXUS_SSO_ENABLED
+          values:
+            - path: additionalNetworkExposures
+              value:
+                - service: nexus-nexus-repository-manager-docker-5000
+                  selector:
+                    app.kubernetes.io/instance: nexus
+                  gateway: tenant
+                  host: nexus-docker
+                  port: 5000
