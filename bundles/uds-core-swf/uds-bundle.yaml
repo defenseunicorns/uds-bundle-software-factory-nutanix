@@ -371,24 +371,37 @@ packages:
   #   path: ../../build
   #   ref: 0.0.1
 
-  # - name: jira
-  #   repository: ghcr.io/defenseunicorns/packages/uds/jira
-  #   ref: 1.19.0-uds.0-registry1
-  #   overrides:
-  #     jira:
-  #       jira:
-  #         variables:
-  #           - name: JIRA_LOCAL_HOME_ENABLED
-  #             path: "volumes.localHome.persistentVolumeClaim.create"
-  #             description: "Local Home Toggle"
-  #             default: "true"
-  #           - name: JIRA_RWO_STORAGE_CLASS
-  #             path: "volumes.localHome.persistentVolumeClaim.storageClassName"
-  #             description: "RWO storage class name"
-  #           - name: JIRA_LOCAL_HOME_SIZE
-  #             path: "volumes.localHome.persistentVolumeClaim.resources.requests.storage"
-  #             description: "Storage size"
-  #             default: "128Gi"
+  - name: jira
+    repository: ghcr.io/defenseunicorns/packages/uds/jira
+    ref: 1.19.0-uds.0-registry1
+    overrides:
+      jira:
+        jira:
+          variables:
+            - name: JIRA_LOCAL_HOME_ENABLED
+              path: "volumes.localHome.persistentVolumeClaim.create"
+              description: "Local Home Toggle"
+              default: "true"
+            - name: JIRA_RWO_STORAGE_CLASS
+              path: "volumes.localHome.persistentVolumeClaim.storageClassName"
+              description: "RWO storage class name"
+            - name: JIRA_LOCAL_HOME_SIZE
+              path: "volumes.localHome.persistentVolumeClaim.resources.requests.storage"
+              description: "Storage size"
+              default: "128Gi"
+              # 1-2k users
+            - name: JIRA_RESOURCE_CONFIG
+              path: "jira.resources"
+              default:
+                container:
+                  requests:
+                    cpu: "100m"
+                    memory: "2Gi"
+                  limits:
+                    cpu: "8"
+                    memory: "16Gi"
+                jvm:
+                  maxHeap: "4g"
 
   # # Confluence
   # - name: confluence-database-secret
@@ -468,6 +481,17 @@ packages:
     overrides:
       nexus:
         nexus:
+          variables:
+            # Large <200 repositories
+            - name: NEXUS_RESOURCE_CONFIG
+              path: "nexus.resources"
+              default:
+                requests:
+                  cpu: "2"
+                  memory: "4Gi"
+                limits:
+                  cpu: "12"
+                  memory: "32Gi"
           values:
             - path: sso.realm
               value:
