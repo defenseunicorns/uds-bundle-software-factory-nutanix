@@ -8,6 +8,22 @@ metadata:
   # x-release-please-end
   architecture: amd64
 
+x-extra-volume-mounts: &extra-volume-mounts
+  - name: trust-bundle
+    mountPath: /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
+    subPath: "ca-bundle.crt"
+    readOnly: true
+  - name: trust-bundle
+    mountPath: /etc/pki/ca-trust/extracted/java/cacerts
+    subPath: "ca-bundle.jks"
+    readOnly: true
+
+x-extra-volumes: &extra-volumes
+  - name: trust-bundle
+    configMap:
+      name: trust-bundle
+      defaultMode: 0644
+
 packages:
   # Zarf init
   - name: init
@@ -76,11 +92,11 @@ packages:
           #         subpath: "ca-bundle.crt"
           #         secretName: ca-secret
           #         readOnly: true
-          variables:
-            - name: EXTRA_VOLUMES
-              path: extraVolumes
-            - name: EXTRA_VOLUME_MOUNTS
-              path: extraVolumeMounts
+          values:
+            - path: extraVolumes
+              value: *extra-volumes
+            - path: extraVolumeMounts
+              value: *extra-volume-mounts
       velero:
         velero:
           values:
@@ -168,11 +184,10 @@ packages:
                     includedNamespaces:
                       - gitlab
                     ttl: "240h"
-          variables:
-            - name: EXTRA_VOLUMES
-              path: extraVolumes
-            - name: EXTRA_VOLUME_MOUNTS
-              path: extraVolumeMounts
+            - path: extraVolumes
+              value: *extra-volumes
+            - path: extraVolumeMounts
+              value: *extra-volume-mounts
           # TODO: remove if not needed. Trying to updated trusted certs via container host first
             # - name: BACKUP_STORAGE_LOCATION
             #   description: "Configuration for velero backup storage."
@@ -190,6 +205,10 @@ packages:
               value: "ReadWriteMany"
             - path: "persistence.storageClassName"
               value: "nutanix-dynamicfile"
+            - path: extraVolumes
+              value: *extra-volumes
+            - path: extraVolumeMounts
+              value: *extra-volume-mounts
           variables:
             - name: KEYCLOAK_DB_USERNAME
               description: "keycloak database username"
@@ -210,16 +229,16 @@ packages:
             - name: KEYCLOAK_INSECURE_ADMIN_PASSWORD_GENERATION
               description: "Generate an insecure admin password for dev/test"
               path: insecureAdminPasswordGeneration.enabled
-            - name: EXTRA_VOLUMES
-              path: extraVolumes
-            - name: EXTRA_VOLUME_MOUNTS
-              path: extraVolumeMounts
       loki:
         loki:
           values:
             # Override default dns service name for Loki Gateway
             - path: "global.dnsService"
               value: "rke2-coredns-rke2-coredns"
+            - path: loki.backend.extraVolumes
+              value: *extra-volumes
+            - path: loki.backend.extraVolumeMounts
+              value: *extra-volume-mounts
           variables:
             - name: LOKI_CHUNKS_BUCKET
               description: "The object storage bucket for Loki chunks"
@@ -250,12 +269,6 @@ packages:
             #   path: loki.storage.s3.http_config.ca_file
             #   description: "CA chain to trust for connections S3 buckets"
             #   default: "/etc/ssl/certs/ca.crt"
-            - name: EXTRA_VOLUMES
-              path: loki.backend.extraVolumes
-              description: "CA chain to trust for connections S3 buckets"
-            - name: EXTRA_VOLUME_MOUNTS
-              path: loki.backend.extraVolumeMounts
-              description: "CA chain to trust for connections S3 buckets"
             - name: LOKI_WRITE_REPLICAS
               path: write.replicas
               description: "Loki write replicas"
@@ -409,12 +422,11 @@ packages:
     overrides:
       gitlab-runner:
         gitlab-runner:
-          variables:
-            # This is likely not enough for gitlab runner jobs to trust custom CAs and is only mounting the certs for gitlab runner itself
-            - name: EXTRA_VOLUMES
-              path: volumes
-            - name: EXTRA_VOLUME_MOUNTS
-              path: volumeMounts
+          values:
+            - path: volumes
+              value: *extra-volumes
+            - path: volumeMounts
+              value: *extra-volume-mounts
     
   ### TODO - uncomment to replace functionality post MVP
 
@@ -542,14 +554,15 @@ packages:
               value:
                 - host: nexus-docker.${DOMAIN}
                   port: 5000
+            - path: deployment.additionalVolumes
+              value: *extra-volumes
+            - path: deployment.additionalVolumeMounts
+              value: *extra-volume-mounts
         uds-nexus-config:
+          values:
           variables:
             - name: NEXUS_SSO_ENABLED
               path: "sso.enabled"
-            - name: EXTRA_VOLUMES
-              path: deployment.additionalVolumes
-            - name: EXTRA_VOLUME_MOUNTS
-              path: deployment.additionalVolumeMounts
           values:
             - path: additionalNetworkExposures
               value:
