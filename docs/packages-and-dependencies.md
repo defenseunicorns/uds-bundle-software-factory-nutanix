@@ -40,7 +40,7 @@ The UDS Software Factory Bundle (SWF) is a collection of Zarf packages which inc
 |----|----|----|----|
 | [Nutanix CSI Driver Init](https://portal.nutanix.com/page/documents/details?targetId=CSI-Volume-Driver-v2_6:CSI-Volume-Driver-v2_6) | v0.34.0 | v2.6.8 | A zarf component installed in the cluster for orchestrating further deployment of Zarf based packages |
 | [MetalLB](https://github.com/defenseunicorns/uds-capability-metallb) | 0.0.5 | v0.13.12 | Tool for providing load balancer capabilities for ingress into a Kubernetes deployment |
-| [uds-core](https://github.com/defenseunicorns/uds-core) | 0.22.0 | N/A | [DESCRIPTION BELOW](#UDS-Core) |
+| [uds-core](https://github.com/defenseunicorns/uds-core) | 0.22.1 | N/A | [DESCRIPTION BELOW](#UDS-Core) |
 | [Redis](https://github.com/defenseunicorns/uds-package-dependencies) | 0.0.2 | 7.0.12 | A key-value store used as a data backend for several applications in the stack |
 | [Gitlab](https://github.com/defenseunicorns/uds-package-gitlab) | v17.0.1-uds.1-registry1 | 17.0.1 | A source control management tool used in the software development lifecycle for storing, updating, building and deploying custom software |
 | [Gitlab Runner](https://github.com/defenseunicorns/uds-package-gitlab-runner) | 17.0.0-uds.0-registry1 | v17.0.0 | A counterpart to Gitlab (above) in which automated software builds, tests and deployments are executed |
