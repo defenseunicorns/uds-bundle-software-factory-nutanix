@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/uds-cli/v0.10.4/uds.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/uds-cli/v0.11.0/uds.schema.json
 kind: UDSBundle
 metadata:
   name: software-factory-nutanix
@@ -41,7 +41,7 @@ packages:
 
   - name: core
     repository: ghcr.io/defenseunicorns/packages/uds/core
-    ref: 0.22.0-registry1
+    ref: 0.22.1-registry1
     overrides:
       kube-prometheus-stack:
         kube-prometheus-stack:
