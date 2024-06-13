@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.14](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.13...v0.2.14) (2024-06-13)
+
+
+### Features
+
+* nexus updates to configure sso ([#121](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/121)) ([2f24efe](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/2f24efe207a84a9441a424cb0ea80d7902f41ed0))
+* update uds-core ([#128](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/128)) ([949df27](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/949df27a512e4759d8b613fa46518d219438296b))
+
+
+### Bug Fixes
+
+* add nexus default realm role to bundle config ([#126](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/126)) ([0f31e12](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/0f31e1246197a388617023c1640048ec025be7a8))
+
+
+### Miscellaneous
+
+* update nexus ([0f31e12](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/0f31e1246197a388617023c1640048ec025be7a8))
+
 ## [0.2.13](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.12...v0.2.13) (2024-05-29)
 
 ### Updated packages
