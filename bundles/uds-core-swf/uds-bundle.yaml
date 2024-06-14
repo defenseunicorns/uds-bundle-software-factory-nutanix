@@ -314,9 +314,8 @@ packages:
                 - secret: ca-secret
             - path: gitlab.init.containerSecurityContext
               value:
-                securityContext:
-                  runAsNonRoot: true
-                  runAsUser: 65534
+                runAsNonRoot: true
+                runAsUser: 65534
           variables:
             - name: MIGRATIONS_RESOURCES
               description: "Gitlab Migrations Resources"
