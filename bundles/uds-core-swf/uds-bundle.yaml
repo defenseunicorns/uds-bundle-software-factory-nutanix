@@ -312,6 +312,11 @@ packages:
             - path: global.certificates.customCAs
               value:
                 - secret: ca-secret
+            - path: gitlab.webservice.init.containerSecurityContext
+              value:
+                securityContext:
+                  runAsNonRoot: true
+                  runAsUser: 65534
           variables:
             - name: MIGRATIONS_RESOURCES
               description: "Gitlab Migrations Resources"
