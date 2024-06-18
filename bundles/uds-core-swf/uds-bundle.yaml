@@ -250,6 +250,14 @@ packages:
               path: backend.replicas
               description: "Loki backend replicas"
               default: "1"
+            - name: LOKI_WRITE_PERSISTENCE_SIZE
+              path: write.persistence.size
+              description: "Loki write persistence size"
+              default: 128Gi
+            - name: LOKI_BACKEND_PERSISTENCE_SIZE
+              path: backend.persistence.size
+              description: "Loki backend persistence size"
+              default: 128Gi
       istio-admin-gateway:
         uds-istio-config:
           variables:
