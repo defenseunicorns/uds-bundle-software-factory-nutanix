@@ -579,6 +579,17 @@ packages:
   #             path: "postgres.connectionOptions"
   #             description: "Postgres DB connection options"
   #             default: "?connect_timeout=10"
+  #           # 1-2k users
+  #           - name: MATTERMOST_RESOURCE_CONFIG
+  #             path: mattermostApp.resources
+  #             description: "Mattermost Resource Config"
+  #             default:
+  #               requests:
+  #                 cpu: 100m
+  #                 memory: 256Mi
+  #               limits:
+  #                 cpu: 2
+  #                 memory: 4Gi
 
   # Nexus
   - name: nexus
