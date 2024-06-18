@@ -70,14 +70,25 @@ packages:
           values:
             - path: kube-state-metrics.resources
               value:
-                limits:
-                  cpu: 500m
-                  memory: 512Mi
                 requests:
                   cpu: 20m
                   memory: 128Mi
+                limits:
+                  cpu: 500m
+                  memory: 512Mi
       velero:
         velero:
+          variables:
+            - name: VELERO_RESOURCE_CONFIG
+              path: resources
+              description: "Velero Resource Config"
+              default:
+                requests:
+                  cpu: 500m
+                  memory: 128Mi
+                limits:
+                  cpu: 1
+                  memory: 2Gi
           values:
             - path: initContainers
               value:
@@ -202,11 +213,11 @@ packages:
               path: resources
               default:
                 requests:
-                  cpu: 500m
+                  cpu: 400m
                   memory: 512Mi
                 limits:
                   cpu: 1
-                  memory: 1Gi
+                  memory: 2Gi
       loki:
         loki:
           values:
@@ -258,6 +269,36 @@ packages:
               path: backend.persistence.size
               description: "Loki backend persistence size"
               default: 128Gi
+            - name: LOKI_READ_RESOURCE_CONFIG
+              path: read.resources
+              description: "Loki read resource config"
+              default:
+                requests:
+                  cpu: 100m
+                  memory: 512Mi
+                limits:
+                  cpu: 2
+                  memory: 4Gi
+            - name: LOKI_WRITE_RESOURCE_CONFIG
+              path: write.resources
+              description: "Loki write resource config"
+              default:
+                requests:
+                  cpu: 100m
+                  memory: 512Mi
+                limits:
+                  cpu: 2
+                  memory: 4Gi
+            - name: LOKI_BACKEND_RESOURCE_CONFIG
+              path: backend.resources
+              description: "Loki backend resource config"
+              default:
+                requests:
+                  cpu: 100m
+                  memory: 512Mi
+                limits:
+                  cpu: 2
+                  memory: 4Gi
       istio-admin-gateway:
         uds-istio-config:
           variables:
@@ -296,6 +337,19 @@ packages:
             - name: TENANT_TLS_KEY
               description: "The TLS key for the tenant gateway (must be base64 encoded)"
               path: tls.key
+      promtail:
+        promtail:
+          variables:
+            - name: PROMTAIL_RESOURCE_CONFIG
+              description: "Promtail Resource Config"
+              path: resources
+              default:
+                requests:
+                  cpu: 100m
+                  memory: 256Mi
+                limits:
+                  cpu: 1
+                  memory: 1Gi
 
   # NOTE -- depends on hardcoded PVC name(s) in core.keycloak
   - name: keycloak-config-wrapper
