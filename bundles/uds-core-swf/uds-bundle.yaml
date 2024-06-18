@@ -261,44 +261,44 @@ packages:
               path: backend.replicas
               description: "Loki backend replicas"
               default: "1"
-            - name: LOKI_WRITE_PERSISTENCE_SIZE
-              path: write.persistence.size
-              description: "Loki write persistence size"
-              default: 128Gi
-            - name: LOKI_BACKEND_PERSISTENCE_SIZE
-              path: backend.persistence.size
-              description: "Loki backend persistence size"
-              default: 128Gi
-            - name: LOKI_READ_RESOURCE_CONFIG
-              path: read.resources
-              description: "Loki read resource config"
-              default:
-                requests:
-                  cpu: 100m
-                  memory: 512Mi
-                limits:
-                  cpu: 2
-                  memory: 4Gi
-            - name: LOKI_WRITE_RESOURCE_CONFIG
-              path: write.resources
-              description: "Loki write resource config"
-              default:
-                requests:
-                  cpu: 100m
-                  memory: 512Mi
-                limits:
-                  cpu: 2
-                  memory: 4Gi
-            - name: LOKI_BACKEND_RESOURCE_CONFIG
-              path: backend.resources
-              description: "Loki backend resource config"
-              default:
-                requests:
-                  cpu: 100m
-                  memory: 512Mi
-                limits:
-                  cpu: 2
-                  memory: 4Gi
+            # - name: LOKI_WRITE_PERSISTENCE_SIZE
+            #   path: write.persistence.size
+            #   description: "Loki write persistence size"
+            #   default: 128Gi
+            # - name: LOKI_BACKEND_PERSISTENCE_SIZE
+            #   path: backend.persistence.size
+            #   description: "Loki backend persistence size"
+            #   default: 128Gi
+            # - name: LOKI_READ_RESOURCE_CONFIG
+            #   path: read.resources
+            #   description: "Loki read resource config"
+            #   default:
+            #     requests:
+            #       cpu: 100m
+            #       memory: 512Mi
+            #     limits:
+            #       cpu: 2
+            #       memory: 4Gi
+            # - name: LOKI_WRITE_RESOURCE_CONFIG
+            #   path: write.resources
+            #   description: "Loki write resource config"
+            #   default:
+            #     requests:
+            #       cpu: 100m
+            #       memory: 512Mi
+            #     limits:
+            #       cpu: 2
+            #       memory: 4Gi
+            # - name: LOKI_BACKEND_RESOURCE_CONFIG
+            #   path: backend.resources
+            #   description: "Loki backend resource config"
+            #   default:
+            #     requests:
+            #       cpu: 100m
+            #       memory: 512Mi
+            #     limits:
+            #       cpu: 2
+            #       memory: 4Gi
       istio-admin-gateway:
         uds-istio-config:
           variables:
@@ -599,16 +599,16 @@ packages:
       nexus:
         nexus:
           variables:
-            # Large <200 repositories
+            # Medium <50 repositories
             - name: NEXUS_RESOURCE_CONFIG
-              path: "nexus.resources"
+              path: nexus.resources
               default:
                 requests:
-                  cpu: "2"
-                  memory: "4Gi"
+                  cpu: 2
+                  memory: 4Gi
                 limits:
-                  cpu: "12"
-                  memory: "32Gi"
+                  cpu: 8
+                  memory: 16Gi
           values:
             - path: sso.realm
               value:
