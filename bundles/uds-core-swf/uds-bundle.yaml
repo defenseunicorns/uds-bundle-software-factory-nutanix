@@ -312,7 +312,7 @@ packages:
                 allowPrivilegeEscalation: false
                 privileged: false
                 readOnlyRootFilesystem: false
-                runAsUser: 1000
+                runAsUser: 0
                 seLinuxOptions:
                   type: spc_t
           variables:
