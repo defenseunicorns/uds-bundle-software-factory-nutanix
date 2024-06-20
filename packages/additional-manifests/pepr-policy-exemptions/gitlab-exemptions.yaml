@@ -1,0 +1,19 @@
+apiVersion: uds.dev/v1alpha1
+kind: Exemption
+metadata:
+  name: gitlab-certificates
+  namespace: uds-policy-exemptions
+spec:
+  exemptions:
+    - policies:
+        - RestrictSELinuxType
+        - RestrictHostPathWrite
+      matcher:
+        namespace: gitlab
+        name: ".*"
+      title: "gitlab exemptions"
+      description: "Gitlab's certificates container needs write access to the following paths in order to load custom CA certificates:
+        - `/usr/share/pki/ca-trust-source/anchors/`
+        - `/etc/pki/ca-trust/extracted/openssl/`
+        - `/etc/pki/ca-trust/extracted/java/`
+        - `/etc/pki/ca-trust/extracted/edk2/`"
