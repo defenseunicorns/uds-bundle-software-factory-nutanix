@@ -309,12 +309,15 @@ packages:
                 - secret: ca-secret
             - path: gitlab.webservice.init.containerSecurityContext
               value:
-                allowPrivilegeEscalation: false
-                privileged: false
-                readOnlyRootFilesystem: false
-                runAsUser: 0
                 seLinuxOptions:
-                  type: spc_t
+                  level: "s0:c148,c240"
+              # value:
+              #   allowPrivilegeEscalation: false
+              #   privileged: false
+              #   readOnlyRootFilesystem: false
+              #   runAsUser: 0
+              #   seLinuxOptions:
+              #     type: spc_t
           variables:
             - name: MIGRATIONS_RESOURCES
               description: "Gitlab Migrations Resources"

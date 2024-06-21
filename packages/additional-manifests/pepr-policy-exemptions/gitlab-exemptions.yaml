@@ -7,9 +7,9 @@ spec:
   exemptions:
     - policies:
         # - DisallowPrivileged
-        - RequireNonRootUser
+        # - RequireNonRootUser
         - RestrictSELinuxType
-        - RestrictHostPathWrite
+        # - RestrictHostPathWrite
       matcher:
         namespace: gitlab
         name: ".*"
