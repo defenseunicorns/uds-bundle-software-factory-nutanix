@@ -6,8 +6,8 @@ metadata:
 spec:
   exemptions:
     - policies:
-        # - DisallowPrivileged
-        # - RequireNonRootUser
+        - DisallowPrivileged
+        - RequireNonRootUser
         - RestrictSELinuxType
         # - RestrictHostPathWrite
       matcher:
