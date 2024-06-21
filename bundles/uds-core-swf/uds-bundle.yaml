@@ -8,6 +8,11 @@ metadata:
   # x-release-please-end
   architecture: amd64
 
+x-gitlab-init-security-context: &gitlab-init-security-context
+  privileged: true
+  readOnlyRootFilesystem: false
+  runAsUser: 0 
+
 packages:
   # Zarf init
   - name: init
@@ -312,6 +317,23 @@ packages:
                 privileged: true
                 readOnlyRootFilesystem: false
                 runAsUser: 0
+            - path: gitlab.webservice.init.containerSecurityContext
+              value: *gitlab-init-security-context
+            - path: gitlab.toolbox.init.containerSecurityContext
+              value: *gitlab-init-security-context
+            - path: gitlab.sidekiq.init.containerSecurityContext
+              value: *gitlab-init-security-context
+            - path: gitlab.migrations.init.containerSecurityContext
+              value: *gitlab-init-security-context
+            - path: gitlab.gitlab-shell.init.containerSecurityContext
+              value: *gitlab-init-security-context
+            - path: gitlab.gitlab-pages.init.containerSecurityContext
+              value: *gitlab-init-security-context
+            - path: gitlab.gitlab-exporter.init.containerSecurityContext
+              value: *gitlab-init-security-context
+            - path: gitlab.gitaly.init.containerSecurityContext
+              value: *gitlab-init-security-context
+                
           variables:
             - name: MIGRATIONS_RESOURCES
               description: "Gitlab Migrations Resources"
