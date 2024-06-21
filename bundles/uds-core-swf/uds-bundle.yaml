@@ -323,10 +323,12 @@ packages:
               value: *gitlab-init-security-context
             - path: gitlab.sidekiq.init.containerSecurityContext
               value: *gitlab-init-security-context
-            - path: gitlab.migrations.init.containerSecurityContext
-              value: *gitlab-init-security-context
-            - path: gitlab.gitlab-shell.init.containerSecurityContext
-              value: *gitlab-init-security-context
+            ## gitlab-migrations failed to init as root
+            # - path: gitlab.migrations.init.containerSecurityContext
+            #   value: *gitlab-init-security-context
+            ## gitlab-shell crashed on startup as root
+            # - path: gitlab.gitlab-shell.init.containerSecurityContext
+            #   value: *gitlab-init-security-context
             - path: gitlab.gitlab-pages.init.containerSecurityContext
               value: *gitlab-init-security-context
             - path: gitlab.gitlab-exporter.init.containerSecurityContext
