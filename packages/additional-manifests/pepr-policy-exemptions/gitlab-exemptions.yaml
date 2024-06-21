@@ -8,8 +8,6 @@ spec:
     - policies:
         - DisallowPrivileged
         - RequireNonRootUser
-        - RestrictSELinuxType
-        # - RestrictHostPathWrite
       matcher:
         namespace: gitlab
         name: ".*"
