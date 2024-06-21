@@ -313,11 +313,6 @@ packages:
               value:
                 - secret: ca-secret
             - path: gitlab.webservice.init.containerSecurityContext
-              value:
-                privileged: true
-                readOnlyRootFilesystem: false
-                runAsUser: 0
-            - path: gitlab.webservice.init.containerSecurityContext
               value: *gitlab-init-security-context
             - path: gitlab.toolbox.init.containerSecurityContext
               value: *gitlab-init-security-context
