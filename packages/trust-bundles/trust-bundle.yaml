@@ -1,0 +1,30 @@
+apiVersion: trust.cert-manager.io/v1alpha1
+kind: Bundle
+metadata:
+  name: trust-bundle # The bundle name will also be used for the target
+spec:
+  sources:
+  # Include a bundle of publicly trusted certificates which can be
+  # used to validate most TLS certificates on the internet, such as
+  # those issued by Let's Encrypt, Google, Amazon and others.
+  - useDefaultCAs: true
+
+  # Custom CA chain provided via zarf variable
+  - secret:
+      name: "ca-chain"
+      key: "chain.crt"
+
+  target:
+    # Sync the bundle to a ConfigMap called `trust-bundle` in every namespace which
+    # has the label "app.kubernetes.io/managed-by=zarf"
+    # All ConfigMaps will include a PEM-formatted bundle, here named "ca-bundle.crt"
+    # and in this case we also request a binary formatted bundles in JKS format,
+    # here named "ca-bundle.jks".
+    configMap:
+      key: "ca-bundle.crt"
+    additionalFormats:
+      jks:
+        key: "ca-bundle.jks"
+    namespaceSelector:
+      matchLabels:
+        app.kubernetes.io/managed-by: "zarf"

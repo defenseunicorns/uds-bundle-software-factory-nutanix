@@ -1,0 +1,25 @@
+variables:
+  - name: ARCH
+    description: "What architecture to use"
+    default: "amd64"
+  - name: DEPLOY_IMAGE
+    description: "Container image to use to run uds deploy in"
+    default: "ghcr.io/defenseunicorns/build-harness/build-harness:2.0.22"
+
+tasks:
+  - name: uds-version
+    description: Check the UDS version in the build harness being used
+    actions:
+      - cmd: docker run --rm ${DEPLOY_IMAGE} bash -c 'uds version'
+
+  - name: deploy-bundle
+    description: Deploy bundle based on configured input build and config directories
+    inputs:
+      build-dir:
+        default: ./build
+        description: Input for the path to the build directory containing the uds bundle to deploy
+      config-dir:
+        default: ./scratch/configs/dev
+        description: Input for the path to the directory containing the uds-config.yaml to use for deploying the bundle
+    actions:
+      - cmd: docker run --rm -e UDS_CONFIG=/configs/uds-config.yaml -e KUBECONFIG=/configs/kubeconfig -v ${INPUT_CONFIG_DIR}:/configs -v ${INPUT_BUILD_DIR}:/build ${DEPLOY_IMAGE} bash -c 'uds deploy /build/uds-bundle-software-factory-nutanix-${ARCH}*.tar.zst --no-tea --confirm'

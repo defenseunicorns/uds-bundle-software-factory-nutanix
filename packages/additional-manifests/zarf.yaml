@@ -10,8 +10,6 @@ variables:
   - name: DOMAIN
     description: "Domain to be used in VS hosts and gateway config"
     default: "mtsi.bigbang.dev"
-  - name: ADDITIONAL_CA_CHAIN
-    description: "Additional CA chain"
 
 components:
   - name: gitlab-additional-manifests
@@ -24,7 +22,6 @@ components:
           - gitlab/gitlab-ssh-networkpolicies.yaml
           - gitlab/gitlab-ssh-gateway.yaml
           - gitlab/envoy-filter.yaml
-          - gitlab/ca-secret.yaml
   - name: pepr-policy-exemptions
     required: true
     manifests:
@@ -33,9 +30,9 @@ components:
           # TODO -- see README for details
           # - pepr-policy-exemptions/nutanix-csi-exemptions.yaml
           - pepr-policy-exemptions/metallb-exemptions.yaml
-  - name: mattermost-ca-secret
-    required: true
-    manifests:
-      - name: mattermost-ca-secret
-        files:
-          - mattermost/ca-secret.yaml
+  # - name: mattermost-ca-secret
+  #   required: true
+  #   manifests:
+  #     - name: mattermost-ca-secret
+  #       files:
+  #         - mattermost/ca-secret.yaml
