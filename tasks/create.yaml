@@ -50,12 +50,6 @@ tasks:
     description: Create package create additional manifests needed.
     actions:
       - cmd: ./uds zarf package create ./packages/additional-manifests --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
-  
-  # TODO - remove when multiple exemptions can be applied at once
-  - name: additional-manifests-package-2
-    description: Create package create additional manifests needed.
-    actions:
-      - cmd: ./uds zarf package create ./packages/additional-manifests/pepr-policy-exemptions/tmp-csi-exemption --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
 
   - name: init-package
     description: Create init package with Nutanix CSI driver.
