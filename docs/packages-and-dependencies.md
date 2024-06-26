@@ -48,7 +48,7 @@ The UDS Software Factory Bundle (SWF) is a collection of Zarf packages which inc
 | [Jira](https://github.com/defenseunicorns/uds-package-jira) | 1.19.0-uds.0-registry1 | 9.15.1 | A collaboration tool used for team management and task organization |
 | [Confluence](https://github.com/defenseunicorns/uds-package-confluence) | 1.18.0-uds.0-registry1 | 8.8.0 | A knowledge management tool used by teams to organize information |
 | [Mattermost](https://github.com/defenseunicorns/uds-package-mattermost) | 9.7.2-uds.0-registry1 | 9.7.2 | An instance of Mattermost, a self-hosted chat and collaboration platform |
-| [Nexus](https://github.com/defenseunicorns/uds-package-nexus) | 3.68.0-uds.0-registry1 | 3.68.1-02 | An artifact repository used for storing compiled application libraries, packages, images and other such artifacts |
+| [Nexus](https://github.com/defenseunicorns/uds-package-nexus) | 3.68.0-uds.2-registry1 | 3.68.1-02 | An artifact repository used for storing compiled application libraries, packages, images and other such artifacts |
 
 ## UDS Core
  UDS Core is a collection of tools that provide administrative capabilities such as deployment automation, centralized logging, monitoring, alerting and runtime security to a kubernetes cluster. The following applications and tools are installed:
