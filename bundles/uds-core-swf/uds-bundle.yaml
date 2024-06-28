@@ -11,7 +11,7 @@ metadata:
 x-gitlab-init-security-context: &gitlab-init-security-context
   privileged: true
   readOnlyRootFilesystem: false
-  runAsUser: 0 
+  runAsUser: 0
 
 packages:
   # Zarf init
@@ -330,7 +330,7 @@ packages:
               value: *gitlab-init-security-context
             - path: gitlab.gitaly.init.containerSecurityContext
               value: *gitlab-init-security-context
-                
+
           variables:
             - name: MIGRATIONS_RESOURCES
               description: "Gitlab Migrations Resources"
@@ -483,7 +483,7 @@ packages:
   # Nexus
   - name: nexus
     repository: ghcr.io/defenseunicorns/packages/uds/nexus
-    ref: 3.68.0-uds.1-registry1
+    ref: 3.68.0-uds.3-registry1
     overrides:
       nexus:
         nexus:
@@ -492,8 +492,8 @@ packages:
               value:
                 - "NexusAuthenticatingRealm"
                 - "SamlRealm"
-                - "DefaultRole"
                 - "User-Token-Realm"
+                - "NuGetApiKey"
             - path: nexus.docker.enabled
               value: true
             - path: nexus.docker.registries
