@@ -2,8 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.2.16](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.15...v0.2.16) (2024-07-01)
+## [0.2.16](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.14...v0.2.16) (2024-07-01)
 
+* Contains the same updates as the [0.2.15] (2024-07-01) below, just with a ci bug fix to publish the package.
 
 ### Bug Fixes
 
