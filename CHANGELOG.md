@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.16](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.15...v0.2.16) (2024-07-01)
+
+
+### Bug Fixes
+
+* bump uds cli in setup action ([051e14f](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/051e14f1ac51de2e62e8129709650d599cad5fc2))
+
 ## [0.2.15](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.14...v0.2.15) (2024-07-01)
 
 ### Updated packages
