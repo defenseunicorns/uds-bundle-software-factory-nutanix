@@ -2,6 +2,67 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.15](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.14...v0.2.15) (2024-07-01)
+
+### Updated packages
+| Package | Old | New |
+| ---- | ---- | ---- |
+| uds-cli | 0.11.0 | 0.12.0 |
+| nutanix-init | 0.34.0 | 0.35.0 |
+| gitlab | 17.0.1 | 17.0.2 |
+
+### Features
+
+* run gitlab init containers as privileged for copying CA trust ([#130](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/130)) ([5b4031e](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/5b4031ef62a7eee53f9d66eb659d76313323668b))
+
+
+### Bug Fixes
+
+* bump nexus again to bring in default saml role update ([9bec327](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/9bec327f36b86af23fae9f1a11a56ce233836ed8))
+
+
+### Miscellaneous
+
+* bump gitlab to 17.0.2-uds.0 ([18fde32](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/18fde320542fa0aa4abd40d9bb33fcf48e8624e4))
+* bump nexus and add NuGetApiKey realm ([#136](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/136)) ([9bec327](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/9bec327f36b86af23fae9f1a11a56ce233836ed8))
+* bump nutanix csi init to v0.35.0 ([18fde32](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/18fde320542fa0aa4abd40d9bb33fcf48e8624e4))
+* bump uds-cli to 0.12.0 ([#137](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/137)) ([18fde32](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/18fde320542fa0aa4abd40d9bb33fcf48e8624e4))
+
+---
+### DETAILS
+
+#### Nexus
+#### [3.68.0-uds.3](https://github.com/defenseunicorns/uds-package-nexus/compare/v3.68.0-uds.1...v3.68.0-uds.3) (2024-06-27)
+
+#### Bug Fixes
+
+* update default role and realm for uds ([#18](https://github.com/defenseunicorns/uds-package-nexus/issues/18)) ([19e1d09](https://github.com/defenseunicorns/uds-package-nexus/commit/19e1d09b12685b14cc0aa5e3961f33cf41d211d8))
+* add wait for package creation ([#16](https://github.com/defenseunicorns/uds-package-nexus/issues/16)) ([946d431](https://github.com/defenseunicorns/uds-package-nexus/commit/946d4311281dda43fe8e64859078498a96abad35))
+
+
+#### Gitlab
+#### [17.0.2-uds.0](https://github.com/defenseunicorns/uds-package-gitlab/compare/v17.0.1-uds.1...v17.0.2-uds.0) (2024-06-20)
+
+#### Features
+
+* add wait for GL package CR readiness ([#144](https://github.com/defenseunicorns/uds-package-gitlab/issues/144)) ([eaa59dd](https://github.com/defenseunicorns/uds-package-gitlab/commit/eaa59ddbe0ebdc6935732b104479f667be588dad))
+* allow for Postgres password secret generation ([#147](https://github.com/defenseunicorns/uds-package-gitlab/issues/147)) ([5d48380](https://github.com/defenseunicorns/uds-package-gitlab/commit/5d48380e57b40a66aa8000059f5f5caa1c6e7558))
+
+
+#### Bug Fixes
+
+* add missing exporter netpols ([#142](https://github.com/defenseunicorns/uds-package-gitlab/issues/142)) ([9b5a258](https://github.com/defenseunicorns/uds-package-gitlab/commit/9b5a25876c8ee4432095ea9b94da9072b547f225))
+
+
+#### Miscellaneous
+
+* cache playwright and add tests to amd64 release ([#155](https://github.com/defenseunicorns/uds-package-gitlab/issues/155)) ([4af9d3a](https://github.com/defenseunicorns/uds-package-gitlab/commit/4af9d3a210f4776909db5f3d611840c57a0f44e6))
+* **deps:** update gitlab package dependencies ([#154](https://github.com/defenseunicorns/uds-package-gitlab/issues/154)) ([e5a8f66](https://github.com/defenseunicorns/uds-package-gitlab/commit/e5a8f66a66ac635665e298c1ad7c7e9d1bf10223))
+* **deps:** update gitlab support dependencies ([#137](https://github.com/defenseunicorns/uds-package-gitlab/issues/137)) ([66bb3ba](https://github.com/defenseunicorns/uds-package-gitlab/commit/66bb3ba7947eb28f8d7764b80495c62b6c6a5937))
+* document how to use the database ([#149](https://github.com/defenseunicorns/uds-package-gitlab/issues/149)) ([3ec9044](https://github.com/defenseunicorns/uds-package-gitlab/commit/3ec90445035d1c18f4f06a891861c2a95c6a0af8))
+
+---
+
 ## [0.2.14](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.13...v0.2.14) (2024-06-13)
 
 ### Updated packages
