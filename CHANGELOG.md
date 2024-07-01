@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.15](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.14...v0.2.15) (2024-07-01)
+
+
+### Features
+
+* run gitlab init containers as privileged for copying CA trust ([#130](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/130)) ([5b4031e](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/5b4031ef62a7eee53f9d66eb659d76313323668b))
+
+
+### Bug Fixes
+
+* bump nexus again to bring in default saml role update ([9bec327](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/9bec327f36b86af23fae9f1a11a56ce233836ed8))
+
+
+### Miscellaneous
+
+* bump gitlab to 17.0.2-uds.0 ([18fde32](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/18fde320542fa0aa4abd40d9bb33fcf48e8624e4))
+* bump nexus and add NuGetApiKey realm ([#136](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/136)) ([9bec327](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/9bec327f36b86af23fae9f1a11a56ce233836ed8))
+* bump nutanix csi init to v0.35.0 ([18fde32](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/18fde320542fa0aa4abd40d9bb33fcf48e8624e4))
+* bump uds-cli to 0.12.0 ([#137](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/137)) ([18fde32](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/18fde320542fa0aa4abd40d9bb33fcf48e8624e4))
+
 ## [0.2.14](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.13...v0.2.14) (2024-06-13)
 
 ### Updated packages
