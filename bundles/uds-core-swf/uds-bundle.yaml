@@ -42,11 +42,11 @@ packages:
   # MetalLB
   - name: metallb
     repository: ghcr.io/defenseunicorns/packages/metallb
-    ref: 0.0.5-amd64
+    ref: 0.1.0-amd64
 
   - name: core
     repository: ghcr.io/defenseunicorns/packages/uds/core
-    ref: 0.22.1-registry1
+    ref: 0.22.2-registry1
     overrides:
       kube-prometheus-stack:
         kube-prometheus-stack:
@@ -65,13 +65,13 @@ packages:
             - path: initContainers
               value:
                 - name: velero-plugin-for-aws
-                  image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.9.2
+                  image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.10.0
                   imagePullPolicy: IfNotPresent
                   volumeMounts:
                     - mountPath: /target
                       name: plugins
                 - name: velero-plugin-for-csi
-                  image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi:v0.7.0
+                  image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi:v0.7.1
                   imagePullPolicy: IfNotPresent
                   volumeMounts:
                     - mountPath: /target
@@ -291,7 +291,7 @@ packages:
 
   - name: gitlab
     repository: ghcr.io/defenseunicorns/packages/uds/gitlab
-    ref: 17.0.2-uds.0-registry1
+    ref: 17.1.1-uds.0-registry1
     overrides:
       gitlab:
         uds-gitlab-config:
@@ -392,7 +392,7 @@ packages:
 
   # - name: jira
   #   repository: ghcr.io/defenseunicorns/packages/uds/jira
-  #   ref: 1.19.0-uds.0-registry1
+  #   ref: 1.20.0-uds.0-registry1
   #   overrides:
   #     jira:
   #       jira:
@@ -416,7 +416,7 @@ packages:
 
   # - name: confluence
   #   repository: ghcr.io/defenseunicorns/packages/uds/confluence
-  #   ref: 1.18.0-uds.0-registry1
+  #   ref: 1.20.0-uds.0-registry1
   #   overrides:
   #     confluence:
   #       confluence:
@@ -436,7 +436,7 @@ packages:
   # # Mattermost
   # - name: mattermost
   #   repository: ghcr.io/defenseunicorns/packages/uds/mattermost
-  #   ref: 9.7.2-uds.0-registry1
+  #   ref: 9.9.0-uds.0-registry1
   #   overrides:
   #     mattermost:
   #       mattermost-enterprise-edition:
