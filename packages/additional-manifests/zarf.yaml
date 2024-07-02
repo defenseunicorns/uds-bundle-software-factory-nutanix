@@ -27,8 +27,7 @@ components:
     manifests:
       - name: pepr-policy-exemptions
         files:
-          # TODO -- see README for details
-          # - pepr-policy-exemptions/nutanix-csi-exemptions.yaml
+          - pepr-policy-exemptions/nutanix-csi-exemptions.yaml
           - pepr-policy-exemptions/metallb-exemptions.yaml
   # - name: mattermost-ca-secret
   #   required: true

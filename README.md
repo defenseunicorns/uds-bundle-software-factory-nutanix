@@ -16,8 +16,8 @@ Once the below [Prerequisites](#prerequisites) are met, these are the steps to d
 
 ### Prerequisites
 **Tools**:
-* [uds version v0.10.4](https://github.com/defenseunicorns/uds-cli/tree/v0.10.4)
-- `sudo curl -sL https://github.com/defenseunicorns/uds-cli/releases/download/v0.10.4/uds-cli_v0.10.4_Linux_amd64`
+* [uds version v0.12.0](https://github.com/defenseunicorns/uds-cli/tree/v0.12.0)
+- `sudo curl -sL https://github.com/defenseunicorns/uds-cli/releases/download/v0.12.0/uds-cli_v0.12.0_Linux_amd64`
 * (OPTIONAL) [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
 * (OPTIONAL) [helm](https://github.com/helm/helm)
 
