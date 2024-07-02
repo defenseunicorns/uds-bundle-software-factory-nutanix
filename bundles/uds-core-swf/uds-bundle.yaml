@@ -244,6 +244,18 @@ packages:
               value: *extra-volumes
             - path: loki.backend.extraVolumeMounts
               value: *extra-volume-mounts
+            - path: loki.gateway.extraVolumes
+              value: *extra-volumes
+            - path: loki.gateway.extraVolumeMounts
+              value: *extra-volume-mounts
+            - path: loki.write.extraVolumes
+              value: *extra-volumes
+            - path: loki.write.extraVolumeMounts
+              value: *extra-volume-mounts
+            - path: loki.read.extraVolumes
+              value: *extra-volumes
+            - path: loki.read.extraVolumeMounts
+              value: *extra-volume-mounts
           variables:
             - name: LOKI_CHUNKS_BUCKET
               description: "The object storage bucket for Loki chunks"
