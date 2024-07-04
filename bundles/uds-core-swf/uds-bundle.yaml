@@ -266,44 +266,14 @@ packages:
               path: backend.replicas
               description: "Loki backend replicas"
               default: "1"
-            # - name: LOKI_WRITE_PERSISTENCE_SIZE
-            #   path: write.persistence.size
-            #   description: "Loki write persistence size"
-            #   default: 128Gi
-            # - name: LOKI_BACKEND_PERSISTENCE_SIZE
-            #   path: backend.persistence.size
-            #   description: "Loki backend persistence size"
-            #   default: 128Gi
-            # - name: LOKI_READ_RESOURCE_CONFIG
-            #   path: read.resources
-            #   description: "Loki read resource config"
-            #   default:
-            #     requests:
-            #       cpu: 100m
-            #       memory: 512Mi
-            #     limits:
-            #       cpu: 2
-            #       memory: 4Gi
-            # - name: LOKI_WRITE_RESOURCE_CONFIG
-            #   path: write.resources
-            #   description: "Loki write resource config"
-            #   default:
-            #     requests:
-            #       cpu: 100m
-            #       memory: 512Mi
-            #     limits:
-            #       cpu: 2
-            #       memory: 4Gi
-            # - name: LOKI_BACKEND_RESOURCE_CONFIG
-            #   path: backend.resources
-            #   description: "Loki backend resource config"
-            #   default:
-            #     requests:
-            #       cpu: 100m
-            #       memory: 512Mi
-            #     limits:
-            #       cpu: 2
-            #       memory: 4Gi
+            - name: LOKI_WRITE_PERSISTENCE_SIZE
+              path: write.persistence.size
+              description: "Loki write persistence size"
+              default: 128Gi
+            - name: LOKI_BACKEND_PERSISTENCE_SIZE
+              path: backend.persistence.size
+              description: "Loki backend persistence size"
+              default: 128Gi
       istio-admin-gateway:
         uds-istio-config:
           variables:
