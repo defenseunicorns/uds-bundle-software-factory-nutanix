@@ -56,11 +56,6 @@ tasks:
     actions:
       - cmd: ZARF_CONFIG=./packages/init/zarf-config.yaml ./uds zarf package create ./packages/init --set AGENT_IMAGE_TAG=$(uds zarf version) --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
   
-  - name: trustmanager-package
-    description: Create trustmanager package.
-    actions:
-      - cmd: ./uds zarf package create ./packages/trustmanager --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
-
   - name: trust-bundles-package
     description: Create trust-bundle package for adding custom CAs.
     actions:

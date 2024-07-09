@@ -16,7 +16,6 @@ tasks:
       - task: create:object-store-packages
       - task: create:additional-manifests-package
       - task: create:init-package
-      - task: create:trustmanager-package
       - task: create:trust-bundles-package
       - task: create:bundle
   ################

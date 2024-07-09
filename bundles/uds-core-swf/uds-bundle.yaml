@@ -54,10 +54,14 @@ packages:
   - name: software-factory-namespaces
     path: ../../build
     ref: 1.0.0
+  
+  - name: cert-manager
+    repository: ghcr.io/defenseunicorns/packages/uds/cert-manager
+    ref: 0.1.3-upstream
 
   - name: trust-manager
-    path: ../../build
-    ref: 0.0.1
+    repository: ghcr.io/defenseunicorns/packages/uds/trust-manager
+    ref: 0.11.0-uds.2-upstream
 
   - name: trust-bundles
     path: ../../build
