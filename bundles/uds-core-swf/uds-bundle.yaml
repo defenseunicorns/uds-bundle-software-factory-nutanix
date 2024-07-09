@@ -48,19 +48,52 @@ packages:
     repository: ghcr.io/defenseunicorns/packages/uds/core
     ref: 0.22.1-registry1
     overrides:
+      grafana:
+        grafana:
+          variables:
+            - name: GRAFANA_RESOURCE_CONFIG
+              path: resources
+              default:
+                requests:
+                  cpu: 500m
+                  memory: 512Mi
+                limits:
+                  cpu: 2
+                  memory: 2Gi
       kube-prometheus-stack:
         kube-prometheus-stack:
+          variables:
+            - name: PROMETHEUS_RESOURCE_CONFIG
+              path: prometheus.prometheusSpec.resources
+              default:
+                requests:
+                  cpu: 1
+                  memory: 2Gi
+                limits:
+                  cpu: 4
+                  memory: 8Gi
           values:
             - path: kube-state-metrics.resources
               value:
-                limits:
-                  cpu: 500m
-                  memory: 512Mi
                 requests:
                   cpu: 20m
                   memory: 128Mi
+                limits:
+                  cpu: 500m
+                  memory: 512Mi
       velero:
         velero:
+          variables:
+            - name: VELERO_RESOURCE_CONFIG
+              path: resources
+              description: "Velero Resource Config"
+              default:
+                requests:
+                  cpu: 500m
+                  memory: 128Mi
+                limits:
+                  cpu: 1
+                  memory: 2Gi
           values:
             - path: initContainers
               value:
@@ -180,6 +213,16 @@ packages:
             - name: KEYCLOAK_INSECURE_ADMIN_PASSWORD_GENERATION
               description: "Generate an insecure admin password for dev/test"
               path: insecureAdminPasswordGeneration.enabled
+            - name: KEYCLOAK_RESOURCE_CONFIG
+              description: "Keycloak Resource Config"
+              path: resources
+              default:
+                requests:
+                  cpu: 400m
+                  memory: 512Mi
+                limits:
+                  cpu: 1
+                  memory: 2Gi
       loki:
         loki:
           values:
@@ -223,6 +266,22 @@ packages:
               path: backend.replicas
               description: "Loki backend replicas"
               default: "1"
+            - name: LOKI_WRITE_PERSISTENCE_SIZE
+              path: write.persistence.size
+              description: "Loki write persistence size"
+              default: 128Gi
+            - name: LOKI_BACKEND_PERSISTENCE_SIZE
+              path: backend.persistence.size
+              description: "Loki backend persistence size"
+              default: 128Gi
+            - name: LOKI_QUERY_INTERVAL
+              path: loki.limits_config.split_queries_by_interval
+              description: "Query interval to not hit limits"
+              default: "30m"
+            - name: LOKI_MAX_REQUESTS_PER_TENANT
+              path: loki.query_scheduler.max_outstanding_requests_per_tenant
+              description: "Set to new Loki 3.0 default"
+              default: 32000
       istio-admin-gateway:
         uds-istio-config:
           variables:
@@ -261,6 +320,19 @@ packages:
             - name: TENANT_TLS_KEY
               description: "The TLS key for the tenant gateway (must be base64 encoded)"
               path: tls.key
+      promtail:
+        promtail:
+          variables:
+            - name: PROMTAIL_RESOURCE_CONFIG
+              description: "Promtail Resource Config"
+              path: resources
+              default:
+                requests:
+                  cpu: 100m
+                  memory: 256Mi
+                limits:
+                  cpu: 1
+                  memory: 1Gi
 
   # NOTE -- depends on hardcoded PVC name(s) in core.keycloak
   - name: keycloak-config-wrapper
@@ -408,6 +480,19 @@ packages:
   #             path: "volumes.localHome.persistentVolumeClaim.resources.requests.storage"
   #             description: "Storage size"
   #             default: "128Gi"
+  #             # 1-2k users
+  #           - name: JIRA_RESOURCE_CONFIG
+  #             path: "jira.resources"
+  #             default:
+  #               container:
+  #                 requests:
+  #                   cpu: "100m"
+  #                   memory: "2Gi"
+  #                 limits:
+  #                   cpu: "8"
+  #                   memory: "16Gi"
+  #               jvm:
+  #                 maxHeap: "4g"
 
   # # Confluence
   # - name: confluence-database-secret
@@ -432,6 +517,18 @@ packages:
   #             path: "volumes.localHome.persistentVolumeClaim.resources.requests.storage"
   #             description: "Storage size"
   #             default: "128Gi"
+  #           - name: CONFLUENCE_RESOURCE_CONFIG
+  #             path: "confluence.resources"
+  #             default:
+  #               container:
+  #                 requests:
+  #                   cpu: "2"
+  #                   memory: "2Gi"
+  #                 limits:
+  #                   cpu: "4"
+  #                   memory: "8Gi"
+  #               jvm:
+  #                 maxHeap: "4g"
 
   # # Mattermost
   # - name: mattermost
@@ -479,6 +576,17 @@ packages:
   #             path: "postgres.connectionOptions"
   #             description: "Postgres DB connection options"
   #             default: "?connect_timeout=10"
+  #           # 1-2k users
+  #           - name: MATTERMOST_RESOURCE_CONFIG
+  #             path: mattermostApp.resources
+  #             description: "Mattermost Resource Config"
+  #             default:
+  #               requests:
+  #                 cpu: 100m
+  #                 memory: 256Mi
+  #               limits:
+  #                 cpu: 2
+  #                 memory: 4Gi
 
   # Nexus
   - name: nexus
@@ -487,6 +595,17 @@ packages:
     overrides:
       nexus:
         nexus:
+          variables:
+            # Medium <50 repositories
+            - name: NEXUS_RESOURCE_CONFIG
+              path: nexus.resources
+              default:
+                requests:
+                  cpu: 2
+                  memory: 4Gi
+                limits:
+                  cpu: 8
+                  memory: 16Gi
           values:
             - path: sso.realm
               value:
