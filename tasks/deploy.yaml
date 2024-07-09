@@ -25,4 +25,4 @@ tasks:
         default: ./scratch/configs/dev
         description: Input for the path to the directory containing the uds-config.yaml to use for deploying the bundle
     actions:
-      - cmd: docker run --rm -e ARCH=${ARCH} -e BUNDLE_VERSION=${BUNDLE_VERSION} -e UDS_CONFIG=/configs/uds-config.yaml -e KUBECONFIG=/configs/kubeconfig -v ${INPUT_CONFIG_DIR}:/configs -v ${INPUT_BUILD_DIR}:/build ${DEPLOY_IMAGE} bash -c 'uds deploy /build/uds-bundle-software-factory-nutanix-${ARCH}-${BUNDLE_VERSION}.tar.zst --confirm'
+      - cmd: docker run --rm -e ARCH=${ARCH} -e BUNDLE_VERSION=${BUNDLE_VERSION} -e UDS_CONFIG=/configs/uds-config.yaml -e KUBECONFIG=/configs/kubeconfig -v /tmp:/tmp -v ${INPUT_CONFIG_DIR}:/configs -v ${INPUT_BUILD_DIR}:/build ${DEPLOY_IMAGE} bash -c 'uds deploy /build/uds-bundle-software-factory-nutanix-${ARCH}-${BUNDLE_VERSION}.tar.zst -p core --confirm'

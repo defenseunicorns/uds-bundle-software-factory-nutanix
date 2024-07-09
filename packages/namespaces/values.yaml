@@ -34,5 +34,3 @@ namespaces:
     labels:
       istio-injection: enabled
   - name: cert-manager
-    labels:
-      istio-injection: enabled

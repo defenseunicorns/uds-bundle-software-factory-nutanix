@@ -55,13 +55,9 @@ packages:
     path: ../../build
     ref: 1.0.0
   
-  - name: cert-manager
-    repository: ghcr.io/defenseunicorns/packages/uds/cert-manager
-    ref: 0.1.3-upstream
-
   - name: trust-manager
-    repository: ghcr.io/defenseunicorns/packages/uds/trust-manager
-    ref: 0.11.0-uds.2-upstream
+    path: ../../build
+    ref: 0.0.1
 
   - name: trust-bundles
     path: ../../build
@@ -285,21 +281,21 @@ packages:
             # Override default dns service name for Loki Gateway
             - path: "global.dnsService"
               value: "rke2-coredns-rke2-coredns"
-            - path: loki.backend.extraVolumes
+            - path: backend.extraVolumes
               value: *extra-volumes
-            - path: loki.backend.extraVolumeMounts
+            - path: backend.extraVolumeMounts
               value: *extra-volume-mounts
-            - path: loki.gateway.extraVolumes
+            - path: gateway.extraVolumes
               value: *extra-volumes
-            - path: loki.gateway.extraVolumeMounts
+            - path: gateway.extraVolumeMounts
               value: *extra-volume-mounts
-            - path: loki.write.extraVolumes
+            - path: write.extraVolumes
               value: *extra-volumes
-            - path: loki.write.extraVolumeMounts
+            - path: write.extraVolumeMounts
               value: *extra-volume-mounts
-            - path: loki.read.extraVolumes
+            - path: read.extraVolumes
               value: *extra-volumes
-            - path: loki.read.extraVolumeMounts
+            - path: read.extraVolumeMounts
               value: *extra-volume-mounts
           variables:
             - name: LOKI_CHUNKS_BUCKET
