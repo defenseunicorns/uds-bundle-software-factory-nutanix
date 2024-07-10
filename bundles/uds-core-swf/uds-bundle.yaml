@@ -135,6 +135,10 @@ packages:
                 limits:
                   cpu: 1
                   memory: 2Gi
+            # TODO: remove if not needed. Trying to updated trusted certs via container host first
+            - name: BACKUP_STORAGE_LOCATION
+              path: configuration.backupStorageLocation
+              description: "Configuration for velero backup storage."
           values:
             - path: initContainers
               value:
@@ -224,9 +228,6 @@ packages:
               value: *extra-volumes
             - path: extraVolumeMounts
               value: *extra-volume-mounts
-          # TODO: remove if not needed. Trying to updated trusted certs via container host first
-            # - name: BACKUP_STORAGE_LOCATION
-            #   description: "Configuration for velero backup storage."
       keycloak:
         keycloak:
           values:
