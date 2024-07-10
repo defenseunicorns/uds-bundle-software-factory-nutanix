@@ -230,11 +230,10 @@ packages:
       keycloak:
         keycloak:
           values:
-            # TODO - test/debug
-            # - path: "devMode"
-            #   value: "false"
-            # - path: "autoscaling.enabled"
-            #   value: "true"
+            - path: "devMode"
+              value: "false"
+            - path: "autoscaling.enabled"
+              value: "true"
             - path: "persistence.providers.enabled"
               value: "true"
             - path: "persistence.accessMode"
