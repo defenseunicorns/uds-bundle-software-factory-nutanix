@@ -706,7 +706,6 @@ packages:
             - path: deployment.additionalVolumeMounts
               value: *extra-volume-mounts
         uds-nexus-config:
-          values:
           variables:
             - name: NEXUS_SSO_ENABLED
               path: "sso.enabled"
