@@ -21,6 +21,7 @@ variables:
     REGISTRY_HPA_ENABLE: true
     REGISTRY_PVC_ACCESS_MODE: ReadWriteMany
     REGISTRY_PVC_ENABLED: true
+    REGISTRY_PVC_SIZE: 128Gi
     REGISTRY_STORAGE_CLASS: "nutanix-dynamicfile"
     PRISM_ENDPOINT: "PRISM element IP address"
     PRISM_USERNAME: "csi-user-prism-element-user"
