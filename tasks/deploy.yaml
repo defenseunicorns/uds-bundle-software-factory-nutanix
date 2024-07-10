@@ -7,6 +7,7 @@ variables:
     default: "ghcr.io/defenseunicorns/build-harness/build-harness:2.0.28"
   - name: BUNDLE_VERSION
     description: "Version of the bundle to deploy"
+    # TODO - add release-please support
     default: "0.2.16"
 
 tasks:
