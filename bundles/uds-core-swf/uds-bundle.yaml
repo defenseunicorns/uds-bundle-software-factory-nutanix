@@ -234,7 +234,7 @@ packages:
             - path: "devMode"
               value: "false"
             - path: "autoscaling.enabled"
-              value: "true"
+              value: "false"
             - path: "persistence.providers.enabled"
               value: "true"
             - path: "persistence.accessMode"
