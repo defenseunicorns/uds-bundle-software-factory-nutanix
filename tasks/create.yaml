@@ -55,3 +55,13 @@ tasks:
     description: Create init package with Nutanix CSI driver.
     actions:
       - cmd: ZARF_CONFIG=./packages/init/zarf-config.yaml ./uds zarf package create ./packages/init --set AGENT_IMAGE_TAG=$(uds zarf version) --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+  
+  - name: trust-manager-package
+    description: Create trust-manager package.
+    actions:
+      - cmd: ./uds zarf package create ./packages/trust-manager --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+
+  - name: trust-bundles-package
+    description: Create trust-bundle package for adding custom CAs.
+    actions:
+      - cmd: ./uds zarf package create ./packages/trust-bundles --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
