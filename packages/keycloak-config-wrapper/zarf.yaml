@@ -36,10 +36,10 @@ components:
               fi 
 
               # copy the jars (shouldn't matter which pod, and 0 should always exist)
-              ./zarf tools kubectl cp *.jar keycloak/keycloak-0:/opt/keycloak/providers
+              ./zarf tools kubectl cp *.jar keycloak/identity-config-loader:/home/nonroot
 
               # set the marker
-              ./zarf tools kubectl exec -n keycloak keycloak-0 -- touch /home/non-root/marker
+              ./zarf tools kubectl exec -n keycloak keycloak-0 -- touch /home/nonroot/marker
         
               # wait for the job to finish
               ./zarf tools wait-for job -n keycloak identity-config-loader '{.status.succeeded}'=1
