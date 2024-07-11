@@ -8,6 +8,22 @@ metadata:
   # x-release-please-end
   architecture: amd64
 
+x-extra-volume-mounts: &extra-volume-mounts
+  - name: trust-bundle
+    mountPath: /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
+    subPath: "ca-bundle.crt"
+    readOnly: true
+  - name: trust-bundle
+    mountPath: /etc/pki/ca-trust/extracted/java/cacerts
+    subPath: "ca-bundle.jks"
+    readOnly: true
+
+x-extra-volumes: &extra-volumes
+  - name: trust-bundle
+    configMap:
+      name: trust-bundle
+      defaultMode: 0644
+
 x-gitlab-init-security-context: &gitlab-init-security-context
   privileged: true
   readOnlyRootFilesystem: false
@@ -38,6 +54,14 @@ packages:
   - name: software-factory-namespaces
     path: ../../build
     ref: 1.0.0
+  
+  - name: trust-manager
+    path: ../../build
+    ref: 0.0.1
+
+  - name: trust-bundles
+    path: ../../build
+    ref: 0.0.1
 
   # MetalLB
   - name: metallb
@@ -50,6 +74,11 @@ packages:
     overrides:
       grafana:
         grafana:
+          values:
+            - path: extraVolumes
+              value: *extra-volumes
+            - path: extraVolumeMounts
+              value: *extra-volume-mounts
           variables:
             - name: GRAFANA_RESOURCE_CONFIG
               path: resources
@@ -179,20 +208,27 @@ packages:
                     includedNamespaces:
                       - gitlab
                     ttl: "240h"
+            - path: extraVolumes
+              value: *extra-volumes
+            - path: extraVolumeMounts
+              value: *extra-volume-mounts
       keycloak:
         keycloak:
           values:
-            # TODO - test/debug
-            # - path: "devMode"
-            #   value: "false"
-            # - path: "autoscaling.enabled"
-            #   value: "true"
+            - path: "devMode"
+              value: "false"
+            - path: "autoscaling.enabled"
+              value: "false"
             - path: "persistence.providers.enabled"
               value: "true"
             - path: "persistence.accessMode"
               value: "ReadWriteMany"
             - path: "persistence.storageClassName"
               value: "nutanix-dynamicfile"
+            - path: extraVolumes
+              value: *extra-volumes
+            - path: extraVolumeMounts
+              value: *extra-volume-mounts
           variables:
             - name: KEYCLOAK_DB_USERNAME
               description: "keycloak database username"
@@ -229,6 +265,22 @@ packages:
             # Override default dns service name for Loki Gateway
             - path: "global.dnsService"
               value: "rke2-coredns-rke2-coredns"
+            - path: backend.extraVolumes
+              value: *extra-volumes
+            - path: backend.extraVolumeMounts
+              value: *extra-volume-mounts
+            - path: gateway.extraVolumes
+              value: *extra-volumes
+            - path: gateway.extraVolumeMounts
+              value: *extra-volume-mounts
+            - path: write.extraVolumes
+              value: *extra-volumes
+            - path: write.extraVolumeMounts
+              value: *extra-volume-mounts
+            - path: read.extraVolumes
+              value: *extra-volumes
+            - path: read.extraVolumeMounts
+              value: *extra-volume-mounts
           variables:
             - name: LOKI_CHUNKS_BUCKET
               description: "The object storage bucket for Loki chunks"
@@ -383,7 +435,9 @@ packages:
           values:
             - path: global.certificates.customCAs
               value:
-                - secret: ca-secret
+                - configMap: trust-bundle
+                  keys:
+                    - ca-bundle.crt
             - path: gitlab.webservice.init.containerSecurityContext
               value: *gitlab-init-security-context
             - path: gitlab.toolbox.init.containerSecurityContext
@@ -445,7 +499,15 @@ packages:
   - name: gitlab-runner
     repository: ghcr.io/defenseunicorns/packages/uds/gitlab-runner
     ref: 17.0.0-uds.0-registry1
-
+    overrides:
+      gitlab-runner:
+        gitlab-runner:
+          values:
+            - path: volumes
+              value: *extra-volumes
+            - path: volumeMounts
+              value: *extra-volume-mounts
+    
   ### TODO - uncomment to replace functionality post MVP
 
   # # Sonarqube
@@ -619,10 +681,14 @@ packages:
               value:
                 - host: nexus-docker.${DOMAIN}
                   port: 5000
+            - path: deployment.additionalVolumes
+              value: *extra-volumes
+            - path: deployment.additionalVolumeMounts
+              value: *extra-volume-mounts
         uds-nexus-config:
           variables:
-            - path: "sso.enabled"
-              name: NEXUS_SSO_ENABLED
+            - name: NEXUS_SSO_ENABLED
+              path: "sso.enabled"
           values:
             - path: additionalNetworkExposures
               value:
