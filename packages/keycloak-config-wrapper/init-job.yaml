@@ -20,7 +20,7 @@ spec:
               "sh",
               "-c",
               # This command looks for the Zarf "data injection marker" which is a timestamped file that is injected after everything else and marks the injection as complete.
-              'while [ ! -f /home/nonroot/###ZARF_DATA_INJECTION_MARKER### ]; do echo "waiting for zarf data sync" && sleep 1; done; echo "we are done waiting!"; /home/nonroot/sync.sh',
+              'while [ ! -f /home/nonroot/marker ]; do echo "waiting for data sync" && sleep 1; done; echo "we are done waiting!"',
             ]
           securityContext:
             runAsUser: 65532
