@@ -397,13 +397,27 @@ packages:
     ref: 0.0.2
 
   # Gitlab
-  - name: gitlab-redis
-    repository: ghcr.io/defenseunicorns/packages/uds/dev-redis
-    ref: 0.0.2
-
-  - name: gitlab-redis-secret
-    path: ../../build
-    ref: 0.0.1
+  - name: gitlab-valkey
+    repository: ghcr.io/defenseunicorns/packages/uds/valkey
+    ref: 7.2.5-uds.1-upstream
+    overrides:
+      valkey:
+        uds-valkey-config:
+          values:
+            - path: custom
+              value:
+                - direction: Ingress
+                  selector:
+                    app.kubernetes.io/name: valkey
+                  remoteNamespace: gitlab
+                  port: 6379
+                  description: "Ingress from GitLab"
+            - path: copyPassword
+              value:
+                enabled: true
+                namespace: gitlab
+                secretName: gitlab-redis
+                secretKey: password
 
   - name: gitlab-object-store
     path: ../../build
@@ -415,7 +429,7 @@ packages:
 
   - name: gitlab
     repository: ghcr.io/defenseunicorns/packages/uds/gitlab
-    ref: 17.0.2-uds.0-registry1
+    ref: 17.1.1-uds.1-registry1
     overrides:
       gitlab:
         uds-gitlab-config:
@@ -428,8 +442,8 @@ packages:
               value:
                 internal: true
                 selector:
-                  app.kubernetes.io/instance: redis
-                namespace: dev-redis
+                  app.kubernetes.io/name: valkey
+                namespace: valkey
                 port: 6379
         gitlab:
           values:
@@ -456,6 +470,8 @@ packages:
               value: *gitlab-init-security-context
             - path: gitlab.gitaly.init.containerSecurityContext
               value: *gitlab-init-security-context
+            - path: global.redis.host
+              value: "valkey-master.valkey.svc.cluster.local"
 
           variables:
             - name: MIGRATIONS_RESOURCES

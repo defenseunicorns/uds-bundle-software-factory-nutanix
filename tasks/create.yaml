@@ -26,11 +26,6 @@ tasks:
       - cmd: ./uds zarf package create ./packages/databases/jira/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
       - cmd: ./uds zarf package create ./packages/databases/sonarqube/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
 
-  - name: gitlab-redis-secret-package
-    description: Create package for the gitlab redis secret
-    actions:
-      - cmd: ./uds zarf package create ./packages/gitlab-redis --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
-
   - name: keycloak-config-wrapper-package
     description: Create the keycloak configurations shim loader
     actions:
