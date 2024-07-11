@@ -30,9 +30,3 @@ components:
           - pepr-policy-exemptions/nutanix-csi-exemptions.yaml
           - pepr-policy-exemptions/metallb-exemptions.yaml
           - pepr-policy-exemptions/gitlab-exemptions.yaml
-  # - name: mattermost-ca-secret
-  #   required: true
-  #   manifests:
-  #     - name: mattermost-ca-secret
-  #       files:
-  #         - mattermost/ca-secret.yaml

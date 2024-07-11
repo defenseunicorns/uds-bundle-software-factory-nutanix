@@ -74,18 +74,6 @@ packages:
     overrides:
       grafana:
         grafana:
-          # Remove if extra_volumes works
-          # values:
-          #   - path: global.extraSecretMounts
-          #     value:
-          #       - name: additional-ca-certs
-          #         # path from example configmap mount
-          #         # mountPath: /etc/grafana/ssl/
-          #         # actual path for ubi9
-          #         mountPath: /etc/pki/tls/certs/
-          #         subpath: "ca-bundle.crt"
-          #         secretName: ca-secret
-          #         readOnly: true
           values:
             - path: extraVolumes
               value: *extra-volumes
@@ -234,7 +222,7 @@ packages:
             - path: "devMode"
               value: "false"
             - path: "autoscaling.enabled"
-              value: "true"
+              value: "false"
             - path: "persistence.providers.enabled"
               value: "true"
             - path: "persistence.accessMode"
@@ -322,11 +310,6 @@ packages:
             - name: LOKI_S3_SECRET_ACCESS_KEY
               path: loki.storage.s3.secretAccessKey
               description: "The S3 Secret Access Key"
-            # Remove if extra_volumes works and S3 CA doesn't explicitly need set
-            # - name: LOKI_TLS_CERT_PATH
-            #   path: loki.storage.s3.http_config.ca_file
-            #   description: "CA chain to trust for connections S3 buckets"
-            #   default: "/etc/ssl/certs/ca.crt"
             - name: LOKI_WRITE_REPLICAS
               path: write.replicas
               description: "Loki write replicas"
