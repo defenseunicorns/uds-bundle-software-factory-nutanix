@@ -19,7 +19,7 @@ spec:
             [
               "sh",
               "-c",
-              # This command looks for the Zarf "data injection marker" which is a timestamped file that is injected after everything else and marks the injection as complete.
+              # This command waits for a marker file added after the kubectl cp completes
               'while [ ! -f /home/nonroot/marker ]; do echo "waiting for data sync" && sleep 1; done; echo "we are done waiting!"; /home/nonroot/sync.sh',
             ]
           securityContext:
