@@ -31,22 +31,15 @@ components:
             description: Check that the host architecture matches the package architecture
             maxRetries: 0
         after:
-          # check for jar files (CAN EXIT EARLY)
           - cmd: |
-              COUNT=`ls -1 *.jar 2>/dev/null | wc -l`
-              if [ $COUNT = 0 ]; then 
-                echo "No local JAR files detected -- SKIPPING CUSTOM PLUGIN LOAD"
-                exit 0
-              fi 
-
               # wait for the job to start
               ./zarf tools wait-for job -n keycloak identity-config-loader '{.status.ready}'=1
 
               # find the pod
               POD=$(./zarf tools kubectl get pods -n keycloak --selector app=data-loader --no-headers -o custom-columns=":metadata.name")
 
-              # copy the jars (shouldn't matter which pod, and 0 should always exist)
-              ./zarf tools kubectl cp *.jar keycloak/$POD:/home/nonroot
+              # copy the jars if they exist (CAN ERROR QUIETLY)
+              ./zarf tools kubectl cp *.jar keycloak/$POD:/home/nonroot || true
 
               # set the marker
               ./zarf tools kubectl exec -n keycloak $POD -- touch /home/nonroot/marker
