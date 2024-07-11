@@ -35,6 +35,9 @@ components:
                 exit 0
               fi 
 
+              # wait for the job to start
+              ./zarf tools wait-for job -n keycloak identity-config-loader '{.status.ready}'=1
+
               # find the pod
               POD=$(./zarf tools kubectl get pods -n keycloak --selector app=data-loader --no-headers -o custom-columns=":metadata.name")
 
