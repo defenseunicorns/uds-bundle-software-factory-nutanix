@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.17](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.16...v0.2.17) (2024-07-12)
+
+
+### Features
+
+* add multiple resource config ([#139](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/139)) ([30c34c2](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/30c34c2c83904a6df5162b7e442b1a07a73872df))
+* Custom ca cert support ([#122](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/122)) ([4d90054](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/4d900541cb8230361e04dfa8c28bd1bbb35d80ce))
+* replace zarf data injection ([#145](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/145)) ([5f9be14](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/5f9be1477663b3ee248cacf00d32401bc8c2f5c7))
+* swapped redis for valkey and updated gitlab uds pkg version to v17.1.1-uds1 ([#146](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/146)) ([07282ae](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/07282ae7ba157420aa091a32a46b8277baf0739e))
+
+
+### Miscellaneous
+
+* bumping identity-config tag to match ([d731f11](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/d731f112ad53ed3c2655d700b5a4fc0263bac44d))
+* Nexus upgrade to 3.69.0-uds.0 ([d731f11](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/d731f112ad53ed3c2655d700b5a4fc0263bac44d))
+* update uds core to 0.23.0 ([#142](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/142)) ([d731f11](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/d731f112ad53ed3c2655d700b5a4fc0263bac44d))
+
 ## [0.2.16](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.14...v0.2.16) (2024-07-01)
 
 * Contains the same updates as the [0.2.15] (2024-07-01) below, just with a ci bug fix to publish the package.
