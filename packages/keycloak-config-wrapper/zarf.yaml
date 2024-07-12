@@ -10,48 +10,43 @@ components:
     only:
       cluster:
         architecture: amd64
-    files:
-      # Transfer the files for zarf to use at deploytime
-      - source: init-job.yaml
-        target: tmp_deploy/init-job.yaml
-      - source: zarfception.yaml
-        target: tmp_deploy/zarf.yaml
+    manifests:
+      #create a job from the pre-existing init image
+      - name: data-loader
+        namespace: keycloak
+        files: 
+          - init-job.yaml
     images:
       # renovate: datasource=github-tags depName=defenseunicorns/uds-identity-config versioning=semver 
       - "ghcr.io/defenseunicorns/uds/identity-config:0.5.0"
     actions:
-      onDeploy:
-        before:
-          # cleanup output from previous attempts
+      onDeploy:          
+        before:  
+          # cleanup previous attempts
           - cmd: |
-              rm -rf tmp_deploy
-              mkdir tmp_deploy
-          
+              ./zarf tools kubectl delete job -n keycloak identity-config-loader 2>/dev/null || true
+              
           # Check deploy system arch
           - cmd: if [ "$(uname -m)" != "x86_64" ]; then echo "this package architecture is amd64, but the target system has a different architecture. These architectures must be the same" && exit 1; fi
             description: Check that the host architecture matches the package architecture
             maxRetries: 0
         after:
-          # check for jar files (CAN EXIT EARLY)
           - cmd: |
-              COUNT=`ls -1 *.jar 2>/dev/null | wc -l`
-              if [ $COUNT = 0 ]; then 
-                echo "No local JAR files detected -- SKIPPING CUSTOM PLUGIN LOAD"
-                exit 0
-              fi 
+              # wait for the job to start
+              ./zarf tools wait-for job -n keycloak identity-config-loader '{.status.ready}'=1
 
-              # move to workdir
-              cp *.jar tmp_deploy/
-              cd tmp_deploy
+              # find the pod
+              POD=$(./zarf tools kubectl get pods -n keycloak --selector app=data-loader --no-headers -o custom-columns=":metadata.name")
 
-              # build the zarf wrapper wrapper (yo dawg... 'zarfception.yaml') -- collect the local files
-              ./zarf package create . --confirm
+              # copy the jars if they exist (CAN ERROR QUIETLY)
+              ./zarf tools kubectl cp *.jar keycloak/$POD:/home/nonroot || true
 
-              # deploy the zarf wrapper
-              ./zarf package deploy zarf-package*.tar.zst --confirm 
+              # set the marker
+              ./zarf tools kubectl exec -n keycloak $POD -- touch /home/nonroot/marker
         
-        # CLEANUP attempted deploys
+              # wait for the job to finish
+              ./zarf tools wait-for job -n keycloak identity-config-loader '{.status.succeeded}'=1
+          
         onSuccess:
-          - cmd: rm -rf tmp_deploy
-        onFailure:
-          - cmd: rm -rf tmp_deploy
+          # bounce keycloak statefulset
+          - cmd: ./zarf tools kubectl rollout restart statefulset -n keycloak keycloak
