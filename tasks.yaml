@@ -1,5 +1,6 @@
 includes:
   - create: ./tasks/create.yaml
+  - deploy: ./tasks/deploy.yaml
 
 tasks:
   ################
@@ -9,13 +10,33 @@ tasks:
     actions:
       - task: create:build-dir
       - task: create:database-manifest-packages
-      - task: create:gitlab-redis-secret-package
       - task: create:keycloak-config-wrapper-package
       - task: create:namespaces-package
       - task: create:object-store-packages
       - task: create:additional-manifests-package
       - task: create:init-package
+      - task: create:trust-manager-package
+      - task: create:trust-bundles-package
       - task: create:bundle
+  ################
+  #  Deploy
+  ################
+  - name: uds-version
+    description: Check version of UDS being used to deploy
+    actions:
+      - task: deploy:uds-version
+
+  - name: deploy-dev
+    description: Deploy bundle to dev cluster
+    actions:
+      - task: deploy:deploy-bundle
+
+  - name: deploy-test
+    description: Deploy bundle to test cluster
+    actions:
+      - task: deploy:deploy-bundle
+        with:
+          config-dir: ./scratch/configs/test
 
   #### Clean ####
   - name: clean

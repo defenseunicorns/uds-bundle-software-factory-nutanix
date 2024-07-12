@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: trust-bundles
+  description: "Configures ca trust bundles used by trust-manager to enable services to trust custom CAs"
+  architecture: "amd64"
+  version: "0.0.1"
+
+variables:
+  - name: ADDITIONAL_CA_CHAIN
+    description: "Additional CA chain"
+
+components:
+  # Create secret containing custom CA Chain
+  - name: ca-chain
+    required: true
+    manifests:
+      - name: ca-chain
+        namespace: cert-manager
+        files:
+          - ca-secret.yaml
+  # Create trust-manager bundle containing public CAs and custom CA chain
+  - name: trust-bundle
+    required: true
+    manifests:
+      - name: trust-bundle
+        namespace: cert-manager
+        files:
+          - trust-bundle.yaml
