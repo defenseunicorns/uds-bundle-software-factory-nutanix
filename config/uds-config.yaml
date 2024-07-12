@@ -69,7 +69,6 @@ variables:
     GITLAB_BACKUP_SCHEDULE: "0 3 * * *"
     GITLAB_BACKUP_EXTRA_ARGS: "--skip artifiacts,registry"
     BUCKET_SUFFIX: ""
-    GITLAB_REDIS_ENDPOINT: "redis-master.dev-redis.svc.cluster.local"
     WEBSERVICE_REPLICAS: 3
     WEBSERVICE_WORKERS: 4
     WEBSERVICE_HPA:

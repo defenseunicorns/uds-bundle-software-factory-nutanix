@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 
 ## [0.2.17](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.16...v0.2.17) (2024-07-12)
+### OVERVIEW
+This update includes potentially breaking changes.
+We recommend installing this in a fresh environment (including databases and buckets).
+
+Highlights include:
+* Update to uds-core for security and stability changes
+* Update to resource allocation to better support expected workloads
+* Updates to the nexus package to simplify SSO client creation and initialization
+* Updates to how CA trust is managed throughout the deployment, which should resolve many SSL errors observed today
+* Refactoring the process of loading custom keycloak plugins to resolve errors observed with newer versions of uds-cli
+* Removing dependency on Redis to alleviate license concerns
+
+### Configuration Changes
+* Addition of `init.REGISTRY_PVC_SIZE` (suggested default of 128Gi) to allow expansion of internal docker registry storage
+* Removal of `nexus.NEXUS_DB_PASSWORD` (will result in a random default password)
+* Removal of `gitlab.GITLAB_REDIS_ENDPOINT` (default is now set at the bundle level)
+
+
+### Removed Packages
+> [!Caution]
+> The following packages have been removed
+
+| Package | Version | Explanation |
+| ---- | ---- | ---- |
+| Redis | 7.0.12 | Replaced by Valkey due to licencing concerns |
+
+### Added Packages
+| Package | Version | Explanation |
+| ---- | ---- | ---- |
+| Valkey | 7.2.5 | Replacing Redis due to licensing concerns |
+| cert-manager | 1.14.5 | Parent package to trust-manager, includes required CRDs |
+| trust-mangaer | 0.11.0 | Creates and distributes a CA trust bundle for consumption within the cluster |
+
+### Updated Packages
+| Package | Old | New |
+| ---- | ---- | ---- |
+| uds-core | 0.22.1 | 0.23.0 |
+| gitlab | 17.0.2 | 17.1.1 |
+| nexus | 3.68.1-02 | 3.69.0-02 |
+| istio | 1.22.1 | 1.22.2 |
+| promtail | 2.9.6 | 3.1.0 |
+| grafana | 10.4.2 | 11.1.0 |
+| neuvector | 5.3.2 | 5.3.3 |
+| pepr | 0.31.1 | 0.32.6 |
 
 
 ### Features
@@ -18,6 +62,86 @@ All notable changes to this project will be documented in this file.
 * bumping identity-config tag to match ([d731f11](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/d731f112ad53ed3c2655d700b5a4fc0263bac44d))
 * Nexus upgrade to 3.69.0-uds.0 ([d731f11](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/d731f112ad53ed3c2655d700b5a4fc0263bac44d))
 * update uds core to 0.23.0 ([#142](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/142)) ([d731f11](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/d731f112ad53ed3c2655d700b5a4fc0263bac44d))
+
+---
+### DETAILS
+
+#### uds-core
+##### [0.23.0](https://github.com/defenseunicorns/uds-core/compare/v0.22.2...v0.23.0) (2024-07-04)
+
+##### ⚠ BREAKING CHANGES
+
+* remove emulated gitlab endpoints from keycloak ([#483](https://github.com/defenseunicorns/uds-core/issues/483))
+
+##### Features
+
+* **ALPHA Functionality**: identity group auth ([#497](https://github.com/defenseunicorns/uds-core/issues/497)) ([d71d83e](https://github.com/defenseunicorns/uds-core/commit/d71d83ed4d6e6a35724e70fc5a27cb7ff6e1adaa)) - this is provided as an alpha feature and may not be stable. To use this functionality on an existing installation (upgrade) make sure to follow the [Identity Config upgrade documentation](https://github.com/defenseunicorns/uds-identity-config/blob/main/README.md#from-v045-to-v050).
+
+
+##### Bug Fixes
+
+* **docs:** re-ordered small paragraphs, clarified wording, and added links to tech homepages ([#531](https://github.com/defenseunicorns/uds-core/issues/531)) ([6b2b46b](https://github.com/defenseunicorns/uds-core/commit/6b2b46b46dcb0d25bc13ca7e166bba4fb531da15))
+* **docs:** removed double-link which broke the markdown formatting in pr template ([#532](https://github.com/defenseunicorns/uds-core/issues/532)) ([f41ced4](https://github.com/defenseunicorns/uds-core/commit/f41ced483cc8f8ca1f2cfba3ae3fb58a218f7afc))
+* **docs:** uds-config.yaml example in k3d-slim-dev README ([#530](https://github.com/defenseunicorns/uds-core/issues/530)) ([2e1c53e](https://github.com/defenseunicorns/uds-core/commit/2e1c53e939b99794c8e6994f20282974bd139917))
+* operator retries and error logging ([#511](https://github.com/defenseunicorns/uds-core/issues/511)) ([cae5aab](https://github.com/defenseunicorns/uds-core/commit/cae5aabed589d28680f0f36bd4afe8e2d235c8b4))
+
+
+##### Miscellaneous
+
+* **deps:** update checkout action to latest sha ([#481](https://github.com/defenseunicorns/uds-core/issues/481)) ([c6f0137](https://github.com/defenseunicorns/uds-core/commit/c6f0137bb9a1e11f98d426cec8c98eb4005f160a))
+* **deps:** update dependency weaveworks/eksctl to v0.183.0 ([#499](https://github.com/defenseunicorns/uds-core/issues/499)) ([9cb8e4d](https://github.com/defenseunicorns/uds-core/commit/9cb8e4d7c86611918e502de0a7e7e25921523cbc))
+* **deps:** update grafana to 11.1.0 ([#380](https://github.com/defenseunicorns/uds-core/issues/380)) ([499058a](https://github.com/defenseunicorns/uds-core/commit/499058aedbbda33f88fffd94178ceb68529d5c85))
+* **deps:** update istio to v1.22.2 ([#512](https://github.com/defenseunicorns/uds-core/issues/512)) ([dcdadb4](https://github.com/defenseunicorns/uds-core/commit/dcdadb49255a5052dcb3fe079335976b758b32f9))
+* **deps:** update jest to v29.1.5 ([#485](https://github.com/defenseunicorns/uds-core/issues/485)) ([9c392b9](https://github.com/defenseunicorns/uds-core/commit/9c392b9b88c84e3c3763878e6beb1800c43ded25))
+* **deps:** update neuvector to 5.3.3 ([#467](https://github.com/defenseunicorns/uds-core/issues/467)) ([261057d](https://github.com/defenseunicorns/uds-core/commit/261057d2bf142c3167fdf0d0bd68bc2fb47d22df))
+* **deps:** update pepr to 0.32.2 ([#473](https://github.com/defenseunicorns/uds-core/issues/473)) ([ab4bee9](https://github.com/defenseunicorns/uds-core/commit/ab4bee906f020d86b90c0b984789be55f8b4c08b))
+* **deps:** update pepr to 0.32.3 ([#494](https://github.com/defenseunicorns/uds-core/issues/494)) ([2e28897](https://github.com/defenseunicorns/uds-core/commit/2e2889784043b21463e72643eb890054645dd439))
+* **deps:** update pepr to 0.32.6 ([#516](https://github.com/defenseunicorns/uds-core/issues/516)) ([a9d3eec](https://github.com/defenseunicorns/uds-core/commit/a9d3eecce3e007958b45ac2e627cbece84ad48ac))
+* **deps:** update promtail to 3.1.0 ([#335](https://github.com/defenseunicorns/uds-core/issues/335)) ([4457fce](https://github.com/defenseunicorns/uds-core/commit/4457fce6f46626047e37a17b87dbdc675bcfd709))
+* **deps:** update uds to v0.12.0 ([#521](https://github.com/defenseunicorns/uds-core/issues/521)) ([8e587ff](https://github.com/defenseunicorns/uds-core/commit/8e587ffc210bdb2351748383e058cf86ced8b7a9))
+* **deps:** update uds-common tasks to 0.6.1 ([#498](https://github.com/defenseunicorns/uds-core/issues/498)) ([4aa6e33](https://github.com/defenseunicorns/uds-core/commit/4aa6e3372f6d1a5df1e2ae51a3129603a8b0b29b))
+* **deps:** update zarf to v0.35.0 ([#490](https://github.com/defenseunicorns/uds-core/issues/490)) ([86957cf](https://github.com/defenseunicorns/uds-core/commit/86957cfe19564ec8ddccec7e496af4469def322a))
+* docs linting changes ([#505](https://github.com/defenseunicorns/uds-core/issues/505)) ([0fe2015](https://github.com/defenseunicorns/uds-core/commit/0fe20151713363f572a50601016e06e60230990f))
+* remove emulated gitlab endpoints from keycloak ([#483](https://github.com/defenseunicorns/uds-core/issues/483)) ([495960c](https://github.com/defenseunicorns/uds-core/commit/495960ce8d40cf2ef7c0f0021b653db6fc6383bb))
+* update docs for group auth and readme for docs site ([#540](https://github.com/defenseunicorns/uds-core/issues/540)) ([ace7041](https://github.com/defenseunicorns/uds-core/commit/ace7041e500b72f00b4a5c23d7413a46aa359504))
+
+---
+#### gitlab
+##### [17.1.1-uds.1](https://github.com/defenseunicorns/uds-package-gitlab/compare/v17.1.1-uds.0...v17.1.1-uds.1) (2024-07-09)
+
+
+##### ⚠ BREAKING CHANGES
+
+* allow redis password secret creation and GitLab PeerAuthentication exceptions ([#161](https://github.com/defenseunicorns/uds-package-gitlab/issues/161))
+
+##### Features
+
+* allow redis password secret creation and GitLab PeerAuthentication exceptions ([#161](https://github.com/defenseunicorns/uds-package-gitlab/issues/161)) ([a5e9bd1](https://github.com/defenseunicorns/uds-package-gitlab/commit/a5e9bd1f9c116acbea06b28d78d651dec5f5696d))
+
+
+##### Miscellaneous
+
+* **deps:** update gitlab support dependencies ([#158](https://github.com/defenseunicorns/uds-package-gitlab/issues/158)) ([32aece7](https://github.com/defenseunicorns/uds-package-gitlab/commit/32aece705213305db19b115a2acc74fb3166e20a))
+* remove and gitignore .vscode directory ([#159](https://github.com/defenseunicorns/uds-package-gitlab/issues/159)) ([c087596](https://github.com/defenseunicorns/uds-package-gitlab/commit/c087596604d2296ca9d05e915d59d6c715fd90a9))
+* update license ([#148](https://github.com/defenseunicorns/uds-package-gitlab/issues/148)) ([a457cc4](https://github.com/defenseunicorns/uds-package-gitlab/commit/a457cc4946be87160e86743e7416a10d69dfaf8c))
+
+---
+#### nexus
+##### [3.69.0-uds.0](https://github.com/defenseunicorns/uds-package-nexus/compare/v3.68.0-uds.3...v3.69.0-uds.0) (2024-07-12)
+
+
+##### Bug Fixes
+
+* improve clientID usage ([6788a04](https://github.com/defenseunicorns/uds-package-nexus/commit/6788a0478f9aa73210815dac5c98ff1b07c1e1ce))
+* remove custom_admin_password to allow random admin password generation ([6788a04](https://github.com/defenseunicorns/uds-package-nexus/commit/6788a0478f9aa73210815dac5c98ff1b07c1e1ce))
+
+
+##### Miscellaneous
+
+* release 3.69.0-uds.0 ([8ca331b](https://github.com/defenseunicorns/uds-package-nexus/commit/8ca331b1e382e811eb6663f589bb1d7fdc2d355a))
+* update common uds task versions ([6788a04](https://github.com/defenseunicorns/uds-package-nexus/commit/6788a0478f9aa73210815dac5c98ff1b07c1e1ce))
+* upgrade to 69.0.0-bb.1 ([6788a04](https://github.com/defenseunicorns/uds-package-nexus/commit/6788a0478f9aa73210815dac5c98ff1b07c1e1ce))
+
 
 ## [0.2.16](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.14...v0.2.16) (2024-07-01)
 
