@@ -71,8 +71,8 @@ components:
       - registry.k8s.io/sig-storage/csi-snapshotter:v6.3.2
       - registry.k8s.io/sig-storage/csi-resizer:v1.9.2
       - registry.k8s.io/sig-storage/livenessprobe:v2.11.0
-      - registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi:v0.7.0
-      - registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.9.2
+      - registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi:v0.7.1
+      - registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.10.0
 
   - name: namespaces
     required: true
@@ -133,8 +133,8 @@ components:
       - registry.k8s.io/sig-storage/csi-snapshotter:v6.3.2
       - registry.k8s.io/sig-storage/csi-resizer:v1.9.2
       - registry.k8s.io/sig-storage/livenessprobe:v2.11.0
-      - registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi:v0.7.0
-      - registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.9.2
+      - registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi:v0.7.1
+      - registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.10.0
       - "###ZARF_PKG_TMPL_REGISTRY_IMAGE_DOMAIN######ZARF_PKG_TMPL_REGISTRY_IMAGE###:###ZARF_PKG_TMPL_REGISTRY_IMAGE_TAG###"
 
   # Creates the pod+git mutating webhook

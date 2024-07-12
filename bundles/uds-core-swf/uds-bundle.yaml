@@ -54,7 +54,7 @@ packages:
   - name: software-factory-namespaces
     path: ../../build
     ref: 1.0.0
-  
+
   - name: trust-manager
     path: ../../build
     ref: 0.0.1
@@ -70,7 +70,7 @@ packages:
 
   - name: core
     repository: ghcr.io/defenseunicorns/packages/uds/core
-    ref: 0.22.1-registry1
+    ref: 0.23.0-registry1
     overrides:
       grafana:
         grafana:
@@ -127,13 +127,13 @@ packages:
             - path: initContainers
               value:
                 - name: velero-plugin-for-aws
-                  image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.9.2
+                  image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.10.0
                   imagePullPolicy: IfNotPresent
                   volumeMounts:
                     - mountPath: /target
                       name: plugins
                 - name: velero-plugin-for-csi
-                  image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi:v0.7.0
+                  image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi:v0.7.1
                   imagePullPolicy: IfNotPresent
                   volumeMounts:
                     - mountPath: /target
@@ -523,7 +523,7 @@ packages:
               value: *extra-volumes
             - path: volumeMounts
               value: *extra-volume-mounts
-    
+
   ### TODO - uncomment to replace functionality post MVP
 
   # # Sonarqube
@@ -669,7 +669,7 @@ packages:
   # Nexus
   - name: nexus
     repository: ghcr.io/defenseunicorns/packages/uds/nexus
-    ref: 3.68.0-uds.3-registry1
+    ref: 3.69.0-uds.0-registry1
     overrides:
       nexus:
         nexus:
