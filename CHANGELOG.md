@@ -17,9 +17,7 @@ Highlights include:
 
 ### Configuration Changes
 * Addition of `init.REGISTRY_PVC_SIZE` (suggested default of 128Gi) to allow expansion of internal docker registry storage
-* Removal of `nexus.NEXUS_DB_PASSWORD` (will result in a random default password)
 * Removal of `gitlab.GITLAB_REDIS_ENDPOINT` (default is now set at the bundle level)
-
 
 ### Removed Packages
 > [!Caution]
