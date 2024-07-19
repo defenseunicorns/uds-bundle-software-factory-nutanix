@@ -74,16 +74,6 @@ components:
       - registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi:v0.7.1
       - registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.10.0
 
-  - name: namespaces
-    required: true
-    charts:
-      - name: namespaces
-        version: 1.0.0
-        namespace: default
-        url: https://defenseunicorns.github.io/uds-support-charts/
-        valuesFiles:
-          - values/namespaces.yaml
-
   - name: nutanix-csi-storage
     required: true
     charts:

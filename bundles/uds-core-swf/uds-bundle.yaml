@@ -50,11 +50,6 @@ packages:
               path: persistence.storageClass
               default: "nutanix-dynamicfile"
 
-  # Namespace pre-reqs for swf capabilities
-  - name: software-factory-namespaces
-    path: ../../build
-    ref: 1.0.0
-
   - name: trust-manager
     path: ../../build
     ref: 0.0.1

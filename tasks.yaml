@@ -11,7 +11,6 @@ tasks:
       - task: create:build-dir
       - task: create:database-manifest-packages
       - task: create:keycloak-config-wrapper-package
-      - task: create:namespaces-package
       - task: create:object-store-packages
       - task: create:additional-manifests-package
       - task: create:init-package
