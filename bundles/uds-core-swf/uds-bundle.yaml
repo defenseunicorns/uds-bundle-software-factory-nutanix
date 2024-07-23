@@ -50,11 +50,6 @@ packages:
               path: persistence.storageClass
               default: "nutanix-dynamicfile"
 
-  # Namespace pre-reqs for swf capabilities
-  - name: software-factory-namespaces
-    path: ../../build
-    ref: 1.0.0
-
   - name: trust-manager
     path: ../../build
     ref: 0.0.1
@@ -399,7 +394,7 @@ packages:
   # Gitlab
   - name: gitlab-valkey
     repository: ghcr.io/defenseunicorns/packages/uds/valkey
-    ref: 7.2.5-uds.1-upstream
+    ref: 7.2.5-uds.2-upstream
     overrides:
       valkey:
         uds-valkey-config:
@@ -429,7 +424,7 @@ packages:
 
   - name: gitlab
     repository: ghcr.io/defenseunicorns/packages/uds/gitlab
-    ref: 17.1.1-uds.1-registry1
+    ref: 17.1.2-uds.0-registry1
     overrides:
       gitlab:
         uds-gitlab-config:

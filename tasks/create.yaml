@@ -29,12 +29,7 @@ tasks:
   - name: keycloak-config-wrapper-package
     description: Create the keycloak configurations shim loader
     actions:
-      - cmd: ./uds zarf package create ./packages/keycloak-config-wrapper --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build      
-
-  - name: namespaces-package
-    description: Create the namespaces package
-    actions:
-      - cmd: ./uds zarf package create ./packages/namespaces --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: ./uds zarf package create ./packages/keycloak-config-wrapper --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
 
   - name: object-store-packages
     description: Create the object storage packages
@@ -50,7 +45,7 @@ tasks:
     description: Create init package with Nutanix CSI driver.
     actions:
       - cmd: ZARF_CONFIG=./packages/init/zarf-config.yaml ./uds zarf package create ./packages/init --set AGENT_IMAGE_TAG=$(uds zarf version) --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
-  
+
   - name: trust-manager-package
     description: Create trust-manager package.
     actions:
