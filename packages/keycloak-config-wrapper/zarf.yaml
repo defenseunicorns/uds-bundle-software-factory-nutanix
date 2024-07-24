@@ -14,18 +14,18 @@ components:
       #create a job from the pre-existing init image
       - name: data-loader
         namespace: keycloak
-        files: 
+        files:
           - init-job.yaml
     images:
-      # renovate: datasource=github-tags depName=defenseunicorns/uds-identity-config versioning=semver 
-      - "ghcr.io/defenseunicorns/uds/identity-config:0.5.0"
+      # renovate: datasource=github-tags depName=defenseunicorns/uds-identity-config versioning=semver
+      - "ghcr.io/defenseunicorns/uds/identity-config:0.5.1"
     actions:
-      onDeploy:          
-        before:  
+      onDeploy:
+        before:
           # cleanup previous attempts
           - cmd: |
               ./zarf tools kubectl delete job -n keycloak identity-config-loader 2>/dev/null || true
-              
+
           # Check deploy system arch
           - cmd: if [ "$(uname -m)" != "x86_64" ]; then echo "this package architecture is amd64, but the target system has a different architecture. These architectures must be the same" && exit 1; fi
             description: Check that the host architecture matches the package architecture
@@ -43,10 +43,10 @@ components:
 
               # set the marker
               ./zarf tools kubectl exec -n keycloak $POD -- touch /home/nonroot/marker
-        
+
               # wait for the job to finish
               ./zarf tools wait-for job -n keycloak identity-config-loader '{.status.succeeded}'=1
-          
+
         onSuccess:
           # bounce keycloak statefulset
           - cmd: ./zarf tools kubectl rollout restart statefulset -n keycloak keycloak
