@@ -321,14 +321,6 @@ packages:
               path: backend.persistence.size
               description: "Loki backend persistence size"
               default: 128Gi
-            - name: LOKI_QUERY_INTERVAL
-              path: loki.limits_config.split_queries_by_interval
-              description: "Query interval to not hit limits"
-              default: "30m"
-            - name: LOKI_MAX_REQUESTS_PER_TENANT
-              path: loki.query_scheduler.max_outstanding_requests_per_tenant
-              description: "Set to new Loki 3.0 default"
-              default: 32000
       istio-admin-gateway:
         uds-istio-config:
           variables:
