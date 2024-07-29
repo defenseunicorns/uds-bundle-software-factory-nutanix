@@ -37,6 +37,18 @@ tasks:
         with:
           config-dir: ./scratch/configs/test
 
+  - name: deploy-published-dev
+    description: Deploy published oci bundle to dev cluster
+    actions:
+      - task: deploy:deploy-published
+
+  - name: deploy-published-test
+    description: Deploy published oci bundle to test cluster
+    actions:
+      - task: deploy:deploy-published
+        with:
+          config-dir: ./scratch/configs/test
+
   #### Clean ####
   - name: clean
     actions:
