@@ -7,8 +7,9 @@ variables:
     default: "ghcr.io/defenseunicorns/build-harness/build-harness:2.0.34"
   - name: BUNDLE_VERSION
     description: "Version of the bundle to deploy"
-    # TODO - add release-please support
+    # x-release-please-start-version
     default: "0.3.0"
+    # x-release-please-end
 
 tasks:
   - name: uds-version
