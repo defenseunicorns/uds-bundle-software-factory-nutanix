@@ -49,6 +49,9 @@ packages:
             - name: REGISTRY_STORAGE_CLASS
               path: persistence.storageClass
               default: "nutanix-dynamicfile"
+            - name: DEPLOYMENT_REPLICACOUNT
+              path: replicaCount
+              default: 3
 
   - name: trust-manager
     path: ../../build
