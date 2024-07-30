@@ -65,7 +65,7 @@ components:
     images:
       - registry.k8s.io/sig-storage/snapshot-controller:v6.3.2
       - registry.k8s.io/sig-storage/snapshot-validation-webhook:v6.3.2
-      - quay.io/karbon/ntnx-csi:v2.6.6
+      - quay.io/karbon/ntnx-csi:v2.6.10
       - registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.9.1
       - registry.k8s.io/sig-storage/csi-provisioner:v3.6.2
       - registry.k8s.io/sig-storage/csi-snapshotter:v6.3.2
@@ -80,7 +80,7 @@ components:
       # renovate: datasource=helm
       - name: nutanix-csi-storage
         url: https://github.com/defenseunicorns/nutanix-helm.git # fork containing fix for imagepullsecrets needed for pods to pull images from zarf registry
-        version: v2.6.6-modified
+        version: v2.6.10-modified
         gitPath: charts/nutanix-csi-storage
         namespace: ntnx-system
         valuesFiles:
@@ -117,7 +117,7 @@ components:
     images:
       - registry.k8s.io/sig-storage/snapshot-controller:v6.3.2
       - registry.k8s.io/sig-storage/snapshot-validation-webhook:v6.3.2
-      - quay.io/karbon/ntnx-csi:v2.6.6
+      - quay.io/karbon/ntnx-csi:v2.6.10
       - registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.9.1
       - registry.k8s.io/sig-storage/csi-provisioner:v3.6.2
       - registry.k8s.io/sig-storage/csi-snapshotter:v6.3.2

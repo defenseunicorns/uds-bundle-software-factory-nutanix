@@ -132,12 +132,12 @@ servicemonitor:
 
 controller:
   replicas: 2
-  image: ###ZARF_REGISTRY###/karbon/ntnx-csi:v2.6.6
+  image: ###ZARF_REGISTRY###/karbon/ntnx-csi:v2.6.10
   nodeSelector: {}
   tolerations: []
 
 node:
-  image: ###ZARF_REGISTRY###/karbon/ntnx-csi:v2.6.6
+  image: ###ZARF_REGISTRY###/karbon/ntnx-csi:v2.6.10
   nodeSelector: {}
   tolerations: []
 
