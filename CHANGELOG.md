@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.1](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.3.0...v0.3.1) (2024-08-01)
+
+
+### Miscellaneous
+
+* add override for zarf-registry replica-count in place of hpa ([10988cc](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/10988cc018e7bdd206f798f18e1cfeba77314726))
+* add tasks for deploying published oci and update task versions ([#152](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/152)) ([ad96a6b](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/ad96a6b93ee65daf5e921a5b22ef3cd87e1cfe11))
+* cleanup unecessary loki overrides ([b3a4f56](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/b3a4f5627a143f34b8b67fa11b5b7cca96ca909f))
+* remove old namespace pattern ([#149](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/149)) ([77ca71e](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/77ca71ef06040eec9b0f7cae409d1d8606360f81))
+* update csi chart and storage images ([#154](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/154)) ([c0dca0e](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/c0dca0e2415f82c5cd4759f953222cbaa8cbb73a))
+* upgrade gitlab to 17.1.2-uds.0 ([77ca71e](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/77ca71ef06040eec9b0f7cae409d1d8606360f81))
+* upgrade Nutanix CSI init to 0.36.1 ([b3a4f56](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/b3a4f5627a143f34b8b67fa11b5b7cca96ca909f))
+* upgrade uds-cli to 0.13.1 ([b3a4f56](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/b3a4f5627a143f34b8b67fa11b5b7cca96ca909f))
+* upgrade uds-core to 0.24.1 ([#151](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/151)) ([b3a4f56](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/b3a4f5627a143f34b8b67fa11b5b7cca96ca909f))
+* upgrade uds-identity-config to v0.5.1 ([b3a4f56](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/b3a4f5627a143f34b8b67fa11b5b7cca96ca909f))
+* upgrade valkey to 7.2.5-uds.2 ([77ca71e](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/77ca71ef06040eec9b0f7cae409d1d8606360f81))
+
 ## [0.3.0](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.16...v0.3.0) (2024-07-12)
 ### OVERVIEW
 This update includes potentially breaking changes.
