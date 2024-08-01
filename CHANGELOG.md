@@ -2,6 +2,85 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.1](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.3.0...v0.3.1) (2024-08-01)
+
+### OVERVIEW
+Notable updates include
+  * uds-cli version 0.13.1
+  * Nutanix csi driver version 0.2.10
+
+There are manual clickop keycloak updates to make when upgrading this bundle from 0.3.0 to 0.3.1 because of the identity-config update that happened. Details on those manual steps can be found [here](https://github.com/defenseunicorns/uds-identity-config/blob/main/docs/VERSION_UPGRADE.md)
+
+### Updated Packages
+| Package | Old | New |
+| ---- | ---- | ---- |
+| uds-cli | 0.12.0 | 0.13.1 |
+| nutanix csi zarf init | 0.35.0 | 0.36.1 |
+| nutanix csi driver | 2.6.6 | 2.6.10 |
+| uds-core | 0.23.0 | 0.24.1 |
+| authservice | 0.5.3 | 1.0.1 |
+| uds-identity-config | 0.5.0 | 0.5.1 |
+| pepr | 0.32.6 | 0.32.7 |
+| gitlab | 17.1.1 | 17.1.2 |
+
+### Miscellaneous
+
+* add override for zarf-registry replica-count in place of hpa ([10988cc](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/10988cc018e7bdd206f798f18e1cfeba77314726))
+* add tasks for deploying published oci and update task versions ([#152](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/152)) ([ad96a6b](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/ad96a6b93ee65daf5e921a5b22ef3cd87e1cfe11))
+* cleanup unecessary loki overrides ([b3a4f56](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/b3a4f5627a143f34b8b67fa11b5b7cca96ca909f))
+* remove old namespace pattern ([#149](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/149)) ([77ca71e](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/77ca71ef06040eec9b0f7cae409d1d8606360f81))
+* update csi chart and storage images ([#154](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/154)) ([c0dca0e](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/c0dca0e2415f82c5cd4759f953222cbaa8cbb73a))
+* upgrade gitlab to 17.1.2-uds.0 ([77ca71e](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/77ca71ef06040eec9b0f7cae409d1d8606360f81))
+* upgrade Nutanix CSI init to 0.36.1 ([b3a4f56](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/b3a4f5627a143f34b8b67fa11b5b7cca96ca909f))
+* upgrade uds-cli to 0.13.1 ([b3a4f56](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/b3a4f5627a143f34b8b67fa11b5b7cca96ca909f))
+* upgrade uds-core to 0.24.1 ([#151](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/151)) ([b3a4f56](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/b3a4f5627a143f34b8b67fa11b5b7cca96ca909f))
+* upgrade uds-identity-config to v0.5.1 ([b3a4f56](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/b3a4f5627a143f34b8b67fa11b5b7cca96ca909f))
+* upgrade valkey to 7.2.5-uds.2 ([77ca71e](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/77ca71ef06040eec9b0f7cae409d1d8606360f81))
+
+---
+### DETAILS
+
+#### uds-core
+##### [0.24.1](https://github.com/defenseunicorns/uds-core/compare/v0.24.0...v0.24.1) (2024-07-22)
+
+##### Upgrade Note
+* See 0.5.1 upgrade documentation on [identity-config](https://github.com/defenseunicorns/uds-identity-config/blob/main/README.md#upgrading-identity-config) if upgrading an existing installation.
+
+##### Bug Fixes
+
+* **ci:** snapshot release publish, passthrough test on upgrade ([#575](https://github.com/defenseunicorns/uds-core/issues/575)) ([d4afe00](https://github.com/defenseunicorns/uds-core/commit/d4afe0065b76ec7c44e9d00b1f95b46b189043f0))
+* **ci:** workflow permissions ([cacf1b5](https://github.com/defenseunicorns/uds-core/commit/cacf1b5d8bccd16a8c2381fbd0912715a78a22c2))
+* only allow istio gateways to set x509 client certificate header ([#572](https://github.com/defenseunicorns/uds-core/issues/572)) ([5c62279](https://github.com/defenseunicorns/uds-core/commit/5c622795b9becb7ef6f65b807486ade0fd44bea1))
+* **sso:** delete orphaned SSO secrets ([#578](https://github.com/defenseunicorns/uds-core/issues/578)) ([5a6b9ef](https://github.com/defenseunicorns/uds-core/commit/5a6b9effca83f4f19344c813cf96d474ff5fdeb4))
+* unicorn flavor proxy image reference ([#590](https://github.com/defenseunicorns/uds-core/issues/590)) ([db081fa](https://github.com/defenseunicorns/uds-core/commit/db081fa41c0db6557c3b66bbfa0b5064dc7226e3))
+* update monitor mutation to not overwrite explicitly defined scrape class ([#582](https://github.com/defenseunicorns/uds-core/issues/582)) ([7e550d3](https://github.com/defenseunicorns/uds-core/commit/7e550d3577546d73e32a62dac018e048972d46eb))
+
+
+##### Miscellaneous
+
+* **deps:** update grafana chart + sidecar image ([#567](https://github.com/defenseunicorns/uds-core/issues/567)) ([85b6de4](https://github.com/defenseunicorns/uds-core/commit/85b6de4b140a2076cdc72626bce2d24aab90c26c))
+* **deps:** update pepr to v0.32.7 ([#556](https://github.com/defenseunicorns/uds-core/issues/556)) ([e594f13](https://github.com/defenseunicorns/uds-core/commit/e594f1366bb6a920a9cd7a945bc41ae39382f8b8))
+* **deps:** update uds-identity-config to v0.5.1 ([#591](https://github.com/defenseunicorns/uds-core/issues/591)) ([b9c5bd3](https://github.com/defenseunicorns/uds-core/commit/b9c5bd34c75b6fe7063d8bf4bd15496f73e87861))
+* **deps:** update uds-k3d to v0.8.0 ([#581](https://github.com/defenseunicorns/uds-core/issues/581)) ([fab8919](https://github.com/defenseunicorns/uds-core/commit/fab89198a9118f51e372b589e02fca89d6db4112))
+* **loki:** default query settings, config as secret ([#579](https://github.com/defenseunicorns/uds-core/issues/579)) ([5fa889c](https://github.com/defenseunicorns/uds-core/commit/5fa889c51a59786330fd4f7b914b532b4c56b1b3))
+* **oscal:** begin integration of composed oscal with validations ([#496](https://github.com/defenseunicorns/uds-core/issues/496)) ([047fd30](https://github.com/defenseunicorns/uds-core/commit/047fd3041a8eecc29c8f61e1f3c2c70622ec9e88))
+
+---
+#### gitlab
+##### [17.1.2-uds.0](https://github.com/defenseunicorns/uds-package-gitlab/compare/v17.1.1-uds.1...v17.1.2-uds.0) (2024-07-18)
+
+
+##### Features
+
+* expose `requiredGroups` in sso config ([#167](https://github.com/defenseunicorns/uds-package-gitlab/issues/167)) ([c0b4c37](https://github.com/defenseunicorns/uds-package-gitlab/commit/c0b4c37940fac22c879dd785405b5012a819e55c))
+
+
+##### Miscellaneous
+
+* **deps:** update gitlab package dependencies ([#163](https://github.com/defenseunicorns/uds-package-gitlab/issues/163)) ([78d5f4d](https://github.com/defenseunicorns/uds-package-gitlab/commit/78d5f4dcabb3ddaaf7cb87761c560c6cdc2b8c1f))
+* **deps:** update gitlab support dependencies ([#162](https://github.com/defenseunicorns/uds-package-gitlab/issues/162)) ([0c49973](https://github.com/defenseunicorns/uds-package-gitlab/commit/0c49973a26cfa58026a2e88b0314e33dfe000792))
+---
+
 ## [0.3.0](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.2.16...v0.3.0) (2024-07-12)
 ### OVERVIEW
 This update includes potentially breaking changes.
