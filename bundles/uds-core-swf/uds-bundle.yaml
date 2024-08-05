@@ -52,6 +52,16 @@ packages:
             - name: DEPLOYMENT_REPLICACOUNT
               path: replicaCount
               default: 3
+      nutanix-csi-storage:
+        nutanix-csi-storage:
+          variables:
+            - name: CSI_NODE_TOLERATIONS
+              description: "Tolerations to apply to the CSI node pods."
+              path: node.tolerations
+              default:
+                - effect: NoSchedule
+                  key: dedicated-gitaly-node
+                  operator: Exists
 
   - name: trust-manager
     path: ../../build
@@ -500,6 +510,37 @@ packages:
             - name: SHELL_REPLICAS
               description: "Gitlab Shell Min Replicas"
               path: "gitlab.gitlab-shell.minReplicas"
+            - name: TOLERATIONS
+              description: "Tolerations to allow gitaly to schedule on tainted nodes."
+              path: gitlab.gitaly.tolerations
+              default:
+                - effect: NoSchedule
+                  key: dedicated-gitaly-node
+                  operator: Exists
+            - name: AFFINITY
+              description: "Affinity settings to prefer scheduling on dedicated gitaly nodes and avoid nodes already running gitaly."
+              path: gitlab.gitaly.affinity
+              default:
+                podAntiAffinity:
+                  preferredDuringSchedulingIgnoredDuringExecution:
+                    - weight: 100
+                      podAffinityTerm:
+                        labelSelector:
+                          matchExpressions:
+                            - key: app
+                              operator: In
+                              values:
+                                - gitaly
+                        topologyKey: kubernetes.io/hostname
+                nodeAffinity:
+                    preferredDuringSchedulingIgnoredDuringExecution:
+                      - weight: 1
+                        preference:
+                          matchExpressions:
+                            - key: dedicated
+                              operator: In
+                              values:
+                                - gitaly-node
 
   # Gitlab Runner
   - name: gitlab-runner
