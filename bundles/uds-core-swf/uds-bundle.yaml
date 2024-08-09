@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/uds-cli/v0.13.1/uds.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/uds-cli/v0.14.0/uds.schema.json
 kind: UDSBundle
 metadata:
   name: software-factory-nutanix
@@ -64,11 +64,11 @@ packages:
   # MetalLB
   - name: metallb
     repository: ghcr.io/defenseunicorns/packages/metallb
-    ref: 0.0.5-amd64
+    ref: 0.1.0-amd64
 
   - name: core
     repository: ghcr.io/defenseunicorns/packages/uds/core
-    ref: 0.24.1-registry1
+    ref: 0.25.1-registry1
     overrides:
       grafana:
         grafana:
@@ -389,7 +389,7 @@ packages:
   # Gitlab
   - name: gitlab-valkey
     repository: ghcr.io/defenseunicorns/packages/uds/valkey
-    ref: 7.2.5-uds.2-upstream
+    ref: 7.2.6-uds.0-upstream
     overrides:
       valkey:
         uds-valkey-config:
@@ -419,7 +419,7 @@ packages:
 
   - name: gitlab
     repository: ghcr.io/defenseunicorns/packages/uds/gitlab
-    ref: 17.1.2-uds.0-registry1
+    ref: 17.2.1-uds.0-registry1
     overrides:
       gitlab:
         uds-gitlab-config:
@@ -504,7 +504,7 @@ packages:
   # Gitlab Runner
   - name: gitlab-runner
     repository: ghcr.io/defenseunicorns/packages/uds/gitlab-runner
-    ref: 17.0.0-uds.0-registry1
+    ref: 17.1.0-uds.1-registry1
     overrides:
       gitlab-runner:
         gitlab-runner:
@@ -523,7 +523,7 @@ packages:
 
   # - name: sonarqube
   #   repository: ghcr.io/defenseunicorns/packages/uds/sonarqube
-  #   ref: 8.0.3-uds.6-registry1
+  #   ref: 10.6.0-uds.1-registry1
 
   # # Jira
   # - name: jira-database-secret
@@ -532,7 +532,7 @@ packages:
 
   # - name: jira
   #   repository: ghcr.io/defenseunicorns/packages/uds/jira
-  #   ref: 1.19.0-uds.0-registry1
+  #   ref: 1.20.1-uds.0-registry1
   #   overrides:
   #     jira:
   #       jira:
@@ -569,7 +569,7 @@ packages:
 
   # - name: confluence
   #   repository: ghcr.io/defenseunicorns/packages/uds/confluence
-  #   ref: 1.18.0-uds.0-registry1
+  #   ref: 1.20.0-uds.3-registry1
   #   overrides:
   #     confluence:
   #       confluence:
@@ -601,7 +601,7 @@ packages:
   # # Mattermost
   # - name: mattermost
   #   repository: ghcr.io/defenseunicorns/packages/uds/mattermost
-  #   ref: 9.7.2-uds.0-registry1
+  #   ref: 9.10.1-uds.1-registry1
   #   overrides:
   #     mattermost:
   #       mattermost-enterprise-edition:
@@ -659,7 +659,7 @@ packages:
   # Nexus
   - name: nexus
     repository: ghcr.io/defenseunicorns/packages/uds/nexus
-    ref: 3.69.0-uds.0-registry1
+    ref: 3.70.1-uds.0-registry1
     overrides:
       nexus:
         nexus:
