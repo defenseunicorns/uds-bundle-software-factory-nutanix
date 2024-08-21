@@ -46,9 +46,18 @@ packages:
       zarf-registry:
         docker-registry:
           variables:
+<<<<<<< HEAD
             - name: REGISTRY_CA_BUNDLE
               path: caBundle
               default: ""
+=======
+            - name: REGISTRY_STORAGE_CLASS
+              path: persistence.storageClass
+              default: "nutanix-dynamicfile"
+            - name: DEPLOYMENT_REPLICACOUNT
+              path: replicaCount
+              default: 3
+>>>>>>> c3f738571fab1c88947b7378de983777699b048f
       nutanix-csi-storage:
         nutanix-csi-storage:
           variables:
