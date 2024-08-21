@@ -4,14 +4,15 @@ package:
     # These values are sourced from and updated with https://github.com/defenseunicorns/zarf/blob/main/zarf-config.toml
     set:
       agent_image_domain: "ghcr.io/"
-      agent_image: "defenseunicorns/zarf/agent"
+      agent_image: "zarf-dev/zarf/agent"
 
-      injector_version: "2023-08-02"
-      injector_amd64_shasum: "91de0768855ee2606a4f85a92bb480ff3a14ca205fd8d05eb397c18e15aa0247"
-      injector_arm64_shasum: "663df681deea957b0ec53538eab221691a83de8e95d86b8a29008af711934bee"
+      # Tag for the zarf injector binary to use
+      injector_version: '2024-07-22'
+      injector_amd64_shasum: '8463bfd66930a4b26c665b51f25e8a32ed5948068bae49987013c89173394478'
+      injector_arm64_shasum: 'b905e647e0d7876cfd5b665632cfc43ad919dc60408f7236c5b541c53277b503'
 
       registry_image_domain: ""
       registry_image: "library/registry"
       registry_image_tag: "2.8.3"
 
-      gitea_image: "gitea/gitea:1.21.11-rootless"
+      gitea_image: 'gitea/gitea:1.21.5-rootless'

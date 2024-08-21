@@ -35,23 +35,20 @@ packages:
     path: ../../build
     optionalComponents:
       - git-server
-    ref: v0.36.1
+    ref: v0.38.2
     overrides:
       zarf-seed-registry:
         docker-registry:
           variables:
-            - name: REGISTRY_STORAGE_CLASS
-              path: persistence.storageClass
-              default: "nutanix-dynamicfile"
+            - name: REGISTRY_CA_BUNDLE
+              path: caBundle
+              default: ""
       zarf-registry:
         docker-registry:
           variables:
-            - name: REGISTRY_STORAGE_CLASS
-              path: persistence.storageClass
-              default: "nutanix-dynamicfile"
-            - name: DEPLOYMENT_REPLICACOUNT
-              path: replicaCount
-              default: 3
+            - name: REGISTRY_CA_BUNDLE
+              path: caBundle
+              default: ""
       nutanix-csi-storage:
         nutanix-csi-storage:
           variables:
