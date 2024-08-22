@@ -32,9 +32,7 @@ x-gitlab-init-security-context: &gitlab-init-security-context
 packages:
   # Zarf init
   - name: init
-    path: ../../build
-    optionalComponents:
-      - git-server
+    repository: ghcr.io/zarf-dev/packages/init
     ref: v0.38.2
     overrides:
       zarf-seed-registry:
@@ -49,6 +47,14 @@ packages:
             - name: REGISTRY_CA_BUNDLE
               path: caBundle
               default: ""
+            - name: REGISTRY_REPLICA_COUNT
+              path: replicaCount
+              default: 3
+
+  - name: nutanix-csi
+    path: ../../build
+    ref: 0.0.1
+    overrides:
       nutanix-csi-storage:
         nutanix-csi-storage:
           variables:
