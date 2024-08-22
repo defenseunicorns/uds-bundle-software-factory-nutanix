@@ -1,0 +1,65 @@
+kind: ZarfPackageConfig
+metadata:
+  name: nutanix-csi
+  description: "Nutanix CSI Driver Package"
+  architecture: amd64
+  version: "0.0.1" # This version is not used by zarf, but is used for tracking with the published versions
+
+variables:
+  - name: DYNAMIC_FILE_STORE_NAME
+    description: "Name of Nutanix File Server to use for Dynamic File storageclass. Should match the name value for the file server in Prism."
+  - name: PRISM_ENDPOINT
+    description: "IP or hostname of Prism Element."
+  - name: PRISM_USERNAME
+    description: "Username of prism user to use for Nutanix CSI driver."
+  - name: PRISM_PASSWORD
+    description: "Password for prism user to use for Nutanix CSI driver."
+  - name: STORAGE_CONTAINER
+    description: "Name of Nutanix Storage Container for CSI driver to create volumes in."
+
+components:
+  # Push nutanix csi images to seed-registry
+  - name: nutanix-csi-images-initial
+    required: true
+    description: Push nutanix images to the zarf registry
+    images:
+      - registry.k8s.io/sig-storage/snapshot-controller:v8.0.1
+      - registry.k8s.io/sig-storage/snapshot-validation-webhook:v8.0.1
+      - quay.io/karbon/ntnx-csi:v2.6.10
+      - registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.11.1
+      - registry.k8s.io/sig-storage/csi-provisioner:v5.0.1
+      - registry.k8s.io/sig-storage/csi-snapshotter:v8.0.1
+      - registry.k8s.io/sig-storage/csi-resizer:v1.11.2
+      - registry.k8s.io/sig-storage/livenessprobe:v2.13.1
+      - registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi:v0.7.1
+      - registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.10.0
+
+  - name: nutanix-csi-storage
+    required: true
+    charts:
+      # renovate: datasource=helm
+      - name: nutanix-csi-storage
+        url: https://github.com/defenseunicorns/nutanix-helm.git # fork containing fix for imagepullsecrets needed for pods to pull images from zarf registry
+        version: v2.6.10-modified
+        gitPath: charts/nutanix-csi-storage
+        namespace: ntnx-system
+        valuesFiles:
+          - values/nutanix-storage-values.yaml
+    actions:
+      onDeploy:
+        before:
+          - description: Delete Storage Classes
+            cmd: ./zarf tools kubectl delete sc nutanix-volume --ignore-not-found=true
+
+  - name: nutanix-dynamicfile-manifests
+    required: true
+    manifests:
+      - name: nutanix-dynamicfile-manifests
+        namespace: ntnx-system
+        files:
+          - nutanix-dynamicfile.yaml
+    actions:
+      onDeploy:
+        before:
+          - description: Delete Storage Classes
+            cmd: ./zarf tools kubectl delete sc nutanix-dynamicfile --ignore-not-found=true

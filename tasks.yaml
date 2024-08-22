@@ -13,7 +13,7 @@ tasks:
       - task: create:keycloak-config-wrapper-package
       - task: create:object-store-packages
       - task: create:additional-manifests-package
-      - task: create:init-package
+      - task: create:nutanix-csi-package
       - task: create:trust-manager-package
       - task: create:trust-bundles-package
       - task: create:bundle

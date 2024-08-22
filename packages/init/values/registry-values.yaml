@@ -1,8 +1,0 @@
-persistence:
-  enabled: ###ZARF_VAR_UPGRADE_PERSISTENCE###
-
-autoscaling:
-  enabled: false
-
-extraEnvVars:
-  ###ZARF_VAR_UPGRADE_ENV_VARS###
