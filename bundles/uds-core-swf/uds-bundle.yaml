@@ -273,9 +273,6 @@ packages:
       loki:
         loki:
           values:
-            # Override default dns service name for Loki Gateway
-            - path: "global.dnsService"
-              value: "rke2-coredns-rke2-coredns"
             - path: backend.extraVolumes
               value: *extra-volumes
             - path: backend.extraVolumeMounts
