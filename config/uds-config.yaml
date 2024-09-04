@@ -49,7 +49,11 @@ variables:
       -----BEGIN CERTIFICATE-----
       other cert contents
       -----END CERTIFICATE-----
-    PRISM_ENDPOINT: "PRISM element IP address"
+  nutanix-csi:
+    PRISM_CENTRAL_ENDPOINT: "Prism Central IP address or hostname"
+    PRISM_CENTRAL_USERNAME: "csi-user-prism-central"
+    PRISM_CENTRAL_PASSWORD: "csi–user-prism-central-password"
+    PRISM_ENDPOINT: "Prism element IP address"
     PRISM_USERNAME: "csi-user-prism-element-user"
     PRISM_PASSWORD: "csi-user-passoword"
     STORAGE_CONTAINER: "nutanix-storage-container"
