@@ -12,11 +12,11 @@ parameters:
   csi.storage.k8s.io/provisioner-secret-namespace: ntnx-system
   description: nutanix-dynamicfile
   dynamicProv: ENABLED
-  nfsServerName: dev-fs
+  nfsServerName: ###ZARF_VAR_DYNAMIC_FILE_STORE_NAME###
   squashType: root-squash
   storageType: NutanixFiles
 provisioner: csi.nutanix.com
-reclaimPolicy: Delete
+reclaimPolicy: Retain
 volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=4.1

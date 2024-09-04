@@ -1,0 +1,15 @@
+allowVolumeExpansion: true
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: nutanix-volume
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+parameters: 
+  csi.storage.k8s.io/fstype: xfs
+  hypervisorAttached: ENABLED
+  flashMode: DISABLED
+  storageContainer: ###ZARF_VAR_STORAGE_CONTAINER###
+  storageType: NutanixVolumes
+provisioner: csi.nutanix.com
+reclaimPolicy: Retain

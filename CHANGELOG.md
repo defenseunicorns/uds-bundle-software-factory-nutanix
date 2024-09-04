@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.2](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.3.1...v0.3.2) (2024-09-04)
+
+
+### Miscellaneous
+
+* configure tolerations and affinity for gitaly ([c3f7385](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/c3f738571fab1c88947b7378de983777699b048f))
+* switch zarf to use s3 backend ([#157](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/157)) ([c6d2ee2](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/c6d2ee2887c3ac51f1fd1cbec32b77c349fb5249))
+* update nutanix-csi to version 3.0.0 ([#159](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/159)) ([734a816](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/734a816bfe229bbececfa3d604c815160f34abe4))
+
 ## [0.3.1](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.3.0...v0.3.1) (2024-08-01)
 
 ### OVERVIEW
