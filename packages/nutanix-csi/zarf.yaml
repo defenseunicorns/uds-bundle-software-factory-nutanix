@@ -27,6 +27,7 @@ variables:
     description: "Name of Nutanix Storage Container for CSI driver to create volumes in."
   - name: HYPERVISOR_ATTACHED
     description: "Whether to use hypervisor_attached storage or not. Set to ENABLED to turn on."
+    default: "DISABLED"
 
 components:
   # Push nutanix csi images to seed-registry

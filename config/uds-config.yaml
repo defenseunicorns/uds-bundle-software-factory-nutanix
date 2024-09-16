@@ -58,6 +58,7 @@ variables:
     PRISM_PASSWORD: "csi-user-passoword"
     STORAGE_CONTAINER: "nutanix-storage-container"
     DYNAMIC_FILE_STORE_NAME: "nutanix-file-server-name"
+    HYPERVISOR_ATTACHED: "DISABLED"
   metallb:
     # Replace with a valid IP address range
     IP_ADDRESS_POOL: "10.0.0.10-10.0.0.20"
