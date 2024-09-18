@@ -14,6 +14,7 @@ tasks:
       - task: create:object-store-packages
       - task: create:additional-manifests-package
       - task: create:nutanix-csi-package
+      - task: create:cert-manager-package
       - task: create:trust-manager-package
       - task: create:trust-bundles-package
       - task: create:bundle
@@ -37,6 +38,14 @@ tasks:
         with:
           config-dir: ./scratch/configs/test
 
+  - name: deploy-mgmt
+    description: Deploy bundle to mgmt cluster
+    actions:
+      - task: deploy:deploy-bundle
+        with:
+          config-dir: ./scratch/configs/mgmt
+          package-list: "-p init,nutanix-csi,trust-manager,trust-bundles,metallb,core,nexus"
+
   - name: deploy-published-dev
     description: Deploy published oci bundle to dev cluster
     actions:
@@ -48,6 +57,14 @@ tasks:
       - task: deploy:deploy-published
         with:
           config-dir: ./scratch/configs/test
+
+  - name: deploy-published-mgmt
+    description: Deploy published oci bundle to mgmt cluster
+    actions:
+      - task: deploy:deploy-published
+        with:
+          config-dir: ./scratch/configs/mgmt
+          package-list: "-p init,nutanix-csi,trust-manager,trust-bundles,metallb,core,nexus"
 
   #### Clean ####
   - name: clean
