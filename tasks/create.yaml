@@ -8,7 +8,7 @@ tasks:
   - name: build-dir
     description: Create build directory
     actions:
-      - cmd: mkdir build -p
+      - cmd: mkdir -p build
 
   # Bundles
   - name: bundle

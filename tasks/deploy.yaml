@@ -4,7 +4,7 @@ variables:
     default: "amd64"
   - name: DEPLOY_IMAGE
     description: "Container image to use to run uds deploy in"
-    default: "ghcr.io/defenseunicorns/build-harness/build-harness:2.0.34"
+    default: "ghcr.io/defenseunicorns/build-harness/build-harness:2.0.39"
   - name: BUNDLE_VERSION
     description: "Version of the bundle to deploy"
     # x-release-please-start-version
@@ -20,20 +20,20 @@ tasks:
   - name: deploy-bundle
     description: Deploy bundle based on configured input build and config directories
     inputs:
-      build-dir:
+      build_dir:
         default: ./build
         description: Input for the path to the build directory containing the uds bundle to deploy
-      config-dir:
+      config_dir:
         default: ./scratch/configs/dev
         description: Input for the path to the directory containing the uds-config.yaml to use for deploying the bundle
     actions:
-      - cmd: docker run --rm -e ARCH=${ARCH} -e BUNDLE_VERSION=${BUNDLE_VERSION} -e UDS_CONFIG=/configs/uds-config.yaml -e KUBECONFIG=/configs/kubeconfig -v /tmp:/tmp -v ${INPUT_CONFIG_DIR}:/configs -v ${INPUT_BUILD_DIR}:/build ${DEPLOY_IMAGE} bash -c 'uds deploy /build/uds-bundle-software-factory-nutanix-${ARCH}-${BUNDLE_VERSION}.tar.zst --confirm'
+      - cmd: UDS_CONFIG=${{ .inputs.config_dir }}/uds-config.yaml KUBECONFIG=${{ .inputs.config_dir }}/kubeconfig uds deploy ${{ .inputs.build_dir }}/uds-bundle-software-factory-nutanix-${ARCH}-${BUNDLE_VERSION}.tar.zst --confirm
 
   - name: deploy-published
     description: Deploy published oci of bundle from ghcr
     inputs:
-      config-dir:
+      config_dir:
         default: ./scratch/configs/dev
         description: Input for the path to the directory containing the uds-config.yaml to use for deploying the bundle
     actions:
-      - cmd: docker run --rm -e BUNDLE_VERSION=${BUNDLE_VERSION} -e UDS_CONFIG=/configs/uds-config.yaml -e KUBECONFIG=/configs/kubeconfig -v /tmp:/tmp -v ${INPUT_CONFIG_DIR}:/configs ${DEPLOY_IMAGE} bash -c 'uds deploy oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix:${BUNDLE_VERSION} --confirm'
+      - cmd: docker run --rm -e BUNDLE_VERSION=${BUNDLE_VERSION} -e UDS_CONFIG=/configs/uds-config.yaml -e KUBECONFIG=/configs/kubeconfig -v /tmp:/tmp -v ${{ .inputs.config_dir }}:/configs ${DEPLOY_IMAGE} bash -c 'uds deploy oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix:${BUNDLE_VERSION} --confirm'

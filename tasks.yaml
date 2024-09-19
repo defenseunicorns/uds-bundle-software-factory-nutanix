@@ -47,7 +47,7 @@ tasks:
     actions:
       - task: deploy:deploy-published
         with:
-          config-dir: ./scratch/configs/test
+          config_dir: ./scratch/configs/test
 
   #### Clean ####
   - name: clean
