@@ -3,6 +3,12 @@ includes:
   - deploy: ./tasks/deploy.yaml
 
 tasks:
+  - name: dev
+    description: The create-deploy dev loop
+    actions:
+      - task: create-bundle
+      - task: deploy-dev
+
   ################
   #  Create
   ################
