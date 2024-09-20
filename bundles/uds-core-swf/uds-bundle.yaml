@@ -77,11 +77,11 @@ packages:
   # MetalLB
   - name: metallb
     repository: ghcr.io/defenseunicorns/packages/metallb
-    ref: 0.0.5-amd64
+    ref: 0.1.1-amd64
 
   - name: core
     repository: ghcr.io/defenseunicorns/packages/uds/core
-    ref: 0.24.1-registry1
+    ref: 0.27.2-registry1
     overrides:
       grafana:
         grafana:
@@ -566,42 +566,42 @@ packages:
   #   repository: ghcr.io/defenseunicorns/packages/uds/sonarqube
   #   ref: 8.0.3-uds.6-registry1
 
-  # # Jira
-  # - name: jira-database-secret
-  #   path: ../../build
-  #   ref: 0.0.1
+  # Jira
+  - name: jira-database-secret
+    path: ../../build
+    ref: 0.0.1
 
-  # - name: jira
-  #   repository: ghcr.io/defenseunicorns/packages/uds/jira
-  #   ref: 1.19.0-uds.0-registry1
-  #   overrides:
-  #     jira:
-  #       jira:
-  #         variables:
-  #           - name: JIRA_LOCAL_HOME_ENABLED
-  #             path: "volumes.localHome.persistentVolumeClaim.create"
-  #             description: "Local Home Toggle"
-  #             default: "true"
-  #           - name: JIRA_RWO_STORAGE_CLASS
-  #             path: "volumes.localHome.persistentVolumeClaim.storageClassName"
-  #             description: "RWO storage class name"
-  #           - name: JIRA_LOCAL_HOME_SIZE
-  #             path: "volumes.localHome.persistentVolumeClaim.resources.requests.storage"
-  #             description: "Storage size"
-  #             default: "128Gi"
-  #             # 1-2k users
-  #           - name: JIRA_RESOURCE_CONFIG
-  #             path: "jira.resources"
-  #             default:
-  #               container:
-  #                 requests:
-  #                   cpu: "100m"
-  #                   memory: "2Gi"
-  #                 limits:
-  #                   cpu: "8"
-  #                   memory: "16Gi"
-  #               jvm:
-  #                 maxHeap: "4g"
+  - name: jira
+    repository: ghcr.io/defenseunicorns/packages/uds/jira
+    ref: 1.21.2-uds.0-registry1
+    overrides:
+      jira:
+        jira:
+          variables:
+            - name: JIRA_LOCAL_HOME_ENABLED
+              path: "volumes.localHome.persistentVolumeClaim.create"
+              description: "Local Home Toggle"
+              default: "true"
+            - name: JIRA_RWO_STORAGE_CLASS
+              path: "volumes.localHome.persistentVolumeClaim.storageClassName"
+              description: "RWO storage class name"
+            - name: JIRA_LOCAL_HOME_SIZE
+              path: "volumes.localHome.persistentVolumeClaim.resources.requests.storage"
+              description: "Storage size"
+              default: "128Gi"
+              # 1-2k users
+            - name: JIRA_RESOURCE_CONFIG
+              path: "jira.resources"
+              default:
+                container:
+                  requests:
+                    cpu: "100m"
+                    memory: "2Gi"
+                  limits:
+                    cpu: "8"
+                    memory: "16Gi"
+                jvm:
+                  maxHeap: "4g"
 
   # # Confluence
   # - name: confluence-database-secret
