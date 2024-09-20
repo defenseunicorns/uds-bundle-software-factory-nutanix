@@ -77,7 +77,7 @@ packages:
   # MetalLB
   - name: metallb
     repository: ghcr.io/defenseunicorns/packages/metallb
-    ref: 0.1.1-amd64
+    ref: 0.0.5-amd64
 
   - name: core
     repository: ghcr.io/defenseunicorns/packages/uds/core
@@ -236,10 +236,6 @@ packages:
               value: "ReadWriteMany"
             - path: "persistence.storageClassName"
               value: "nutanix-dynamicfile"
-            - path: extraVolumes
-              value: *extra-volumes
-            - path: extraVolumeMounts
-              value: *extra-volume-mounts
           variables:
             - name: KEYCLOAK_DB_USERNAME
               description: "keycloak database username"
