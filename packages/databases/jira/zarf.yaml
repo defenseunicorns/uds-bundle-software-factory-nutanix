@@ -12,16 +12,13 @@ variables:
     default: "replace-me"
 
 components:
-  - name: jira-postgres-secret
+  - name: jira-postgres-config
     required: true
     manifests:
       - name: jira-postgres-secret
         namespace: jira
         files:
           - secret.yaml
-  - name: jira-egress-db-netpol
-    required: true
-    manifests:
       - name: jira-postgres-egress-netpol
         namespace: jira
         files:
