@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
 kind: ZarfPackageConfig
 metadata:
-  name: jira-database-secret
+  name: jira-database-connection
   version: "0.0.1"
   architecture: amd64
 
@@ -19,3 +19,10 @@ components:
         namespace: jira
         files:
           - secret.yaml
+  - name: jira-egress-db-netpol
+    required: true
+    manifests:
+      - name: jira-postgres-egress-netpol
+        namespace: jira
+        files:
+          - external-db-netpol.yaml

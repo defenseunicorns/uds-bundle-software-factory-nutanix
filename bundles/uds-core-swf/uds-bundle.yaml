@@ -549,7 +549,7 @@ packages:
   #   ref: 8.0.3-uds.6-registry1
 
   # Jira
-  - name: jira-database-secret
+  - name: jira-database-connection
     path: ../../build
     ref: 0.0.1
 
@@ -583,7 +583,7 @@ packages:
                     cpu: "8"
                     memory: "16Gi"
                 jvm:
-                  maxHeap: "4g"
+                  maxHeap: "6g"
 
   # # Confluence
   # - name: confluence-database-secret

@@ -23,7 +23,7 @@ tasks:
     actions:
       - cmd: ./uds zarf package create ./packages/databases/confluence/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
       - cmd: ./uds zarf package create ./packages/databases/gitlab/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
-      - cmd: ./uds zarf package create ./packages/databases/jira/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+      - cmd: ./uds zarf package create ./packages/databases/jira --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
       - cmd: ./uds zarf package create ./packages/databases/sonarqube/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
 
   - name: keycloak-config-wrapper-package
