@@ -548,13 +548,6 @@ packages:
   #   repository: ghcr.io/defenseunicorns/packages/uds/sonarqube
   #   ref: 8.0.3-uds.6-registry1
 
-  # TODO: once updating Jira to include these changes https://github.com/defenseunicorns/uds-package-jira/pull/49
-  # remove this package as we're able to do with without it.
-  # Jira
-  - name: jira-database-connection
-    path: ../../build
-    ref: 0.0.1
-
   - name: jira
     repository: ghcr.io/defenseunicorns/packages/uds/jira
     ref: 1.21.2-uds.0-registry1
