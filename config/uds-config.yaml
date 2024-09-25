@@ -148,13 +148,10 @@ variables:
     SONARQUBE_DB_NAME: "sonarqubedb"
     SONARQUBE_DB_USERNAME: "postgres"
     SONARQUBE_DB_ENDPOINT: "sonarqube-pg.replace.with.db.url"
-  jira-database-secret:
-    JIRA_DB_PASSWORD: "replace-me-db-passwords"
   jira:
     JIRA_DB_NAME: "jiradb"
     JIRA_DB_USERNAME: "postgres"
-    JIRA_LOCAL_HOME_ENABLED: "true"
-    JIRA_LOCAL_HOME_SIZE: "128Gi"
+    JIRA_DB_PASSWORD: "replace-me-db-passwords"
     JIRA_DB_ENDPOINT: "jira-pg.replace.with.db.url"
   confluence-database-secret:
     CONFLUENCE_DB_PASSWORD: "replace-me-db-passwords"
