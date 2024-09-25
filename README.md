@@ -16,8 +16,8 @@ Once the below [Prerequisites](#prerequisites) are met, these are the steps to d
 
 ### Prerequisites
 **Tools**:
-* [uds version v0.14.1](https://github.com/defenseunicorns/uds-cli/tree/v0.14.1)
-- `sudo curl -sL https://github.com/defenseunicorns/uds-cli/releases/download/v0.14.1/uds-cli_v0.14.1_Linux_amd64`
+* [uds version v0.16.0](https://github.com/defenseunicorns/uds-cli/tree/v0.16.0)
+- `sudo curl -sL https://github.com/defenseunicorns/uds-cli/releases/download/v0.16.0/uds-cli_v0.16.0_Linux_amd64`
 * (OPTIONAL) [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
 * (OPTIONAL) [helm](https://github.com/helm/helm)
 
@@ -157,3 +157,20 @@ uds run --list
 uds run create-bundle
 ```
 
+To force terminate a namespace that is hanging, try this. This state is often brought about during development by deleting the metrics
+server before everything else is gone. The namespaces then hang as they're unable to talk to it.
+
+```bash
+kubectl proxy & # Only run this once
+destroy-ns () {
+  NAMESPACE="${1}"
+  kubectl get namespace "${NAMESPACE}" -o json | jq '.spec = {"finalizers":[]}' > temp.json
+  curl -k -H "Content-Type: application/json" -X PUT --data-binary @temp.json 127.0.0.1:8001/api/v1/namespaces/$NAMESPACE/finalize
+}
+
+# For every namespace you want to delete:
+destroy-ns <namespace>
+
+# So we don't dirty the git history
+rm temp.json
+```

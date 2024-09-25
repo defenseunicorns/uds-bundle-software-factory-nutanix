@@ -81,7 +81,7 @@ packages:
 
   - name: core
     repository: ghcr.io/defenseunicorns/packages/uds/core
-    ref: 0.24.1-registry1
+    ref: 0.27.2-registry1
     overrides:
       grafana:
         grafana:
@@ -135,20 +135,6 @@ packages:
                   cpu: 1
                   memory: 2Gi
           values:
-            - path: initContainers
-              value:
-                - name: velero-plugin-for-aws
-                  image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.10.0
-                  imagePullPolicy: IfNotPresent
-                  volumeMounts:
-                    - mountPath: /target
-                      name: plugins
-                - name: velero-plugin-for-csi
-                  image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi:v0.7.1
-                  imagePullPolicy: IfNotPresent
-                  volumeMounts:
-                    - mountPath: /target
-                      name: plugins
             - path: configuration.features
               value: EnableCSI
             - path: snapshotsEnabled
@@ -236,10 +222,6 @@ packages:
               value: "ReadWriteMany"
             - path: "persistence.storageClassName"
               value: "nutanix-dynamicfile"
-            - path: extraVolumes
-              value: *extra-volumes
-            - path: extraVolumeMounts
-              value: *extra-volume-mounts
           variables:
             - name: KEYCLOAK_DB_USERNAME
               description: "keycloak database username"
@@ -268,7 +250,7 @@ packages:
                   cpu: 400m
                   memory: 512Mi
                 limits:
-                  cpu: 1
+                  cpu: "1"
                   memory: 2Gi
       loki:
         loki:
@@ -566,42 +548,53 @@ packages:
   #   repository: ghcr.io/defenseunicorns/packages/uds/sonarqube
   #   ref: 8.0.3-uds.6-registry1
 
-  # # Jira
-  # - name: jira-database-secret
-  #   path: ../../build
-  #   ref: 0.0.1
-
-  # - name: jira
-  #   repository: ghcr.io/defenseunicorns/packages/uds/jira
-  #   ref: 1.19.0-uds.0-registry1
-  #   overrides:
-  #     jira:
-  #       jira:
-  #         variables:
-  #           - name: JIRA_LOCAL_HOME_ENABLED
-  #             path: "volumes.localHome.persistentVolumeClaim.create"
-  #             description: "Local Home Toggle"
-  #             default: "true"
-  #           - name: JIRA_RWO_STORAGE_CLASS
-  #             path: "volumes.localHome.persistentVolumeClaim.storageClassName"
-  #             description: "RWO storage class name"
-  #           - name: JIRA_LOCAL_HOME_SIZE
-  #             path: "volumes.localHome.persistentVolumeClaim.resources.requests.storage"
-  #             description: "Storage size"
-  #             default: "128Gi"
-  #             # 1-2k users
-  #           - name: JIRA_RESOURCE_CONFIG
-  #             path: "jira.resources"
-  #             default:
-  #               container:
-  #                 requests:
-  #                   cpu: "100m"
-  #                   memory: "2Gi"
-  #                 limits:
-  #                   cpu: "8"
-  #                   memory: "16Gi"
-  #               jvm:
-  #                 maxHeap: "4g"
+  - name: jira
+    repository: ghcr.io/defenseunicorns/packages/uds/jira
+    ref: 1.22.0-uds.0-registry1
+    overrides:
+      jira:
+        uds-jira-config:
+          values:
+            - path: postgres.internal
+              value: false
+            - path: postgres.username
+              value: "###ZARF_VAR_JIRA_DB_USERNAME###"
+            - path: postgres.password
+              value: "###ZARF_VAR_JIRA_DB_PASSWORD###"
+            - path: custom  # To setup custom egress rule to reach DB.
+              value:
+                - direction: Egress
+                  port: 5432
+                  selector:
+                    app.kubernetes.io/name: jira
+                  remoteGenerated: Anywhere
+                  description: "Egress to Postgres"
+        jira:
+          variables:
+            - name: JIRA_LOCAL_HOME_ENABLED
+              path: "volumes.localHome.persistentVolumeClaim.create"
+              description: "Local Home Toggle"
+              default: "true"
+            - name: JIRA_RWO_STORAGE_CLASS
+              path: "volumes.localHome.persistentVolumeClaim.storageClassName"
+              description: "RWO storage class name"
+            - name: JIRA_LOCAL_HOME_SIZE
+              path: "volumes.localHome.persistentVolumeClaim.resources.requests.storage"
+              description: "Storage size"
+              default: "128Gi"
+              # 1-2k users
+            - name: JIRA_RESOURCE_CONFIG
+              path: "jira.resources"
+              default:
+                container:
+                  requests:
+                    cpu: "100m"
+                    memory: "2Gi"
+                  limits:
+                    cpu: "8"
+                    memory: "16Gi"
+                jvm:
+                  maxHeap: "6g"
 
   # # Confluence
   # - name: confluence-database-secret
