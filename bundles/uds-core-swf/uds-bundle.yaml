@@ -550,7 +550,7 @@ packages:
 
   - name: jira
     repository: ghcr.io/defenseunicorns/packages/uds/jira
-    ref: 1.21.2-uds.0-registry1
+    ref: 1.22.0-uds.0-registry1
     overrides:
       jira:
         uds-jira-config:
@@ -561,6 +561,14 @@ packages:
               value: "###ZARF_VAR_JIRA_DB_USERNAME###"
             - path: postgres.password
               value: "###ZARF_VAR_JIRA_DB_PASSWORD###"
+            - path: custom  # To setup custom egress rule to reach DB.
+              value:
+                - direction: Egress
+                  port: 5432
+                  selector:
+                    app.kubernetes.io/name: jira
+                  remoteGenerated: Anywhere
+                  description: "Egress to Postgres"
         jira:
           variables:
             - name: JIRA_LOCAL_HOME_ENABLED
