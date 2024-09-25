@@ -537,16 +537,19 @@ packages:
             - path: volumeMounts
               value: *extra-volume-mounts
 
-  ### TODO - uncomment to replace functionality post MVP
-
-  # # Sonarqube
-  # - name: sonarqube-database-secret
-  #   path: ../../build
-  #   ref: 0.0.1
-
-  # - name: sonarqube
-  #   repository: ghcr.io/defenseunicorns/packages/uds/sonarqube
-  #   ref: 8.0.3-uds.6-registry1
+  - name: sonarqube
+    repository: ghcr.io/defenseunicorns/packages/uds/sonarqube
+    ref: 10.6.0-uds.1-registry1
+    overrides:
+      sonarqube:
+        uds-sonarqube-config:
+          values:
+            - path: postgres.internal
+              value: false
+            - path: postgres.password
+              value: "###ZARF_VAR_SONARQUBE_DB_PASSWORD###"
+            - path: "jdbcOverwrite.jdbcUsername"
+              value: "###ZARF_VAR_SONARQUBE_DB_USERNAME###"
 
   - name: jira
     repository: ghcr.io/defenseunicorns/packages/uds/jira

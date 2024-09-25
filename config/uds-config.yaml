@@ -141,12 +141,10 @@ variables:
         memory: 15G
     REGISTRY_REPLICAS: 2
     SHELL_REPLICAS: 2
-  sonarqube-database-secret:
-    SONARQUBE_DB_PASSWORD: "replace-me-db-passwords"
   sonarqube:
-    # db config
     SONARQUBE_DB_NAME: "sonarqubedb"
     SONARQUBE_DB_USERNAME: "postgres"
+    SONARQUBE_DB_PASSWORD: "replace-me-db-passwords"
     SONARQUBE_DB_ENDPOINT: "sonarqube-pg.replace.with.db.url"
   jira:
     JIRA_DB_NAME: "jiradb"
