@@ -596,41 +596,52 @@ packages:
                 jvm:
                   maxHeap: "6g"
 
-  # # Confluence
-  # - name: confluence-database-secret
-  #   path: ../../build
-  #   ref: 0.0.1
-
-  # - name: confluence
-  #   repository: ghcr.io/defenseunicorns/packages/uds/confluence
-  #   ref: 1.18.0-uds.0-registry1
-  #   overrides:
-  #     confluence:
-  #       confluence:
-  #         variables:
-  #           - name: CONFLUENCE_LOCAL_HOME_ENABLED
-  #             path: "volumes.localHome.persistentVolumeClaim.create"
-  #             description: "Local Home Toggle"
-  #             default: "true"
-  #           - name: CONFLUENCE_RWO_STORAGE_CLASS
-  #             path: "volumes.localHome.persistentVolumeClaim.storageClassName"
-  #             description: "RWO storage class name"
-  #           - name: CONFLUENCE_LOCAL_HOME_SIZE
-  #             path: "volumes.localHome.persistentVolumeClaim.resources.requests.storage"
-  #             description: "Storage size"
-  #             default: "128Gi"
-  #           - name: CONFLUENCE_RESOURCE_CONFIG
-  #             path: "confluence.resources"
-  #             default:
-  #               container:
-  #                 requests:
-  #                   cpu: "2"
-  #                   memory: "2Gi"
-  #                 limits:
-  #                   cpu: "4"
-  #                   memory: "8Gi"
-  #               jvm:
-  #                 maxHeap: "4g"
+  - name: confluence
+    repository: ghcr.io/defenseunicorns/packages/uds/confluence
+    ref: 1.20.0-uds.3-registry1
+    overrides:
+      confluence:
+        uds-confluence-config:
+          values:
+            - path: postgres.internal
+              value: false
+            - path: postgres.username
+              value: "###ZARF_VAR_CONFLUENCE_DB_USERNAME###"
+            - path: postgres.password
+              value: "###ZARF_VAR_CONFLUENCE_DB_PASSWORD###"
+            - path: custom  # To setup custom egress rule to reach DB.
+              value:
+                - direction: Egress
+                  port: 5432
+                  selector:
+                    app.kubernetes.io/name: confluence
+                  remoteGenerated: Anywhere
+                  description: "Egress to Postgres"
+        confluence:
+          variables:
+            - name: CONFLUENCE_LOCAL_HOME_ENABLED
+              path: "volumes.localHome.persistentVolumeClaim.create"
+              description: "Local Home Toggle"
+              default: "true"
+            - name: CONFLUENCE_RWO_STORAGE_CLASS
+              path: "volumes.localHome.persistentVolumeClaim.storageClassName"
+              description: "RWO storage class name"
+            - name: CONFLUENCE_LOCAL_HOME_SIZE
+              path: "volumes.localHome.persistentVolumeClaim.resources.requests.storage"
+              description: "Storage size"
+              default: "128Gi"
+            - name: CONFLUENCE_RESOURCE_CONFIG
+              path: "confluence.resources"
+              default:
+                container:
+                  requests:
+                    cpu: "2"
+                    memory: "2Gi"
+                  limits:
+                    cpu: "4"
+                    memory: "8Gi"
+                jvm:
+                  maxHeap: "6g"
 
   # # Mattermost
   # - name: mattermost

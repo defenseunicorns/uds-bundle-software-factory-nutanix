@@ -153,13 +153,10 @@ variables:
     JIRA_DB_USERNAME: "postgres"
     JIRA_DB_PASSWORD: "replace-me-db-passwords"
     JIRA_DB_ENDPOINT: "jira-pg.replace.with.db.url"
-  confluence-database-secret:
-    CONFLUENCE_DB_PASSWORD: "replace-me-db-passwords"
   confluence:
     CONFLUENCE_DB_NAME: "confluencedb"
     CONFLUENCE_DB_USERNAME: "postgres"
-    CONFLUENCE_LOCAL_HOME_ENABLED: "true"
-    CONFLUENCE_LOCAL_HOME_SIZE: "128Gi"
+    CONFLUENCE_DB_PASSWORD: "replace-me-db-passwords"
     CONFLUENCE_DB_ENDPOINT: "confluence-pg.replace.with.db.url"
   mattermost:
     ACCESS_KEY: "replace-me-object-store-access-key"
