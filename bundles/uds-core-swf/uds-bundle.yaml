@@ -548,57 +548,53 @@ packages:
   #   repository: ghcr.io/defenseunicorns/packages/uds/sonarqube
   #   ref: 8.0.3-uds.6-registry1
 
-  # Last updated 09/25/2024
-  # For unknown reasons, this cannot consistently connect to the external DB. It did once on 9/23, but without
-  # code changes it ceased to do so on redeploy. Note the un-ready state is b/c DB issue as attested in log/atlassian-jira.log
-  # it doesn't show up in the logs you get by pulling logs via kubectl.
-  # - name: jira
-  #   repository: ghcr.io/defenseunicorns/packages/uds/jira
-  #   ref: 1.22.2-uds.0-registry1
-  #   overrides:
-  #     jira:
-  #       uds-jira-config:
-  #         values:
-  #           - path: postgres.internal
-  #             value: false
-  #           - path: postgres.username
-  #             value: "###ZARF_VAR_JIRA_DB_USERNAME###"
-  #           - path: postgres.password
-  #             value: "###ZARF_VAR_JIRA_DB_PASSWORD###"
-  #           - path: custom  # To setup custom egress rule to reach DB.
-  #             value:
-  #               - direction: Egress
-  #                 port: 5432
-  #                 selector:
-  #                   app.kubernetes.io/name: jira
-  #                 remoteGenerated: Anywhere
-  #                 description: "Egress to Postgres"
-  #       jira:
-  #         variables:
-  #           - name: JIRA_LOCAL_HOME_ENABLED
-  #             path: "volumes.localHome.persistentVolumeClaim.create"
-  #             description: "Local Home Toggle"
-  #             default: "true"
-  #           - name: JIRA_RWO_STORAGE_CLASS
-  #             path: "volumes.localHome.persistentVolumeClaim.storageClassName"
-  #             description: "RWO storage class name"
-  #           - name: JIRA_LOCAL_HOME_SIZE
-  #             path: "volumes.localHome.persistentVolumeClaim.resources.requests.storage"
-  #             description: "Storage size"
-  #             default: "128Gi"
-  #             # 1-2k users
-  #           - name: JIRA_RESOURCE_CONFIG
-  #             path: "jira.resources"
-  #             default:
-  #               container:
-  #                 requests:
-  #                   cpu: "100m"
-  #                   memory: "2Gi"
-  #                 limits:
-  #                   cpu: "8"
-  #                   memory: "16Gi"
-  #               jvm:
-  #                 maxHeap: "6g"
+  - name: jira
+    repository: ghcr.io/defenseunicorns/packages/uds/jira
+    ref: 1.22.0-uds.0-registry1
+    overrides:
+      jira:
+        uds-jira-config:
+          values:
+            - path: postgres.internal
+              value: false
+            - path: postgres.username
+              value: "###ZARF_VAR_JIRA_DB_USERNAME###"
+            - path: postgres.password
+              value: "###ZARF_VAR_JIRA_DB_PASSWORD###"
+            - path: custom  # To setup custom egress rule to reach DB.
+              value:
+                - direction: Egress
+                  port: 5432
+                  selector:
+                    app.kubernetes.io/name: jira
+                  remoteGenerated: Anywhere
+                  description: "Egress to Postgres"
+        jira:
+          variables:
+            - name: JIRA_LOCAL_HOME_ENABLED
+              path: "volumes.localHome.persistentVolumeClaim.create"
+              description: "Local Home Toggle"
+              default: "true"
+            - name: JIRA_RWO_STORAGE_CLASS
+              path: "volumes.localHome.persistentVolumeClaim.storageClassName"
+              description: "RWO storage class name"
+            - name: JIRA_LOCAL_HOME_SIZE
+              path: "volumes.localHome.persistentVolumeClaim.resources.requests.storage"
+              description: "Storage size"
+              default: "128Gi"
+              # 1-2k users
+            - name: JIRA_RESOURCE_CONFIG
+              path: "jira.resources"
+              default:
+                container:
+                  requests:
+                    cpu: "100m"
+                    memory: "2Gi"
+                  limits:
+                    cpu: "8"
+                    memory: "16Gi"
+                jvm:
+                  maxHeap: "6g"
 
   # # Confluence
   # - name: confluence-database-secret
