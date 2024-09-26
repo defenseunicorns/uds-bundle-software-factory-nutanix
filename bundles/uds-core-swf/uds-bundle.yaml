@@ -139,14 +139,6 @@ packages:
                   cpu: 1
                   memory: 2Gi
           values:
-            - path: initContainers
-              value:
-                - name: velero-plugin-for-aws
-                  image: registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.10.0
-                  imagePullPolicy: IfNotPresent
-                  volumeMounts:
-                    - mountPath: /target
-                      name: plugins
             - path: configuration.features
               value: EnableCSI
             - path: snapshotsEnabled
@@ -549,89 +541,98 @@ packages:
             - path: volumeMounts
               value: *extra-volume-mounts
 
-  ### TODO - uncomment to replace functionality post MVP
+  - name: sonarqube
+    repository: ghcr.io/defenseunicorns/packages/uds/sonarqube
+    ref: 10.6.0-uds.1-registry1
+    overrides:
+      sonarqube:
+        uds-sonarqube-config:
+          values:
+            - path: postgres.internal
+              value: false
+            - path: postgres.password
+              value: "###ZARF_VAR_SONARQUBE_DB_PASSWORD###"
+            - path: "jdbcOverwrite.jdbcUsername"
+              value: "###ZARF_VAR_SONARQUBE_DB_USERNAME###"
 
-  # # Sonarqube
-  # - name: sonarqube-database-secret
-  #   path: ../../build
-  #   ref: 0.0.1
+  - name: jira
+    repository: ghcr.io/defenseunicorns/packages/uds/jira
+    ref: 1.22.0-uds.0-registry1
+    overrides:
+      jira:
+        uds-jira-config:
+          values:
+            - path: postgres.internal
+              value: false
+            - path: postgres.username
+              value: "###ZARF_VAR_JIRA_DB_USERNAME###"
+            - path: postgres.password
+              value: "###ZARF_VAR_JIRA_DB_PASSWORD###"
+        jira:
+          variables:
+            - name: JIRA_LOCAL_HOME_ENABLED
+              path: "volumes.localHome.persistentVolumeClaim.create"
+              description: "Local Home Toggle"
+              default: "true"
+            - name: JIRA_RWO_STORAGE_CLASS
+              path: "volumes.localHome.persistentVolumeClaim.storageClassName"
+              description: "RWO storage class name"
+            - name: JIRA_LOCAL_HOME_SIZE
+              path: "volumes.localHome.persistentVolumeClaim.resources.requests.storage"
+              description: "Storage size"
+              default: "128Gi"
+              # 1-2k users
+            - name: JIRA_RESOURCE_CONFIG
+              path: "jira.resources"
+              default:
+                container:
+                  requests:
+                    cpu: "100m"
+                    memory: "2Gi"
+                  limits:
+                    cpu: "8"
+                    memory: "16Gi"
+                jvm:
+                  maxHeap: "6g"
 
-  # - name: sonarqube
-  #   repository: ghcr.io/defenseunicorns/packages/uds/sonarqube
-  #   ref: 8.0.3-uds.6-registry1
-
-  # # Jira
-  # - name: jira-database-secret
-  #   path: ../../build
-  #   ref: 0.0.1
-
-  # - name: jira
-  #   repository: ghcr.io/defenseunicorns/packages/uds/jira
-  #   ref: 1.19.0-uds.0-registry1
-  #   overrides:
-  #     jira:
-  #       jira:
-  #         variables:
-  #           - name: JIRA_LOCAL_HOME_ENABLED
-  #             path: "volumes.localHome.persistentVolumeClaim.create"
-  #             description: "Local Home Toggle"
-  #             default: "true"
-  #           - name: JIRA_RWO_STORAGE_CLASS
-  #             path: "volumes.localHome.persistentVolumeClaim.storageClassName"
-  #             description: "RWO storage class name"
-  #           - name: JIRA_LOCAL_HOME_SIZE
-  #             path: "volumes.localHome.persistentVolumeClaim.resources.requests.storage"
-  #             description: "Storage size"
-  #             default: "128Gi"
-  #             # 1-2k users
-  #           - name: JIRA_RESOURCE_CONFIG
-  #             path: "jira.resources"
-  #             default:
-  #               container:
-  #                 requests:
-  #                   cpu: "100m"
-  #                   memory: "2Gi"
-  #                 limits:
-  #                   cpu: "8"
-  #                   memory: "16Gi"
-  #               jvm:
-  #                 maxHeap: "4g"
-
-  # # Confluence
-  # - name: confluence-database-secret
-  #   path: ../../build
-  #   ref: 0.0.1
-
-  # - name: confluence
-  #   repository: ghcr.io/defenseunicorns/packages/uds/confluence
-  #   ref: 1.18.0-uds.0-registry1
-  #   overrides:
-  #     confluence:
-  #       confluence:
-  #         variables:
-  #           - name: CONFLUENCE_LOCAL_HOME_ENABLED
-  #             path: "volumes.localHome.persistentVolumeClaim.create"
-  #             description: "Local Home Toggle"
-  #             default: "true"
-  #           - name: CONFLUENCE_RWO_STORAGE_CLASS
-  #             path: "volumes.localHome.persistentVolumeClaim.storageClassName"
-  #             description: "RWO storage class name"
-  #           - name: CONFLUENCE_LOCAL_HOME_SIZE
-  #             path: "volumes.localHome.persistentVolumeClaim.resources.requests.storage"
-  #             description: "Storage size"
-  #             default: "128Gi"
-  #           - name: CONFLUENCE_RESOURCE_CONFIG
-  #             path: "confluence.resources"
-  #             default:
-  #               container:
-  #                 requests:
-  #                   cpu: "2"
-  #                   memory: "2Gi"
-  #                 limits:
-  #                   cpu: "4"
-  #                   memory: "8Gi"
-  #               jvm:
-  #                 maxHeap: "4g"
+  - name: confluence
+    repository: ghcr.io/defenseunicorns/packages/uds/confluence
+    ref: 1.20.0-uds.3-registry1
+    overrides:
+      confluence:
+        uds-confluence-config:
+          values:
+            - path: postgres.internal
+              value: false
+            - path: postgres.username
+              value: "###ZARF_VAR_CONFLUENCE_DB_USERNAME###"
+            - path: postgres.password
+              value: "###ZARF_VAR_CONFLUENCE_DB_PASSWORD###"
+        confluence:
+          variables:
+            - name: CONFLUENCE_LOCAL_HOME_ENABLED
+              path: "volumes.localHome.persistentVolumeClaim.create"
+              description: "Local Home Toggle"
+              default: "true"
+            - name: CONFLUENCE_RWO_STORAGE_CLASS
+              path: "volumes.localHome.persistentVolumeClaim.storageClassName"
+              description: "RWO storage class name"
+            - name: CONFLUENCE_LOCAL_HOME_SIZE
+              path: "volumes.localHome.persistentVolumeClaim.resources.requests.storage"
+              description: "Storage size"
+              default: "128Gi"
+            - name: CONFLUENCE_RESOURCE_CONFIG
+              path: "confluence.resources"
+              default:
+                container:
+                  requests:
+                    cpu: "2"
+                    memory: "2Gi"
+                  limits:
+                    cpu: "4"
+                    memory: "8Gi"
+                jvm:
+                  maxHeap: "6g"
 
   # # Mattermost
   # - name: mattermost

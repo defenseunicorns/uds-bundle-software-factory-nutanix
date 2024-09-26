@@ -82,6 +82,6 @@ components:
     actions:
       onDeploy:
         before:
-          - description: Delete Storage Classes
-            cmd: ./zarf tools kubectl delete sc nutanix-dynamicfile --ignore-not-found=true
-            cmd: ./zarf tools kubectl delete sc nutanix-volume --ignore-not-found=true
+          - description: Delete Storage Classes  # We do not want this to fail if they're not there so || true
+            cmd: uds zarf tools kubectl delete sc nutanix-dynamicfile || true
+            cmd: uds zarf tools kubectl delete sc nutanix-volume || true

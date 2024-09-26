@@ -3,6 +3,12 @@ includes:
   - deploy: ./tasks/deploy.yaml
 
 tasks:
+  - name: dev
+    description: The create-deploy dev loop
+    actions:
+      - task: create-bundle
+      - task: deploy-dev
+
   ################
   #  Create
   ################
@@ -56,7 +62,7 @@ tasks:
     actions:
       - task: deploy:deploy-published
         with:
-          config-dir: ./scratch/configs/test
+          config_dir: ./scratch/configs/test
 
   - name: deploy-published-mgmt
     description: Deploy published oci bundle to mgmt cluster

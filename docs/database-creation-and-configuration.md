@@ -38,12 +38,11 @@ variables:
 ## Jira
 ```yaml
 variables:
-  jira-database-manifests:
-    JIRA_DB_EXTERNAL_NAME: "jira-pg.some.url" # Replace with domain entry for your database
-    JIRA_DB_PASSWORD: "replace-me-db-passwords" #Replace
   jira:
-    JIRA_DB_NAME: "jiradb" # Our example uses this database name
-    JIRA_DB_USERNAME: "postgres" # Our example uses this user
+    JIRA_DB_USERNAME: "postgres"
+    JIRA_DB_PASSWORD: "replace-me"
+    JIRA_DB_NAME: "jiradb"
+    JIRA_DB_ENDPOINT: "jira-pg.mtsi-dev.bigbang.dev"
 ```
 
 ## Confluence
