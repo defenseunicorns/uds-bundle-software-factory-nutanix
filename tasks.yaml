@@ -44,7 +44,7 @@ tasks:
       - task: deploy:deploy-bundle
         with:
           config-dir: ./scratch/configs/mgmt
-          package-list: "-p init,nutanix-csi,trust-manager,trust-bundles,metallb,core,nexus"
+          package-list: "-p init,nutanix-csi,trust-manager,trust-bundles,metallb,core,additional-manifests,nexus"
 
   - name: deploy-published-dev
     description: Deploy published oci bundle to dev cluster
@@ -64,7 +64,7 @@ tasks:
       - task: deploy:deploy-published
         with:
           config-dir: ./scratch/configs/mgmt
-          package-list: "-p init,nutanix-csi,trust-manager,trust-bundles,metallb,core,nexus"
+          package-list: "-p init,nutanix-csi,trust-manager,trust-bundles,metallb,core,additional-manifests,nexus"
 
   #### Clean ####
   - name: clean
