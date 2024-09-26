@@ -21,7 +21,6 @@ tasks:
   - name: database-manifest-packages
     description: Create database manifest packages
     actions:
-      - cmd: ./uds zarf package create ./packages/databases/confluence/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
       - cmd: ./uds zarf package create ./packages/databases/gitlab/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
       - cmd: ./uds zarf package create ./packages/databases/sonarqube/secret --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
 
