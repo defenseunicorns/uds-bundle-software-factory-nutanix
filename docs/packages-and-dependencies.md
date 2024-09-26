@@ -45,7 +45,7 @@ The UDS Software Factory Bundle (SWF) is a collection of Zarf packages which inc
 | [Gitlab](https://github.com/defenseunicorns/uds-package-gitlab) | v17.1.2-uds.0-registry1 | 17.1.2 | A source control management tool used in the software development lifecycle for storing, updating, building and deploying custom software |
 | [Gitlab Runner](https://github.com/defenseunicorns/uds-package-gitlab-runner) | 17.0.0-uds.0-registry1 | v17.0.0 | A counterpart to Gitlab (above) in which automated software builds, tests and deployments are executed |
 | [Sonarqube](https://github.com/defenseunicorns/uds-package-sonarqube) | 8.0.3-uds.6-registry1 | 9.9.3-community | A code inspection tool used during automated pipelines to evaluate security considerations of custom software and packaged images |
-| [Jira](https://github.com/defenseunicorns/uds-package-jira) | 1.22.0-uds.0-registry1 | 10.0.1 | A collaboration tool used for team management and task organization |
+| [Jira](https://github.com/defenseunicorns/uds-package-jira) | 1.22.0-uds.0-registry1 | 10.0.1 | A collaboration tool used for team management and task organization |s
 | [Confluence](https://github.com/defenseunicorns/uds-package-confluence) | 1.20.0-uds.0-registry1 | 8.9.4 | A knowledge management tool used by teams to organize information |
 | [Mattermost](https://github.com/defenseunicorns/uds-package-mattermost) | 9.7.2-uds.0-registry1 | 9.7.2 | An instance of Mattermost, a self-hosted chat and collaboration platform |
 | [Nexus](https://github.com/defenseunicorns/uds-package-nexus) | 3.69.0-uds.0-registry1 | 3.69.0-02 | An artifact repository used for storing compiled application libraries, packages, images and other such artifacts |
