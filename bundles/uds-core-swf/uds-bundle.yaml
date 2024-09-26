@@ -561,14 +561,6 @@ packages:
               value: "###ZARF_VAR_JIRA_DB_USERNAME###"
             - path: postgres.password
               value: "###ZARF_VAR_JIRA_DB_PASSWORD###"
-            - path: custom  # To setup custom egress rule to reach DB.
-              value:
-                - direction: Egress
-                  port: 5432
-                  selector:
-                    app.kubernetes.io/name: jira
-                  remoteGenerated: Anywhere
-                  description: "Egress to Postgres"
         jira:
           variables:
             - name: JIRA_LOCAL_HOME_ENABLED
@@ -609,14 +601,6 @@ packages:
               value: "###ZARF_VAR_CONFLUENCE_DB_USERNAME###"
             - path: postgres.password
               value: "###ZARF_VAR_CONFLUENCE_DB_PASSWORD###"
-            - path: custom  # To setup custom egress rule to reach DB.
-              value:
-                - direction: Egress
-                  port: 5432
-                  selector:
-                    app.kubernetes.io/name: confluence
-                  remoteGenerated: Anywhere
-                  description: "Egress to Postgres"
         confluence:
           variables:
             - name: CONFLUENCE_LOCAL_HOME_ENABLED
