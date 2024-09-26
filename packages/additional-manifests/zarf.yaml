@@ -30,3 +30,4 @@ components:
           - pepr-policy-exemptions/nutanix-csi-exemptions.yaml
           - pepr-policy-exemptions/metallb-exemptions.yaml
           - pepr-policy-exemptions/gitlab-exemptions.yaml
+          - pepr-policy-exemptions/eks-mgmt-exemptions.yaml

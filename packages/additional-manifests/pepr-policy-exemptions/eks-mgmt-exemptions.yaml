@@ -1,0 +1,54 @@
+apiVersion: uds.dev/v1alpha1
+kind: Exemption
+metadata:
+  name: eksa-system
+  namespace: uds-policy-exemptions
+spec:
+  exemptions:
+    - policies:
+        - DisallowHostNamespaces
+        - DisallowPrivileged
+        - DisallowSELinuxOptions
+        - DropAllCapabilities
+        - RequireNonRootUser
+        - RestrictCapabilities
+        - RestrictHostPathWrite
+        - RestrictHostPorts
+        - RestrictProcMount
+        - RestrictSeccomp
+        - RestrictSELinuxType
+        - RestrictVolumeTypes
+      matcher:
+        namespace: eksa-system
+        name: "^eks*"
+        kind: pod
+      title: "eksa exemptions"
+      description: "eksa requires elevated permissions"
+---
+
+apiVersion: uds.dev/v1alpha1
+kind: Exemption
+metadata:
+  name: capi-exemptions
+  namespace: uds-policy-exemptions
+spec:
+  exemptions:
+    - policies:
+        - DisallowHostNamespaces
+        - DisallowPrivileged
+        - DisallowSELinuxOptions
+        - DropAllCapabilities
+        - RequireNonRootUser
+        - RestrictCapabilities
+        - RestrictHostPathWrite
+        - RestrictHostPorts
+        - RestrictProcMount
+        - RestrictSeccomp
+        - RestrictSELinuxType
+        - RestrictVolumeTypes
+      matcher:
+        namespace: "^cap*"
+        name: "^cap*"
+        kind: pod
+      title: "capi exemptions"
+      description: "capi requires elevated permissions"

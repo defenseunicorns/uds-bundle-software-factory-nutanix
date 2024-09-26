@@ -66,6 +66,10 @@ packages:
                   key: dedicated-gitaly-node
                   operator: Exists
 
+  - name: cert-manager
+    path: ../../build
+    ref: 0.0.1
+
   - name: trust-manager
     path: ../../build
     ref: 0.0.1
@@ -81,7 +85,7 @@ packages:
 
   - name: core
     repository: ghcr.io/defenseunicorns/packages/uds/core
-    ref: 0.27.2-registry1
+    ref: 0.27.3-registry1
     overrides:
       grafana:
         grafana:
@@ -691,7 +695,7 @@ packages:
   # Nexus
   - name: nexus
     repository: ghcr.io/defenseunicorns/packages/uds/nexus
-    ref: 3.69.0-uds.0-registry1
+    ref: 3.71.0-uds.1-registry1
     overrides:
       nexus:
         nexus:
@@ -706,6 +710,9 @@ packages:
                 limits:
                   cpu: 8
                   memory: 16Gi
+            - name: STORAGE_SIZE
+              path: persistence.storageSize
+              default: 8Gi
           values:
             - path: sso.realm
               value:

@@ -44,6 +44,11 @@ tasks:
     actions:
       - cmd: ./uds zarf package create ./packages/nutanix-csi --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
 
+  - name: cert-manager-package
+    description: Create cert-manager package.
+    actions:
+      - cmd: ./uds zarf package create ./packages/cert-manager --confirm --no-progress --architecture=${ARCH} --skip-sbom --output ./build
+
   - name: trust-manager-package
     description: Create trust-manager package.
     actions:

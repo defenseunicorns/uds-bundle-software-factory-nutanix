@@ -9,15 +9,16 @@ This list covers tools which would be required on a developer machine in order t
 
 | Tool | Version | Description |
 |----|----|----|
-| [terraform](https://github.com/hashicorp/terraform) | v1.6.4 | An Infrastructure As Code (IAC) tool for managing the deployment of virtual resources (VMs, databases, object storage) within Nutanix |
-| [UDS](https://github.com/defenseunicorns/uds-cli) | v0.13.1 | A custom tool for automating and simplifying the management of multiple Zarf deployments in one environment |
+| [OpenTofu](https://github.com/opentofu/opentofu) | v1.7.1 | An Infrastructure As Code (IAC) tool for managing the deployment of virtual resources (VMs, databases, object storage) within Nutanix |
+| [UDS](https://github.com/defenseunicorns/uds-cli) | v0.15.0 | A custom tool for automating and simplifying the management of multiple Zarf deployments in one environment |
 
 ## Operating System Package Installs
 This list covers tools and packages installed in the Operating System of the virtual machines allocated to run Kubernetes. This list is obviously not exhaustive, but instead covers what is being added to the base STIG'd image.
 
 | Package | Version | Description |
 |----|----|----|
-| [rke2](https://github.com/rancher/rke2/releases/) | v1.27.6+rke2r1 | A Kubernetes distribution provided by Rancher, focused on security compliance for Government workloads |
+| [rke2](https://github.com/rancher/rke2/releases/) | v1.29.6+rke2r1 | A Kubernetes distribution provided by Rancher, focused on security compliance for Government workloads |
+| [eks-d](https://github.com/aws/eks-distro/releases/) | v1.29.6-eks-c025470 | A Kubernetes distribution provided by AWS |
 | [iptables](https://linux.die.net/man/8/iptables) | v1.8.4 | A linux tool for managing local IPv4 packet filtering and NAT routing |
 | [postgres14](https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm) | 14.10 | Database server required as part of initial setup |
 | [lvm2](https://gitlab.com/lvmteam/lvm2) | 2.03.14(2)-RHEL8 | Logical volume management tool needed by rook/ceph |
@@ -40,7 +41,7 @@ The UDS Software Factory Bundle (SWF) is a collection of Zarf packages which inc
 |----|----|----|----|
 | [Nutanix CSI Driver Init](https://portal.nutanix.com/page/documents/details?targetId=CSI-Volume-Driver-v2_6:CSI-Volume-Driver-v2_6) | v0.36.1 | v2.6.8 | A zarf component installed in the cluster for orchestrating further deployment of Zarf based packages |
 | [MetalLB](https://github.com/defenseunicorns/uds-capability-metallb) | 0.0.5 | v0.13.12 | Tool for providing load balancer capabilities for ingress into a Kubernetes deployment |
-| [uds-core](https://github.com/defenseunicorns/uds-core) | 0.27.2 | N/A | [DESCRIPTION BELOW](#UDS-Core) |
+| [uds-core](https://github.com/defenseunicorns/uds-core) | 0.27.3 | N/A | [DESCRIPTION BELOW](#UDS-Core) |
 | [Valkey](https://github.com/defenseunicorns/uds-package-valkey) | v7.2.5-uds.2-upstream | 7.2.5 | A key-value store used as a data backend for several applications in the stack |
 | [Gitlab](https://github.com/defenseunicorns/uds-package-gitlab) | v17.1.2-uds.0-registry1 | 17.1.2 | A source control management tool used in the software development lifecycle for storing, updating, building and deploying custom software |
 | [Gitlab Runner](https://github.com/defenseunicorns/uds-package-gitlab-runner) | 17.0.0-uds.0-registry1 | v17.0.0 | A counterpart to Gitlab (above) in which automated software builds, tests and deployments are executed |
@@ -48,7 +49,7 @@ The UDS Software Factory Bundle (SWF) is a collection of Zarf packages which inc
 | [Jira](https://github.com/defenseunicorns/uds-package-jira) | 1.22.0-uds.0-registry1 | 10.0.1 | A collaboration tool used for team management and task organization |s
 | [Confluence](https://github.com/defenseunicorns/uds-package-confluence) | 1.20.0-uds.0-registry1 | 8.9.4 | A knowledge management tool used by teams to organize information |
 | [Mattermost](https://github.com/defenseunicorns/uds-package-mattermost) | 9.7.2-uds.0-registry1 | 9.7.2 | An instance of Mattermost, a self-hosted chat and collaboration platform |
-| [Nexus](https://github.com/defenseunicorns/uds-package-nexus) | 3.69.0-uds.0-registry1 | 3.69.0-02 | An artifact repository used for storing compiled application libraries, packages, images and other such artifacts |
+| [Nexus](https://github.com/defenseunicorns/uds-package-nexus) | 3.71.0-uds.1-registry1 | 3.71.0 | An artifact repository used for storing compiled application libraries, packages, images and other such artifacts |
 | [cert-manager](https://cert-manager.io/) | 0.0.1 | 1.14.5 | Tool for automating management of in-cluster certificates |
 | [trust-manager](https://cert-manager.io/docs/trust/trust-manager/) | 0.0.1 | v0.11.0 | Tool for automating creation and distribution of CA trust bundles |
 
