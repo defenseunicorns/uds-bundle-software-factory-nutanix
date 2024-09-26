@@ -45,7 +45,7 @@ tasks:
           config-dir: ./scratch/configs/test
 
   - name: deploy-mgmt
-    description: Deploy bundle to mgmt cluster
+    description: Deploy Nexus and dependencies to eks mgmt cluster
     actions:
       - task: deploy:deploy-bundle
         with:
