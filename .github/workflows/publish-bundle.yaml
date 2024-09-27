@@ -57,8 +57,8 @@ jobs:
       ####
       - name: Build bundles
         run: |
-          uds run create-eksd-bundle
-          uds run create-rke2-bundle
+          uds run create-bundle-eksd
+          uds run create-bundle-rke2
 
       - name: Publish bundle
         run: |
