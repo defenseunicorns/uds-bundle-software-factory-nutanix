@@ -6,24 +6,30 @@ tasks:
   - name: dev-eksd
     description: The create-deploy dev loop
     actions:
-      - task: create-eksd-bundle
-      - task: deploy-eksd-dev
+      - task: create-bundle-eksd
+      - task: deploy-dev-eksd
 
   - name: dev-rke2
     description: The create-deploy dev loop
     actions:
-      - task: create-rke2-bundle
-      - task: deploy-rke2-dev
+      - task: create-bundle-rke2
+      - task: deploy-dev-rke2
 
   ################
   #  Create
   ################
-  - name: create-eksd-bundle
+  - name: create-bundles
+    actions:
+      - task: create-bundle-dependencies
+      - task: create:eksd-bundle
+      - task: create:rke2-bundle
+
+  - name: create-bundle-eksd
     actions:
       - task: create-bundle-dependencies
       - task: create:eksd-bundle
 
-  - name: create-rke2-bundle
+  - name: create-bundle-rke2
     actions:
       - task: create-bundle-dependencies
       - task: create:rke2-bundle
@@ -49,21 +55,21 @@ tasks:
     actions:
       - task: deploy:uds-version
 
-  - name: deploy-eksd-dev
+  - name: deploy-dev-eksd
     description: Deploy eksd bundle to dev cluster
     actions:
       - task: deploy:deploy-bundle
         with:
           bundle_type: eksd
 
-  - name: deploy-rke2-dev
+  - name: deploy-dev-rke2
     description: Deploy rke2bundle to dev cluster
     actions:
       - task: deploy:deploy-bundle
         with:
           bundle_type: rke2
 
-  - name: deploy-eksd-test
+  - name: deploy-test-eksd
     description: Deploy bundle to test cluster
     actions:
       - task: deploy:deploy-bundle
@@ -71,7 +77,7 @@ tasks:
           config_dir: ./scratch/configs/test
           bundle_type: eksd
 
-  - name: deploy-rke2-test
+  - name: deploy-test-rke2
     description: Deploy bundle to test cluster
     actions:
       - task: deploy:deploy-bundle
@@ -79,28 +85,28 @@ tasks:
           config_dir: ./scratch/configs/test
           bundle_type: rke2
 
-  - name: deploy-mgmt
-    description: Deploy Nexus and dependencies to eks mgmt cluster
-    actions:
-      - task: deploy:deploy-bundle
-        with:
-          config_dir: ./scratch/configs/mgmt
-          package_list: "-p init,nutanix-csi,trust-manager,trust-bundles,metallb,core,additional-manifests,nexus"
-
-  - name: deploy-published-dev
+  - name: deploy-dev-published
     description: Deploy published oci bundle to dev cluster
     actions:
       - task: deploy:deploy-published
 
-  - name: deploy-published-test
+  - name: deploy-test-published
     description: Deploy published oci bundle to test cluster
     actions:
       - task: deploy:deploy-published
         with:
           config_dir: ./scratch/configs/test
 
-  - name: deploy-published-mgmt
-    description: Deploy published oci bundle to mgmt cluster
+  - name: deploy-mgmt
+    description: Deploy Nexus and dependencies to eks mgmt cluster using locally built bundle
+    actions:
+      - task: deploy:deploy-bundle
+        with:
+          config_dir: ./scratch/configs/mgmt
+          package_list: "-p init,nutanix-csi,trust-manager,trust-bundles,metallb,core,additional-manifests,nexus"
+
+  - name: deploy-mgmt-published
+    description: Deploy Nexus and dependencies to eks mgmt cluster using published bundle
     actions:
       - task: deploy:deploy-published
         with:
