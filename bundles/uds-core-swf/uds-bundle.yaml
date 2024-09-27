@@ -641,7 +641,10 @@ packages:
             - path: mattermostApp.extraVolumes
               value: *extra-volumes
             - path: mattermostApp.extraVolumeMounts
-              value: *extra-volume-mounts
+              value:
+                - name: trust-bundle
+                  mountPath: /etc/ssl/certs
+                  readOnly: true
         uds-mattermost-config:
           variables:
             - name: OBJECT_STORE_SECURE
