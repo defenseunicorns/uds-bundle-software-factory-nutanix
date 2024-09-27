@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/uds-cli/v0.13.1/uds.schema.json
 kind: UDSBundle
 metadata:
-  name: software-factory-nutanix
+  name: software-factory-nutanix-eksd
   description: A UDS bundle for deploying a software factory to an RKE2 cluster
   # x-release-please-start-version
   version: "0.3.2"
@@ -54,6 +54,8 @@ packages:
   - name: nutanix-csi
     path: ../../build
     ref: 0.0.1
+    optionalComponents:
+      - nutanix-csi-snapshot
     overrides:
       nutanix-csi-storage:
         nutanix-csi-storage:

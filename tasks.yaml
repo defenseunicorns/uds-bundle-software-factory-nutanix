@@ -3,16 +3,33 @@ includes:
   - deploy: ./tasks/deploy.yaml
 
 tasks:
-  - name: dev
+  - name: dev-eksd
     description: The create-deploy dev loop
     actions:
-      - task: create-bundle
-      - task: deploy-dev
+      - task: create-eksd-bundle
+      - task: deploy-eksd-dev
+
+  - name: dev-rke2
+    description: The create-deploy dev loop
+    actions:
+      - task: create-rke2-bundle
+      - task: deploy-rke2-dev
 
   ################
   #  Create
   ################
-  - name: create-bundle
+  - name: create-eksd-bundle
+    actions:
+      - task: create-bundle-dependencies
+      - task: create:eksd-bundle
+
+  - name: create-rke2-bundle
+    actions:
+      - task: create-bundle-dependencies
+      - task: create:rke2-bundle
+
+  - name: create-bundle-dependencies
+    description: Create all dependencies for the bundle
     actions:
       - task: create:build-dir
       - task: create:database-manifest-packages
@@ -23,7 +40,7 @@ tasks:
       - task: create:cert-manager-package
       - task: create:trust-manager-package
       - task: create:trust-bundles-package
-      - task: create:bundle
+
   ################
   #  Deploy
   ################
@@ -32,17 +49,35 @@ tasks:
     actions:
       - task: deploy:uds-version
 
-  - name: deploy-dev
-    description: Deploy bundle to dev cluster
+  - name: deploy-eksd-dev
+    description: Deploy eksd bundle to dev cluster
     actions:
       - task: deploy:deploy-bundle
+        with:
+          bundle-type: eksd
 
-  - name: deploy-test
+  - name: deploy-rke2-dev
+    description: Deploy rke2bundle to dev cluster
+    actions:
+      - task: deploy:deploy-bundle
+        with:
+          bundle-type: rke2
+
+  - name: deploy-eksd-test
     description: Deploy bundle to test cluster
     actions:
       - task: deploy:deploy-bundle
         with:
           config-dir: ./scratch/configs/test
+          bundle-type: eksd
+
+  - name: deploy-rke2-test
+    description: Deploy bundle to test cluster
+    actions:
+      - task: deploy:deploy-bundle
+        with:
+          config-dir: ./scratch/configs/test
+          bundle-type: rke2
 
   - name: deploy-mgmt
     description: Deploy Nexus and dependencies to eks mgmt cluster

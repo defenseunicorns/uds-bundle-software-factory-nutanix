@@ -50,7 +50,7 @@ components:
       - registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.10.0
 
   - name: nutanix-csi-snapshot
-    required: true
+    required: false
     charts:
       # renovate: datasource=helm
       - name: nutanix-csi-snapshot
