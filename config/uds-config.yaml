@@ -58,6 +58,7 @@ variables:
     PRISM_PASSWORD: "csi-user-passoword"
     STORAGE_CONTAINER: "nutanix-storage-container"
     DYNAMIC_FILE_STORE_NAME: "nutanix-file-server-name"
+    HYPERVISOR_ATTACHED: "DISABLED"
   metallb:
     # Replace with a valid IP address range
     IP_ADDRESS_POOL: "10.0.0.10-10.0.0.20"
@@ -182,6 +183,14 @@ variables:
     NEXUS_DB_USERNAME: "postgres"
     NEXUS_DB_ENDPOINT: "nexus-pg.replace.with.db.url"
     NEXUS_DB_PASSWORD: "replace-me-db-passwords"
+    NEXUS_RESOURCE_CONFIG: # optional
+      requests:
+        cpu: 2
+        memory: 4Gi
+      limits:
+        cpu: 6
+        memory: 8Gi
+    STORAGE_SIZE: 128Gi # optional
     # SSO requires a license
     NEXUS_SSO_ENABLED: false
     NEXUS_LICENSE_KEY: ""
