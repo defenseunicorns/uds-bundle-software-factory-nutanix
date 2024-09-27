@@ -54,38 +54,38 @@ tasks:
     actions:
       - task: deploy:deploy-bundle
         with:
-          bundle-type: eksd
+          bundle_type: eksd
 
   - name: deploy-rke2-dev
     description: Deploy rke2bundle to dev cluster
     actions:
       - task: deploy:deploy-bundle
         with:
-          bundle-type: rke2
+          bundle_type: rke2
 
   - name: deploy-eksd-test
     description: Deploy bundle to test cluster
     actions:
       - task: deploy:deploy-bundle
         with:
-          config-dir: ./scratch/configs/test
-          bundle-type: eksd
+          config_dir: ./scratch/configs/test
+          bundle_type: eksd
 
   - name: deploy-rke2-test
     description: Deploy bundle to test cluster
     actions:
       - task: deploy:deploy-bundle
         with:
-          config-dir: ./scratch/configs/test
-          bundle-type: rke2
+          config_dir: ./scratch/configs/test
+          bundle_type: rke2
 
   - name: deploy-mgmt
     description: Deploy Nexus and dependencies to eks mgmt cluster
     actions:
       - task: deploy:deploy-bundle
         with:
-          config-dir: ./scratch/configs/mgmt
-          package-list: "-p init,nutanix-csi,trust-manager,trust-bundles,metallb,core,additional-manifests,nexus"
+          config_dir: ./scratch/configs/mgmt
+          package_list: "-p init,nutanix-csi,trust-manager,trust-bundles,metallb,core,additional-manifests,nexus"
 
   - name: deploy-published-dev
     description: Deploy published oci bundle to dev cluster
@@ -104,8 +104,8 @@ tasks:
     actions:
       - task: deploy:deploy-published
         with:
-          config-dir: ./scratch/configs/mgmt
-          package-list: "-p init,nutanix-csi,trust-manager,trust-bundles,metallb,core,additional-manifests,nexus"
+          config_dir: ./scratch/configs/mgmt
+          package_list: "-p init,nutanix-csi,trust-manager,trust-bundles,metallb,core,additional-manifests,nexus"
 
   #### Clean ####
   - name: clean
