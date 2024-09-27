@@ -643,7 +643,8 @@ packages:
             - path: mattermostApp.extraVolumeMounts
               value:
                 - name: trust-bundle
-                  mountPath: /etc/ssl/certs
+                  mountPath: /etc/ssl/certs/ca.crt
+                  subPath: "ca-bundle.crt"
                   readOnly: true
         uds-mattermost-config:
           variables:
