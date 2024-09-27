@@ -3,8 +3,7 @@ metadata:
   name: nutanix-csi
   description: "Nutanix CSI Driver Package"
   architecture: amd64
-  version: "0.0.1" # This version is not used by zarf, but is used for tracking with the published versions
-
+  version: "3.0.0"
 variables:
   - name: DYNAMIC_FILE_STORE_NAME
     description: "Name of Nutanix File Server to use for Dynamic File storageclass. Should match the name value for the file server in Prism."
@@ -50,7 +49,7 @@ components:
       - registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.10.0
 
   - name: nutanix-csi-snapshot
-    required: true
+    required: false
     charts:
       # renovate: datasource=helm
       - name: nutanix-csi-snapshot
@@ -83,5 +82,6 @@ components:
       onDeploy:
         before:
           - description: Delete Storage Classes  # We do not want this to fail if they're not there so || true
-            cmd: uds zarf tools kubectl delete sc nutanix-dynamicfile || true
-            cmd: uds zarf tools kubectl delete sc nutanix-volume || true
+            cmd: |
+              uds zarf tools kubectl delete sc nutanix-dynamicfile || true
+              uds zarf tools kubectl delete sc nutanix-volume || true

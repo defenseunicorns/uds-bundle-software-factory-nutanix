@@ -11,11 +11,17 @@ tasks:
       - cmd: mkdir -p build
 
   # Bundles
-  - name: bundle
-    description: Create the UDS Bundle with SWF on UDS Core
+  - name: eksd-bundle
+    description: Create the eksd UDS Bundle with SWF on UDS Core
     actions:
-      - cmd: ./uds create ./bundles/uds-core-swf --architecture=${ARCH} --confirm
-      - cmd: mv ./bundles/uds-core-swf/uds-bundle-* ./build
+      - cmd: ./uds create ./bundles/eksd --architecture=${ARCH} --confirm
+      - cmd: mv ./bundles/eksd/uds-bundle-* ./build
+
+  - name: rke2-bundle
+    description: Create the rke2 UDS Bundle with SWF on UDS Core
+    actions:
+      - cmd: ./uds create ./bundles/rke2 --architecture=${ARCH} --confirm
+      - cmd: mv ./bundles/rke2/uds-bundle-* ./build
 
   # Packages
   - name: database-manifest-packages
