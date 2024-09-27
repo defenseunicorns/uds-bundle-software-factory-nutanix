@@ -55,9 +55,13 @@ jobs:
       ####
       # Build and publish bundle
       ####
-      - name: Build bundle
-        run: uds run create-bundle
+      - name: Build bundles
+        run: |
+          uds run create-eksd-bundle
+          uds run create-rke2-bundle
 
       - name: Publish bundle
-        run: uds publish uds-bundle-software-factory-nutanix-amd64-*.tar.zst oci://ghcr.io/defenseunicorns/uds-bundle --no-progress
+        run: |
+          uds publish uds-bundle-software-factory-nutanix-eksd-amd64-*.tar.zst oci://ghcr.io/defenseunicorns/uds-bundle --no-progress
+          uds publish uds-bundle-software-factory-nutanix-rke2-amd64-*.tar.zst oci://ghcr.io/defenseunicorns/uds-bundle --no-progress
         working-directory: build

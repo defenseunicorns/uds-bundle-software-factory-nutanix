@@ -123,23 +123,18 @@ For demonstration purposes, you can setup a local configfile as follows:
 ### Deployment
 Select a target version number and gather the OCI image reference [from the packages page](https://github.com/orgs/defenseunicorns/packages?repo_name=uds-bundle-software-factory-nutanix). With the above prerequisites and configuration complete, you can deploy the bundle directly via OCI:
 ```
-uds deploy oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix:0.x.x --architecure amd64 --confirm
+uds deploy oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix-eksd:0.x.x --architecure amd64 --confirm
 ```
 
 ### (OPTIONAL) Local Deployment Reference
 Situationally, it may be useful to download the deployment artifact so that it may be referenced offline. This can be accomplished by first downloading the target release:
 ```
-uds pull oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix:0.x.x --architecture amd64
+uds pull oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix-eksd:0.x.x --architecture amd64
 ```
 
 And subsequently deploying from the local file:
 ```
-uds deploy uds-bundle-software-factory-nutanix-amd64-0.x.x.tar.zst --confirm
-```
-
->NOTE: There is a new default terminal user interface for UDS. When running a deploy from a pipeline you can choose to have the normal terminal output by using the `--no-tea` flag with your uds deploy.
-```
-uds deploy uds-bundle-software-factory-nutanix-amd64-0.x.x.tar.zst --confirm --no-tea
+uds deploy uds-bundle-software-factory-nutanix-eksd-amd64-0.x.x.tar.zst --confirm
 ```
 ## Custom Keycloak Plugin
 The Keycloak installation provided as part of UDS Core loads themes and plugins from an init-container. You can optionally provide custom JARs at deploytime simply by adding them to the directory where you run `uds deploy`. This will result in a custom Zarf package being built locally (to include your custom JAR).
@@ -152,9 +147,6 @@ You can reference the uds tasks in this project to learn how to build and deploy
 ```bash
 # List the available tasks to run
 uds run --list
-
-# Run the create-bundle task
-uds run create-bundle
 ```
 
 To force terminate a namespace that is hanging, try this. This state is often brought about during development by deleting the metrics

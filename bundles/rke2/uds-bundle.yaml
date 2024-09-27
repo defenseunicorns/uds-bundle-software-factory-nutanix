@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/uds-cli/v0.13.1/uds.schema.json
 kind: UDSBundle
 metadata:
-  name: software-factory-nutanix
+  name: software-factory-nutanix-rke2
   description: A UDS bundle for deploying a software factory to an RKE2 cluster
   # x-release-please-start-version
   version: "0.3.2"
@@ -33,7 +33,7 @@ packages:
   # Zarf init
   - name: init
     repository: ghcr.io/zarf-dev/packages/init
-    ref: v0.38.2
+    ref: v0.39.0
     overrides:
       zarf-seed-registry:
         docker-registry:
@@ -53,7 +53,7 @@ packages:
 
   - name: nutanix-csi
     path: ../../build
-    ref: 0.0.1
+    ref: 3.0.0
     overrides:
       nutanix-csi-storage:
         nutanix-csi-storage:
@@ -259,6 +259,9 @@ packages:
       loki:
         loki:
           values:
+            # Override default dns service name for Loki Gateway
+            - path: "global.dnsService"
+              value: "rke2-coredns-rke2-coredns"
             - path: backend.extraVolumes
               value: *extra-volumes
             - path: backend.extraVolumeMounts
