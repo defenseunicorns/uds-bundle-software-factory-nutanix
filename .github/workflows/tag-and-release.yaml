@@ -28,6 +28,6 @@ jobs:
   # Publish the uds bundle
   publish-uds-bundle:
     needs: tag-new-version
-    # if: ${{ needs.tag-new-version.outputs.release_created == 'true'}}
+    if: ${{ needs.tag-new-version.outputs.release_created == 'true'}}
     uses: ./.github/workflows/publish-bundle.yaml
     secrets: inherit
