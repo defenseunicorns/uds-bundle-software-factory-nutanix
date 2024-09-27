@@ -33,7 +33,7 @@ packages:
   # Zarf init
   - name: init
     repository: ghcr.io/zarf-dev/packages/init
-    ref: v0.38.2
+    ref: v0.39.0
     overrides:
       zarf-seed-registry:
         docker-registry:
@@ -53,7 +53,7 @@ packages:
 
   - name: nutanix-csi
     path: ../../build
-    ref: 0.0.1
+    ref: 3.0.0
     overrides:
       nutanix-csi-storage:
         nutanix-csi-storage:
