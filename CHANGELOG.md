@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.0](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.3.2...v0.4.0) (2024-09-27)
+
+
+### Features
+
+* enable & update sonarqube to 10.6.0 ([#194](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/194)) ([bc5ec54](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/bc5ec549b4517ee5bc679f8de337511625e50658))
+* enable confluence & update to v8.9.4 ([#193](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/193)) ([97c9207](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/97c920764cbcd3a924ad0439860503f2506d3795))
+* enabled mattermost ([#199](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/199)) ([0bc72d6](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/0bc72d65eebd73c1c06f8e0859d1ff65d499de93))
+* improved task names for auto-complete ([#203](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/203)) ([fa0a5f1](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/fa0a5f1ddf64a7d4bdfd8ed8b3b5504d4bd77aed))
+* re-enable jira ([#184](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/184)) ([c1b4efc](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/c1b4efce0c8b5f2e1f1b2e17216b2d58a29fad37))
+
+
+### Bug Fixes
+
+* re-enable mattermost in rke2 bundle too & update to 9.11.1 ([#202](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/202)) ([7d6f6bc](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/7d6f6bca28a75dba73a80c67c3bdac509e12b3a9))
+
+
+### Miscellaneous
+
+* configure bundle to be compatible with eks-d ([#158](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/158)) ([a69818a](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/a69818a1e923f52a466ebadf78eaa08348bf8527))
+* release 0.4.0 ([d57cb44](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/d57cb44dfdc3f9d0d59911ea635a58ea4d14c061))
+* split eksd and rke2 bundles ([#201](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/201)) ([b865581](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/b865581bad35fe48ce6b2b859f559a6872736ca1))
+* update bundle to be compatible with eks-management cluster ([#198](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/198)) ([8fedecc](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/8fedeccbce30bcdbd499c0a44e5957fc09cdccec))
+* update uds-config example file ([#160](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/160)) ([6d5c65f](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/6d5c65ff5c2893ee919ff7125294fb60c2e86c60))
+* upgrade zarf to match uds-cli version ([b865581](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/b865581bad35fe48ce6b2b859f559a6872736ca1))
+
 ## [0.3.2](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.3.1...v0.3.2) (2024-09-04)
 
 
