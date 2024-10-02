@@ -559,6 +559,10 @@ packages:
               value: "###ZARF_VAR_SONARQUBE_DB_PASSWORD###"
             - path: "jdbcOverwrite.jdbcUsername"
               value: "###ZARF_VAR_SONARQUBE_DB_USERNAME###"
+            - path: extraVolumes
+              value: *extra-volumes
+            - path: extraVolumeMounts
+              value: *extra-volume-mounts
 
   - name: jira
     repository: ghcr.io/defenseunicorns/packages/uds/jira
@@ -573,6 +577,10 @@ packages:
               value: "###ZARF_VAR_JIRA_DB_USERNAME###"
             - path: postgres.password
               value: "###ZARF_VAR_JIRA_DB_PASSWORD###"
+            - path: volumes.additional
+              value: *extra-volumes
+            - path: jira.additionalVolumeMounts
+              value: *extra-volume-mounts
         jira:
           variables:
             - name: JIRA_LOCAL_HOME_ENABLED
@@ -613,6 +621,12 @@ packages:
               value: "###ZARF_VAR_CONFLUENCE_DB_USERNAME###"
             - path: postgres.password
               value: "###ZARF_VAR_CONFLUENCE_DB_PASSWORD###"
+            - path: additionalFiles
+              value:
+                - name: trust-bundle
+                  mountPath: /etc/pki/ca-trust/extracted/java/cacerts
+                  key: "ca-bundle.jks"
+                  type: configMap
         confluence:
           variables:
             - name: CONFLUENCE_LOCAL_HOME_ENABLED
