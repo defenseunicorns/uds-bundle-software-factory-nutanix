@@ -86,6 +86,8 @@ packages:
   - name: core
     repository: ghcr.io/defenseunicorns/packages/uds/core
     ref: 0.28.0-registry1
+    optionalComponents:
+      - metrics-server
     overrides:
       grafana:
         grafana:
@@ -557,6 +559,16 @@ packages:
               value: "###ZARF_VAR_SONARQUBE_DB_PASSWORD###"
             - path: "jdbcOverwrite.jdbcUsername"
               value: "###ZARF_VAR_SONARQUBE_DB_USERNAME###"
+            - path: extraVolumes
+              value: *extra-volumes
+            - path: extraVolumeMounts
+              value: *extra-volume-mounts
+        sonarqube:
+          values:
+            - path: extraVolumes
+              value: *extra-volumes
+            - path: extraVolumeMounts
+              value: *extra-volume-mounts
 
   - name: jira
     repository: ghcr.io/defenseunicorns/packages/uds/jira
@@ -571,7 +583,16 @@ packages:
               value: "###ZARF_VAR_JIRA_DB_USERNAME###"
             - path: postgres.password
               value: "###ZARF_VAR_JIRA_DB_PASSWORD###"
+            - path: volumes.additional
+              value: *extra-volumes
+            - path: jira.additionalVolumeMounts
+              value: *extra-volume-mounts
         jira:
+          values:
+            - path: volumes.additional
+              value: *extra-volumes
+            - path: jira.additionalVolumeMounts
+              value: *extra-volume-mounts
           variables:
             - name: JIRA_LOCAL_HOME_ENABLED
               path: "volumes.localHome.persistentVolumeClaim.create"
@@ -611,7 +632,20 @@ packages:
               value: "###ZARF_VAR_CONFLUENCE_DB_USERNAME###"
             - path: postgres.password
               value: "###ZARF_VAR_CONFLUENCE_DB_PASSWORD###"
+            - path: additionalFiles
+              value:
+                - name: trust-bundle
+                  mountPath: /etc/pki/ca-trust/extracted/java/cacerts
+                  key: "ca-bundle.jks"
+                  type: configMap
         confluence:
+          values:
+            - path: additionalFiles
+              value:
+                - name: trust-bundle
+                  mountPath: /var/ssl
+                  key: "ca-bundle.jks"
+                  type: configMap
           variables:
             - name: CONFLUENCE_LOCAL_HOME_ENABLED
               path: "volumes.localHome.persistentVolumeClaim.create"
@@ -700,7 +734,7 @@ packages:
   # Nexus
   - name: nexus
     repository: ghcr.io/defenseunicorns/packages/uds/nexus
-    ref: 3.71.0-uds.1-registry1
+    ref: 3.72.0-uds.0-registry1
     overrides:
       nexus:
         nexus:
