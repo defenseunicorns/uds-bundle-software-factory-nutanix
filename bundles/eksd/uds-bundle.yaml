@@ -533,7 +533,7 @@ packages:
   # Gitlab Runner
   - name: gitlab-runner
     repository: ghcr.io/defenseunicorns/packages/uds/gitlab-runner
-    ref: 17.2.1-uds.2-registry1
+    ref: 17.1.0-uds.1-registry1
     overrides:
       gitlab-runner:
         gitlab-runner:
