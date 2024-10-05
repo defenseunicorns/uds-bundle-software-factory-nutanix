@@ -671,6 +671,9 @@ packages:
                   subPath: "ca-bundle.crt"
                   readOnly: true
         uds-mattermost-config:
+          values:
+            - path: postgres.internal
+              value: false
           variables:
             - name: OBJECT_STORE_SECURE
               path: "objectStorage.secure"
