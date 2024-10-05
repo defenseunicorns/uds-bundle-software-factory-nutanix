@@ -419,7 +419,7 @@ packages:
 
   - name: gitlab
     repository: ghcr.io/defenseunicorns/packages/uds/gitlab
-    ref: 17.1.2-uds.0-registry1
+    ref: 17.2.7-uds.2-registry1
     overrides:
       gitlab:
         uds-gitlab-config:
@@ -435,6 +435,8 @@ packages:
                   app.kubernetes.io/name: valkey
                 namespace: valkey
                 port: 6379
+            - path: ssh.enabled
+              value: true
         gitlab:
           values:
             - path: global.certificates.customCAs
@@ -448,12 +450,6 @@ packages:
               value: *gitlab-init-security-context
             - path: gitlab.sidekiq.init.containerSecurityContext
               value: *gitlab-init-security-context
-            ## gitlab-migrations failed to init as root
-            # - path: gitlab.migrations.init.containerSecurityContext
-            #   value: *gitlab-init-security-context
-            ## gitlab-shell crashed on startup as root
-            # - path: gitlab.gitlab-shell.init.containerSecurityContext
-            #   value: *gitlab-init-security-context
             - path: gitlab.gitlab-pages.init.containerSecurityContext
               value: *gitlab-init-security-context
             - path: gitlab.gitlab-exporter.init.containerSecurityContext
@@ -462,6 +458,8 @@ packages:
               value: *gitlab-init-security-context
             - path: global.redis.host
               value: "valkey-master.valkey.svc.cluster.local"
+            - path: gitlab.gitlab-shell.enabled
+              value: true
 
           variables:
             - name: MIGRATIONS_RESOURCES
