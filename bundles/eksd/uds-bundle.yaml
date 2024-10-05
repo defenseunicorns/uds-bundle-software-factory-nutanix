@@ -610,7 +610,7 @@ packages:
 
   - name: confluence
     repository: ghcr.io/defenseunicorns/packages/uds/confluence
-    ref: 1.20.0-uds.3-registry1
+    ref: 1.20.0-uds.4-registry1
     overrides:
       confluence:
         uds-confluence-config:
