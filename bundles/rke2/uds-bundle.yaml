@@ -363,11 +363,11 @@ packages:
             - name: TENANT_TLS_KEY
               description: "The TLS key for the tenant gateway (must be base64 encoded)"
               path: tls.key
-      promtail:
-        promtail:
+      vector:
+        vector:
           variables:
-            - name: PROMTAIL_RESOURCE_CONFIG
-              description: "Promtail Resource Config"
+            - name: VECTOR_RESOURCE_CONFIG
+              description: "Vector Resource Config"
               path: resources
               default:
                 requests:
@@ -375,7 +375,7 @@ packages:
                   memory: 256Mi
                 limits:
                   cpu: 1
-                  memory: 1Gi
+                  memory: 2Gi
 
   # NOTE -- depends on hardcoded PVC name(s) in core.keycloak
   - name: keycloak-config-wrapper
