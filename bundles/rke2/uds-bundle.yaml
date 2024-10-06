@@ -438,6 +438,10 @@ packages:
                 port: 6379
             - path: ssh.enabled
               value: true
+        uds-gitlab-settings:
+          values:
+            - path: settingsJob.application.enabled_git_access_protocol
+              value: all
         gitlab:
           values:
             - path: global.certificates.customCAs
