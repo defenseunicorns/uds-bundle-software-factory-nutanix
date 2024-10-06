@@ -353,7 +353,7 @@ packages:
                 - name: tcp-ssh
                   port: 22
                   protocol: TCP
-                  targetPort: 2022
+                  targetPort: 2222
         uds-istio-config:
           variables:
             - name: TENANT_TLS_CERT
