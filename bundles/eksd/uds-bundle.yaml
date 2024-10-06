@@ -379,7 +379,7 @@ packages:
   # NOTE -- depends on hardcoded PVC name(s) in core.keycloak
   - name: keycloak-config-wrapper
     path: ../../build
-    ref: 0.0.1
+    ref: 0.0.2
 
   # Additional manifests needed
   - name: additional-manifests
