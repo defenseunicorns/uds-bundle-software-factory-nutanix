@@ -1,7 +1,7 @@
 kind: ZarfPackageConfig
 metadata:
   name: keycloak-config-wrapper
-  version: "0.0.1"
+  version: "0.0.2"
 
 components:
   - name: keycloak-config-wrapper
@@ -18,7 +18,7 @@ components:
           - init-job.yaml
     images:
       # renovate: datasource=github-tags depName=defenseunicorns/uds-identity-config versioning=semver
-      - "ghcr.io/defenseunicorns/uds/identity-config:0.5.1"
+      - "ghcr.io/defenseunicorns/uds/identity-config:0.6.3"
     actions:
       onDeploy:
         before:

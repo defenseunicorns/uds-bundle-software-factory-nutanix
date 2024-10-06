@@ -18,9 +18,6 @@ components:
       - name: gitlab-additional-manifests
         namespace: gitlab
         files:
-          - gitlab/gitlab-ssh-virtualservice.yaml
-          - gitlab/gitlab-ssh-networkpolicies.yaml
-          - gitlab/gitlab-ssh-gateway.yaml
           - gitlab/envoy-filter.yaml
   - name: pepr-policy-exemptions
     required: true

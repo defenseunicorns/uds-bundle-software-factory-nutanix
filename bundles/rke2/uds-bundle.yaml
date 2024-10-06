@@ -85,7 +85,7 @@ packages:
 
   - name: core
     repository: ghcr.io/defenseunicorns/packages/uds/core
-    ref: 0.27.3-registry1
+    ref: 0.28.0-registry1
     optionalComponents:
       - metrics-server
     overrides:
@@ -354,7 +354,7 @@ packages:
                 - name: tcp-ssh
                   port: 22
                   protocol: TCP
-                  targetPort: 2022
+                  targetPort: 2222
         uds-istio-config:
           variables:
             - name: TENANT_TLS_CERT
@@ -363,11 +363,11 @@ packages:
             - name: TENANT_TLS_KEY
               description: "The TLS key for the tenant gateway (must be base64 encoded)"
               path: tls.key
-      promtail:
-        promtail:
+      vector:
+        vector:
           variables:
-            - name: PROMTAIL_RESOURCE_CONFIG
-              description: "Promtail Resource Config"
+            - name: VECTOR_RESOURCE_CONFIG
+              description: "Vector Resource Config"
               path: resources
               default:
                 requests:
@@ -375,12 +375,12 @@ packages:
                   memory: 256Mi
                 limits:
                   cpu: 1
-                  memory: 1Gi
+                  memory: 2Gi
 
   # NOTE -- depends on hardcoded PVC name(s) in core.keycloak
   - name: keycloak-config-wrapper
     path: ../../build
-    ref: 0.0.1
+    ref: 0.0.2
 
   # Additional manifests needed
   - name: additional-manifests
@@ -390,7 +390,7 @@ packages:
   # Gitlab
   - name: gitlab-valkey
     repository: ghcr.io/defenseunicorns/packages/uds/valkey
-    ref: 7.2.5-uds.2-upstream
+    ref: 7.2.6-uds.0-upstream
     overrides:
       valkey:
         uds-valkey-config:
@@ -420,7 +420,7 @@ packages:
 
   - name: gitlab
     repository: ghcr.io/defenseunicorns/packages/uds/gitlab
-    ref: 17.1.2-uds.0-registry1
+    ref: 17.2.7-uds.2-registry1
     overrides:
       gitlab:
         uds-gitlab-config:
@@ -436,6 +436,12 @@ packages:
                   app.kubernetes.io/name: valkey
                 namespace: valkey
                 port: 6379
+            - path: ssh.enabled
+              value: true
+        uds-gitlab-settings:
+          values:
+            - path: settingsJob.application.enabled_git_access_protocol
+              value: all
         gitlab:
           values:
             - path: global.certificates.customCAs
@@ -449,12 +455,6 @@ packages:
               value: *gitlab-init-security-context
             - path: gitlab.sidekiq.init.containerSecurityContext
               value: *gitlab-init-security-context
-            ## gitlab-migrations failed to init as root
-            # - path: gitlab.migrations.init.containerSecurityContext
-            #   value: *gitlab-init-security-context
-            ## gitlab-shell crashed on startup as root
-            # - path: gitlab.gitlab-shell.init.containerSecurityContext
-            #   value: *gitlab-init-security-context
             - path: gitlab.gitlab-pages.init.containerSecurityContext
               value: *gitlab-init-security-context
             - path: gitlab.gitlab-exporter.init.containerSecurityContext
@@ -463,6 +463,8 @@ packages:
               value: *gitlab-init-security-context
             - path: global.redis.host
               value: "valkey-master.valkey.svc.cluster.local"
+            - path: gitlab.gitlab-shell.enabled
+              value: true
 
           variables:
             - name: MIGRATIONS_RESOURCES
@@ -536,7 +538,7 @@ packages:
   # Gitlab Runner
   - name: gitlab-runner
     repository: ghcr.io/defenseunicorns/packages/uds/gitlab-runner
-    ref: 17.0.0-uds.0-registry1
+    ref: 17.1.0-uds.1-registry1
     overrides:
       gitlab-runner:
         gitlab-runner:
@@ -621,7 +623,7 @@ packages:
 
   - name: confluence
     repository: ghcr.io/defenseunicorns/packages/uds/confluence
-    ref: 1.20.0-uds.3-registry1
+    ref: 1.20.0-uds.4-registry1
     overrides:
       confluence:
         uds-confluence-config:
@@ -674,7 +676,7 @@ packages:
    # Mattermost
   - name: mattermost
     repository: ghcr.io/defenseunicorns/packages/uds/mattermost
-    ref: 9.11.1-uds.0-registry1
+    ref: 10.0.0-uds.0-registry1
     overrides:
       mattermost:
         mattermost-enterprise-edition:
@@ -688,6 +690,9 @@ packages:
                   subPath: "ca-bundle.crt"
                   readOnly: true
         uds-mattermost-config:
+          values:
+            - path: postgres.internal
+              value: false
           variables:
             - name: OBJECT_STORE_SECURE
               path: "objectStorage.secure"
