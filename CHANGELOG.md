@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.1](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.4.0...v0.4.1) (2024-10-06)
+
+
+### Miscellaneous
+
+* bump keycloak wrapper to 0.6.3 ([9c1f08a](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/9c1f08a2ec48553b1e943285111aa78d161e6933))
+* small fixes ([#209](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/209)) ([579b390](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/579b3903328f8f8037ee6a1f67ad5c33783f99fd))
+* upgrade confluence to 1.20.0-uds.4 ([9c1f08a](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/9c1f08a2ec48553b1e943285111aa78d161e6933))
+* upgrade gitlab to 17.2.7-uds.2 ([9c1f08a](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/9c1f08a2ec48553b1e943285111aa78d161e6933))
+* upgrade gitlab-runner to 17.1.0-uds.1 ([9c1f08a](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/9c1f08a2ec48553b1e943285111aa78d161e6933))
+* upgrade mattermost to 10.0.0-uds.0 ([9c1f08a](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/9c1f08a2ec48553b1e943285111aa78d161e6933))
+* upgrade uds-core to 0.28.0 ([#211](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/211)) ([9c1f08a](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/9c1f08a2ec48553b1e943285111aa78d161e6933))
+* upgrade valkey to 7.2.6 ([9c1f08a](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/9c1f08a2ec48553b1e943285111aa78d161e6933))
+
 ## [0.4.0](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.3.2...v0.4.0) (2024-09-27)
 
 
