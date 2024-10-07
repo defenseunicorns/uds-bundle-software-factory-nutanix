@@ -60,18 +60,3 @@ jobs:
           uds run create-bundle-eksd
           uds publish build/uds-bundle-software-factory-nutanix-eksd-amd64-*.tar.zst oci://ghcr.io/defenseunicorns/uds-bundle --no-progress
           uds run clean
-
-      - name: Free GH runner build space
-        run: |
-          df -h
-          sudo rm -rf /usr/share/dotnet
-          sudo rm -rf /usr/local/lib/android
-          sudo rm -rf /opt/ghc
-          sudo rm -rf /opt/hostedtoolcache/CodeQL
-          sudo docker image prune --all --force
-          df -h
-
-      - name: Build and publish rke2 bundle
-        run: |
-          uds run create-bundle-rke2
-          uds publish build/uds-bundle-software-factory-nutanix-rke2-amd64-*.tar.zst oci://ghcr.io/defenseunicorns/uds-bundle --no-progress
