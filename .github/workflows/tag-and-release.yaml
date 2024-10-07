@@ -28,13 +28,13 @@ jobs:
   # Publish the uds bundle
   publish-uds-bundle-eksd:
     needs: tag-new-version
-    # if: ${{ needs.tag-new-version.outputs.release_created == 'true'}}
+    if: ${{ needs.tag-new-version.outputs.release_created == 'true'}}
     uses: ./.github/workflows/publish-bundle-eksd.yaml
     secrets: inherit
 
   # Publish the uds bundle
   publish-uds-bundle-rke2:
     needs: tag-new-version
-    # if: ${{ needs.tag-new-version.outputs.release_created == 'true'}}
+    if: ${{ needs.tag-new-version.outputs.release_created == 'true'}}
     uses: ./.github/workflows/publish-bundle-rke2.yaml
     secrets: inherit
