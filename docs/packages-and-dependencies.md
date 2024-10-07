@@ -10,7 +10,7 @@ This list covers tools which would be required on a developer machine in order t
 | Tool | Version | Description |
 |----|----|----|
 | [OpenTofu](https://github.com/opentofu/opentofu) | v1.7.1 | An Infrastructure As Code (IAC) tool for managing the deployment of virtual resources (VMs, databases, object storage) within Nutanix |
-| [UDS](https://github.com/defenseunicorns/uds-cli) | v0.15.0 | A custom tool for automating and simplifying the management of multiple Zarf deployments in one environment |
+| [UDS](https://github.com/defenseunicorns/uds-cli) | v0.16.0 | A custom tool for automating and simplifying the management of multiple Zarf deployments in one environment |
 
 ## Operating System Package Installs
 This list covers tools and packages installed in the Operating System of the virtual machines allocated to run Kubernetes. This list is obviously not exhaustive, but instead covers what is being added to the base STIG'd image.
