@@ -526,14 +526,14 @@ packages:
                                 - gitaly
                         topologyKey: kubernetes.io/hostname
                 nodeAffinity:
-                    preferredDuringSchedulingIgnoredDuringExecution:
-                      - weight: 1
-                        preference:
-                          matchExpressions:
-                            - key: dedicated
-                              operator: In
-                              values:
-                                - gitaly-node
+                  preferredDuringSchedulingIgnoredDuringExecution:
+                    - weight: 1
+                      preference:
+                        matchExpressions:
+                          - key: dedicated
+                            operator: In
+                            values:
+                              - gitaly-node
 
   # Gitlab Runner
   - name: gitlab-runner
