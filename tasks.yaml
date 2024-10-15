@@ -18,6 +18,11 @@ tasks:
       - task: create-bundle-rke2
       - task: deploy-dev-rke2
 
+  - name: precommit
+    description: Run git precommit hooks
+    actions:
+      - cmd: pre-commit run --all-files
+
   ################
   #  Create
   ################
@@ -120,5 +125,3 @@ tasks:
   - name: clean
     actions:
       - cmd: rm -rf ./build/*
-
-
