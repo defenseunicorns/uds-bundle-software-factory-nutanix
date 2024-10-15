@@ -18,6 +18,12 @@ tasks:
       - task: create-bundle-rke2
       - task: deploy-dev-rke2
 
+  - name: deps
+    description: Install development dependencies
+    actions:
+      - task: lint:deps
+      - cmd: CMD=pip && which $CMD || CMD=pip3 && $CMD install shellcheck-py>=0.10.0.1
+
   - name: precommit
     description: Run git precommit hooks
     actions:

@@ -52,8 +52,8 @@ repos:
 
   - repo: local
     hooks:
-      - id: shell-lint
-        name: "Shell Lint"
+      - id: shell-check
+        name: "Shell Check"
         entry: |
           bash -c 'uds run lint:shell'
         language: system
