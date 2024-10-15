@@ -26,6 +26,8 @@ tasks:
         description: "Install shellcheck-py via pip"
       - cmd: CMD=pip && which $CMD || CMD=pip3 && $CMD install -Ivq "pre-commit>=4.0.1"
         description: "Install pre-commit via pip"
+      - cmd: "echo '[*] Please ensure your path is set correctly, for example: \nexport PATH=$PATH:~/.local/bin:~/venv/bin'"
+        description: "Note to set your path"
 
   - name: precommit
     description: Run git precommit hooks
