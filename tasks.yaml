@@ -22,7 +22,10 @@ tasks:
     description: Install development dependencies
     actions:
       - task: lint:deps
-      - cmd: CMD=pip && which $CMD || CMD=pip3 && $CMD install shellcheck-py>=0.10.0.1
+      - cmd: CMD=pip && which $CMD || CMD=pip3 && $CMD install -Ivq "shellcheck-py>=0.10.0.1"
+        description: "Install shellcheck-py via pip"
+      - cmd: CMD=pip && which $CMD || CMD=pip3 && $CMD install -Ivq "pre-commit>=4.0.1"
+        description: "Install pre-commit via pip"
 
   - name: precommit
     description: Run git precommit hooks
