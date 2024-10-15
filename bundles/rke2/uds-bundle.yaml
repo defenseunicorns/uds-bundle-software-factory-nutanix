@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/uds-cli/v0.13.1/uds.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/uds-cli/v0.17.0/uds.schema.json
 kind: UDSBundle
 metadata:
   name: software-factory-nutanix-rke2
@@ -33,7 +33,7 @@ packages:
   # Zarf init
   - name: init
     repository: ghcr.io/zarf-dev/packages/init
-    ref: v0.39.0
+    ref: v0.41.0
     overrides:
       zarf-seed-registry:
         docker-registry:
@@ -81,11 +81,11 @@ packages:
   # MetalLB
   - name: metallb
     repository: ghcr.io/defenseunicorns/packages/metallb
-    ref: 0.0.5-amd64
+    ref: 0.1.1-amd64
 
   - name: core
     repository: ghcr.io/defenseunicorns/packages/uds/core
-    ref: 0.28.0-registry1
+    ref: 0.29.0-registry1
     optionalComponents:
       - metrics-server
     overrides:
@@ -420,7 +420,7 @@ packages:
 
   - name: gitlab
     repository: ghcr.io/defenseunicorns/packages/uds/gitlab
-    ref: 17.2.7-uds.2-registry1
+    ref: 17.2.9-uds.0-registry1
     overrides:
       gitlab:
         uds-gitlab-config:
@@ -538,7 +538,7 @@ packages:
   # Gitlab Runner
   - name: gitlab-runner
     repository: ghcr.io/defenseunicorns/packages/uds/gitlab-runner
-    ref: 17.1.0-uds.1-registry1
+    ref: 17.2.1-uds.2-registry1
     overrides:
       gitlab-runner:
         gitlab-runner:
@@ -550,7 +550,7 @@ packages:
 
   - name: sonarqube
     repository: ghcr.io/defenseunicorns/packages/uds/sonarqube
-    ref: 10.6.0-uds.1-registry1
+    ref: 10.7.0-uds.0-registry1
     overrides:
       sonarqube:
         uds-sonarqube-config:
@@ -676,7 +676,7 @@ packages:
    # Mattermost
   - name: mattermost
     repository: ghcr.io/defenseunicorns/packages/uds/mattermost
-    ref: 10.0.0-uds.0-registry1
+    ref: 10.0.0-uds.1-registry1
     overrides:
       mattermost:
         mattermost-enterprise-edition:
