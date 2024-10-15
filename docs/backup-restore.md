@@ -14,7 +14,7 @@ Run `velero backup describe manual-nexus-velero-backup-1716311265` or `velero ba
 
 - Delete the PVC (Velero will not restore data if the backed up PV/PVC still exist)
 ```bash
-$ kubectl delete pvc nexus-nexus-repository-manager-data 
+$ kubectl delete pvc nexus-nexus-repository-manager-data
 
 persistentvolumeclaim "nexus-nexus-repository-manager-data" deleted
 ```

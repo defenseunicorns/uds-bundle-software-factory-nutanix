@@ -1,0 +1,59 @@
+repos:
+  ################
+  # GENERAL CHECKS
+  ################
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.0.1
+    hooks:
+      - id: check-added-large-files
+        name: Large Files Check
+        args: ["--maxkb=1024"]
+
+      - id: detect-private-key
+        name: Check Private Keys
+
+      - id: check-merge-conflict
+        name: Merge Conflict Resolution Check
+
+      - id: end-of-file-fixer
+        name: Newline EOF Checker
+
+      - id: fix-byte-order-marker
+        name: Fix UTF-8 byte order marker
+
+      - id: trailing-whitespace
+        name: Whitespace Cleaning Check
+        args: [--markdown-linebreak-ext=md]
+
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.18.0
+    hooks:
+      - id: gitleaks
+        name: GitLeaks Checks
+
+  - repo: https://github.com/sirosen/texthooks
+    rev: 0.6.7
+    hooks:
+      - id: fix-smartquotes
+      - id: fix-spaces
+      - id: fix-ligatures
+
+  ############
+  # CODE LINT
+  ############
+
+  - repo: local
+    hooks:
+      - id: yaml-lint
+        name: "Yaml Lint"
+        entry: |
+          bash -c 'uds run lint:yaml'
+        language: system
+
+  - repo: local
+    hooks:
+      - id: shell-lint
+        name: "Shell Lint"
+        entry: |
+          bash -c 'uds run lint:shell'
+        language: system
