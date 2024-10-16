@@ -39,7 +39,7 @@ The UDS Software Factory Bundle (SWF) is a collection of Zarf packages which inc
 
 | Name | Package Version (internal) | Application Version | Description |
 |----|----|----|----|
-| [Zarf Init](https://github.com/zarf-dev/zarf/pkgs/container/packages%2Finit) | v0.41.0 | v0.41.0 | Zarf Init Package used to initialize zarf in the cluster |
+| [Zarf Init](https://github.com/zarf-dev/zarf/pkgs/container/packages%2Finit) | v0.39.0 | v0.39.0 | Zarf Init Package used to initialize zarf in the cluster |
 | [Nutanix CSI](https://portal.nutanix.com/page/documents/details?targetId=CSI-Volume-Driver-v2_6:CSI-Volume-Driver-v2_6) | v3.0.0 | v3.0.0 | Nutanix CSI package |
 | [MetalLB](https://github.com/defenseunicorns/uds-capability-metallb) | 0.0.5 | v0.13.12 | Tool for providing load balancer capabilities for ingress into a Kubernetes deployment |
 | [uds-core](https://github.com/defenseunicorns/uds-core) | 0.29.0 | N/A | [DESCRIPTION BELOW](#UDS-Core) |
