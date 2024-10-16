@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/uds-cli/v0.13.1/uds.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/uds-cli/v0.17.0/uds.schema.json
 kind: UDSBundle
 metadata:
   name: software-factory-nutanix-rke2
@@ -85,7 +85,7 @@ packages:
 
   - name: core
     repository: ghcr.io/defenseunicorns/packages/uds/core
-    ref: 0.28.0-registry1
+    ref: 0.29.0-registry1
     optionalComponents:
       - metrics-server
     overrides:
@@ -420,7 +420,7 @@ packages:
 
   - name: gitlab
     repository: ghcr.io/defenseunicorns/packages/uds/gitlab
-    ref: 17.2.7-uds.2-registry1
+    ref: 17.2.9-uds.0-registry1
     overrides:
       gitlab:
         uds-gitlab-config:
@@ -550,7 +550,7 @@ packages:
 
   - name: sonarqube
     repository: ghcr.io/defenseunicorns/packages/uds/sonarqube
-    ref: 10.6.0-uds.1-registry1
+    ref: 10.7.0-uds.0-registry1
     overrides:
       sonarqube:
         uds-sonarqube-config:
@@ -676,7 +676,7 @@ packages:
    # Mattermost
   - name: mattermost
     repository: ghcr.io/defenseunicorns/packages/uds/mattermost
-    ref: 10.0.0-uds.0-registry1
+    ref: 10.0.0-uds.1-registry1
     overrides:
       mattermost:
         mattermost-enterprise-edition:

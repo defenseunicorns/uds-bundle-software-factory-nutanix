@@ -42,17 +42,17 @@ The UDS Software Factory Bundle (SWF) is a collection of Zarf packages which inc
 | [Zarf Init](https://github.com/zarf-dev/zarf/pkgs/container/packages%2Finit) | v0.39.0 | v0.39.0 | Zarf Init Package used to initialize zarf in the cluster |
 | [Nutanix CSI](https://portal.nutanix.com/page/documents/details?targetId=CSI-Volume-Driver-v2_6:CSI-Volume-Driver-v2_6) | v3.0.0 | v3.0.0 | Nutanix CSI package |
 | [MetalLB](https://github.com/defenseunicorns/uds-capability-metallb) | 0.0.5 | v0.13.12 | Tool for providing load balancer capabilities for ingress into a Kubernetes deployment |
-| [uds-core](https://github.com/defenseunicorns/uds-core) | 0.28.0 | N/A | [DESCRIPTION BELOW](#UDS-Core) |
+| [uds-core](https://github.com/defenseunicorns/uds-core) | 0.29.0 | N/A | [DESCRIPTION BELOW](#UDS-Core) |
 | [Valkey](https://github.com/defenseunicorns/uds-package-valkey) | v7.2.6-uds.0-upstream | 7.2.6 | A key-value store used as a data backend for several applications in the stack |
-| [Gitlab](https://github.com/defenseunicorns/uds-package-gitlab) | v17.2.7-uds.2-registry1 | 17.2.7 | A source control management tool used in the software development lifecycle for storing, updating, building and deploying custom software |
+| [Gitlab](https://github.com/defenseunicorns/uds-package-gitlab) | v17.2.9-uds.0-registry1 | 17.2.9 | A source control management tool used in the software development lifecycle for storing, updating, building and deploying custom software |
 | [Gitlab Runner](https://github.com/defenseunicorns/uds-package-gitlab-runner) | 17.1.0-uds.1-registry1 | v17.1.0 | A counterpart to Gitlab (above) in which automated software builds, tests and deployments are executed |
-| [Sonarqube](https://github.com/defenseunicorns/uds-package-sonarqube) | 10.6.0-uds.1-registry1 | 10.6.0-community | A code inspection tool used during automated pipelines to evaluate security considerations of custom software and packaged images |
+| [Sonarqube](https://github.com/defenseunicorns/uds-package-sonarqube) | 10.7.0-uds.0-registry1 | 10.7.0-community | A code inspection tool used during automated pipelines to evaluate security considerations of custom software and packaged images |
 | [Jira](https://github.com/defenseunicorns/uds-package-jira) | 1.22.0-uds.0-registry1 | 10.0.1 | A collaboration tool used for team management and task organization |s
 | [Confluence](https://github.com/defenseunicorns/uds-package-confluence) | 1.20.0-uds.4-registry1 | 9.0.3 | A knowledge management tool used by teams to organize information |
-| [Mattermost](https://github.com/defenseunicorns/uds-package-mattermost) | 10.0.0-uds.0-registry1 | 10.0.0 | An instance of Mattermost, a self-hosted chat and collaboration platform |
+| [Mattermost](https://github.com/defenseunicorns/uds-package-mattermost) | 10.0.0-uds.1-registry1 | 10.0.0 | An instance of Mattermost, a self-hosted chat and collaboration platform |
 | [Nexus](https://github.com/defenseunicorns/uds-package-nexus) | 3.72.0-uds.0-registry1 | 3.72.0 | An artifact repository used for storing compiled application libraries, packages, images and other such artifacts |
-| [cert-manager](https://cert-manager.io/) | 0.0.1 | 1.14.5 | Tool for automating management of in-cluster certificates |
-| [trust-manager](https://cert-manager.io/docs/trust/trust-manager/) | 0.0.1 | v0.11.0 | Tool for automating creation and distribution of CA trust bundles |
+| [cert-manager](https://cert-manager.io/) | 0.0.1 | 1.16.1 | Tool for automating management of in-cluster certificates |
+| [trust-manager](https://cert-manager.io/docs/trust/trust-manager/) | 0.0.1 | v0.12.0 | Tool for automating creation and distribution of CA trust bundles |
 
 ## UDS Core
  UDS Core is a collection of tools that provide administrative capabilities such as deployment automation, centralized logging, monitoring, alerting and runtime security to a kubernetes cluster. The following applications and tools are installed:
@@ -60,14 +60,14 @@ The UDS Software Factory Bundle (SWF) is a collection of Zarf packages which inc
 | Package | Version | Description |
 |----|----|----|
 | [Istio](https://istio.io/latest/) | 1.23.2 | A package detailing the configuration of the deployed service mesh -- used by the operator to apply the desired state in the cluster |
-| [Loki](https://grafana.com/oss/loki/) | 3.1.1 | A Grafana product for aggregating and querying log data |
+| [Loki](https://grafana.com/oss/loki/) | 3.2.0 | A Grafana product for aggregating and querying log data |
 | [Vector](https://vector.dev/) | 0.41.1 | A logging daemon installed on each cluster node to capture logs from the host and all cluster workload processes. Logs are shipped to Loki |
 | [Prometheus](https://prometheus.io/) | 2.54.1 | A product for storing and querying time series based data such as system performance metrics (CPU/MEM usage) |
-| [Grafana](https://github.com/grafana/grafana) | 11.2.0 | A Grafana product to provide a frontend interface to display and query performance information from Prometheus, log data from Loki, and request tracing information from Tempo |
+| [Grafana](https://github.com/grafana/grafana) | 11.2.2 | A Grafana product to provide a frontend interface to display and query performance information from Prometheus, log data from Loki, and request tracing information from Tempo |
 | [Neuvector](https://www.suse.com/neuvector/) | 5.3.4 | A kubernetes security suite that provides CVE scanning for hosts and images, as well as runtime security monitoring and protection |
 | [Velero](https://repo1.dso.mil/big-bang/product/packages/velero) | 1.14.1 | A tool for orchistrating backups of cluster state and storage |
 | [Authservice](https://github.com/istio-ecosystem/authservice) | 1.0.2 | A tool for simplifying and automating auth workflows via Istio integration |
 | [Metrics Server](https://github.com/kubernetes-sigs/metrics-server) | 0.7.2 | A container metrics aggregation and exporter for kubernetes |
-| [Pepr](https://pepr.dev/) | 0.36.0 | Declarative automation for managing deployments and security policy enorcement |
+| [Pepr](https://pepr.dev/) | 0.37.2 | Declarative automation for managing deployments and security policy enorcement |
 | [Keycloak](https://github.com/defenseunicorns/uds-core) | 25.0.6 | An identity and access management (IDAM) tool used to authenticate users for access to applications |
 | [uds-identity-config]() | v0.6.3 | UDS Identity (Keycloak) Config image used by UDS Identity |
