@@ -10,18 +10,18 @@ components:
   - name: trust-manager-images
     required: true
     images:
-      - quay.io/jetstack/trust-manager:v0.11.0
+      - quay.io/jetstack/trust-manager:v0.12.0
       - quay.io/jetstack/cert-manager-package-debian:20210119.0
-      - quay.io/jetstack/cert-manager-controller:v1.14.5
-      - quay.io/jetstack/cert-manager-webhook:v1.14.5
-      - quay.io/jetstack/cert-manager-cainjector:v1.14.5
-      - quay.io/jetstack/cert-manager-acmesolver:v1.14.5
-      - quay.io/jetstack/cert-manager-startupapicheck:v1.14.5
+      - quay.io/jetstack/cert-manager-controller:v1.16.1
+      - quay.io/jetstack/cert-manager-webhook:v1.16.1
+      - quay.io/jetstack/cert-manager-cainjector:v1.16.1
+      - quay.io/jetstack/cert-manager-acmesolver:v1.16.1
+      - quay.io/jetstack/cert-manager-startupapicheck:v1.16.1
   - name: trust-manager
     required: true
     charts:
       - name: trust-manager
-        version: 0.11.0
+        version: v0.12.0
         namespace: trust-manager
         url: https://charts.jetstack.io/
         valuesFiles:
