@@ -1,5 +1,3 @@
 # SSO Integration
 
-Most applications deployed with UDS are automatically integrated with Keycloak. However, two applications do not support install-time 
-SSO configuration and so must be configured manually. Those are the Atlassian apps, Jira and Confluence. Please reference the 
-Atlassian documentation for guidance in configuring SSO. Their clients exist in keycloak, the SAML details just need added to the apps.
+Most applications deployed with UDS are automatically integrated with Keycloak. However, two applications do not support install-time SSO configuration and so must be configured manually. Those are the Atlassian apps, Jira and Confluence. Please reference the Atlassian documentation for guidance in configuring SSO. Their clients are created in Keycloak, the SAML details just need added to the apps.
