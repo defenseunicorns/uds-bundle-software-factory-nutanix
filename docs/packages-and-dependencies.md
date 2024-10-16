@@ -45,7 +45,7 @@ The UDS Software Factory Bundle (SWF) is a collection of Zarf packages which inc
 | [uds-core](https://github.com/defenseunicorns/uds-core) | 0.29.0 | N/A | [DESCRIPTION BELOW](#UDS-Core) |
 | [Valkey](https://github.com/defenseunicorns/uds-package-valkey) | v7.2.6-uds.0-upstream | 7.2.6 | A key-value store used as a data backend for several applications in the stack |
 | [Gitlab](https://github.com/defenseunicorns/uds-package-gitlab) | v17.2.9-uds.0-registry1 | 17.2.9 | A source control management tool used in the software development lifecycle for storing, updating, building and deploying custom software |
-| [Gitlab Runner](https://github.com/defenseunicorns/uds-package-gitlab-runner) | 17.2.1-uds.2-registry1 | v17.2.1 | A counterpart to Gitlab (above) in which automated software builds, tests and deployments are executed |
+| [Gitlab Runner](https://github.com/defenseunicorns/uds-package-gitlab-runner) | 17.1.0-uds.1-registry1 | v17.1.0 | A counterpart to Gitlab (above) in which automated software builds, tests and deployments are executed |
 | [Sonarqube](https://github.com/defenseunicorns/uds-package-sonarqube) | 10.7.0-uds.0-registry1 | 10.7.0-community | A code inspection tool used during automated pipelines to evaluate security considerations of custom software and packaged images |
 | [Jira](https://github.com/defenseunicorns/uds-package-jira) | 1.22.0-uds.0-registry1 | 10.0.1 | A collaboration tool used for team management and task organization |s
 | [Confluence](https://github.com/defenseunicorns/uds-package-confluence) | 1.20.0-uds.4-registry1 | 9.0.3 | A knowledge management tool used by teams to organize information |
