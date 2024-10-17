@@ -194,4 +194,3 @@ variables:
     # SSO requires a license
     NEXUS_SSO_ENABLED: false
     NEXUS_LICENSE_KEY: ""
-

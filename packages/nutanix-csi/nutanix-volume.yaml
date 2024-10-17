@@ -5,7 +5,7 @@ metadata:
   name: nutanix-volume
   annotations:
     storageclass.kubernetes.io/is-default-class: "true"
-parameters: 
+parameters:
   csi.storage.k8s.io/fstype: xfs
   hypervisorAttached: ###ZARF_VAR_HYPERVISOR_ATTACHED###
   flashMode: DISABLED

@@ -1,6 +1,9 @@
 includes:
   - create: ./tasks/create.yaml
   - deploy: ./tasks/deploy.yaml
+  - lint: https://raw.githubusercontent.com/defenseunicorns/uds-common/v1.1.0/tasks/lint.yaml
+  - actions: https://raw.githubusercontent.com/defenseunicorns/uds-common/v1.1.0/tasks/actions.yaml
+  - setup: https://raw.githubusercontent.com/defenseunicorns/uds-common/v1.1.0/tasks/setup.yaml
 
 tasks:
   - name: dev-eksd
@@ -14,6 +17,22 @@ tasks:
     actions:
       - task: create-bundle-rke2
       - task: deploy-dev-rke2
+
+  - name: deps
+    description: Install development dependencies
+    actions:
+      - task: lint:deps
+      - cmd: CMD=pip && which $CMD || CMD=pip3 && $CMD install -Ivq "shellcheck-py>=0.10.0.1"
+        description: "Install shellcheck-py via pip"
+      - cmd: CMD=pip && which $CMD || CMD=pip3 && $CMD install -Ivq "pre-commit>=4.0.1"
+        description: "Install pre-commit via pip"
+      - cmd: "echo '[*] Please ensure your path is set correctly, for example: \nexport PATH=$PATH:~/.local/bin:~/venv/bin'"
+        description: "Note to set your path"
+
+  - name: precommit
+    description: Run git precommit hooks
+    actions:
+      - cmd: pre-commit run --all-files
 
   ################
   #  Create
