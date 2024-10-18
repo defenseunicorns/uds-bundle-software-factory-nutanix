@@ -194,3 +194,44 @@ variables:
     # SSO requires a license
     NEXUS_SSO_ENABLED: false
     NEXUS_LICENSE_KEY: ""
+    # This must be a list of registries in the form:
+    #   - host: nexus-docker.${DOMAIN}
+    #     port: 5000
+    #     secretName: registry-secret
+    # secretName is optional.
+    # These values are getting inserted in here: https://repo1.dso.mil/big-bang/product/packages/nexus/-/blob/main/chart/values.yaml?ref_type=heads#L240
+    NEXUS_REGISTRY_LIST:
+      - host: reg1.nexus.${DOMAIN}
+        port: 443
+      - host: reg2.nexus.${DOMAIN}
+        port: 443
+      - host: reg3.nexus.${DOMAIN}
+        port: 443
+    # This must be a list of additional exposures in the form:
+    # - service: nexus-nexus-repository-manager-docker-5000
+    #   selector:
+    #     app.kubernetes.io/instance: nexus
+    #   gateway: tenant
+    #   host: nexus-docker
+    #   port: 5000
+    # These values are getting inserted into this https://github.com/defenseunicorns/uds-package-nexus/blob/main/chart/values.yaml#L17
+    # via the variable substitution in the bundle .
+    NEXUS_LIST_ADD_NET_EXP:
+      - service: nexus-repository-manager-docker-443
+        selector:
+          app.kubernetes.io/instance: nexus
+        gateway: tenant
+        host: reg1.nexus
+        port: 443
+      - service: nexus-repository-manager-docker-443
+        selector:
+          app.kubernetes.io/instance: nexus
+        gateway: tenant
+        host: reg2.nexus
+        port: 443
+      - service: nexus-repository-manager-docker-443
+        selector:
+          app.kubernetes.io/instance: nexus
+        gateway: tenant
+        host: reg3.nexus
+        port: 443
