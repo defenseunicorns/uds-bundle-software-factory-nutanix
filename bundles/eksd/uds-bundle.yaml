@@ -723,8 +723,9 @@ packages:
 
   # Nexus
   - name: nexus
-    repository: ghcr.io/defenseunicorns/packages/uds/nexus
-    ref: 3.72.0-uds.0-registry1
+    #repository: ghcr.io/defenseunicorns/packages/uds/nexus
+    ref: 3.72.0-uds.0
+    path: ../../../uds-package-nexus
     overrides:
       nexus:
         nexus:
@@ -753,8 +754,16 @@ packages:
               value: true
             - path: nexus.docker.registries
               value:
-                - host: nexus-docker.${DOMAIN}
-                  port: 5000
+                - host: reg1.nexus.${DOMAIN}
+                  port: 443
+                - host: reg2.nexus.${DOMAIN}
+                  port: 443
+                - host: reg3.nexus.${DOMAIN}
+                  port: 443
+              #  "###ZARF_VAR_NEXUS_REGISTRY_LIST###"
+              #   - host: nexus-docker.${DOMAIN}
+              #     port: 5000
+              #     secretName: registry-secret
             - path: deployment.additionalVolumes
               value: *extra-volumes
             - path: deployment.additionalVolumeMounts
@@ -766,9 +775,29 @@ packages:
           values:
             - path: additionalNetworkExposures
               value:
-                - service: nexus-nexus-repository-manager-docker-5000
+                - service: nexus-repository-manager-docker-443
                   selector:
                     app.kubernetes.io/instance: nexus
                   gateway: tenant
-                  host: nexus-docker
-                  port: 5000
+                  host: reg1.nexus
+                  port: 443
+                - service: nexus-repository-manager-docker-443
+                  selector:
+                    app.kubernetes.io/instance: nexus
+                  gateway: tenant
+                  host: reg2.nexus
+                  port: 443
+                - service: nexus-repository-manager-docker-443
+                  selector:
+                    app.kubernetes.io/instance: nexus
+                  gateway: tenant
+                  host: reg3.nexus
+                  port: 443
+
+                #"###ZARF_VAR_NEXUS_LIST_ADD_NET_EXP###"
+                # - service: nexus-nexus-repository-manager-docker-5000
+                #   selector:
+                #     app.kubernetes.io/instance: nexus
+                #   gateway: tenant
+                #   host: nexus-docker
+                #   port: 5000
