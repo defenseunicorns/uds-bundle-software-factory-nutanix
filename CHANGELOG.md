@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.2](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.4.1...v0.4.2) (2024-10-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* final release containing eks-d support ([#217](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/217))
+
+### Features
+
+* final release containing eks-d support ([#217](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/217)) ([36de4a6](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/36de4a6b84d5dfe2e052a2e8e964beb45f8faaad))
+
+
+### Miscellaneous
+
+* **deps:** update dependencies ([#223](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/223)) ([67943ba](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/67943ba8505980ae8cae6549d414995c670bb0c6))
+* update codeowners ([#227](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/227)) ([077102b](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/077102bab7032061a45e5bb93dee2f56109036ee))
+
 ## [0.4.1](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.4.0...v0.4.1) (2024-10-06)
 
 
