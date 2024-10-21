@@ -761,5 +761,13 @@ packages:
           variables:
             - name: NEXUS_SSO_ENABLED
               path: "sso.enabled"
-            - name: NEXUS_LIST_ADD_NET_EXP
-              path: "additionalNetworkExposures"
+          values:
+            - path: additionalNetworkExposures
+              value:
+                - service: nexus-repository-manager
+                  description: Expose the subdomain for segmented docker registries.
+                  selector:
+                    app.kubernetes.io/instance: nexus
+                  gateway: tenant
+                  host: "*.nexus"
+                  port: 8081
