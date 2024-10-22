@@ -757,8 +757,6 @@ packages:
             - name: STORAGE_SIZE
               path: persistence.storageSize
               default: 8Gi
-            - name: NEXUS_REGISTRY_LIST
-              path: nexus.docker.registries
           values:
             - path: sso.realm
               value:

@@ -197,31 +197,4 @@ variables:
     # SSO requires a license
     NEXUS_SSO_ENABLED: false
     NEXUS_LICENSE_KEY: ""
-    # This must be a list of registries in the form:
-    #   - host: nexus-docker.${DOMAIN}  THIS DOESN'T ACTUALLY MATTER
-    #     port: 5000
-    #     secretName: registry-secret
-    # secretName is optional. The port name is mandatory. Leave it out and the service will fail to create with an invalid
-    # DNS name `nexus-manager-blah-docker-<empty string b/c no port>`. You cannot re-use ports between docker registries
-    # w/o getting duplicate port names created: https://repo1.dso.mil/big-bang/product/packages/nexus/-/blob/main/chart/templates/deployment.yaml?ref_type=heads#L88
-    # These values are getting inserted in here: https://repo1.dso.mil/big-bang/product/packages/nexus/-/blob/main/chart/values.yaml?ref_type=heads#L240
-    NEXUS_REGISTRY_LIST:
-      - host: "*.nexus.${DOMAIN}" # This value actually doens't matter w/ Istio
-        port: 8081
-    # This must be a list of additional exposures in the form:
-    # - service: nexus-nexus-repository-manager-docker-5000
-    #   selector:
-    #     app.kubernetes.io/instance: nexus
-    #   gateway: tenant
-    #   host: nexus-docker
-    #   port: 5000
-    # These values are getting inserted into this https://github.com/defenseunicorns/uds-package-nexus/blob/main/chart/values.yaml#L17
-    # via the variable substitution in the bundle .
-    NEXUS_LIST_ADD_NET_EXP:
-      - service: nexus-repository-manager
-        description: Expose the subdomain for segmented docker registries.
-        selector:
-          app.kubernetes.io/instance: nexus
-        gateway: tenant
-        host: "*.nexus"
-        port: 8081
+ 
