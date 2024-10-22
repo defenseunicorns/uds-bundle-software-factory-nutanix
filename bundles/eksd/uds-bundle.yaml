@@ -364,6 +364,9 @@ packages:
               path: tls.key
             - name: TENANT_HOST_LIST
               path: tls.servers.tenant.hosts  # The tenant subpath is in the override here: https://github.com/defenseunicorns/uds-core/blob/main/src/istio/values/config-tenant.yaml#L11
+              default:
+                - "*"
+                - "*.nexus"  # To add the multiple nexus sub-domain registries to the tenant gateway. Do not attempt *.*.nexus, Nexus only supports first-level subdomain routing.
       vector:
         vector:
           variables:
