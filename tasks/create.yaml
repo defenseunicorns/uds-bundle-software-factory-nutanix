@@ -2,6 +2,10 @@ variables:
   - name: ARCH
     description: "What architecture to use"
     default: "amd64"
+  - name: EXTRA_ARGS
+    description: "Extra arguments to add to the 'uds create' command"
+    default: "--no-progress"
+    # for local dev: --set EXTRA_ARGS="--skip-sbom"
 
 tasks:
   # Build directory
@@ -11,12 +15,6 @@ tasks:
       - cmd: mkdir -p build
 
   # Bundles
-  - name: eksd-bundle
-    description: Create the eksd UDS Bundle with SWF on UDS Core
-    actions:
-      - cmd: ./uds create ./bundles/eksd --architecture="${ARCH}" --confirm
-      - cmd: mv ./bundles/eksd/uds-bundle-* ./build
-
   - name: rke2-bundle
     description: Create the rke2 UDS Bundle with SWF on UDS Core
     actions:
@@ -27,40 +25,40 @@ tasks:
   - name: database-manifest-packages
     description: Create database manifest packages
     actions:
-      - cmd: ./uds zarf package create ./packages/databases/gitlab/secret --confirm --no-progress --architecture="${ARCH}" --skip-sbom --output ./build
-      - cmd: ./uds zarf package create ./packages/databases/sonarqube/secret --confirm --no-progress --architecture="${ARCH}" --skip-sbom --output ./build
+      - cmd: ./uds zarf package create ./packages/databases/gitlab/secret --confirm --architecture="${ARCH}" --output ./build "${EXTRA_ARGS}"
+      - cmd: ./uds zarf package create ./packages/databases/sonarqube/secret --confirm --architecture="${ARCH}" --output ./build "${EXTRA_ARGS}"
 
   - name: keycloak-config-wrapper-package
     description: Create the keycloak configurations shim loader
     actions:
-      - cmd: ./uds zarf package create ./packages/keycloak-config-wrapper --confirm --no-progress --architecture="${ARCH}" --skip-sbom --output ./build
+      - cmd: ./uds zarf package create ./packages/keycloak-config-wrapper --confirm --architecture="${ARCH}" --output ./build "${EXTRA_ARGS}"
 
   - name: object-store-packages
     description: Create the object storage packages
     actions:
-      - cmd: ./uds zarf package create ./packages/object-store/gitlab --confirm --no-progress --architecture="${ARCH}" --skip-sbom --output ./build
+      - cmd: ./uds zarf package create ./packages/object-store/gitlab --confirm --architecture="${ARCH}" --output ./build "${EXTRA_ARGS}"
 
   - name: additional-manifests-package
     description: Create package create additional manifests needed.
     actions:
-      - cmd: ./uds zarf package create ./packages/additional-manifests --confirm --no-progress --architecture="${ARCH}" --skip-sbom --output ./build
+      - cmd: ./uds zarf package create ./packages/additional-manifests --confirm --architecture="${ARCH}" --output ./build "${EXTRA_ARGS}"
 
   - name: nutanix-csi-package
     description: Create Nutanix CSI driver package.
     actions:
-      - cmd: ./uds zarf package create ./packages/nutanix-csi --confirm --no-progress --architecture="${ARCH}" --skip-sbom --output ./build
+      - cmd: ./uds zarf package create ./packages/nutanix-csi --confirm --architecture="${ARCH}" --output ./build "${EXTRA_ARGS}"
 
   - name: cert-manager-package
     description: Create cert-manager package.
     actions:
-      - cmd: ./uds zarf package create ./packages/cert-manager --confirm --no-progress --architecture="${ARCH}" --skip-sbom --output ./build
+      - cmd: ./uds zarf package create ./packages/cert-manager --confirm --architecture="${ARCH}" --output ./build "${EXTRA_ARGS}"
 
   - name: trust-manager-package
     description: Create trust-manager package.
     actions:
-      - cmd: ./uds zarf package create ./packages/trust-manager --confirm --no-progress --architecture="${ARCH}" --skip-sbom --output ./build
+      - cmd: ./uds zarf package create ./packages/trust-manager --confirm --architecture="${ARCH}" --output ./build "${EXTRA_ARGS}"
 
   - name: trust-bundles-package
     description: Create trust-bundle package for adding custom CAs.
     actions:
-      - cmd: ./uds zarf package create ./packages/trust-bundles --confirm --no-progress --architecture="${ARCH}" --skip-sbom --output ./build
+      - cmd: ./uds zarf package create ./packages/trust-bundles --confirm --architecture="${ARCH}" --output ./build "${EXTRA_ARGS}"

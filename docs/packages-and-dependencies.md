@@ -18,7 +18,6 @@ This list covers tools and packages installed in the Operating System of the vir
 | Package | Version | Description |
 |----|----|----|
 | [rke2](https://github.com/rancher/rke2/releases/) | v1.29.6+rke2r1 | A Kubernetes distribution provided by Rancher, focused on security compliance for Government workloads |
-| [eks-d](https://github.com/aws/eks-distro/releases/) | v1.29.6-eks-c025470 | A Kubernetes distribution provided by AWS |
 | [iptables](https://linux.die.net/man/8/iptables) | v1.8.4 | A linux tool for managing local IPv4 packet filtering and NAT routing |
 | [postgres14](https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm) | 14.10 | Database server required as part of initial setup |
 | [lvm2](https://gitlab.com/lvmteam/lvm2) | 2.03.14(2)-RHEL8 | Logical volume management tool needed by rook/ceph |
