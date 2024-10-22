@@ -16,7 +16,7 @@ Once deployed, the Istio Tenant Gateway will route all HTTP(S) traffic which hit
 
 As an operator, you can setup & test multiple docker registries by following these steps. As your preferences differ from the example, see [the official Nexus documentation](https://help.sonatype.com/en/nexus-repository-administration.html) and linked throughout for help.
 
-1. Deploy the bundle. Note the addition in release 0.5.0 of the UDS_CONFIG variable with path `variables.core.TENANT_HOST_LIST`. This variable must have at least these values. See in-line comments for each value's function.
+1. Deploy the bundle. Note the addition in release 0.5.0 of the UDS_CONFIG variable with path `variables.core.TENANT_HOST_LIST`. This variable defaults to the same list shown below (you can double check by looking in the `uds-bundle.yam`). See in-line comments for each value's function.
 
 ```yaml
 variables:
