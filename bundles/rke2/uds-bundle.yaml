@@ -363,6 +363,8 @@ packages:
             - name: TENANT_TLS_KEY
               description: "The TLS key for the tenant gateway (must be base64 encoded)"
               path: tls.key
+            - name: TENANT_HOST_LIST
+              path: tls.servers.tenant.hosts  # The tenant subpath is in the override here: https://github.com/defenseunicorns/uds-core/blob/main/src/istio/values/config-tenant.yaml#L11
       vector:
         vector:
           variables:
@@ -774,5 +776,13 @@ packages:
           variables:
             - name: NEXUS_SSO_ENABLED
               path: "sso.enabled"
-            - name: NEXUS_LIST_ADD_NET_EXP
-              path: "additionalNetworkExposures"
+          values:
+            - path: additionalNetworkExposures
+              value:
+                - service: nexus-repository-manager
+                  description: Expose the subdomain for segmented docker registries.
+                  selector:
+                    app.kubernetes.io/instance: nexus
+                  gateway: tenant
+                  host: "*.nexus"
+                  port: 8081

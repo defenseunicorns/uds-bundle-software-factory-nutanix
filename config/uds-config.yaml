@@ -70,7 +70,7 @@ variables:
     TENANT_TLS_KEY: replace-me-key
     TENANT_HOST_LIST:
       - "*"
-      - "*.nexus"  # To add the multiple nexus sub-domain registries to the tenant gateway
+      - "*.nexus"  # To add the multiple nexus sub-domain registries to the tenant gateway. Do not attempt *.*.nexus, Nexus only supports first-level subdomain routing.
     KEYCLOAK_DB_USERNAME: "postgres"
     KEYCLOAK_DB_PASSWORD: "replace-me-db-passwords"
     KEYCLOAK_DB_NAME: "keycloakdb"
@@ -125,6 +125,7 @@ variables:
       requests:
         cpu: 10m
         memory: 10M
+
     SIDEKIQ_REPLICAS: 3
     SIDEKIQ_HPA:
       cpu:
