@@ -31,7 +31,7 @@ tasks:
   ################
   #  Create
   ################
-  - name: create-bundle
+  - name: create-bundles
     description: Create all UDS Bundles
     actions:
       - task: create-bundle-dependencies
