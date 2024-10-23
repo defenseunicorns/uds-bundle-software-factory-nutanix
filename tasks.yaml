@@ -93,5 +93,6 @@ tasks:
 
   #### Clean ####
   - name: clean
+    description: Clean up local dev build contents
     actions:
       - cmd: rm -rf ./build/*
