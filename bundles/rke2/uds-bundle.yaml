@@ -363,6 +363,11 @@ packages:
             - name: TENANT_TLS_KEY
               description: "The TLS key for the tenant gateway (must be base64 encoded)"
               path: tls.key
+            - name: TENANT_HOST_LIST
+              path: tls.servers.tenant.hosts  # The tenant subpath is in the override here: https://github.com/defenseunicorns/uds-core/blob/main/src/istio/values/config-tenant.yaml#L11
+              default:
+                - "*"
+                - "*.nexus"  # To add the multiple nexus sub-domain registries to the tenant gateway. Do not attempt *.*.nexus, Nexus only supports first-level subdomain routing.
       vector:
         vector:
           variables:
@@ -766,10 +771,6 @@ packages:
                 - "NuGetApiKey"
             - path: nexus.docker.enabled
               value: true
-            - path: nexus.docker.registries
-              value:
-                - host: nexus-docker.${DOMAIN}
-                  port: 5000
             - path: deployment.additionalVolumes
               value: *extra-volumes
             - path: deployment.additionalVolumeMounts
@@ -781,9 +782,10 @@ packages:
           values:
             - path: additionalNetworkExposures
               value:
-                - service: nexus-nexus-repository-manager-docker-5000
+                - service: nexus-repository-manager
+                  description: Expose the subdomain for segmented docker registries.
                   selector:
                     app.kubernetes.io/instance: nexus
                   gateway: tenant
-                  host: nexus-docker
-                  port: 5000
+                  host: "*.nexus"
+                  port: 8081
