@@ -4,7 +4,7 @@ variables:
     default: "amd64"
   - name: EXTRA_ARGS
     description: "Extra arguments to add to the 'uds create' command"
-    default: "--skip-sbom"
+    default: "--skip-sbom=true"
 
 tasks:
   # Build directory
