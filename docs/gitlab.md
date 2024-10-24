@@ -12,7 +12,7 @@ Here is an example of the GitLab admin screen after rebalancing the shard weight
 
 ![image](screenshots/configure-shard-weights.png)
 
-You can confirm newly created repos are going to different shards by viewing them in the `Admin area` and checking the Storage name. The screenshots below show repos created in testing going to different shards.
+You can confirm newly created repos are going to different shards by viewing them in the `Admin area` and checking the Storage name. The screenshots below show repos created in testing going to different shards (keep the expected value concept in mind - not all shards may be used via the random-weighted distribution until many repos have been created and inspected).
 
 ![image](screenshots/ig-proj1-shard2.png)
 
