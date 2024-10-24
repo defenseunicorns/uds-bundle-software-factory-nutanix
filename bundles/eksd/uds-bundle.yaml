@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/uds-cli/v0.17.0/uds.schema.json
 kind: UDSBundle
 metadata:
-  name: software-factory-nutanix-rke2
+  name: software-factory-nutanix-eksd
   description: A UDS bundle for deploying a software factory to an RKE2 cluster
   # x-release-please-start-version
   version: "0.4.2"
@@ -54,6 +54,8 @@ packages:
   - name: nutanix-csi
     path: ../../build
     ref: 3.0.0
+    optionalComponents:
+      - nutanix-csi-snapshot
     overrides:
       nutanix-csi-storage:
         nutanix-csi-storage:
@@ -261,9 +263,6 @@ packages:
       loki:
         loki:
           values:
-            # Override default dns service name for Loki Gateway
-            - path: "global.dnsService"
-              value: "rke2-coredns-rke2-coredns"
             - path: backend.extraVolumes
               value: *extra-volumes
             - path: backend.extraVolumeMounts
@@ -470,7 +469,6 @@ packages:
               value: "valkey-master.valkey.svc.cluster.local"
             - path: gitlab.gitlab-shell.enabled
               value: true
-
           variables:
             - name: MIGRATIONS_RESOURCES
               description: "Gitlab Migrations Resources"
@@ -571,10 +569,6 @@ packages:
               value: "###ZARF_VAR_SONARQUBE_DB_PASSWORD###"
             - path: "jdbcOverwrite.jdbcUsername"
               value: "###ZARF_VAR_SONARQUBE_DB_USERNAME###"
-            - path: extraVolumes
-              value: *extra-volumes
-            - path: extraVolumeMounts
-              value: *extra-volume-mounts
         sonarqube:
           values:
             - path: extraVolumes
@@ -595,10 +589,6 @@ packages:
               value: "###ZARF_VAR_JIRA_DB_USERNAME###"
             - path: postgres.password
               value: "###ZARF_VAR_JIRA_DB_PASSWORD###"
-            - path: volumes.additional
-              value: *extra-volumes
-            - path: jira.additionalVolumeMounts
-              value: *extra-volume-mounts
         jira:
           values:
             - path: volumes.additional
@@ -644,12 +634,6 @@ packages:
               value: "###ZARF_VAR_CONFLUENCE_DB_USERNAME###"
             - path: postgres.password
               value: "###ZARF_VAR_CONFLUENCE_DB_PASSWORD###"
-            - path: additionalFiles
-              value:
-                - name: trust-bundle
-                  mountPath: /etc/pki/ca-trust/extracted/java/cacerts
-                  key: "ca-bundle.jks"
-                  type: configMap
         confluence:
           values:
             - path: additionalFiles
@@ -683,7 +667,7 @@ packages:
                 jvm:
                   maxHeap: "6g"
 
-   # Mattermost
+  # Mattermost
   - name: mattermost
     repository: ghcr.io/defenseunicorns/packages/uds/mattermost
     ref: 10.0.0-uds.1-registry1
