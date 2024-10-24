@@ -541,7 +541,7 @@ packages:
             - name: GITALY_SHARD_NAMES
               path: global.gitaly.internal.names # Gitlab uses the global top-value to set subcharts: https://gitlab.com/gitlab-org/charts/gitlab/-/blob/master/values.yaml?ref_type=heads#L184
               default:
-                - "default"  # Keep this at all times, it's the gitaly made by default, keeping it enables upgrade compatibility.
+                - "default"  # Gitlab requires that the first shard always be named `default`: https://docs.gitlab.com/ee/administration/gitaly/configure_gitaly.html?tab=Helm+chart+%28Kubernetes%29#gitlab-requires-a-default-repository-storage
 
   # Gitlab Runner
   - name: gitlab-runner

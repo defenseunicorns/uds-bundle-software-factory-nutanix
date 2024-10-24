@@ -146,7 +146,7 @@ variables:
         memory: 15G
     # https://docs.gitlab.com/charts/charts/gitlab/gitaly/ - every name becomes a stateful storage set (gitaly instance)
     GITALY_SHARD_NAMES:
-      - default
+      - "default"  # Gitlab requires that the first shard always be named `default`: https://docs.gitlab.com/ee/administration/gitaly/configure_gitaly.html?tab=Helm+chart+%28Kubernetes%29#gitlab-requires-a-default-repository-storage
       - shard1
       - shard2
     REGISTRY_REPLICAS: 2
