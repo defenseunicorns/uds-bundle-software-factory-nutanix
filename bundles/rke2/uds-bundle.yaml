@@ -534,6 +534,11 @@ packages:
                             operator: In
                             values:
                               - gitaly-node
+            # https://docs.gitlab.com/charts/charts/gitlab/gitaly/ - every name results in additional Gitaly shard
+            - name: GITALY_SHARD_NAMES
+              path: global.gitaly.internal.names # Gitlab uses the global top-value to set subcharts: https://gitlab.com/gitlab-org/charts/gitlab/-/blob/master/values.yaml?ref_type=heads#L184
+              default:
+                - "default"  # Keep this at all times, it's the gitaly made by default, keeping it enables upgrade compatibility.
 
   # Gitlab Runner
   - name: gitlab-runner

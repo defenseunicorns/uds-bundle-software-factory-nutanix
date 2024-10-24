@@ -140,6 +140,11 @@ variables:
       requests:
         cpu: 4000m
         memory: 15G
+    # https://docs.gitlab.com/charts/charts/gitlab/gitaly/ - every name becomes a stateful storage set (gitaly instance)
+    GITALY_SHARD_NAMES:
+      - default
+      - shard1
+      - shard2
     REGISTRY_REPLICAS: 2
     SHELL_REPLICAS: 2
   sonarqube:
