@@ -11,7 +11,6 @@
       ],
       "versioning": "always-bump-patch",
       "extra-files": [
-        "bundles/eksd/uds-bundle.yaml",
         "bundles/rke2/uds-bundle.yaml",
         "tasks/deploy.yaml"
       ]
