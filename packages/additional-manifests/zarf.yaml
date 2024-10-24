@@ -28,3 +28,11 @@ components:
           - pepr-policy-exemptions/metallb-exemptions.yaml
           - pepr-policy-exemptions/gitlab-exemptions.yaml
           - pepr-policy-exemptions/eks-mgmt-exemptions.yaml
+  - name: jobs
+    required: true
+    manifests:
+      - name: jobs-manifests
+        files:
+          - jobs/pepr-restart-job.yaml
+    images:
+      - registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.29.4
