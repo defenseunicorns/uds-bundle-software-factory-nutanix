@@ -42,7 +42,7 @@ spec:
           restartPolicy: OnFailure
           containers:
             - name: kubectl-container
-              image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.29.4
+              image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.6
               args:
                 - rollout
                 - restart
@@ -50,7 +50,7 @@ spec:
                 - -n
                 - pepr-system
             - name: kubectl-container2
-              image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.29.4
+              image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.6
               args:
                 - rollout
                 - restart
