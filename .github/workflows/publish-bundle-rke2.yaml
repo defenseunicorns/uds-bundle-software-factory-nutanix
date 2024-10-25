@@ -2,9 +2,13 @@ name: Publish Zarf Package
 
 on:
   workflow_call:
+    inputs:
+      tag-name:
+        required: true
+        type: string
 
 permissions:
-  contents: read
+  contents: write
   packages: write
   id-token: write
 
@@ -52,11 +56,20 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      ####
-      # Build and publish bundle
-      ####
       - name: Build and publish rke2 bundle
         run: |
           uds run create-bundle-rke2 --set EXTRA_ARGS="--no-progress"
+          uds inspect --sbom build/uds-bundle-software-factory-nutanix-rke2*.tar.zst
           uds publish build/uds-bundle-software-factory-nutanix-rke2-amd64-*.tar.zst oci://ghcr.io/defenseunicorns/uds-bundle --no-progress
+
+      - name: Upload SBOM to Release
+        id: upload-sbom-to-release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG_NAME="v${{ inputs.tag-name }}"
+          gh release upload "${TAG_NAME}" "$(find . -maxdepth 1 -type f -name "*-sboms.tar" -print0 | xargs -0 echo)"
+
+      - name: Cleanup
+        run: |
           uds run clean
