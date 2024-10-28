@@ -29,7 +29,7 @@ Create your own `uds-config.yaml` file. You can start from the reference file in
 
 You will continue to update this uds-config.yaml file with environment-dependent variables as you go through these instructions. You can also review it now for familiarity.
 
-### 4.  sCreate Infrastructure Dependencies
+### 4. Create Infrastructure Dependencies
 
 This bundle requires pre-existing s3 buckets and external postgres databases. The addresses and credentials are passed in via the `uds-config.yaml` file at deploy time. 
 
