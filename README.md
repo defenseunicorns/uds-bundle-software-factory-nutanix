@@ -43,7 +43,7 @@ This bundle requires pre-existing s3 buckets and external postgres databases. Th
 
 #### A. Create the Kubernetes Cluster
 
-Goes without saying, but the k8s cluster must already exist in Nutanix, and you must have admin access to it.
+Goes without saying, but the k8s cluster must already exist in Nutanix, and you must have admin access to it. We create ours with Terraform [here](https://github.com/defenseunicorns/delivery-nutanix-iac/tree/main)
 
 #### B. Provide a Domain, DNS sub-domain support (wildcard CNAME preferable), TLS certs
 
