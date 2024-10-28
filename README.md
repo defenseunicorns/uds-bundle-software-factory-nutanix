@@ -6,7 +6,7 @@ Bundle developers see [development.md](docs/development.md).
 
 ## Installing on Nutanix
 
-### Install Required Tools
+### 1. Install Required Tools
 
 - [UDS CLI](https://github.com/defenseunicorns/uds-cli/tree/v0.16.0). This links to version 0.16.0 which is what the bundle is tested with but it should work with most nearby versions. The binary is here: <https://github.com/defenseunicorns/uds-cli/releases/download/v0.16.0/uds-cli_v0.16.0_Linux_amd64>
 
@@ -16,30 +16,28 @@ Bundle developers see [development.md](docs/development.md).
 - [helm](https://helm.sh/docs/intro/install/)
 - [k9s](https://k9scli.io/topics/install/) also availible via the command `uds monitor`
 
-### Get the Bundle
+### 2. Get the Bundle
 
 - The bundle you would like to install.
   - You can download the latest in your browser from [Defense Unicorn's published packages](https://github.com/orgs/defenseunicorns/packages?repo_name=uds-bundle-software-factory-nutanix)
   - You can pull it via the same protocol used to push/pull docker images: `uds pull oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix-rke2:0.4.3 --architecture amd64`
   - You can also reference it by it's "docker name" (OCI image URL) at deploy time with the same command above, `pull` switched to `deploy` and UDS will pull it and deploy it. This is less relevant to air-gapped installs unless you're pushing the bundle to a high-side docker registry before install (which isn't a bad idea).
 
-### Customize Configuration via `uds-config.yaml`
+### 3. Customize Configuration via `uds-config.yaml`
 
-Create your own `uds-config.yaml` file. You can start from the reference file in the `config/` directory. See [docs/configuration.md](docs/configuration.md) for further assistance.
+Create your own `uds-config.yaml` file. You can start from the reference file in the `config/` directory.
 
-You will continue to update this uds-config.yaml file as you go with S3 bucket and postgres DB specifics.
+You will continue to update this uds-config.yaml file with environment-dependent variables as you go through these instructions. You can also review it now for familiarity.
 
-### Create Infrastructure Dependencies
+### 4.  sCreate Infrastructure Dependencies
 
 This bundle requires pre-existing s3 buckets and external postgres databases. The addresses and credentials are passed in via the `uds-config.yaml` file at deploy time. 
 
-> Note: As with any k8s system that includes persistent storage, be aware that if you wipe an app out and redeploy it there may be credential drift between the auto-regenerated secrets that some parts of the system will source credentials from and the postgres DB which other parts will source the same credential from. This has been observed to be a problem for the `metrics-server` job specifically. If the `metrics-server` job fails with a 401, you may need to manually edit the secret to put the right API Admin key in. Other apps will have similar failure modes.
-
-#### 1. Create the Kubernetes Cluster
+#### A. Create the Kubernetes Cluster
 
 Goes without saying, but the k8s cluster must already exist in Nutanix, and you must have admin access to it.
 
-#### 2. Provide a Domain, DNS sub-domain support (wildcard CNAME preferable), TLS certs
+#### B. Provide a Domain, DNS sub-domain support (wildcard CNAME preferable), TLS certs
 
 During bundle development and testing, we use the `*.bigbang.dev` domain (which is owned by a Unicorn who used to work for Platform One). You will need to setup routing to `*.your-domain.com`.
 
@@ -47,7 +45,7 @@ You also need TLS certs signed by a locally trusted CA for the applications. A w
 
 	- `confluence.your.domain`
 	- `gitlab.your.domain`
-	- `*.pages.your.domain`  **Note:** strongly recommend a wildcard here as it'd be toilsome to keep up with user behavior here.
+	- `*.pages.your.domain` **Note:** strongly recommend a wildcard here as it'd be toilsome to keep up with user behavior here.
 	- `registry.your.domain`
 	- `gitlab.your.domain`
 	- `jira.your.domain`
@@ -64,7 +62,9 @@ You also need TLS certs signed by a locally trusted CA for the applications. A w
   - `sonarqube.your.domain`
   - `tracing.your.domain`
 
-#### 3. Provision S3-like Object Storage
+Update the domain and TLS cert values in your `uds-config.yaml` file.
+
+#### C. Provision S3-like Object Storage
 
 There are the default bucket names in the default `uds-config.yaml` file. If you choose to deviate from these names know:
 - Gitlab only allows you to add a suffix. 
@@ -72,7 +72,7 @@ There are the default bucket names in the default `uds-config.yaml` file. If you
 
 Reference the `uds-config.yaml` file you created as you go to be sure you're creating/have created buckets by the intended names.
 
-#### 4. Create the Postgres Databases.
+#### D. Create the Postgres Databases.
 
 The following applications require an external database:
 - Keycloak
@@ -85,7 +85,7 @@ The following applications require an external database:
 
 Update your `uds-config.yaml` file with the correct credentials and connection URLs.
 
-#### 5. Enable Nutanix CSI
+#### E. Enable Nutanix CSI
 
 This bundle utilizes the Nutanix CSI Helm chart for persistent storage. Before the bundle can be deployed the following needs to be created:
 1. Prism Element user and password for the CSI provider to connect to Prism Element. Update your `uds-config.yaml` file with the user credentials and the Prism Element IP/Hostname.
@@ -94,7 +94,7 @@ This bundle utilizes the Nutanix CSI Helm chart for persistent storage. Before t
 
 > NOTE: User/password and Nutanix File server must be configured in Prism _Element_ not Prism _Central_.
 
-### Deploy
+### 5. Deploy
 
 This is the easy step.
 
