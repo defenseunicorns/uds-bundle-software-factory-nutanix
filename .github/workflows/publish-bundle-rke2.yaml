@@ -58,7 +58,7 @@ jobs:
 
       - name: Build and publish rke2 bundle
         run: |
-          uds run create-bundle-rke2 --set EXTRA_ARGS="--no-progress"
+          uds run create-bundle-rke2 --set EXTRA_ARGS="--skip-sbom=false"
           uds inspect --sbom build/uds-bundle-software-factory-nutanix-rke2*.tar.zst
           uds publish build/uds-bundle-software-factory-nutanix-rke2-amd64-*.tar.zst oci://ghcr.io/defenseunicorns/uds-bundle --no-progress
 
