@@ -2,6 +2,8 @@
 
 This is a UDS Software Facotry bundle meant to be deployed on a Nutanix-based K8s cluster. This is not a [Supported Environment](https://uds.defenseunicorns.com/reference/uds-core/distribution-support/) but UDS should be compatible with this setup, and this bundle includes configuration changes to help it work on Nutanix.
 
+A list of included applications can be found [here](docs/packages-and-dependencies.md).
+
 Bundle developers see [development.md](docs/development.md).
 
 ## Installing on Nutanix
@@ -31,9 +33,9 @@ Get the bundle you would like to install:
 
 ### 3. Customize Configuration via `uds-config.yaml`
 
-Create your own `uds-config.yaml` file. You can start from the reference file in the `config/` directory.
+Create your own `uds-config.yaml` file. You can start from the reference file in the `config/` directory. Note it the default yaml file includes comments to point you at particular docs (such as [docs/nexus.md](docs/nexus.md)) to guide you in understanding and configuring some of the more challenging values.
 
-You will continue to update this uds-config.yaml file with environment-dependent variables as you go through these instructions. You can also review it now for familiarity.
+Don't worry about the domain, database, TLS, and object store related values at this time. They will be addressed in the following sections.
 
 ### 4. Create Infrastructure Dependencies
 
@@ -76,7 +78,7 @@ There are the default bucket names in the default `uds-config.yaml` file. If you
 - Gitlab only allows you to add a suffix.
 - Loki, Velero and Mattermost don't care what you name the S3 buckets.
 
-Reference the `uds-config.yaml` file you created as you go to be sure you're creating/have created buckets by the intended names.
+Reference the `uds-config.yaml` file you created as you go to be sure you're creating/have created buckets by the intended names. For a list of UDS config variables to be sure you update, see [docs/object-store-creation-and-configuration.md](docs/object-store-creation-and-configuration.md).
 
 #### D. Create the Postgres Databases.
 
@@ -89,7 +91,7 @@ The following applications require an external database:
 - Mattermost
 - Nexus
 
-Update your `uds-config.yaml` file with the correct credentials and connection URLs.
+Update your `uds-config.yaml` file with the correct credentials and connection URLs. For a list of UDS config variables to be sure you update, see [docs/database-creation-and-configuration.md](docs/database-creation-and-configuration.md).
 
 #### E. Enable Nutanix CSI
 
