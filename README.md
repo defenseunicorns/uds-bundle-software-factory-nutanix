@@ -37,7 +37,7 @@ You will continue to update this uds-config.yaml file with environment-dependent
 
 ### 4. Create Infrastructure Dependencies
 
-This bundle requires pre-existing s3 buckets and external postgres databases. The addresses and credentials are passed in via the `uds-config.yaml` file at deploy time. 
+This bundle requires pre-existing s3 buckets and external postgres databases. The addresses and credentials are passed in via the `uds-config.yaml` file at deploy time.
 
 #### A. Create the Kubernetes Cluster
 
@@ -61,10 +61,10 @@ You also need TLS certs signed by a locally trusted CA for the applications. A w
   - `grafana.your.domain`
   - `neuvector.your.domain`
   - `nexus.your.domain`
-  - `*.nexus.your.domain` 
-  
+  - `*.nexus.your.domain`
+
     > **Note:** if you create a cert per nexus subdomain instead of a wildcard cert (subdomains are docker registries) see [docs/nexus.md](docs/nexus.md) to make sure you update the tenant gateway and other relevant uds-config variables correctly. It was tested with a wildcard cert. This author can't promise the current configuration would allow multiple individual certs to be inserted into the right places.
-  
+
   - `sonarqube.your.domain`
   - `tracing.your.domain`
 
@@ -73,7 +73,7 @@ Update the domain and TLS cert values in your `uds-config.yaml` file.
 #### C. Provision S3-like Object Storage
 
 There are the default bucket names in the default `uds-config.yaml` file. If you choose to deviate from these names know:
-- Gitlab only allows you to add a suffix. 
+- Gitlab only allows you to add a suffix.
 - Loki, Velero and Mattermost don't care what you name the S3 buckets.
 
 Reference the `uds-config.yaml` file you created as you go to be sure you're creating/have created buckets by the intended names.
