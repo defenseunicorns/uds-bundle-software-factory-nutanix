@@ -93,7 +93,8 @@ Update your `uds-config.yaml` file with the correct credentials and connection U
 
 #### E. Enable Nutanix CSI
 
-This bundle utilizes the Nutanix CSI Helm chart for persistent storage. Before the bundle can be deployed the following needs to be created:
+This bundle utilizes the Nutanix CSI Helm chart for persistent storage. It needs Nutanix resources set up ahead of time.
+
 1. Prism Element user and password for the CSI provider to connect to Prism Element. Update your `uds-config.yaml` file with the user credentials and the Prism Element IP/Hostname.
 2. Nutanix Storage Container for RWO persistent volumes. Add the storage container name to the `uds-config.yaml`.
 3. Nutanix File Server for RWX persistent volumes. **Be sure to configure the DNS records that it asks for.** Put the File Server name as it appears in Prism Element into your `uds-config.yaml`.
