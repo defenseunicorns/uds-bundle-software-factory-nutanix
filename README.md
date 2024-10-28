@@ -93,6 +93,8 @@ The following applications require an external database:
 
 Update your `uds-config.yaml` file with the correct credentials and connection URLs. For a list of UDS config variables to be sure you update, see [docs/database-creation-and-configuration.md](docs/database-creation-and-configuration.md).
 
+You can review the terraform IaC we use for databases in our [delivery-nutanix-deployments](https://github.com/defenseunicorns/delivery-nutanix-deployments) repo.
+
 #### E. Enable Nutanix CSI
 
 This bundle utilizes the Nutanix CSI Helm chart for persistent storage. It needs Nutanix resources set up ahead of time.

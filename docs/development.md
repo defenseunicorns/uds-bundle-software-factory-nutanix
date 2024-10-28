@@ -4,7 +4,7 @@
 
 Recommend you setup tab-completion for uds among the other tools. Like kubectl and helm, the completion scripts are available at `uds completion <shell type>`. You can also get all available uds tasks by running `uds run --list`.
 
-## Developmnet Cycle
+## Development Cycle
 
 ### 1. Setup your scratch directory
 
@@ -28,7 +28,7 @@ If you only changed the uds configuration values, skip to step 2.
 2. Redeploy your bundle to the environment you're developing against. If you want a whole bundle deploy, just run `uds run deploy...` (use tab complete to finish that out if you've set it up). However, to speed up your cycles dramatically, create your own version of that UDS deploy command, and use the `-p` flag to only deploy the package you updated. In the example below, we redeploy gitlab:
 
 ```bash
-UDS_CONFIG=scratch/configs/dev/uds-config.yaml KUBECONFIG=scratch/configs/dev/kubeconfig uds deploy build/uds-bundle-software-factory-nutanix-eksd-amd64-0.4.2.tar.zst -p gitlab --confirm  
+UDS_CONFIG=scratch/configs/dev/uds-config.yaml KUBECONFIG=scratch/configs/dev/kubeconfig uds deploy build/uds-bundle-software-factory-nutanix-rke2-amd64-0.4.2.tar.zst -p gitlab --confirm
 # the --confirm flag removes the y/n confirmation like a -y flag
 ```
 
