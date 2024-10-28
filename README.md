@@ -1,4 +1,4 @@
-# uds-bundle-software-factory-nutanix
+# UDS Bundled Software Factory for Nutanix
 
 This is a UDS Software Facotry bundle meant to be deployed on a Nutanix-based K8s cluster. This is not a [Supported Environment](https://uds.defenseunicorns.com/reference/uds-core/distribution-support/) but UDS should be compatible with this setup, and this bundle includes configuration changes to help it work on Nutanix.
 
