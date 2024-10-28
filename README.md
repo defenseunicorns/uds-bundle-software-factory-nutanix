@@ -4,162 +4,102 @@ This is a UDS Software Facotry bundle meant to be deployed on a Nutanix-based K8
 
 Bundle developers see [development.md](docs/development.md).
 
-## Installation ("quickstart")
-Once the below [Prerequisites](#prerequisites) are met, these are the steps to deploy.
-1) Gather your files in your working directory. Bundle tarball can be referenced via OCI or downloaded for local use.
-  - uds-config.yaml [Instructions on creating this file](#Configuration)
-  - uds-bundle-software-factory-nutanix-amd64-0.x.x.tar.zst [Instructions on OCI reference usage](#deployment). [Instructions on local reference](#(optional)-local-deployment-reference)
-2) Deploy the bundle with the above files in your working directory by [following these instructions](#deployment)
+## Installing on Nutanix
 
-### Prerequisites
-**Tools**:
-* [uds version v0.16.0](https://github.com/defenseunicorns/uds-cli/tree/v0.16.0)
-- `sudo curl -sL https://github.com/defenseunicorns/uds-cli/releases/download/v0.16.0/uds-cli_v0.16.0_Linux_amd64`
-* (OPTIONAL) [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
-* (OPTIONAL) [helm](https://github.com/helm/helm)
+### Install Required Tools
 
-**Infrastructure**:
-* Kubernetes cluster
-* Access to the cluster with enough privilege to deploy
-* A valid domain
-  > NOTE: `*.bigbang.dev` may be used for demonstration and test deployments.
-* Wildcard certificates to cover your domain (alternatively, expand for full SAN list)
-  <details>
-    <summary>Individual SAN list </summary>
+- [UDS CLI](https://github.com/defenseunicorns/uds-cli/tree/v0.16.0). This links to version 0.16.0 which is what the bundle is tested with but it should work with most nearby versions. The binary is here: <https://github.com/defenseunicorns/uds-cli/releases/download/v0.16.0/uds-cli_v0.16.0_Linux_amd64>
 
-	* `confluence.your.domain`
-	* `gitlab.your.domain`
-	* `*.pages.your.domain`
-	* `registry.your.domain`
-	* `gitlab.your.domain`
-	* `jira.your.domain`
-	* `keycloak.your.domain`
-	* `kiali.your.domain`
-	* `chat.your.domain`
-	* `grafana.your.domain`
-	* `neuvector.your.domain`
-	* `nexus.your.domain`
-	* `sonarqube.your.domain`
-    * `tracing.your.domain`
-  </details>
+**Optionally**, the following tools are baked into the UDS CLI via Zarf (`uds zarf tools`) already are easier to use if installed directly:
 
-  > NOTE: If using the example domain (`*.bigbang.dev`), a valid corresponding certificate and key can be found [in the Platform1 Big Bang repo](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/chart/ingress-certs.yaml?ref_type=heads).
-* Object Storage with provisioned buckets (expand for details).
-These are the default bucket names. Gitlab allows you to add a suffix in your `uds-config.yaml`, so reflect that if you configure a suffix. Also, Loki, Velero and Mattermost allow you to configure your bucket name in your `uds-config.yaml`. Reflect that if you configure those differently then the below defaults.
-  <details>
-    <summary> Loki </summary>
+- [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
+- [helm](https://helm.sh/docs/intro/install/)
+- [k9s](https://k9scli.io/topics/install/) also availible via the command `uds monitor`
 
-    * loki-chunks-bucket
-    * loki-ruler-bucket
-    * loki-admin-bucket
-  </details>
-  <details>
-    <summary> Velero </summary>
+### Get the Bundle
 
-    * velero-backups
-  </details>
-  <details>
-    <summary> Gitlab </summary>
+- The bundle you would like to install.
+  - You can download the latest in your browser from [Defense Unicorn's published packages](https://github.com/orgs/defenseunicorns/packages?repo_name=uds-bundle-software-factory-nutanix)
+  - You can pull it via the same protocol used to push/pull docker images: `uds pull oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix-rke2:0.4.3 --architecture amd64`
+  - You can also reference it by it's "docker name" (OCI image URL) at deploy time with the same command above, `pull` switched to `deploy` and UDS will pull it and deploy it. This is less relevant to air-gapped installs unless you're pushing the bundle to a high-side docker registry before install (which isn't a bad idea).
 
-    * uds-gitlab-artifacts
-    * uds-gitlab-backups
-    * uds-gitlab-ci-secure-files
-    * uds-gitlab-dependency-proxy
-    * uds-gitlab-lfs
-    * uds-gitlab-mr-diffs
-    * uds-gitlab-packages
-    * uds-gitlab-pages
-    * uds-gitlab-terraform-state
-    * uds-gitlab-uploads
-    * uds-gitlab-registry
-    * uds-gitlab-tmp
-  </details>
-  <details>
-    <summary> Mattermost </summary>
+### Customize Configuration via `uds-config.yaml`
 
-    * mattermost-bucket
-  </details>
-* Postgres databases (expand for details):
-  <details>
-    <summary> Full list of databases </summary>
+Create your own `uds-config.yaml` file. You can start from the reference file in the `config/` directory. See [docs/configuration.md](docs/configuration.md) for further assistance.
 
-  * Keycloak
-  * Gitlab
-  * Sonarqube
-  * Jira
-  * Confluence
-  * Mattermost
-  * Nexus
-  </details>
+You will continue to update this uds-config.yaml file as you go with S3 bucket and postgres DB specifics.
 
-> NOTE: All database and object storage credentials must be provided via username and password in the uds-config.
+### Create Infrastructure Dependencies
 
-**Storage**
+This bundle requires pre-existing s3 buckets and external postgres databases. The addresses and credentials are passed in via the `uds-config.yaml` file at deploy time. 
 
-This bundle utilizes the Nutanix CSI Helm chart for persistent storage. Before the bundle can be deployed the following needs to be configured:
-* Prism Element user and password for the CSI provider to connect to Prism Element. Username, password, and Prism Element IP/Hostname will need passed to uds-config.yaml.
-* Nutanix Storage Container for RWO persistent volumes. Can either be a new container configured specifically for cluster storage, or an existing container depending on your needs/desires. Storage container name will need passed to uds-config.yaml.
-* Nutanix File Server configured to use for RWX persistent volumes. Make sure to configure the DNS records that it asks you to make. File Server name as it appears in Prism Element will need passed to uds-config.yaml.
+> Note: As with any k8s system that includes persistent storage, be aware that if you wipe an app out and redeploy it there may be credential drift between the auto-regenerated secrets that some parts of the system will source credentials from and the postgres DB which other parts will source the same credential from. This has been observed to be a problem for the `metrics-server` job specifically. If the `metrics-server` job fails with a 401, you may need to manually edit the secret to put the right API Admin key in. Other apps will have similar failure modes.
 
-> NOTE: User/password and Nutanix File server must be configured in Prism Element not Prism Central.
+#### 1. Create the Kubernetes Cluster
 
-### Configuration
-Deployment configuration is managed via a `uds-config.yaml` file in the deployment directory. Some values in the configuration will be sensitive, **we do not recommend checking this into source control in its entierty**. Best practice would involve either storing the configuration in an external secrets manager (like Vault), or managing deployments via CD and generating the config file dynamically at deploy time using CD managed secrets.
+Goes without saying, but the k8s cluster must already exist in Nutanix, and you must have admin access to it.
 
-For demonstration purposes, you can setup a local configfile as follows:
-* Copy an example configuration from [config/uds-config.yaml](config/uds-config.yaml) to your working directory
-* Update the config according to your environment taking care to set:
-  * domain variables
-  * init variables for Nutanix csi
-  * certificate values
-  * bucket names and credentials
-  * database names and credentials
+#### 2. Provide a Domain, DNS sub-domain support (wildcard CNAME preferable), TLS certs
 
-> NOTE: The config must be named `uds-config.yaml` and either be present in your working directory or have the environment variable UDS_CONFIG set to its location at deploy time
+During bundle development and testing, we use the `*.bigbang.dev` domain (which is owned by a Unicorn who used to work for Platform One). You will need to setup routing to `*.your-domain.com`.
 
-### Deployment
-Select a target version number and gather the OCI image reference [from the packages page](https://github.com/orgs/defenseunicorns/packages?repo_name=uds-bundle-software-factory-nutanix). With the above prerequisites and configuration complete, you can deploy the bundle directly via OCI:
-```
-uds deploy oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix-rke2:0.x.x --architecure amd64 --confirm
-```
+You also need TLS certs signed by a locally trusted CA for the applications. A wildcard cert is convenient, but many security teams prefer a cert per valid sub-domain. Here is a list of all required sub-domains:
 
-### (OPTIONAL) Local Deployment Reference
-Situationally, it may be useful to download the deployment artifact so that it may be referenced offline. This can be accomplished by first downloading the target release:
-```
-uds pull oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix-rke2:0.x.x --architecture amd64
-```
+	- `confluence.your.domain`
+	- `gitlab.your.domain`
+	- `*.pages.your.domain`  **Note:** strongly recommend a wildcard here as it'd be toilsome to keep up with user behavior here.
+	- `registry.your.domain`
+	- `gitlab.your.domain`
+	- `jira.your.domain`
+	- `keycloak.your.domain`
+	- `kiali.your.domain`
+	- `chat.your.domain`
+	- `grafana.your.domain`
+	- `neuvector.your.domain`
+	- `nexus.your.domain`
+  - `*.nexus.your.domain` 
+  
+    > **Note:** if you create a cert per nexus subdomain instead of a wildcard cert (subdomains are docker registries) see [docs/nexus.md](docs/nexus.md) to make sure you update the tenant gateway and other relevant uds-config variables correctly. It was tested with a wildcard cert. This author can't promise the current configuration would allow multiple individual certs to be inserted into the right places.
+	
+  - `sonarqube.your.domain`
+  - `tracing.your.domain`
 
-And subsequently deploying from the local file:
-```
-uds deploy uds-bundle-software-factory-nutanix-rke2-amd64-0.x.x.tar.zst --confirm
-```
-## Custom Keycloak Plugin
-The Keycloak installation provided as part of UDS Core loads themes and plugins from an init-container. You can optionally provide custom JARs at deploytime simply by adding them to the directory where you run `uds deploy`. This will result in a custom Zarf package being built locally (to include your custom JAR).
+#### 3. Provision S3-like Object Storage
 
-> ANY CUSTOM JAR YOU ADD AT DEPLOY TIME WILL NOT BE INCLUDED IN THE BUNDLE SBOM
+There are the default bucket names in the default `uds-config.yaml` file. If you choose to deviate from these names know:
+- Gitlab only allows you to add a suffix. 
+- Loki, Velero and Mattermost don't care what you name the S3 buckets.
 
-## Additional Notes
-You can reference the uds tasks in this project to learn how to build and deploy.
+Reference the `uds-config.yaml` file you created as you go to be sure you're creating/have created buckets by the intended names.
 
-```bash
-# List the available tasks to run
-uds run --list
-```
+#### 4. Create the Postgres Databases.
 
-To force terminate a namespace that is hanging, try this. This state is often brought about during development by deleting the metrics
-server before everything else is gone. The namespaces then hang as they're unable to talk to it.
+The following applications require an external database:
+- Keycloak
+- Gitlab
+- Sonarqube
+- Jira
+- Confluence
+- Mattermost
+- Nexus
 
-```bash
-kubectl proxy & # Only run this once
-destroy-ns () {
-  NAMESPACE="${1}"
-  kubectl get namespace "${NAMESPACE}" -o json | jq '.spec = {"finalizers":[]}' > temp.json
-  curl -k -H "Content-Type: application/json" -X PUT --data-binary @temp.json 127.0.0.1:8001/api/v1/namespaces/$NAMESPACE/finalize
-}
+Update your `uds-config.yaml` file with the correct credentials and connection URLs.
 
-# For every namespace you want to delete:
-destroy-ns <namespace>
+#### 5. Enable Nutanix CSI
 
-# So we don't dirty the git history
-rm temp.json
-```
+This bundle utilizes the Nutanix CSI Helm chart for persistent storage. Before the bundle can be deployed the following needs to be created:
+1. Prism Element user and password for the CSI provider to connect to Prism Element. Update your `uds-config.yaml` file with the user credentials and the Prism Element IP/Hostname.
+2. Nutanix Storage Container for RWO persistent volumes. Add the storage container name to the `uds-config.yaml`.
+3. Nutanix File Server for RWX persistent volumes. **Be sure to configure the DNS records that it asks for.** Put the File Server name as it appears in Prism Element into your `uds-config.yaml`.
+
+> NOTE: User/password and Nutanix File server must be configured in Prism _Element_ not Prism _Central_.
+
+### Deploy
+
+This is the easy step.
+
+1. Set `KUBECONFIG` to point to the kubernetes kubeconfig file.
+2. Set `UDS_CONFIG` to point at your `uds-config.yaml` file.
+3. Run `uds deploy <package file name or OCI url> --architecure amd64`.
+
+If you got the config right the first time, then congratulations! The whole thing is now running. If murphy struck, see the [developer docs](docs/development.md) for guidance on efficiently testing configuration changes, setting up multiple clusters in a way that fits with the uds tasks, and other notes.

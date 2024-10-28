@@ -1,5 +1,9 @@
 # UDS Bundle Software Factory Nutanix
 
+## Tool Configuration
+
+Recommend you setup tab-completion for uds among the other tools. Like kubectl and helm, the completion scripts are available at `uds completion <shell type>`. You can also get all available uds tasks by running `uds run --list`.
+
 ## Developmnet Cycle
 
 ### 1. Setup your scratch directory
@@ -34,7 +38,7 @@ The test steps will vary depending on your changes. Note that keycloak's admin c
 
 This project uses [release-please-action](https://github.com/google-github-actions/release-please-action) for versioning and releasing OCI packages.
 
-### How should I write my commits?
+## Conventional Commits
 
 Release Please assumes you are using [Conventional Commit messages](https://www.conventionalcommits.org/).
 
@@ -53,3 +57,23 @@ When changes are merged to the `main` branch, the Release Please will evaluate a
 When the auto generated Release Please PR is merged the following steps will automatically happen.
 1) A new release will be created and tagged
 1) A new bundle artifact will be published to the OCI registry.
+
+## Force Terminating a Namespace
+
+To force terminate a namespace that is hanging, try this. This state is often brought about during development by deleting the metrics
+server before everything else is gone. The namespaces then hang as they're unable to talk to it.
+
+```bash
+kubectl proxy & # Only run this once
+destroy-ns () {
+  NAMESPACE="${1}"
+  kubectl get namespace "${NAMESPACE}" -o json | jq '.spec = {"finalizers":[]}' > temp.json
+  curl -k -H "Content-Type: application/json" -X PUT --data-binary @temp.json 127.0.0.1:8001/api/v1/namespaces/$NAMESPACE/finalize
+}
+
+# For every namespace you want to delete:
+destroy-ns <namespace>
+
+# So we don't dirty the git history
+rm temp.json
+```
