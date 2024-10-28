@@ -29,6 +29,9 @@ jobs:
   # Publish the uds bundle
   publish-uds-bundle-rke2:
     needs: tag-new-version
+    permissions: write-all
     if: ${{ needs.tag-new-version.outputs.release_created == 'true'}}
     uses: ./.github/workflows/publish-bundle-rke2.yaml
+    with:
+      tag-name: ${{ needs.tag-new-version.outputs.release_tag }}
     secrets: inherit
