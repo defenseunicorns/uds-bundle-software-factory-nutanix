@@ -1,4 +1,4 @@
-# Configuration notes
+# Configuration Notes
 
 **Links**:
 - The package repo: <https://github.com/defenseunicorns/uds-package-nexus>
