@@ -43,22 +43,22 @@ During bundle development and testing, we use the `*.bigbang.dev` domain (which 
 
 You also need TLS certs signed by a locally trusted CA for the applications. A wildcard cert is convenient, but many security teams prefer a cert per valid sub-domain. Here is a list of all required sub-domains:
 
-	- `confluence.your.domain`
-	- `gitlab.your.domain`
-	- `*.pages.your.domain` **Note:** strongly recommend a wildcard here as it'd be toilsome to keep up with user behavior here.
-	- `registry.your.domain`
-	- `gitlab.your.domain`
-	- `jira.your.domain`
-	- `keycloak.your.domain`
-	- `kiali.your.domain`
-	- `chat.your.domain`
-	- `grafana.your.domain`
-	- `neuvector.your.domain`
-	- `nexus.your.domain`
+  - `confluence.your.domain`
+  - `gitlab.your.domain`
+  - `*.pages.your.domain` **Note:** strongly recommend a wildcard here as it'd be toilsome to keep up with user behavior here.
+  - `registry.your.domain`
+  - `gitlab.your.domain`
+  - `jira.your.domain`
+  - `keycloak.your.domain`
+  - `kiali.your.domain`
+  - `chat.your.domain`
+  - `grafana.your.domain`
+  - `neuvector.your.domain`
+  - `nexus.your.domain`
   - `*.nexus.your.domain` 
   
     > **Note:** if you create a cert per nexus subdomain instead of a wildcard cert (subdomains are docker registries) see [docs/nexus.md](docs/nexus.md) to make sure you update the tenant gateway and other relevant uds-config variables correctly. It was tested with a wildcard cert. This author can't promise the current configuration would allow multiple individual certs to be inserted into the right places.
-	
+  
   - `sonarqube.your.domain`
   - `tracing.your.domain`
 
