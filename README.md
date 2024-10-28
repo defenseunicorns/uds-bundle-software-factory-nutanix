@@ -1,11 +1,10 @@
 # uds-bundle-software-factory-nutanix
-The UDS Software Factory (SWF) bundle can be used to deploy an opinionated kubernetes based devsecops stack and development environment.
-The full list of packages and dependencies installed by the bundle (and an assumed underlying environment) can be [viewed here](docs/packages-and-dependencies.md).
 
-> NOTE: this project is young and rapidly iterating, stay up to date on changes by subscribing to release notifications
+This is a UDS Software Facotry bundle meant to be deployed on a Nutanix-based K8s cluster. This is not a [Supported Environment](https://uds.defenseunicorns.com/reference/uds-core/distribution-support/) but UDS should be compatible with this setup, and this bundle includes configuration changes to help it work on Nutanix.
 
+Developers - 
 ## Developer Info
-[DEVELOPMENT_MAINTENANCE.md](docs/DEVELOPMENT_MAINTENANCE.md)
+[development.md](docs/development.md)
 
 ## Installation ("quickstart")
 Once the below [Prerequisites](#prerequisites) are met, these are the steps to deploy.
