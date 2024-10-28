@@ -17,47 +17,47 @@ tasks:
   - name: rke2-bundle
     description: Create the rke2 UDS Bundle with SWF on UDS Core
     actions:
-      - cmd: ./uds create ./bundles/rke2 --architecture="${ARCH}" --confirm
+      - cmd: ./uds create ./bundles/rke2 --architecture="${ARCH}" --confirm --no-progress
       - cmd: mv ./bundles/rke2/uds-bundle-* ./build
 
   # Packages
   - name: database-manifest-packages
     description: Create database manifest packages
     actions:
-      - cmd: ./uds zarf package create ./packages/databases/gitlab/secret --confirm --architecture="${ARCH}" --output ./build "${EXTRA_ARGS}"
-      - cmd: ./uds zarf package create ./packages/databases/sonarqube/secret --confirm --architecture="${ARCH}" --output ./build "${EXTRA_ARGS}"
+      - cmd: ./uds zarf package create ./packages/databases/gitlab/secret --confirm --no-progress --architecture="${ARCH}" --output ./build "${EXTRA_ARGS}"
+      - cmd: ./uds zarf package create ./packages/databases/sonarqube/secret --confirm --no-progress --architecture="${ARCH}" --output ./build "${EXTRA_ARGS}"
 
   - name: keycloak-config-wrapper-package
     description: Create the keycloak configurations shim loader
     actions:
-      - cmd: ./uds zarf package create ./packages/keycloak-config-wrapper --confirm --architecture="${ARCH}" --output ./build "${EXTRA_ARGS}"
+      - cmd: ./uds zarf package create ./packages/keycloak-config-wrapper --confirm --no-progress --architecture="${ARCH}" --output ./build "${EXTRA_ARGS}"
 
   - name: object-store-packages
     description: Create the object storage packages
     actions:
-      - cmd: ./uds zarf package create ./packages/object-store/gitlab --confirm --architecture="${ARCH}" --output ./build "${EXTRA_ARGS}"
+      - cmd: ./uds zarf package create ./packages/object-store/gitlab --confirm --no-progress --architecture="${ARCH}" --output ./build "${EXTRA_ARGS}"
 
   - name: additional-manifests-package
     description: Create package create additional manifests needed.
     actions:
-      - cmd: ./uds zarf package create ./packages/additional-manifests --confirm --architecture="${ARCH}" --output ./build "${EXTRA_ARGS}"
+      - cmd: ./uds zarf package create ./packages/additional-manifests --confirm --no-progress --architecture="${ARCH}" --output ./build "${EXTRA_ARGS}"
 
   - name: nutanix-csi-package
     description: Create Nutanix CSI driver package.
     actions:
-      - cmd: ./uds zarf package create ./packages/nutanix-csi --confirm --architecture="${ARCH}" --output ./build "${EXTRA_ARGS}"
+      - cmd: ./uds zarf package create ./packages/nutanix-csi --confirm --no-progress --architecture="${ARCH}" --output ./build "${EXTRA_ARGS}"
 
   - name: cert-manager-package
     description: Create cert-manager package.
     actions:
-      - cmd: ./uds zarf package create ./packages/cert-manager --confirm --architecture="${ARCH}" --output ./build "${EXTRA_ARGS}"
+      - cmd: ./uds zarf package create ./packages/cert-manager --confirm --no-progress --architecture="${ARCH}" --output ./build "${EXTRA_ARGS}"
 
   - name: trust-manager-package
     description: Create trust-manager package.
     actions:
-      - cmd: ./uds zarf package create ./packages/trust-manager --confirm --architecture="${ARCH}" --output ./build "${EXTRA_ARGS}"
+      - cmd: ./uds zarf package create ./packages/trust-manager --confirm --no-progress --architecture="${ARCH}" --output ./build "${EXTRA_ARGS}"
 
   - name: trust-bundles-package
     description: Create trust-bundle package for adding custom CAs.
     actions:
-      - cmd: ./uds zarf package create ./packages/trust-bundles --confirm --architecture="${ARCH}" --output ./build "${EXTRA_ARGS}"
+      - cmd: ./uds zarf package create ./packages/trust-bundles --confirm --no-progress --architecture="${ARCH}" --output ./build "${EXTRA_ARGS}"
