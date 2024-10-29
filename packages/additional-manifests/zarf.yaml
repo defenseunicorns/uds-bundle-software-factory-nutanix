@@ -19,6 +19,7 @@ components:
         namespace: gitlab
         files:
           - gitlab/envoy-filter.yaml
+          - gitlab/gitaly-priority-class.yaml
   - name: pepr-policy-exemptions
     required: true
     manifests:

@@ -470,7 +470,9 @@ packages:
               value: "valkey-master.valkey.svc.cluster.local"
             - path: gitlab.gitlab-shell.enabled
               value: true
-
+            # See gitlab's additional manifests, this priority class prevents gitaly from being evicted due to node pressure.
+            - path: gitlab.gitaly.priorityClassName
+              value: "gitlab-gitaly"
           variables:
             - name: MIGRATIONS_RESOURCES
               description: "Gitlab Migrations Resources"
