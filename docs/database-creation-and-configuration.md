@@ -1,7 +1,9 @@
 # Databases
+
 You will need databases created and configured for use by these capabilities in the bundle. Below are example `uds-config.yaml` database entries. Your databases need to conform to what you place in these entries at deploy time.
 
 ## Keycloak
+
 ```yaml
 variables:
   keycloak-database-manifests:
@@ -14,6 +16,7 @@ variables:
 ```
 
 ## Gitlab
+
 ```yaml
 variables:
   gitlab-database-manifests:
@@ -25,6 +28,7 @@ variables:
 ```
 
 ## Sonarqube
+
 ```yaml
 variables:
   sonarqube-database-manifests:
@@ -36,6 +40,7 @@ variables:
 ```
 
 ## Jira
+
 ```yaml
 variables:
   jira:
@@ -46,6 +51,7 @@ variables:
 ```
 
 ## Confluence
+
 ```yaml
 variables:
   confluence-database-manifests:
@@ -57,6 +63,7 @@ variables:
 ```
 
 ## Mattermost
+
 ```yaml
 variables:
   mattermost-database-manifests:
@@ -67,6 +74,7 @@ variables:
 ```
 
 ## Nexus
+
 ```yaml
 variables:
   nexus-database-manifests:
