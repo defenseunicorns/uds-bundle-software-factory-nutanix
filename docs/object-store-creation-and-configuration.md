@@ -1,10 +1,13 @@
 # Object Store
+
 You will need object storage created and configured for use by these capabilities in the bundle. Below are example `uds-config.yaml` object store entries. Your object store needs to conform to what you place in these entries at deploy time. You will also see the buckets that need to exist for these capabilities.
 
 ## Velero
+
 You will to create and configure the bucket you are going to use for Velero
 
 ### config
+
 ```yaml
 variables:
   core:
@@ -16,9 +19,11 @@ variables:
 ```
 
 ## Gitlab
+
 You will need these buckets created in your object store. If you choose to configure bucket names to use a suffix, your bucket names will need to contain that suffix.
 
-### buckets
+### Gitlab buckets
+
 - uds-gitlab-artifacts
 - uds-gitlab-backups
 - uds-gitlab-ci-secure-files
@@ -32,7 +37,7 @@ You will need these buckets created in your object store. If you choose to confi
 - uds-gitlab-registry
 - uds-gitlab-tmp
 
-### config
+### Gitlab config
 
 ```yaml
 variables:
@@ -45,12 +50,14 @@ variables:
 ```
 
 ## Mattermost
+
 You will need this bucket created in your object store. If you choose to configure bucket names to use a suffix, your bucket names will need to contain that suffix.
 
-### buckets
+### Mattermost buckets
+
 - mattermost-bucket
 
-### config
+### Mattermost config
 
 ```yaml
 variables:
