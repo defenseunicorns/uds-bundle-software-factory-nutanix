@@ -22,8 +22,8 @@ Once the below [Prerequisites](#prerequisites) are met, these are the steps to d
 
 **Tools**:
 
-- [uds version v0.16.0](https://github.com/defenseunicorns/uds-cli/tree/v0.16.0)
-  - `sudo curl -sL https://github.com/defenseunicorns/uds-cli/releases/download/v0.16.0/uds-cli_v0.16.0_Linux_amd64`
+- [uds version v0.17.0](https://github.com/defenseunicorns/uds-cli/tree/v0.17.0)
+  - `sudo curl -sL https://github.com/defenseunicorns/uds-cli/releases/download/v0.17.0/uds-cli_v0.17.0_Linux_amd64`
 - (OPTIONAL) [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
 - (OPTIONAL) [helm](https://github.com/helm/helm)
 
@@ -37,20 +37,20 @@ Once the below [Prerequisites](#prerequisites) are met, these are the steps to d
   <details>
     <summary>Individual SAN list </summary>
 
-- `confluence.your.domain`
-- `gitlab.your.domain`
-- `*.pages.your.domain`
-- `registry.your.domain`
-- `gitlab.your.domain`
-- `jira.your.domain`
-- `keycloak.your.domain`
-- `kiali.your.domain`
-- `chat.your.domain`
-- `grafana.your.domain`
-- `neuvector.your.domain`
-- `nexus.your.domain`
-- `sonarqube.your.domain`
-  - `tracing.your.domain`
+  - `confluence.your.domain`
+  - `gitlab.your.domain`
+  - `*.pages.your.domain`
+  - `registry.your.domain`
+  - `gitlab.your.domain`
+  - `jira.your.domain`
+  - `keycloak.your.domain`
+  - `kiali.your.domain`
+  - `chat.your.domain`
+  - `grafana.your.domain`
+  - `neuvector.your.domain`
+  - `nexus.your.domain`
+  - `sonarqube.your.domain`
+    - `tracing.your.domain`
   </details>
 
   > NOTE: If using the example domain (`*.bigbang.dev`), a valid corresponding certificate and key can be found [in the Platform1 Big Bang repo](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/chart/ingress-certs.yaml?ref_type=heads).
@@ -60,47 +60,47 @@ These are the default bucket names. Gitlab allows you to add a suffix in your `u
   <details>
     <summary> Loki </summary>
 
-- loki-chunks-bucket
-- loki-ruler-bucket
-- loki-admin-bucket
+  - loki-chunks-bucket
+  - loki-ruler-bucket
+  - loki-admin-bucket
   </details>
   <details>
     <summary> Velero </summary>
 
-- velero-backups
+  - velero-backups
   </details>
   <details>
     <summary> Gitlab </summary>
 
-- uds-gitlab-artifacts
-- uds-gitlab-backups
-- uds-gitlab-ci-secure-files
-- uds-gitlab-dependency-proxy
-- uds-gitlab-lfs
-- uds-gitlab-mr-diffs
-- uds-gitlab-packages
-- uds-gitlab-pages
-- uds-gitlab-terraform-state
-- uds-gitlab-uploads
-- uds-gitlab-registry
-- uds-gitlab-tmp
+  - uds-gitlab-artifacts
+  - uds-gitlab-backups
+  - uds-gitlab-ci-secure-files
+  - uds-gitlab-dependency-proxy
+  - uds-gitlab-lfs
+  - uds-gitlab-mr-diffs
+  - uds-gitlab-packages
+  - uds-gitlab-pages
+  - uds-gitlab-terraform-state
+  - uds-gitlab-uploads
+  - uds-gitlab-registry
+  - uds-gitlab-tmp
   </details>
   <details>
     <summary> Mattermost </summary>
 
-- mattermost-bucket
+  - mattermost-bucket
   </details>
 - Postgres databases (expand for details):
   <details>
     <summary> Full list of databases </summary>
 
-- Keycloak
-- Gitlab
-- Sonarqube
-- Jira
-- Confluence
-- Mattermost
-- Nexus
+  - Keycloak
+  - Gitlab
+  - Sonarqube
+  - Jira
+  - Confluence
+  - Mattermost
+  - Nexus
   </details>
 
 > NOTE: All database and object storage credentials must be provided via username and password in the uds-config.
