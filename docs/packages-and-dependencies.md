@@ -74,4 +74,4 @@ The UDS Software Factory Bundle (SWF) is a collection of Zarf packages which inc
 | [Metrics Server](https://github.com/kubernetes-sigs/metrics-server) | 0.7.2 | A container metrics aggregation and exporter for kubernetes |
 | [Pepr](https://pepr.dev/) | 0.37.2 | Declarative automation for managing deployments and security policy enforcement |
 | [Keycloak](https://github.com/defenseunicorns/uds-core) | 25.0.6 | An identity and access management (IDAM) tool used to authenticate users for access to applications |
-| [uds-identity-config]() | v0.6.3 | UDS Identity (Keycloak) Config image used by UDS Identity |
+| [uds-identity-config](https://github.com/defenseunicorns/uds-identity-config) | v0.6.3 | UDS Identity (Keycloak) Config image used by UDS Identity |
