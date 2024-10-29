@@ -14,8 +14,8 @@ The full list of packages and dependencies installed by the bundle (and an assum
 Once the below [Prerequisites](#prerequisites) are met, these are the steps to deploy.
 
 - Gather your files in your working directory. Bundle tarball can be referenced via OCI or downloaded for local use.
-  - uds-config.yaml [Instructions on creating this file](#configuration)
-  - uds-bundle-software-factory-nutanix-rke2-amd64-0.x.x.tar.zst [Instructions on OCI reference usage](#deployment) or [Instructions on local reference](#optional-local-deployment-reference)
+  - `uds-config.yaml` [Instructions on creating this file](#configuration)
+  - `uds-bundle-software-factory-nutanix-rke2-amd64-0.x.x.tar.zst` [Instructions on OCI reference usage](#deployment) or [Instructions on local reference](#optional-local-deployment-reference)
 - Deploy the bundle with the above files in your working directory by [following these instructions](#deployment)
 
 ### Prerequisites
