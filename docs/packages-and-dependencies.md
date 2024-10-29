@@ -10,7 +10,7 @@ This list covers tools which would be required on a developer machine in order t
 
 | Tool | Version | Description |
 |----|----|----|
-| [OpenTofu](https://github.com/opentofu/opentofu) | v1.7.1 | An Infrastructure As Code (IAC) tool for managing the deployment of virtual resources (VMs, databases, object storage) within Nutanix |
+| [OpenTofu](https://github.com/ophttps://github.com/defenseunicorns/uds-identity-configentofu/opentofu) | v1.7.1 | An Infrastructure As Code (IAC) tool for managing the deployment of virtual resources (VMs, databases, object storage) within Nutanix |
 | [UDS](https://github.com/defenseunicorns/uds-cli) | v0.16.0 | A custom tool for automating and simplifying the management of multiple Zarf deployments in one environment |
 
 ## Operating System Package Installs
@@ -50,7 +50,7 @@ The UDS Software Factory Bundle (SWF) is a collection of Zarf packages which inc
 | [Gitlab](https://github.com/defenseunicorns/uds-package-gitlab) | v17.2.9-uds.0-registry1 | 17.2.9 | A source control management tool used in the software development lifecycle for storing, updating, building and deploying custom software |
 | [Gitlab Runner](https://github.com/defenseunicorns/uds-package-gitlab-runner) | 17.1.0-uds.1-registry1 | v17.1.0 | A counterpart to Gitlab (above) in which automated software builds, tests and deployments are executed |
 | [Sonarquhttps://github.com/defenseunicorns/uds-identity-configbe](https://github.com/defenseunicorns/uds-package-sonarqube) | 10.7.0-uds.0-registry1 | 10.7.0-community | A code inspection tool used during automated pipelines to evaluate security considerations of custom software and packaged images |
-| [Jira](https://github.com/defenseunicorns/uds-package-jira) | 1.22.0-uds.0-registry1 | 10.0.1 | A collaboration tool used for team management and task organization |s
+| [Jira](https://github.com/defenseunicorns/uds-package-jira) | 1.22.0-uds.0-registry1 | 10.0.1 | A collaboration tool used for team management and task organization |
 | [Confluence](https://github.com/defenseunicorns/uds-package-confluence) | 1.20.0-uds.4-registry1 | 9.0.3 | A knowledge management tool used by teams to organize information |
 | [Mattermost](https://github.com/defenseunicorns/uds-package-mattermost) | 10.0.0-uds.1-registry1 | 10.0.0 | An instance of Mattermost, a self-hosted chat and collaboration platform |
 | [Nexus](https://github.com/defenseunicorns/uds-package-nexus) | 3.72.0-uds.0-registry1 | 3.72.0 | An artifact repository used for storing compiled application libraries, packages, images and other such artifacts |
