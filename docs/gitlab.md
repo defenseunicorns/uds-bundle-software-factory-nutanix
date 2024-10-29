@@ -17,3 +17,7 @@ You can confirm newly created repos are going to different shards by viewing the
 ![image](screenshots/ig-proj1-shard2.png)
 
 ![image](screenshots/joe-proj2-default.png)
+
+## Prevent Gitaly Shard OOM
+
+The UDS Config variable `GITALY_CGROUPS` allows adminstrators to improve the resiliency of each gitaly node. The proper values are heavily context specific so it is disabled by default. However, the value given to that variable will be substituted directly into the `gitlab.gitaly.cgroups` path [documented here](https://docs.gitlab.com/ee/administration/gitaly/kubernetes.html#constrain-git-processes-resource-usage). Adding these values will reduce the risk a single git call will cause the gitaly node (shard) to be killed with an OOM error.

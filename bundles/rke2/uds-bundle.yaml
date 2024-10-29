@@ -504,6 +504,10 @@ packages:
             - name: GITALY_RESOURCES
               description: "Gitlab Gitaly Resources"
               path: "gitlab.gitaly.resources"
+            - name: GITALY_CGROUPS  # Set this per the docs, per the resources you've given to gitaly, and per your repo makeup - https://docs.gitlab.com/ee/administration/gitaly/kubernetes.html#constrain-git-processes-resource-usage
+              path: "gitlab.gitaly.cgroups"
+              default:
+                enabled: false
             - name: REGISTRY_REPLICAS
               description: "Gitlab Registry Min Replicas"
               path: "registry.hpa.minReplicas"

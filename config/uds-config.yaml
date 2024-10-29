@@ -149,6 +149,12 @@ variables:
       - "default"  # Gitlab requires that the first shard always be named `default`: https://docs.gitlab.com/ee/administration/gitaly/configure_gitaly.html?tab=Helm+chart+%28Kubernetes%29#gitlab-requires-a-default-repository-storage
       - shard1
       - shard2
+    GITALY_CGROUPS: # https://docs.gitlab.com/ee/administration/gitaly/kubernetes.html#constrain-git-processes-resource-usage
+      enabled: true
+      # Total limit across all repository cgroups, excludes Gitaly process
+      memoryBytes: 63350767616 # 59GiB
+      cpuShares: 1024  # TODO: figure out what this does.
+      cpuQuotaUs: 1400000 # 14 cores
     REGISTRY_REPLICAS: 2
     SHELL_REPLICAS: 2
   sonarqube:
