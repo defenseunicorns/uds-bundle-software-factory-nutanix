@@ -17,3 +17,20 @@ spec:
         - `/etc/pki/ca-trust/extracted/openssl/`
         - `/etc/pki/ca-trust/extracted/java/`
         - `/etc/pki/ca-trust/extracted/edk2/`"
+
+---
+apiVersion: uds.dev/v1alpha1
+kind: Exemption
+metadata:
+  name: gitaly-cgroups
+  namespace: uds-policy-exemptions
+spec:
+  exemptions:
+    - policies:
+        - RestrictHostPathWrite
+        - RestrictVolumeTypes
+      matcher:
+        namespace: gitlab
+        name: "gitlab-gitaly.*"
+      title: "gitlab gitaly exemptions"
+      description: "Gitaly is setting cgroup resource limitations to reduce the risk of a single large git call producing an OOM pod termination."
