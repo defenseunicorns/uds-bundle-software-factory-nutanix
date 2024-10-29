@@ -473,6 +473,10 @@ packages:
             # See gitlab's additional manifests, this priority class prevents gitaly from being evicted due to node pressure.
             - path: gitlab.gitaly.priorityClassName
               value: "gitlab-gitaly"
+            - path: gitlab.gitaly.antiAffinity  # Isolate pods https://docs.gitlab.com/ee/administration/gitaly/kubernetes.html#isolate-gitaly-pods
+              value: "hard"
+            - path: gitlab.gitaly.securityContext.fsGroupChangePolicy  # https://docs.gitlab.com/ee/administration/gitaly/kubernetes.html#persistent-volume-permissions
+              value: OnRootMismatch
           variables:
             - name: MIGRATIONS_RESOURCES
               description: "Gitlab Migrations Resources"
