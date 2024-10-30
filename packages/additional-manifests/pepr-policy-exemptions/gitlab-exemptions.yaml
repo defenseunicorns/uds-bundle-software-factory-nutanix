@@ -29,6 +29,8 @@ spec:
     - policies:
         - RestrictHostPathWrite
         - RestrictVolumeTypes
+        - RequireNonRootUser
+        - DropAllCapabilities
       matcher:
         namespace: gitlab
         name: "gitlab-gitaly.*"
