@@ -149,6 +149,7 @@ variables:
       - "default"  # Gitlab requires that the first shard always be named `default`: https://docs.gitlab.com/ee/administration/gitaly/configure_gitaly.html?tab=Helm+chart+%28Kubernetes%29#gitlab-requires-a-default-repository-storage
       - shard1
       - shard2
+    # Set this with an eye toward the GITALY_RESOURCES above and the link below.
     GITALY_CGROUPS: # https://docs.gitlab.com/ee/administration/gitaly/kubernetes.html#constrain-git-processes-resource-usage
       enabled: true
       # Total limit across all repository cgroups, excludes Gitaly process
