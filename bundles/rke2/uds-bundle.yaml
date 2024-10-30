@@ -475,6 +475,8 @@ packages:
               value: "gitlab-gitaly"
             - path: gitlab.gitaly.securityContext.fsGroupChangePolicy  # https://docs.gitlab.com/ee/administration/gitaly/kubernetes.html#persistent-volume-permissions
               value: OnRootMismatch
+            - path: gitlab.gitaly.cgroups.initContainer.image.tag
+              value: v17.2.9
           variables:
             - name: MIGRATIONS_RESOURCES
               description: "Gitlab Migrations Resources"
