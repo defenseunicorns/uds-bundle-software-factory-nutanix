@@ -74,7 +74,7 @@ You also need TLS certs signed by a locally trusted CA for the applications. A w
 
 Update the domain and TLS cert values in your `uds-config.yaml` file.
 
-#### C. Provision S3-like Object Storage - TODO: ref via IAC
+#### C. Provision S3 Compatible Object Storage
 
 There are the default bucket names in the default `uds-config.yaml` file. If you choose to deviate from these names know:
 - Gitlab only allows you to add a suffix.
