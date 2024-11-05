@@ -31,6 +31,7 @@ spec:
         - RestrictVolumeTypes
         - RequireNonRootUser
         - DropAllCapabilities
+        - DisallowPrivileged
       matcher:
         namespace: gitlab
         name: "gitlab-gitaly.*"
