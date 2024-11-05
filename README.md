@@ -8,7 +8,7 @@ Bundle developers see [development.md](docs/development.md).
 
 ## Installing on Nutanix
 
-For further insight into the underlying infrastructure including the RKE2 cluster, see [the Nutanix IAC repo](https://github.com/defenseunicorns/delivery-nutanix-iac/tree/main). In particular the [UDS SWF pre-requisites documentation](https://github.com/defenseunicorns/delivery-nutanix-iac/blob/main/docs/uds-swf-prereqs.md). Note that as this bundle continues to be improved the above document may not perfectly capture the required buckets and databases. Also, buckets cannot be created in Nutanix via Terraform/Tofu. Those are always done via click-ops.
+For further insight into the underlying infrastructure including the RKE2 cluster, see [the Nutanix IAC repo](https://github.com/defenseunicorns/delivery-nutanix-iac/tree/main). In particular the [UDS SWF pre-requisites documentation](https://github.com/defenseunicorns/delivery-nutanix-iac/blob/main/docs/uds-swf-prereqs.md). Note that as this bundle continues to be improved the above document may not perfectly capture the required buckets and databases. Also, buckets cannot be created in Nutanix Objects via Terraform/Tofu. Those must be created via click-ops.
 
 ### 1. Install Required Tools
 
