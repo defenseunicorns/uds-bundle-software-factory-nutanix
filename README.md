@@ -8,6 +8,8 @@ Bundle developers see [development.md](docs/development.md).
 
 ## Installing on Nutanix
 
+For further insight into the underlying infrastructure including the RKE2 cluster, see [the Nutanix IAC repo](https://github.com/defenseunicorns/delivery-nutanix-iac/tree/main). In particular the [UDS SWF pre-requisites documentation](https://github.com/defenseunicorns/delivery-nutanix-iac/blob/main/docs/uds-swf-prereqs.md). Note that as this bundle continues to be improved the above document may not perfectly capture the required buckets and databases. Also, buckets cannot be created in Nutanix via Terraform/Tofu. Those are always done via click-ops.
+
 ### 1. Install Required Tools
 
 - [UDS CLI](https://github.com/defenseunicorns/uds-cli/tree/v0.16.0). This links to version 0.16.0 which is what the bundle is tested with but it should work with most nearby versions. The binary is here: <https://github.com/defenseunicorns/uds-cli/releases/download/v0.16.0/uds-cli_v0.16.0_Linux_amd64>
@@ -16,7 +18,7 @@ Bundle developers see [development.md](docs/development.md).
 
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
 - [helm](https://helm.sh/docs/intro/install/)
-- [k9s](https://k9scli.io/topics/install/) also availible via the command `uds monitor`
+- [k9s](https://k9scli.io/topics/install/) also available via the command `uds monitor`
 
 ### 2. Get the Bundle
 
@@ -72,7 +74,7 @@ You also need TLS certs signed by a locally trusted CA for the applications. A w
 
 Update the domain and TLS cert values in your `uds-config.yaml` file.
 
-#### C. Provision S3-like Object Storage
+#### C. Provision S3-like Object Storage - TODO: ref via IAC
 
 There are the default bucket names in the default `uds-config.yaml` file. If you choose to deviate from these names know:
 - Gitlab only allows you to add a suffix.
