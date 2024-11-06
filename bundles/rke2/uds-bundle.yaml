@@ -464,13 +464,29 @@ packages:
               value: *gitlab-init-security-context
             - path: gitlab.gitlab-exporter.init.containerSecurityContext
               value: *gitlab-init-security-context
-            - path: gitlab.gitaly.init.containerSecurityContext
-              value: *gitlab-init-security-context
             - path: global.redis.host
               value: "valkey-master.valkey.svc.cluster.local"
             - path: gitlab.gitlab-shell.enabled
               value: true
-
+            # See gitlab's additional manifests, this priority class prevents gitaly from being evicted due to node pressure.
+            - path: gitlab.gitaly.priorityClassName
+              value: "gitlab-gitaly"
+            - path: gitlab.gitaly.securityContext.fsGroupChangePolicy  # https://docs.gitlab.com/ee/administration/gitaly/kubernetes.html#persistent-volume-permissions
+              value: OnRootMismatch
+            - path: gitlab.gitaly.cgroups.initContainer.image.tag
+              value: v17.2.9
+            - path: gitlab.gitaly.cgroups.initContainer.securityContext # These should be the default https://gitlab.com/gitlab-org/charts/gitlab/-/blob/master/charts/gitlab/charts/gitaly/values.yaml?ref_type=heads#L56
+              value:                                                    # but are overridden somewhere to 1000 so setting them back to 0 here.
+                runAsUser: 0
+                runAsGroup: 0
+                privileged: true  # privileged needs added, was not in upstream helm
+            - path: gitlab.gitaly.containerSecurityContext
+              value:
+                runAsUser: 1000
+                allowPrivilegeEscalation: false
+                runAsNonRoot: true
+                capabilities:
+                  drop: ["ALL"]
           variables:
             - name: MIGRATIONS_RESOURCES
               description: "Gitlab Migrations Resources"
@@ -502,6 +518,10 @@ packages:
             - name: GITALY_RESOURCES
               description: "Gitlab Gitaly Resources"
               path: "gitlab.gitaly.resources"
+            - name: GITALY_CGROUPS  # Set this per the docs, per the resources you've given to gitaly, and per your repo makeup - https://docs.gitlab.com/ee/administration/gitaly/kubernetes.html#constrain-git-processes-resource-usage
+              path: "gitlab.gitaly.cgroups"
+              default:
+                enabled: false
             - name: REGISTRY_REPLICAS
               description: "Gitlab Registry Min Replicas"
               path: "registry.hpa.minReplicas"

@@ -1,0 +1,10 @@
+# Per the documentation, we are assigning gitaly a high priority so other pods are evicted under node-pressure BEFORE gitaly is.
+# On Priority Classes: https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#priorityclass
+# The Gitaly Config docs: https://docs.gitlab.com/ee/administration/gitaly/kubernetes.html#use-priorityclass
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: gitlab-gitaly
+value: 1000000
+globalDefault: false
+description: "GitLab Gitaly priority class"

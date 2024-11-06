@@ -19,6 +19,10 @@ components:
         namespace: gitlab
         files:
           - gitlab/envoy-filter.yaml
+          - gitlab/gitaly-priority-class.yaml
+    images:
+      - registry.gitlab.com/gitlab-org/build/cng/gitaly-init-cgroups:v17.2.9  # Remember to redeploy this package if changing stuff around this image in the gitlab package
+
   - name: pepr-policy-exemptions
     required: true
     manifests:
