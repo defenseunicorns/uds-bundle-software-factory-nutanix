@@ -464,8 +464,11 @@ packages:
               value: *gitlab-init-security-context
             - path: gitlab.gitlab-exporter.init.containerSecurityContext
               value: *gitlab-init-security-context
-            - path: gitlab.gitaly.init.containerSecurityContext
-              value: *gitlab-init-security-context
+            - path: gitlab.gitaly.securityContext
+              value:
+                capabilities:
+                  drop:
+                    - ALL
             - path: global.redis.host
               value: "valkey-master.valkey.svc.cluster.local"
             - path: gitlab.gitlab-shell.enabled
@@ -481,7 +484,7 @@ packages:
               value:                                                    # but are overridden somewhere to 1000 so setting them back to 0 here.
                 runAsUser: 0
                 runAsGroup: 0
-                privileged: true  # privileged needs added, was not in upstream helm chart.
+                privileged: true  # privileged needs added, was not in upstream helm
           variables:
             - name: MIGRATIONS_RESOURCES
               description: "Gitlab Migrations Resources"
