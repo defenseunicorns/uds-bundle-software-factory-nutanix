@@ -477,6 +477,11 @@ packages:
               value: OnRootMismatch
             - path: gitlab.gitaly.cgroups.initContainer.image.tag
               value: v17.2.9
+            - path: gitlab.gitaly.cgroups.initContainer.securityContext # These should be the default https://gitlab.com/gitlab-org/charts/gitlab/-/blob/master/charts/gitlab/charts/gitaly/values.yaml?ref_type=heads#L56
+              value:                                                    # but are overridden somewhere to 1000 so setting them back to 0 here.
+                runAsUser: 0
+                runAsGroup: 0
+                privileged: true  # privileged needs added, was not in upstream helm chart.
           variables:
             - name: MIGRATIONS_RESOURCES
               description: "Gitlab Migrations Resources"
