@@ -1,6 +1,6 @@
 # UDS Bundled Software Factory for Nutanix
 
-This is a UDS Software Factory bundle intended to be deployed on an RKE2 K8s cluster running in Nutanix. This bundle utilizes the nutanix-csi driver to support running UDS Software Factory on Nutanix. It has been tested using RKE2 clusters deployed with the [Nutanix RKE2 module](https://github.com/defenseunicorns/delivery-nutanix-iac/tree/main/modules/rke2).
+This is a UDS Software Factory bundle intended to be deployed on an RKE2 K8s cluster running in Nutanix. It has been tested using RKE2 clusters deployed with the [Nutanix RKE2 module](https://github.com/defenseunicorns/delivery-nutanix-iac/tree/main/modules/rke2).
 
 A list of included applications can be found [here](docs/packages-and-dependencies.md).
 
