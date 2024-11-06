@@ -464,11 +464,6 @@ packages:
               value: *gitlab-init-security-context
             - path: gitlab.gitlab-exporter.init.containerSecurityContext
               value: *gitlab-init-security-context
-            - path: gitlab.gitaly.securityContext
-              value:
-                capabilities:
-                  drop:
-                    - ALL
             - path: global.redis.host
               value: "valkey-master.valkey.svc.cluster.local"
             - path: gitlab.gitlab-shell.enabled
@@ -485,6 +480,13 @@ packages:
                 runAsUser: 0
                 runAsGroup: 0
                 privileged: true  # privileged needs added, was not in upstream helm
+            - path: gitlab.gitaly.containerSecurityContext
+              value:
+                runAsUser: 1000
+                allowPrivilegeEscalation: false
+                runAsNonRoot: true
+                capabilities:
+                  drop: ["ALL"]
           variables:
             - name: MIGRATIONS_RESOURCES
               description: "Gitlab Migrations Resources"
