@@ -108,8 +108,9 @@ You can review the Terraform module we use for provisioning postgres databases w
 This bundle utilizes the Nutanix CSI Helm chart for persistent storage. It needs Nutanix resources set up ahead of time.
 
 1. Prism Element user and password for the CSI provider to connect to Prism Element. Update your `uds-config.yaml` file with the user credentials and the Prism Element IP/Hostname.
-2. Nutanix Storage Container for RWO persistent volumes. Add the storage container name to the `uds-config.yaml`.
-3. Nutanix File Server for RWX persistent volumes. **Be sure to configure the DNS records that it asks for.** Put the File Server name as it appears in Prism Element into your `uds-config.yaml`.
+2. Prism Central user and password for the CSI provider to connect to Prism Central. Update your `uds-config.yaml` file with the user credentials and the Prism Central IP/Hostname.
+3. Nutanix Storage Container for RWO persistent volumes. Add the storage container name to the `uds-config.yaml`.
+4. Nutanix File Server for RWX persistent volumes. **Be sure to configure the DNS records that it asks for.** Put the File Server name as it appears in Prism Element into your `uds-config.yaml`.
 
 > NOTE: User/password and Nutanix File server must be configured in Prism _Element_ not Prism _Central_.
 
