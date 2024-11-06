@@ -32,7 +32,7 @@ Get the bundle you would like to install:
     uds pull oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix-rke2:0.5.0 --architecture amd64`
     ```
 <!--x-release-please-end-->
-  - You can also reference it by it's "docker name" (OCI image URL) at deploy time with the same command above, `pull` switched to `deploy` and UDS will pull it and deploy it. This is less relevant to air-gapped installs unless you're pushing the bundle to a high-side docker registry before install (which isn't a bad idea).
+  - You can also reference it by it's "docker name" (OCI image URL) at deploy time with the a similar command to the one above.
 <!--x-release-please-start-version-->
     ```bash
     uds deploy oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix-rke2:0.5.0 --architecture amd64`
@@ -51,7 +51,7 @@ This bundle requires pre-existing s3 buckets and external postgres databases. Th
 
 #### A. Create the Kubernetes Cluster
 
-Goes without saying, but the k8s cluster must already exist in Nutanix, and you must have admin access to it. We create ours with Terraform [here](https://github.com/defenseunicorns/delivery-nutanix-iac/tree/main)
+Goes without saying, but the k8s cluster must already exist in Nutanix, and you must have admin access to it. We create ours with Terraform/Tofu [here](https://github.com/defenseunicorns/delivery-nutanix-iac/tree/main). See especially the [RKE2 module](https://github.com/defenseunicorns/delivery-nutanix-iac/tree/main/modules/rke2) and [module documentation](https://github.com/defenseunicorns/delivery-nutanix-iac/blob/main/docs/rke2-module.md).
 
 #### B. Provide a Domain, DNS sub-domain support (wildcard CNAME preferable), TLS certs
 
