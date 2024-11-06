@@ -12,9 +12,11 @@ For further insight into the underlying infrastructure including the RKE2 cluste
 
 ### 1. Install Required Tools
 
+**To Deploy** (required):
 - [UDS CLI](https://github.com/defenseunicorns/uds-cli/tree/v0.16.0). This links to version 0.16.0 which is what the bundle is tested with but it should work with most nearby versions. The binary is here: <https://github.com/defenseunicorns/uds-cli/releases/download/v0.16.0/uds-cli_v0.16.0_Linux_amd64>
 
-**Optionally**, the following tools are baked into the UDS CLI via Zarf (`uds zarf tools`) already are easier to use if installed directly:
+
+**To Interact with Cluster/Debug** (optional). These tools are also baked into the UDS CLI via Zarf (`uds zarf tools`) but are easier to use if installed directly:
 
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
 - [helm](https://helm.sh/docs/intro/install/)
