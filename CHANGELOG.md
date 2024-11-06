@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.0](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.4.2...v0.5.0) (2024-10-30)
+
+
+### Features
+
+* enabled multiple registry configuration ([#226](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/226)) ([5697b68](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/5697b6896daa943e55e42fe6cab3a940d53b044e))
+* enabled sharded gitaly & added configuration docs ([#232](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/232)) ([c445690](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/c4456904aad518af7001b3466ba745e018a03f60))
+* generate & add sbom to release assets ([#233](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/233)) ([4ed229c](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/4ed229c8745ab387c1dadf72b7e8b8f67e7baa49))
+* improve reliability by adding periodic pepr restart ([#229](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/229)) ([684c6d0](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/684c6d04e3827f952fd8dc9d5831bab21bfa9dd1))
+* remove eks-d & eks-a ([#231](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/231)) ([7ab7ec8](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/7ab7ec8062538f2eaf5131affe65e7dd6efa7b8c))
+
+
+### Miscellaneous
+
+* release 0.5.0 ([86f9008](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/86f9008952c40169662b4c5a4463b4887cda5e6b))
+* release 0.5.0 ([7f5ac97](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/7f5ac976332a27699441c6133e3797a36d6083ec))
+
 ## [0.4.2](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.4.1...v0.4.2) (2024-10-18)
 
 
