@@ -101,7 +101,7 @@ The following applications require an external database:
 
 Update your `uds-config.yaml` file with the correct credentials and connection URLs. For a list of UDS config variables to be sure you update, see [docs/database-creation-and-configuration.md](docs/database-creation-and-configuration.md).
 
-You can review the terraform IaC we use for databases in our [delivery-nutanix-deployments](https://github.com/defenseunicorns/delivery-nutanix-deployments) repo.
+You can review the Terraform module we use for provisioning postgres databases with Nutanix Database Service in our [delivery-nutanix-iac repo](https://github.com/defenseunicorns/delivery-nutanix-iac/tree/main/modules/ndb-pg-db).
 
 #### E. Enable Nutanix CSI
 
