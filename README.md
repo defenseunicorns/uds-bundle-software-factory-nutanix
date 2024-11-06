@@ -27,13 +27,17 @@ For further insight into the underlying infrastructure including the RKE2 cluste
 Get the bundle you would like to install:
   - You can download the latest in your browser from [Defense Unicorn's published packages](https://github.com/orgs/defenseunicorns/packages?repo_name=uds-bundle-software-factory-nutanix)
   - You can pull it via the same protocol used to push/pull docker images:
+<!--x-release-please-start-version-->
     ```bash
-    uds pull oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix-rke2:0.4.3 --architecture amd64`
+    uds pull oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix-rke2:0.5.0 --architecture amd64`
     ```
+<!--x-release-please-end-->
   - You can also reference it by it's "docker name" (OCI image URL) at deploy time with the same command above, `pull` switched to `deploy` and UDS will pull it and deploy it. This is less relevant to air-gapped installs unless you're pushing the bundle to a high-side docker registry before install (which isn't a bad idea).
+<!--x-release-please-start-version-->
     ```bash
-    uds deploy oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix-rke2:0.4.3 --architecture amd64`
+    uds deploy oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix-rke2:0.5.0 --architecture amd64`
     ```
+<!--x-release-please-end-->
 
 ### 3. Customize Configuration via `uds-config.yaml`
 
