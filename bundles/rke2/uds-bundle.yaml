@@ -430,7 +430,8 @@ packages:
               default: "replication"
             - name: GL_VALKEY_REPLICAS
               path: primary.replicaCount
-              default: 3
+            - name: GL_VALKEY_RESOURCES
+              path: primary.resources
 
   - name: gitlab-object-store
     path: ../../build
