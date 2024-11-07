@@ -414,6 +414,23 @@ packages:
                 namespace: gitlab
                 secretName: gitlab-redis
                 secretKey: password
+        valkey:
+          variables:
+            - name: GL_VALKEY_AFFINITY
+              path: primary.affinity  # See for info https://github.com/bitnami/charts/tree/main/bitnami/valkey/#installing-the-chart
+              default: []
+            - name: GL_VALKEY_NODE_SELECTORS
+              path: primary.nodeSelector
+              default: []
+            - name: GL_VALKEY_TOLERATIONS
+              path: primary.tolerations
+              default: []
+            - name: GL_VALKEY_ARCH
+              path: architecture
+              default: "replication"
+            - name: GL_VALKEY_REPLICAS
+              path: primary.replicaCount
+              default: 3
 
   - name: gitlab-object-store
     path: ../../build
