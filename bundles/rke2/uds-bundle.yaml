@@ -229,6 +229,9 @@ packages:
             - path: "persistence.storageClassName"
               value: "nutanix-dynamicfile"
           variables:
+            - name: KEYCLOAK_HA_ENABLED
+              path: "autoscaling.enabled"
+              default: false
             - name: KEYCLOAK_DB_USERNAME
               description: "keycloak database username"
               path: postgresql.username

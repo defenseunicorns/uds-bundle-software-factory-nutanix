@@ -71,6 +71,7 @@ variables:
     TENANT_HOST_LIST:
       - "*"
       - "*.nexus"  # To add the multiple nexus sub-domain registries to the tenant gateway. Do not attempt *.*.nexus, Nexus only supports first-level subdomain routing.
+    KEYCLOAK_HA_ENABLED: false  # Set to true to enable HA configuration.
     KEYCLOAK_DB_USERNAME: "postgres"
     KEYCLOAK_DB_PASSWORD: "replace-me-db-passwords"
     KEYCLOAK_DB_NAME: "keycloakdb"
