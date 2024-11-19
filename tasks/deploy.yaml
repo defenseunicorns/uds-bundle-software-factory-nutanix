@@ -32,7 +32,7 @@ tasks:
       bundle_type:
         default: "rke2"
         description: Input to specify the type of bundle to deploy
-    actions:
+    actions:  # Note: this fails on ARM processor laptops - we don't publish a build image that isn't AMD64
       - cmd: docker run --rm -e ARCH="${ARCH}" -e BUNDLE_VERSION="${BUNDLE_VERSION}" -e BUNDLE_TYPE="${INPUT_BUNDLE_TYPE}" -e UDS_CONFIG=/configs/uds-config.yaml -e KUBECONFIG=/configs/kubeconfig -e PACKAGE_LIST="${INPUT_PACKAGE_LIST}" -v /tmp:/tmp -v "${INPUT_CONFIG_DIR}":/configs -v "${INPUT_BUILD_DIR}":/build "${DEPLOY_IMAGE}" bash -c 'uds deploy /build/uds-bundle-software-factory-nutanix-${BUNDLE_TYPE}-${ARCH}-${BUNDLE_VERSION}.tar.zst ${PACKAGE_LIST} --no-progress --confirm'
 
   - name: deploy-published

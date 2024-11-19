@@ -12,6 +12,11 @@ tasks:
       - task: create-bundle-rke2
       - task: deploy-dev-rke2
 
+  - name: dev-rke2-mac
+    actions:
+      - task: create-bundle-rke2
+      - cmd: UDS_CONFIG=scratch/configs/dev/uds-config.yaml KUBECONFIG=scratch/configs/dev/kubeconfig uds deploy build/uds-bundle-software-factory-nutanix-rke2-amd64-0.5.1.tar.zst --confirm
+
   - name: deps
     description: Install development dependencies
     actions:
