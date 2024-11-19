@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.1](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.5.0...v0.5.1) (2024-11-19)
+
+
+### Features
+
+* configure gitaly with recommended resiliency settings ([#238](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/238)) ([63f4989](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/63f49891ebad02753acb24c29e56a40d4098d9fb))
+
+
+### Miscellaneous
+
+* release 0.5.1 ([3e7a1e7](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/3e7a1e70ba7c8c0ded2816b3113edff786e29be8))
+
 ## [0.5.0](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.4.2...v0.5.0) (2024-10-30)
 
 
