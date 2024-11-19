@@ -11,7 +11,7 @@ This list covers tools which would be required on a developer machine in order t
 | Tool | Version | Description |
 |----|----|----|
 | [OpenTofu](https://github.com/opentofu/opentofu) | v1.7.1 | An Infrastructure As Code (IAC) tool for managing the deployment of virtual resources (VMs, databases, object storage) within Nutanix |
-| [UDS](https://github.com/defenseunicorns/uds-cli) | v0.16.0 | A custom tool for automating and simplifying the management of multiple Zarf deployments in one environment |
+| [UDS](https://github.com/defenseunicorns/uds-cli) | v0.17.0 | A custom tool for automating and simplifying the management of multiple Zarf deployments in one environment |
 
 ## Operating System Package Installs
 
@@ -42,10 +42,10 @@ The UDS Software Factory Bundle (SWF) is a collection of Zarf packages which inc
 
 | Name | Package Version (internal) | Application Version | Description |
 |----|----|----|----|
-| [Zarf Init](https://github.com/zarf-dev/zarf/pkgs/container/packages%2Finit) | v0.39.0 | v0.39.0 | Zarf Init Package used to initialize zarf in the cluster |
+| [Zarf Init](https://github.com/zarf-dev/zarf/pkgs/container/packages%2Finit) | v0.41.0 | v0.41.0 | Zarf Init Package used to initialize zarf in the cluster |
 | [Nutanix CSI](https://portal.nutanix.com/page/documents/details?targetId=CSI-Volume-Driver-v2_6:CSI-Volume-Driver-v2_6) | v3.0.0 | v3.0.0 | Nutanix CSI package |
 | [MetalLB](https://github.com/defenseunicorns/uds-capability-metallb) | 0.0.5 | v0.13.12 | Tool for providing load balancer capabilities for ingress into a Kubernetes deployment |
-| [uds-core](https://github.com/defenseunicorns/uds-core) | 0.29.0 | N/A | [DESCRIPTION BELOW](#uds-core) |
+| [uds-core](https://github.com/defenseunicorns/uds-core) | 0.31.2 | N/A | [DESCRIPTION BELOW](#uds-core) |
 | [Valkey](https://github.com/defenseunicorns/uds-package-valkey) | v7.2.6-uds.0-upstream | 7.2.6 | A key-value store used as a data backend for several applications in the stack |
 | [Gitlab](https://github.com/defenseunicorns/uds-package-gitlab) | v17.2.9-uds.0-registry1 | 17.2.9 | A source control management tool used in the software development lifecycle for storing, updating, building and deploying custom software |
 | [Gitlab Runner](https://github.com/defenseunicorns/uds-package-gitlab-runner) | 17.1.0-uds.1-registry1 | v17.1.0 | A counterpart to Gitlab (above) in which automated software builds, tests and deployments are executed |
@@ -64,14 +64,14 @@ The UDS Software Factory Bundle (SWF) is a collection of Zarf packages which inc
 | Package | Version | Description |
 |----|----|----|
 | [Istio](https://istio.io/latest/) | 1.23.2 | A package detailing the configuration of the deployed service mesh -- used by the operator to apply the desired state in the cluster |
-| [Loki](https://grafana.com/oss/loki/) | 3.2.0 | A Grafana product for aggregating and querying log data |
-| [Vector](https://vector.dev/) | 0.41.1 | A logging daemon installed on each cluster node to capture logs from the host and all cluster workload processes. Logs are shipped to Loki |
+| [Loki](https://grafana.com/oss/loki/) | 3.2.1 | A Grafana product for aggregating and querying log data |
+| [Vector](https://vector.dev/) | 0.42.0 | A logging daemon installed on each cluster node to capture logs from the host and all cluster workload processes. Logs are shipped to Loki |
 | [Prometheus](https://prometheus.io/) | 2.54.1 | A product for storing and querying time series based data such as system performance metrics (CPU/MEM usage) |
-| [Grafana](https://github.com/grafana/grafana) | 11.2.2 | A Grafana product to provide a frontend interface to display and query performance information from Prometheus, log data from Loki, and request tracing information from Tempo |
+| [Grafana](https://github.com/grafana/grafana) | 11.3.0 | A Grafana product to provide a frontend interface to display and query performance information from Prometheus, log data from Loki, and request tracing information from Tempo |
 | [Neuvector](https://www.suse.com/neuvector/) | 5.3.4 | A kubernetes security suite that provides CVE scanning for hosts and images, as well as runtime security monitoring and protection |
-| [Velero](https://repo1.dso.mil/big-bang/product/packages/velero) | 1.14.1 | A tool for orchestrating backups of cluster state and storage |
-| [Authservice](https://github.com/istio-ecosystem/authservice) | 1.0.2 | A tool for simplifying and automating auth workflows via Istio integration |
+| [Velero](https://repo1.dso.mil/big-bang/product/packages/velero) | 1.15.0 | A tool for orchestrating backups of cluster state and storage |
+| [Authservice](https://github.com/istio-ecosystem/authservice) | 1.0.3 | A tool for simplifying and automating auth workflows via Istio integration |
 | [Metrics Server](https://github.com/kubernetes-sigs/metrics-server) | 0.7.2 | A container metrics aggregation and exporter for kubernetes |
-| [Pepr](https://pepr.dev/) | 0.37.2 | Declarative automation for managing deployments and security policy enforcement |
-| [Keycloak](https://github.com/defenseunicorns/uds-core) | 25.0.6 | An identity and access management (IDAM) tool used to authenticate users for access to applications |
-| [uds-identity-config](https://github.com/defenseunicorns/uds-identity-config) | v0.6.3 | UDS Identity (Keycloak) Config image used by UDS Identity |
+| [Pepr](https://pepr.dev/) | 0.39.0 | Declarative automation for managing deployments and security policy enforcement |
+| [Keycloak](https://github.com/defenseunicorns/uds-core) | 26.0.5 | An identity and access management (IDAM) tool used to authenticate users for access to applications |
+| [uds-identity-config](https://github.com/defenseunicorns/uds-identity-config) | v0.7.0 | UDS Identity (Keycloak) Config image used by UDS Identity |
