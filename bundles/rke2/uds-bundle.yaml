@@ -474,7 +474,7 @@ packages:
             - path: gitlab.gitaly.securityContext.fsGroupChangePolicy  # https://docs.gitlab.com/ee/administration/gitaly/kubernetes.html#persistent-volume-permissions
               value: OnRootMismatch
             - path: gitlab.gitaly.cgroups.initContainer.image.tag
-              value: v17.2.9
+              value: v17.5.2
             - path: gitlab.gitaly.cgroups.initContainer.securityContext # These should be the default https://gitlab.com/gitlab-org/charts/gitlab/-/blob/master/charts/gitlab/charts/gitaly/values.yaml?ref_type=heads#L56
               value:                                                    # but are overridden somewhere to 1000 so setting them back to 0 here.
                 runAsUser: 0
@@ -580,7 +580,7 @@ packages:
 
   - name: sonarqube
     repository: ghcr.io/defenseunicorns/packages/uds/sonarqube
-    ref: 10.7.0-uds.0-registry1
+    ref: 10.7.0-uds.2-registry1
     overrides:
       sonarqube:
         uds-sonarqube-config:
@@ -604,7 +604,7 @@ packages:
 
   - name: jira
     repository: ghcr.io/defenseunicorns/packages/uds/jira
-    ref: 1.22.0-uds.0-registry1
+    ref: 10.1.2-uds.0-registry1
     overrides:
       jira:
         uds-jira-config:
@@ -653,7 +653,7 @@ packages:
 
   - name: confluence
     repository: ghcr.io/defenseunicorns/packages/uds/confluence
-    ref: 1.20.0-uds.4-registry1
+    ref: 9.1.1-uds.0-registry1
     overrides:
       confluence:
         uds-confluence-config:
@@ -706,7 +706,7 @@ packages:
    # Mattermost
   - name: mattermost
     repository: ghcr.io/defenseunicorns/packages/uds/mattermost
-    ref: 10.0.0-uds.1-registry1
+    ref: 10.1.2-uds.1-registry1
     overrides:
       mattermost:
         mattermost-enterprise-edition:
@@ -769,7 +769,7 @@ packages:
   # Nexus
   - name: nexus
     repository: ghcr.io/defenseunicorns/packages/uds/nexus
-    ref: 3.72.0-uds.0-registry1
+    ref: 3.72.0-uds.1-registry1
     overrides:
       nexus:
         nexus:

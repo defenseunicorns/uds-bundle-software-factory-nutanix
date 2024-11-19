@@ -1,9 +1,9 @@
 includes:
   - create: ./tasks/create.yaml
   - deploy: ./tasks/deploy.yaml
-  - lint: https://raw.githubusercontent.com/defenseunicorns/uds-common/v1.1.0/tasks/lint.yaml
-  - actions: https://raw.githubusercontent.com/defenseunicorns/uds-common/v1.1.0/tasks/actions.yaml
-  - setup: https://raw.githubusercontent.com/defenseunicorns/uds-common/v1.1.0/tasks/setup.yaml
+  - lint: https://raw.githubusercontent.com/defenseunicorns/uds-common/v1.3.0/tasks/lint.yaml
+  - actions: https://raw.githubusercontent.com/defenseunicorns/uds-common/v1.3.0/tasks/actions.yaml
+  - setup: https://raw.githubusercontent.com/defenseunicorns/uds-common/v1.3.0/tasks/setup.yaml
 
 tasks:
   - name: dev-rke2
