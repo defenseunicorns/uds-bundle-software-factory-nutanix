@@ -4,13 +4,8 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "github>defenseunicorns/uds-common//config/renovate.json5",
-    ":semanticPrefixFixDepsChoreOthers",
-    "config:base",
-    ":disableRateLimiting",
-    "replacements:all",
-    "workarounds:all"
+    "config:recommended",
+    ":disableRateLimiting"
   ],
-  "pre-commit": {
-    "enabled": true
-  }
+  "pre-commit": {"enabled": true}
 }
