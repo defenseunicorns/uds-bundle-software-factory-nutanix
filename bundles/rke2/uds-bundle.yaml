@@ -580,7 +580,7 @@ packages:
 
   - name: sonarqube
     repository: ghcr.io/defenseunicorns/packages/uds/sonarqube
-    ref: 10.7.0-uds.0-registry1
+    ref: 10.7.0-uds.2-registry1
     overrides:
       sonarqube:
         uds-sonarqube-config:
