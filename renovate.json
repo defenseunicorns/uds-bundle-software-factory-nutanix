@@ -6,6 +6,7 @@
     "github>defenseunicorns/uds-common//config/renovate.json5",
     ":semanticPrefixFixDepsChoreOthers",
     "config:base",
+    ":disableRateLimiting",
     "replacements:all",
     "workarounds:all"
   ],
