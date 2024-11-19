@@ -81,11 +81,11 @@ packages:
   # MetalLB
   - name: metallb
     repository: ghcr.io/defenseunicorns/packages/metallb
-    ref: 0.1.1-amd64
+    ref: 0.0.5-amd64
 
   - name: core
     repository: ghcr.io/defenseunicorns/packages/uds/core
-    ref: 0.29.0-registry1
+    ref: 0.31.2-registry1
     optionalComponents:
       - metrics-server
     overrides:
@@ -568,7 +568,7 @@ packages:
   # Gitlab Runner
   - name: gitlab-runner
     repository: ghcr.io/defenseunicorns/packages/uds/gitlab-runner
-    ref: 17.2.1-uds.2-registry1
+    ref: 17.1.0-uds.1-registry1
     overrides:
       gitlab-runner:
         gitlab-runner:
