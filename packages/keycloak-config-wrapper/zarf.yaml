@@ -18,7 +18,7 @@ components:
           - init-job.yaml
     images:
       # renovate: datasource=github-tags depName=defenseunicorns/uds-identity-config versioning=semver
-      - "ghcr.io/defenseunicorns/uds/identity-config:0.6.3"
+      - "ghcr.io/defenseunicorns/uds/identity-config:0.7.0"
     actions:
       onDeploy:
         before:
