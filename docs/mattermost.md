@@ -2,13 +2,14 @@
 
 ## SSO
 
-When creating users for Mattermost in Keycloak, be sure to put a `mattermostid` in for the user. If you don't, when you sign into Mattermost "via GitLab" you'll get the `Could not parse auth data out of gitlab user object` error.
+When creating users for Mattermost in Keycloak, be sure to put a `mattermostid` in for the user. If you don't, when you sign into Mattermost `via GitLab` you'll get the `Could not parse auth data out of gitlab user object` error.
 
 ![image](screenshots/mattermost-sso-missing-mattermostid.png)
 
-If you create an invalid `mattermostid` (such as a person's name) you'll get an invalid OAuth object error.
+If you create an invalid `mattermostid` (such as entering a person's name) you'll get an invalid OAuth object error. It expects a (unique) string of numbers.
 
-What you want to do is have users request mattermost access during signup in Keycloak _OR_ add a number not already in use to their user via a Keycloak admin.
+If creating totally new users, it's best to have them use the sign-up process in Keycloak to ensure properly configured users. Importing users from
+an external system en-masse into the UDS Keycloak is outside the scope of this document.
 
 ## Enabling Calls
 
