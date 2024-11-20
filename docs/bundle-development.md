@@ -1,6 +1,8 @@
-# Configuration Notes
+# Development Notes
 
-## SSO
+## Mattermost
+
+### SSO
 
 When creating users for Mattermost in Keycloak, be sure to put a `mattermostid` in for the user. If you don't, when you sign into Mattermost `via GitLab` you'll get the `Could not parse auth data out of gitlab user object` error.
 
@@ -11,7 +13,7 @@ If you create an invalid `mattermostid` (such as entering a person's name) you'l
 If creating totally new users, it's best to have them use the sign-up process in Keycloak to ensure properly configured users. Importing users from
 an external system en-masse into the UDS Keycloak is outside the scope of this document.
 
-## Enabling Calls
+### Enabling Calls
 
 The calls plugin starts out in [test mode](https://docs.mattermost.com/configure/plugins-configuration-settings.html#test-mode). Administrators must turn it on if it's desired.
 
