@@ -11,7 +11,7 @@ components:
     required: true
     images:
       - quay.io/jetstack/cert-manager-package-debian:20210119.0
-      - quay.io/jetstack/cert-manager-controller:v1.16.1
+      - quay.io/jetstack/cert-manager-controller:v1.16.2
       - quay.io/jetstack/cert-manager-webhook:v1.16.2
       - quay.io/jetstack/cert-manager-cainjector:v1.16.1
       - quay.io/jetstack/cert-manager-acmesolver:v1.16.2
