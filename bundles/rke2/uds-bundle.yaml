@@ -231,7 +231,7 @@ packages:
           variables:
             - name: KEYCLOAK_HA_ENABLED
               path: "autoscaling.enabled"
-              default: false
+              default: true
             - name: KEYCLOAK_DB_USERNAME
               description: "keycloak database username"
               path: postgresql.username
