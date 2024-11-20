@@ -706,7 +706,7 @@ packages:
    # Mattermost
   - name: mattermost
     repository: ghcr.io/defenseunicorns/packages/uds/mattermost
-    ref: 10.0.0-uds.1-registry1
+    ref: 10.1.3-uds.0-registry1
     overrides:
       mattermost:
         mattermost-enterprise-edition:
