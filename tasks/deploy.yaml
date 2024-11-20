@@ -4,7 +4,7 @@ variables:
     default: "amd64"
   - name: DEPLOY_IMAGE
     description: "Container image to use to run uds deploy in"
-    default: "ghcr.io/defenseunicorns/build-harness/build-harness:2.0.42"
+    default: "ghcr.io/defenseunicorns/build-harness/build-harness:2.0.46"
   - name: BUNDLE_VERSION
     description: "Version of the bundle to deploy"
     # x-release-please-start-version
