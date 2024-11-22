@@ -40,4 +40,4 @@ components:
         files:
           - jobs/pepr-restart-job.yaml
     images:
-      - registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.29.4
+      - registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.6

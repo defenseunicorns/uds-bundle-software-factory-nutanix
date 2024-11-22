@@ -1,10 +1,10 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/uds-cli/v0.17.0/uds.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/uds-cli/v0.19.0/uds.schema.json
 kind: UDSBundle
 metadata:
   name: software-factory-nutanix-rke2
   description: A UDS bundle for deploying a software factory to an RKE2 cluster
   # x-release-please-start-version
-  version: "0.5.0"
+  version: "0.5.1"
   # x-release-please-end
   architecture: amd64
 
@@ -33,7 +33,7 @@ packages:
   # Zarf init
   - name: init
     repository: ghcr.io/zarf-dev/packages/init
-    ref: v0.39.0
+    ref: v0.43.1
     overrides:
       zarf-seed-registry:
         docker-registry:
@@ -85,7 +85,7 @@ packages:
 
   - name: core
     repository: ghcr.io/defenseunicorns/packages/uds/core
-    ref: 0.29.0-registry1
+    ref: 0.31.2-registry1
     optionalComponents:
       - metrics-server
     overrides:
@@ -229,6 +229,9 @@ packages:
             - path: "persistence.storageClassName"
               value: "nutanix-dynamicfile"
           variables:
+            - name: KEYCLOAK_HA_ENABLED
+              path: "autoscaling.enabled"
+              default: true
             - name: KEYCLOAK_DB_USERNAME
               description: "keycloak database username"
               path: postgresql.username
@@ -617,7 +620,7 @@ packages:
 
   - name: sonarqube
     repository: ghcr.io/defenseunicorns/packages/uds/sonarqube
-    ref: 10.7.0-uds.0-registry1
+    ref: 10.7.0-uds.2-registry1
     overrides:
       sonarqube:
         uds-sonarqube-config:
@@ -641,7 +644,7 @@ packages:
 
   - name: jira
     repository: ghcr.io/defenseunicorns/packages/uds/jira
-    ref: 1.22.0-uds.0-registry1
+    ref: 10.1.2-uds.0-registry1
     overrides:
       jira:
         uds-jira-config:
@@ -743,7 +746,7 @@ packages:
    # Mattermost
   - name: mattermost
     repository: ghcr.io/defenseunicorns/packages/uds/mattermost
-    ref: 10.0.0-uds.1-registry1
+    ref: 10.1.3-uds.0-registry1
     overrides:
       mattermost:
         mattermost-enterprise-edition:
