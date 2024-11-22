@@ -398,10 +398,11 @@ packages:
   # Gitlab
   - name: gitlab-valkey
     repository: ghcr.io/defenseunicorns/packages/uds/valkey
-    ref: 7.2.6-uds.0-upstream
+    ref: 8.0.1-uds.1-upstream
     overrides:
       valkey:
         uds-valkey-config:
+          namespace: gitlab-valkey
           values:
             - path: custom
               value:
@@ -410,37 +411,30 @@ packages:
                     app.kubernetes.io/name: valkey
                   remoteNamespace: gitlab
                   port: 6379
-                  description: "Ingress from GitLab"
+                  description: "Ingress from GitLab to Valkey read/write ports"
+                - direction: Ingress
+                  selector:
+                    app.kubernetes.io/name: valkey
+                  remoteNamespace: gitlab
+                  port: 26379
+                  description: "Ingress from GitLab to Valkey Sentinel"
             - path: copyPassword
               value:
                 enabled: true
                 namespace: gitlab
                 secretName: gitlab-redis
                 secretKey: password
-        valkey:
-          values:
-            - path: "auth.sentinel"  # TODO: set true and configure to match
-              value: false
           variables:
-            - name: GL_VALKEY_AFFINITY
-              path: primary.affinity  # See for info https://github.com/bitnami/charts/tree/main/bitnami/valkey/#installing-the-chart
-              default: []
-            - name: GL_VALKEY_NODE_SELECTORS
-              path: primary.nodeSelector
-              default: []
-            - name: GL_VALKEY_TOLERATIONS
-              path: primary.tolerations
-              default: []
-            - name: GL_VALKEY_ARCH
-              path: architecture
-              default: "replication"
-            - name: GL_VALKEY_SENTINEL
-              path: sentinel.enabled
-              default: true
             - name: GL_VALKEY_REPLICAS
-              path: primary.replicaCount
-            - name: GL_VALKEY_RESOURCES
-              path: primary.resources
+              default: 3
+              path: replicas
+        valkey:
+          namespace: gitlab-valkey
+          values:
+            - path: architecture
+              value: replication
+            - path: sentinel.enabled
+              value: true
 
   - name: gitlab-object-store
     path: ../../build
@@ -452,7 +446,7 @@ packages:
 
   - name: gitlab
     repository: ghcr.io/defenseunicorns/packages/uds/gitlab
-    ref: 17.2.9-uds.0-registry1
+    path: ../uds-package-gitlab/
     overrides:
       gitlab:
         uds-gitlab-config:
@@ -466,8 +460,10 @@ packages:
                 internal: true
                 selector:
                   app.kubernetes.io/name: valkey
-                namespace: valkey
+                namespace: gitlab-valkey
                 port: 6379
+            - path: redis.sentinel.enabled
+              value: true
             - path: ssh.enabled
               value: true
         uds-gitlab-settings:
@@ -491,21 +487,12 @@ packages:
               value: *gitlab-init-security-context
             - path: gitlab.gitlab-exporter.init.containerSecurityContext
               value: *gitlab-init-security-context
-            ### HA Valkey <=> GitLab ###
-            # Ref: https://gitlab.com/gitlab-org/charts/gitlab/-/blob/master/values.yaml#L165
             - path: global.redis.host
-              # If you are connecting to a Redis HA cluster that has Sentinel servers running,
-              # the global.redis.host attribute needs to be set to the name of the Redis instance
-              # group (such as mymaster or resque), as specified in the sentinel.conf, but not to
-              # the hostname of the Redis master. https://docs.gitlab.com/charts/advanced/external-redis/index.html#configure-the-chart
-              # To translate this into K8s speak, set it to the service since the port will differentiate
-              # not to the master mod itself. Only problem, services are singular per port me-thinks.
-              # The service won't be differentiating like I'm wanting.
-              value: "valkey.valkey.svc.cluster.local"  # TODO: update when deployed so we can see what it actually looks like
+              value: valkey.gitlab-valkey.svc.cluster.local
             - path: global.redis.sentinels
               value:
-                - host: valkey.valkey.svc.cluster.local  # Every pod has a sentinel and replica in it.
-                  port: 26379  # from https://github.com/bitnami/charts/tree/main/bitnami/valkey/#cluster-topologies
+                - host: valkey.gitlab-valkey.svc.cluster.local
+                  port: 26379
             - path: gitlab.gitlab-shell.enabled
               value: true
             # See gitlab's additional manifests, this priority class prevents gitaly from being evicted due to node pressure.
