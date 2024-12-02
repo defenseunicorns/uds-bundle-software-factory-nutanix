@@ -46,7 +46,7 @@ components:
       - registry.k8s.io/sig-storage/livenessprobe:v2.14.0
       - registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.13.0
       - registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-csi:v0.7.1
-      - registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.10.1
+      - registry1.dso.mil/ironbank/opensource/velero/velero-plugin-for-aws:v1.11.0
 
   - name: nutanix-csi-snapshot
     required: false
