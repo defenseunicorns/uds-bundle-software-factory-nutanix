@@ -28,6 +28,8 @@ x-gitlab-init-security-context: &gitlab-init-security-context
   privileged: true
   readOnlyRootFilesystem: false
   runAsUser: 0
+  allowPrivilegeEscalation: true
+  runAsNonRoot: false
 
 packages:
   # Zarf init
@@ -396,9 +398,10 @@ packages:
     ref: 0.0.2
 
   # Gitlab
-  - name: gitlab-valkey
-    repository: ghcr.io/defenseunicorns/packages/uds/valkey
-    ref: 8.0.1-uds.1-upstream
+  - name: valkey
+    #repository: ghcr.io/defenseunicorns/packages/uds/valkey
+    path: ../../../uds-package-valkey
+    ref: 8.0.1-uds.1 #-upstream
     overrides:
       valkey:
         uds-valkey-config:
@@ -435,6 +438,10 @@ packages:
               value: replication
             - path: sentinel.enabled
               value: true
+            - path: auth.enabled  # TODO: revert, but go ahead and use for now
+              value: true
+            - path: auth.sentinel
+              value: false
 
   - name: gitlab-object-store
     path: ../../build
@@ -445,8 +452,10 @@ packages:
     ref: 0.0.1
 
   - name: gitlab
-    repository: ghcr.io/defenseunicorns/packages/uds/gitlab
-    path: ../uds-package-gitlab/
+    # repository: ghcr.io/defenseunicorns/packages/uds/gitlab
+    # ref: 17.2.9-uds.0-registry1
+    path: ../../../uds-package-gitlab
+    ref: 17.5.2-uds.1 #-upstream
     overrides:
       gitlab:
         uds-gitlab-config:
@@ -488,10 +497,16 @@ packages:
             - path: gitlab.gitlab-exporter.init.containerSecurityContext
               value: *gitlab-init-security-context
             - path: global.redis.host
-              value: valkey.gitlab-valkey.svc.cluster.local
+              value: mymaster
+            - path: global.redis.port
+              value: 6379
             - path: global.redis.sentinels
               value:
-                - host: valkey.gitlab-valkey.svc.cluster.local
+                - host: valkey-node-0.valkey-headless.gitlab-valkey.svc.cluster.local
+                  port: 26379
+                - host: valkey-node-1.valkey-headless.gitlab-valkey.svc.cluster.local
+                  port: 26379
+                - host: valkey-node-2.valkey-headless.gitlab-valkey.svc.cluster.local
                   port: 26379
             - path: gitlab.gitlab-shell.enabled
               value: true
@@ -500,13 +515,13 @@ packages:
               value: "gitlab-gitaly"
             - path: gitlab.gitaly.securityContext.fsGroupChangePolicy  # https://docs.gitlab.com/ee/administration/gitaly/kubernetes.html#persistent-volume-permissions
               value: OnRootMismatch
-            - path: gitlab.gitaly.cgroups.initContainer.image.tag
-              value: v17.2.9
-            - path: gitlab.gitaly.cgroups.initContainer.securityContext # These should be the default https://gitlab.com/gitlab-org/charts/gitlab/-/blob/master/charts/gitlab/charts/gitaly/values.yaml?ref_type=heads#L56
-              value:                                                    # but are overridden somewhere to 1000 so setting them back to 0 here.
-                runAsUser: 0
-                runAsGroup: 0
-                privileged: true  # privileged needs added, was not in upstream helm
+            # - path: gitlab.gitaly.cgroups.initContainer.image.tag
+            #   value: v17.2.9
+            # - path: gitlab.gitaly.cgroups.initContainer.securityContext # These should be the default https://gitlab.com/gitlab-org/charts/gitlab/-/blob/master/charts/gitlab/charts/gitaly/values.yaml?ref_type=heads#L56
+            #   value:                                                    # but are overridden somewhere to 1000 so setting them back to 0 here.
+            #     runAsUser: 0
+            #     runAsGroup: 0
+            #     privileged: true  # privileged needs added, was not in upstream helm
             - path: gitlab.gitaly.containerSecurityContext
               value:
                 runAsUser: 1000
