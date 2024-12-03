@@ -438,7 +438,7 @@ packages:
               value: replication
             - path: sentinel.enabled
               value: true
-            - path: auth.enabled  # TODO: revert, but go ahead and use for now
+            - path: auth.enabled
               value: true
             - path: auth.sentinel
               value: false
