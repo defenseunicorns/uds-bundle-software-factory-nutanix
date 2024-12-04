@@ -515,13 +515,9 @@ packages:
                 runAsUser: 0
                 runAsGroup: 0
                 privileged: true  # privileged needs added, was not in upstream helm
-            - path: gitlab.gitaly.containerSecurityContext
-              value:
-                runAsUser: 1000
-                allowPrivilegeEscalation: false
-                runAsNonRoot: true
-                capabilities:
-                  drop: ["ALL"]
+                readOnlyRootFilesystem: false
+                allowPrivilegeEscalation: true
+                runAsNonRoot: false
           variables:
             - name: MIGRATIONS_RESOURCES
               description: "Gitlab Migrations Resources"
