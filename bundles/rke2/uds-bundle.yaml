@@ -451,9 +451,8 @@ packages:
     ref: 0.0.1
 
   - name: gitlab
-    # repository: ghcr.io/defenseunicorns/packages/uds/gitlab
-    path: ../../../uds-package-gitlab
-    ref: 17.6.1-uds.0 #-upstream
+    repository: ghcr.io/defenseunicorns/packages/uds/gitlab
+    ref: 17.6.1-uds.0-upstream
     overrides:
       gitlab:
         uds-gitlab-config:
