@@ -28,6 +28,8 @@ x-gitlab-init-security-context: &gitlab-init-security-context
   privileged: true
   readOnlyRootFilesystem: false
   runAsUser: 0
+  allowPrivilegeEscalation: true
+  runAsNonRoot: false
 
 packages:
   # Zarf init
@@ -398,10 +400,11 @@ packages:
   # Gitlab
   - name: gitlab-valkey
     repository: ghcr.io/defenseunicorns/packages/uds/valkey
-    ref: 7.2.6-uds.0-upstream
+    ref: 8.0.1-uds.2-upstream
     overrides:
       valkey:
         uds-valkey-config:
+          namespace: gitlab-valkey
           values:
             - path: custom
               value:
@@ -410,13 +413,34 @@ packages:
                     app.kubernetes.io/name: valkey
                   remoteNamespace: gitlab
                   port: 6379
-                  description: "Ingress from GitLab"
+                  description: "Ingress from GitLab to Valkey read/write ports"
+                - direction: Ingress
+                  selector:
+                    app.kubernetes.io/name: valkey
+                  remoteNamespace: gitlab
+                  port: 26379
+                  description: "Ingress from GitLab to Valkey Sentinel"
             - path: copyPassword
               value:
                 enabled: true
                 namespace: gitlab
                 secretName: gitlab-redis
                 secretKey: password
+          variables:
+            - name: GL_VALKEY_REPLICAS
+              default: 3
+              path: replicas
+        valkey:
+          namespace: gitlab-valkey
+          values:
+            - path: architecture
+              value: replication
+            - path: sentinel.enabled
+              value: true
+            - path: auth.enabled
+              value: true
+            - path: auth.sentinel
+              value: true
 
   - name: gitlab-pgbouncer-rw
     repository: ghcr.io/defenseunicorns/packages/uds/pgbouncer
@@ -519,15 +543,18 @@ packages:
 
   - name: gitlab
     repository: ghcr.io/defenseunicorns/packages/uds/gitlab
-    ref: 17.2.9-uds.0-registry1
+    ref: 17.6.1-uds.0-upstream
     imports:
       - name: GITLAB_DB_USERNAME
         package: gitlab-pgbouncer-rw
+
     overrides:
       gitlab:
         uds-gitlab-config:
           values:
             - path: storage.internal
+              value: false
+            - path: storage.createSecret.enabled
               value: false
             - path: postgres.internal
               value: false
@@ -536,8 +563,10 @@ packages:
                 internal: true
                 selector:
                   app.kubernetes.io/name: valkey
-                namespace: valkey
+                namespace: gitlab-valkey
                 port: 6379
+            - path: redis.sentinel.enabled
+              value: true
             - path: ssh.enabled
               value: true
         uds-gitlab-settings:
@@ -562,7 +591,13 @@ packages:
             - path: gitlab.gitlab-exporter.init.containerSecurityContext
               value: *gitlab-init-security-context
             - path: global.redis.host
-              value: "valkey-master.valkey.svc.cluster.local"
+              value: mymaster
+            - path: global.redis.port
+              value: 6379
+            - path: global.redis.auth.enabled
+              value: true
+            - path: global.redis.sentinelAuth.enabled
+              value: true
             - path: gitlab.gitlab-shell.enabled
               value: true
             # See gitlab's additional manifests, this priority class prevents gitaly from being evicted due to node pressure.
@@ -571,22 +606,7 @@ packages:
             - path: gitlab.gitaly.securityContext.fsGroupChangePolicy  # https://docs.gitlab.com/ee/administration/gitaly/kubernetes.html#persistent-volume-permissions
               value: OnRootMismatch
             - path: gitlab.gitaly.cgroups.initContainer.image.tag
-              value: v17.2.9
-            - path: gitlab.gitaly.cgroups.initContainer.securityContext # These should be the default https://gitlab.com/gitlab-org/charts/gitlab/-/blob/master/charts/gitlab/charts/gitaly/values.yaml?ref_type=heads#L56
-              value:                                                    # but are overridden somewhere to 1000 so setting them back to 0 here.
-                runAsUser: 0
-                runAsGroup: 0
-                privileged: true  # privileged needs added, was not in upstream helm
-            - path: gitlab.gitaly.containerSecurityContext
-              value:
-                runAsUser: 1000
-                allowPrivilegeEscalation: false
-                runAsNonRoot: true
-                capabilities:
-                  drop: ["ALL"]
-            - path: global.psql.host
-              description: "GitLab DB host should point to kubernetes service for read/write pgbouncer cluster."
-              value: "pgbouncer.gitlab-pgbouncer-rw.svc.cluster.local"
+              value: v17.6.1
           variables:
             - name: MIGRATIONS_RESOURCES
               description: "Gitlab Migrations Resources"
@@ -664,6 +684,15 @@ packages:
               path: global.gitaly.internal.names # Gitlab uses the global top-value to set subcharts: https://gitlab.com/gitlab-org/charts/gitlab/-/blob/master/values.yaml?ref_type=heads#L184
               default:
                 - "default"  # Gitlab requires that the first shard always be named `default`: https://docs.gitlab.com/ee/administration/gitaly/configure_gitaly.html?tab=Helm+chart+%28Kubernetes%29#gitlab-requires-a-default-repository-storage
+            - name: GITLAB_VALKEY_SENTINELS
+              path: global.redis.sentinels
+              default:
+                - host: valkey-node-0.valkey-headless.gitlab-valkey.svc.cluster.local
+                  port: 26379
+                - host: valkey-node-1.valkey-headless.gitlab-valkey.svc.cluster.local
+                  port: 26379
+                - host: valkey-node-2.valkey-headless.gitlab-valkey.svc.cluster.local
+                  port: 26379
             # https://docs.gitlab.com/charts/charts/globals.html#postgresql-load-balancing - configure read replica load balancing hosts list and fine tuning if needed.
             - name: GITLAB_DB_LOAD_BALANCING
               path: global.psql.load_balancing
