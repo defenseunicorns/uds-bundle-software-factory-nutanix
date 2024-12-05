@@ -95,6 +95,7 @@ variables:
     ENDPOINT: "http://replace.with.object.store.url"
     ACCESS_KEY: "replace-me-object-store-access-key"
     SECRET_KEY: "replace-me-object-store-secret-key"
+    REGISTRY_BUCKET: uds-gitlab-registry
   gitlab:
     GENERATE_STORAGE_SECRET: ""  # This is Zarf for "false" - everything is a string in Zarf.
     GITLAB_DB_NAME: "gitlabdb"
