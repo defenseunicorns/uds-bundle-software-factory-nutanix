@@ -451,13 +451,16 @@ packages:
     ref: 0.0.1
 
   - name: gitlab
-    repository: ghcr.io/defenseunicorns/packages/uds/gitlab
-    ref: 17.6.1-uds.0-upstream
+    # repository: ghcr.io/defenseunicorns/packages/uds/gitlab
+    path: ../../../uds-package-gitlab
+    ref: 17.6.1-uds.0 #-upstream
     overrides:
       gitlab:
         uds-gitlab-config:
           values:
             - path: storage.internal
+              value: false
+            - path: storage.createSecret.enabled
               value: false
             - path: postgres.internal
               value: false
@@ -510,13 +513,6 @@ packages:
               value: OnRootMismatch
             - path: gitlab.gitaly.cgroups.initContainer.image.tag
               value: v17.6.1
-            - path: gitlab.gitaly.cgroups.initContainer.securityContext # These should be the default https://gitlab.com/gitlab-org/charts/gitlab/-/blob/master/charts/gitlab/charts/gitaly/values.yaml?ref_type=heads#L56
-              value:                                                    # but are overridden somewhere to 1000 so setting them back to 0 here.
-                # This is a hacky way to get "privileged" added in
-                runAsUser: |
-                  0
-                    privileged: true
-                runAsGroup: 0
           variables:
             - name: MIGRATIONS_RESOURCES
               description: "Gitlab Migrations Resources"

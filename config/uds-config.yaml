@@ -96,6 +96,7 @@ variables:
     ACCESS_KEY: "replace-me-object-store-access-key"
     SECRET_KEY: "replace-me-object-store-secret-key"
   gitlab:
+    GENERATE_STORAGE_SECRET: ""  # This is Zarf for "false" - everything is a string in Zarf.
     GITLAB_DB_NAME: "gitlabdb"
     GITLAB_DB_USERNAME: "postgres"
     GITLAB_DB_ENDPOINT: "gitlab-pg.replace.with.db.url"
