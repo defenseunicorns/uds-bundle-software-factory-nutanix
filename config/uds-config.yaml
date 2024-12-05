@@ -89,8 +89,18 @@ variables:
     VELERO_BUCKET_REGION: "us-east-1"
     VELERO_BUCKET_KEY: "replace-me-object-store-access-key"
     VELERO_BUCKET_KEY_SECRET: "replace-me-object-store-secret-key"
-  gitlab-database-secret:
-    GITLAB_DB_PASSWORD: "replace-me-db-passwords"
+  gitlab-pgbouncer-rw:
+    GITLAB_DB_PASSWORD: ""
+    GITLAB_DB_USERNAME: postgres
+    PGBOUNCER_DATABASES:
+      gitlabdb:
+        host: "gitlab-pg.replace.with.db.url"
+        port: 5000 # Current write port configured for HA proxy by ndb-pg-db-da IaC module
+  gitlab-pgbouncer-ro:
+    PGBOUNCER_DATABASES:
+      gitlabdb:
+        host: "gitlab-pg.replace.with.db.url"
+        port: 5001 # Current read port configured for HA proxy by ndb-pg-db-da IaC module
   gitlab-object-store:
     ENDPOINT: "http://replace.with.object.store.url"
     ACCESS_KEY: "replace-me-object-store-access-key"
@@ -99,8 +109,10 @@ variables:
   gitlab:
     GENERATE_STORAGE_SECRET: ""  # This is Zarf for "false" - everything is a string in Zarf.
     GITLAB_DB_NAME: "gitlabdb"
-    GITLAB_DB_USERNAME: "postgres"
-    GITLAB_DB_ENDPOINT: "gitlab-pg.replace.with.db.url"
+    MIGRATIONS_DB_ENDPOINT: "gitlab-pg.replace.with.db.url"
+    TOOLBOX_DB_ENDPOINT: "gitlab-pg.replace.with.db.url"
+    MIGRATIONS_DB_PORT: 5000
+    TOOLBOX_DB_PORT: 5000
     GITLAB_PAGES_ENABLED: "true"
     GITLAB_SIGNUP_ENABLED: "false"
     GITLAB_BACKUP_SCHEDULE: "0 3 * * *"
@@ -161,6 +173,14 @@ variables:
       cpuQuotaUs: 1400000 # 14 cores
     REGISTRY_REPLICAS: 2
     SHELL_REPLICAS: 2
+    GITLAB_DB_LOAD_BALANCING:
+      hosts:
+        - replica-0.database
+        - replica-1.database
+        - replica-2.database
+      max_replication_difference: # Optional. See documentation https://docs.gitlab.com/ee/administration/postgresql/database_load_balancing.html#handling-stale-reads
+      max_replication_lag_time:   # Optional. See documentation
+      replica_check_interval:     # Optional. See documentation
   sonarqube:
     SONARQUBE_DB_NAME: "sonarqubedb"
     SONARQUBE_DB_USERNAME: "postgres"
