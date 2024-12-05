@@ -103,7 +103,7 @@ variables:
     GITLAB_PAGES_ENABLED: "true"
     GITLAB_SIGNUP_ENABLED: "false"
     GITLAB_BACKUP_SCHEDULE: "0 3 * * *"
-    GITLAB_BACKUP_EXTRA_ARGS: "--skip artifiacts,registry"
+    GITLAB_BACKUP_EXTRA_ARGS: "--skip artifacts,registry"
     BUCKET_SUFFIX: ""
     WEBSERVICE_REPLICAS: 3
     WEBSERVICE_WORKERS: 4
