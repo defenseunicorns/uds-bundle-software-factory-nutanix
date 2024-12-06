@@ -398,7 +398,7 @@ packages:
   # Gitlab
   - name: gitlab-valkey
     repository: ghcr.io/defenseunicorns/packages/uds/valkey
-    ref: 7.2.6-uds.0-upstream
+    ref: 8.0.1-uds.2-upstream
     overrides:
       valkey:
         uds-valkey-config:
