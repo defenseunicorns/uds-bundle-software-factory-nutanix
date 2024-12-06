@@ -519,7 +519,7 @@ packages:
 
   - name: gitlab
     repository: ghcr.io/defenseunicorns/packages/uds/gitlab
-    ref: 17.2.9-uds.0-registry1
+    ref: 17.5.2-uds.1-registry1
     imports:
       - name: GITLAB_DB_USERNAME
         package: gitlab-pgbouncer-rw
@@ -571,7 +571,7 @@ packages:
             - path: gitlab.gitaly.securityContext.fsGroupChangePolicy  # https://docs.gitlab.com/ee/administration/gitaly/kubernetes.html#persistent-volume-permissions
               value: OnRootMismatch
             - path: gitlab.gitaly.cgroups.initContainer.image.tag
-              value: v17.2.9
+              value: v17.5.2
             - path: gitlab.gitaly.cgroups.initContainer.securityContext # These should be the default https://gitlab.com/gitlab-org/charts/gitlab/-/blob/master/charts/gitlab/charts/gitaly/values.yaml?ref_type=heads#L56
               value:                                                    # but are overridden somewhere to 1000 so setting them back to 0 here.
                 runAsUser: 0
