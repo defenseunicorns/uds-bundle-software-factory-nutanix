@@ -28,6 +28,8 @@ x-gitlab-init-security-context: &gitlab-init-security-context
   privileged: true
   readOnlyRootFilesystem: false
   runAsUser: 0
+  allowPrivilegeEscalation: true
+  runAsNonRoot: false
 
 packages:
   # Zarf init
@@ -415,10 +417,11 @@ packages:
   # Gitlab
   - name: gitlab-valkey
     repository: ghcr.io/defenseunicorns/packages/uds/valkey
-    ref: 7.2.6-uds.0-upstream
+    ref: 8.0.1-uds.2-upstream
     overrides:
       valkey:
         uds-valkey-config:
+          namespace: gitlab-valkey
           values:
             - path: custom
               value:
@@ -427,13 +430,122 @@ packages:
                     app.kubernetes.io/name: valkey
                   remoteNamespace: gitlab
                   port: 6379
-                  description: "Ingress from GitLab"
+                  description: "Ingress from GitLab to Valkey read/write ports"
+                - direction: Ingress
+                  selector:
+                    app.kubernetes.io/name: valkey
+                  remoteNamespace: gitlab
+                  port: 26379
+                  description: "Ingress from GitLab to Valkey Sentinel"
             - path: copyPassword
               value:
                 enabled: true
                 namespace: gitlab
                 secretName: gitlab-redis
                 secretKey: password
+          variables:
+            - name: GL_VALKEY_REPLICAS
+              default: 3
+              path: replicas
+        valkey:
+          namespace: gitlab-valkey
+          values:
+            - path: architecture
+              value: replication
+            - path: sentinel.enabled
+              value: true
+            - path: auth.enabled
+              value: true
+            - path: auth.sentinel
+              value: true
+
+  - name: gitlab-pgbouncer-rw
+    repository: ghcr.io/defenseunicorns/packages/uds/pgbouncer
+    ref: 1.21.0-uds.5-registry1
+    exports:
+      - name: GITLAB_DB_USERNAME
+      - name: GITLAB_DB_PASSWORD
+    overrides:
+      pgbouncer:
+        pgbouncer:
+          namespace: gitlab-pgbouncer-rw
+          variables:
+            - name: GITLAB_DB_USERNAME
+              path: config.adminUser
+              description: "pgbouncer admin username. Should match Gitlab postgres database username"
+            - name: GITLAB_DB_PASSWORD
+              path: config.adminPassword
+              description: "pgbouncer admin password. Should match GitLab postgres database password"
+            - name: PGBOUNCER_DATABASES
+              path: config.databases
+              description: "Database configuration for pgbouncer"
+            - name: PGBOUNCER_REPLICA_COUNT
+              path: replicaCount
+              description: "Number of desired PgBouncer pods"
+              default: 3
+            - name: PGBOUNCER_CONFIG
+              path: config.pgbouncer
+              description: "Optional variable that should only need configured if the default pgbouncer configuration is inadequate."
+        uds-pgbouncer-config:
+          namespace: gitlab-pgbouncer-rw
+          values:
+            - path: pgbouncer.ingress
+              value:
+                - remoteNamespace: gitlab
+            - path: pgbouncer.peerauth
+              value:
+                permissive: true
+                port: 5432
+            - path: postgres.internal
+              value: false
+              description: "Postgres DB is external to cluster, so set this to false to all egress traffic out of cluster"
+
+  # Temporary read replica pgbouncer cluster. Not ideal setup for gitlab's internal read replica loadbalancing logic.
+  # This will configure multiple pgbouncer instances to connect to the read replicas via HA proxy.
+  # GitLab recommends a single read replica pgbouncer per postgres replica and to configure gitlab to load balance reads to each replica directly.
+  # https://docs.gitlab.com/ee/administration/postgresql/database_load_balancing.html
+  - name: gitlab-pgbouncer-ro
+    repository: ghcr.io/defenseunicorns/packages/uds/pgbouncer
+    ref: 1.21.0-uds.5-registry1
+    imports:
+      - name: GITLAB_DB_USERNAME
+        package: gitlab-pgbouncer-rw
+      - name: GITLAB_DB_PASSWORD
+        package: gitlab-pgbouncer-rw
+    overrides:
+      pgbouncer:
+        pgbouncer:
+          namespace: gitlab-pgbouncer-ro
+          variables:
+            - name: GITLAB_DB_USERNAME
+              path: config.adminUser
+              description: "pgbouncer admin username. Should match Gitlab postgres database username"
+            - name: GITLAB_DB_PASSWORD
+              path: config.adminPassword
+              description: "pgbouncer admin password. Should match GitLab postgres database password"
+            - name: PGBOUNCER_DATABASES
+              path: config.databases
+              description: "Database configuration for pgbouncer"
+            - name: PGBOUNCER_REPLICA_COUNT
+              path: replicaCount
+              description: "Number of desired PgBouncer pods"
+              default: 3
+            - name: PGBOUNCER_CONFIG
+              path: config.pgbouncer
+              description: "Optional variable that should only need configured if the default pgbouncer configuration is inadequate."
+        uds-pgbouncer-config:
+          namespace: gitlab-pgbouncer-ro
+          values:
+            - path: pgbouncer.ingress
+              value:
+                - remoteNamespace: gitlab
+            - path: pgbouncer.peerauth
+              value:
+                permissive: true
+                port: 5432
+            - path: postgres.internal
+              value: false
+              description: "Postgres DB is external to cluster, so set this to false to all egress traffic out of cluster"
 
   - name: gitlab-object-store
     path: ../../build
@@ -442,15 +554,24 @@ packages:
   - name: gitlab-database-secret
     path: ../../build
     ref: 0.0.1
+    imports:
+      - name: GITLAB_DB_PASSWORD
+        package: gitlab-pgbouncer-rw
 
   - name: gitlab
     repository: ghcr.io/defenseunicorns/packages/uds/gitlab
-    ref: 17.2.9-uds.0-registry1
+    ref: 17.6.1-uds.0-upstream
+    imports:
+      - name: GITLAB_DB_USERNAME
+        package: gitlab-pgbouncer-rw
+
     overrides:
       gitlab:
         uds-gitlab-config:
           values:
             - path: storage.internal
+              value: false
+            - path: storage.createSecret.enabled
               value: false
             - path: postgres.internal
               value: false
@@ -459,8 +580,10 @@ packages:
                 internal: true
                 selector:
                   app.kubernetes.io/name: valkey
-                namespace: valkey
+                namespace: gitlab-valkey
                 port: 6379
+            - path: redis.sentinel.enabled
+              value: true
             - path: ssh.enabled
               value: true
         uds-gitlab-settings:
@@ -485,7 +608,13 @@ packages:
             - path: gitlab.gitlab-exporter.init.containerSecurityContext
               value: *gitlab-init-security-context
             - path: global.redis.host
-              value: "valkey-master.valkey.svc.cluster.local"
+              value: mymaster
+            - path: global.redis.port
+              value: 6379
+            - path: global.redis.auth.enabled
+              value: true
+            - path: global.redis.sentinelAuth.enabled
+              value: true
             - path: gitlab.gitlab-shell.enabled
               value: true
             # See gitlab's additional manifests, this priority class prevents gitaly from being evicted due to node pressure.
@@ -494,19 +623,7 @@ packages:
             - path: gitlab.gitaly.securityContext.fsGroupChangePolicy  # https://docs.gitlab.com/ee/administration/gitaly/kubernetes.html#persistent-volume-permissions
               value: OnRootMismatch
             - path: gitlab.gitaly.cgroups.initContainer.image.tag
-              value: v17.2.9
-            - path: gitlab.gitaly.cgroups.initContainer.securityContext # These should be the default https://gitlab.com/gitlab-org/charts/gitlab/-/blob/master/charts/gitlab/charts/gitaly/values.yaml?ref_type=heads#L56
-              value:                                                    # but are overridden somewhere to 1000 so setting them back to 0 here.
-                runAsUser: 0
-                runAsGroup: 0
-                privileged: true  # privileged needs added, was not in upstream helm
-            - path: gitlab.gitaly.containerSecurityContext
-              value:
-                runAsUser: 1000
-                allowPrivilegeEscalation: false
-                runAsNonRoot: true
-                capabilities:
-                  drop: ["ALL"]
+              value: v17.6.1
           variables:
             - name: MIGRATIONS_RESOURCES
               description: "Gitlab Migrations Resources"
@@ -584,6 +701,38 @@ packages:
               path: global.gitaly.internal.names # Gitlab uses the global top-value to set subcharts: https://gitlab.com/gitlab-org/charts/gitlab/-/blob/master/values.yaml?ref_type=heads#L184
               default:
                 - "default"  # Gitlab requires that the first shard always be named `default`: https://docs.gitlab.com/ee/administration/gitaly/configure_gitaly.html?tab=Helm+chart+%28Kubernetes%29#gitlab-requires-a-default-repository-storage
+            - name: GITLAB_VALKEY_SENTINELS
+              path: global.redis.sentinels
+              default:
+                - host: valkey-node-0.valkey-headless.gitlab-valkey.svc.cluster.local
+                  port: 26379
+                - host: valkey-node-1.valkey-headless.gitlab-valkey.svc.cluster.local
+                  port: 26379
+                - host: valkey-node-2.valkey-headless.gitlab-valkey.svc.cluster.local
+                  port: 26379
+            # https://docs.gitlab.com/charts/charts/globals.html#postgresql-load-balancing - configure read replica load balancing hosts list and fine tuning if needed.
+            - name: GITLAB_DB_LOAD_BALANCING
+              path: global.psql.load_balancing
+              description: "GitLab read replica load balancing configuration"
+              default: # Since we are currently using in cluster pgbouncer for read replicas, set default to only use hostname for kubernetes service for read pgbouncer cluster
+                hosts:
+                  - "pgbouncer.gitlab-pgbouncer-ro.svc.cluster.local"
+            - name: MIGRATIONS_DB_ENDPOINT
+              description: "Postgres hostname/IP for gitlab migrations job to run against. Must bypass pgbouncer for migrations so this must be either HA proxy or direct connection to postgres primary."
+              path: "gitlab.migrations.psql.host"
+            - name: MIGRATIONS_DB_PORT
+              description: "Postgres port for gitlab migrations job."
+              path: "gitlab.migrations.psql.port"
+            - name: TOOLBOX_DB_ENDPOINT
+              description: "Postgres hostname/IP for gitlab toolbox. Must bypass pgbouncer for backups so this must be either HA proxy or direct connection to postgres primary."
+              path: "gitlab.toolbox.psql.host"
+            - name: TOOLBOX_DB_PORT
+              description: "Postgres port for gitlab toolbox."
+              path: "gitlab.toolbox.psql.port"
+            - name: GITLAB_DB_USERNAME
+              description: "postgres username"
+              path: "global.psql.username"
+              default: "postgres"
 
   # Gitlab Runner
   - name: gitlab-runner
