@@ -408,6 +408,9 @@ packages:
                 limits:
                   memory: "2Gi"
                   cpu: "1500m"
+            - name: SSO_ENABLED
+              path: sso.enabled
+              default: false
 
   # Additional manifests needed
   - name: additional-manifests
