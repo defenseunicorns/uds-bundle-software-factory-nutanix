@@ -542,8 +542,9 @@ packages:
         package: gitlab-pgbouncer-rw
 
   - name: gitlab
-    repository: ghcr.io/defenseunicorns/packages/uds/gitlab
-    ref: 17.6.1-uds.0-upstream
+    #repository: ghcr.io/defenseunicorns/packages/uds/gitlab
+    path: ../../../uds-package-gitlab
+    ref: 17.6.1-uds.0 #-upstream
     imports:
       - name: GITLAB_DB_USERNAME
         package: gitlab-pgbouncer-rw
@@ -568,6 +569,8 @@ packages:
             - path: redis.sentinel.enabled
               value: true
             - path: ssh.enabled
+              value: true
+            - path: gitalyCgroupsInit.enabled  # Causes the policy exemption to be created
               value: true
         uds-gitlab-settings:
           values:
@@ -605,8 +608,6 @@ packages:
               value: "gitlab-gitaly"
             - path: gitlab.gitaly.securityContext.fsGroupChangePolicy  # https://docs.gitlab.com/ee/administration/gitaly/kubernetes.html#persistent-volume-permissions
               value: OnRootMismatch
-            - path: gitlab.gitaly.cgroups.initContainer.image.tag
-              value: v17.6.1
           variables:
             - name: MIGRATIONS_RESOURCES
               description: "Gitlab Migrations Resources"

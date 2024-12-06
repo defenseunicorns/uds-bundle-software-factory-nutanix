@@ -171,6 +171,7 @@ variables:
       memoryBytes: 63350767616 # 59GiB
       cpuShares: 1024  # This is a linux cgroups thing: https://medium.com/@weidagang/linux-beyond-the-basics-cpu-management-with-cpu-and-cpuset-cgroups-a4853bc645f5#:~:text=cpu.shares%20(The%20Foundation)%3A,The%20default%20value%20is%201024.
       cpuQuotaUs: 1400000 # 14 cores
+      # You may want to add per repository limites too
     REGISTRY_REPLICAS: 2
     SHELL_REPLICAS: 2
     GITLAB_DB_LOAD_BALANCING:
