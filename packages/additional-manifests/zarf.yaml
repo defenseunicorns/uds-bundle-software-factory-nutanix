@@ -21,7 +21,7 @@ components:
           - gitlab/envoy-filter.yaml
           - gitlab/gitaly-priority-class.yaml
     images:
-      - registry.gitlab.com/gitlab-org/build/cng/gitaly-init-cgroups:v17.2.9  # Remember to redeploy this package if changing stuff around this image in the gitlab package
+      - registry.gitlab.com/gitlab-org/build/cng/gitaly-init-cgroups:v17.5.2  # Remember to redeploy this package if changing stuff around this image in the gitlab package
 
   - name: pepr-policy-exemptions
     required: true
@@ -31,11 +31,3 @@ components:
           - pepr-policy-exemptions/nutanix-csi-exemptions.yaml
           - pepr-policy-exemptions/metallb-exemptions.yaml
           - pepr-policy-exemptions/gitlab-exemptions.yaml
-  - name: jobs
-    required: true
-    manifests:
-      - name: jobs-manifests
-        files:
-          - jobs/pepr-restart-job.yaml
-    images:
-      - registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.6
