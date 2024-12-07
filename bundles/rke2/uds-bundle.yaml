@@ -4,7 +4,7 @@ metadata:
   name: software-factory-nutanix-rke2
   description: A UDS bundle for deploying a software factory to an RKE2 cluster
   # x-release-please-start-version
-  version: "0.5.1"
+  version: "0.5.2"
   # x-release-please-end
   architecture: amd64
 
