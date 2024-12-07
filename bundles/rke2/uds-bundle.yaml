@@ -28,6 +28,8 @@ x-gitlab-init-security-context: &gitlab-init-security-context
   privileged: true
   readOnlyRootFilesystem: false
   runAsUser: 0
+  allowPrivilegeEscalation: true
+  runAsNonRoot: false
 
 packages:
   # Zarf init
@@ -572,18 +574,6 @@ packages:
               value: OnRootMismatch
             - path: gitlab.gitaly.cgroups.initContainer.image.tag
               value: v17.5.2
-            - path: gitlab.gitaly.cgroups.initContainer.securityContext # These should be the default https://gitlab.com/gitlab-org/charts/gitlab/-/blob/master/charts/gitlab/charts/gitaly/values.yaml?ref_type=heads#L56
-              value:                                                    # but are overridden somewhere to 1000 so setting them back to 0 here.
-                runAsUser: 0
-                runAsGroup: 0
-                privileged: true  # privileged needs added, was not in upstream helm
-            - path: gitlab.gitaly.containerSecurityContext
-              value:
-                runAsUser: 1000
-                allowPrivilegeEscalation: false
-                runAsNonRoot: true
-                capabilities:
-                  drop: ["ALL"]
             - path: global.psql.host
               description: "GitLab DB host should point to kubernetes service for read/write pgbouncer cluster."
               value: "pgbouncer.gitlab-pgbouncer-rw.svc.cluster.local"
