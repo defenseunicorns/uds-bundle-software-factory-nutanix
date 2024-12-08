@@ -8,7 +8,7 @@ variables:
   - name: BUNDLE_VERSION
     description: "Version of the bundle to deploy"
     # x-release-please-start-version
-    default: "0.5.1"
+    default: "0.5.2"
     # x-release-please-end
 
 tasks:
@@ -34,6 +34,24 @@ tasks:
         description: Input to specify the type of bundle to deploy
     actions:
       - cmd: docker run --rm -e ARCH="${ARCH}" -e BUNDLE_VERSION="${BUNDLE_VERSION}" -e BUNDLE_TYPE="${INPUT_BUNDLE_TYPE}" -e UDS_CONFIG=/configs/uds-config.yaml -e KUBECONFIG=/configs/kubeconfig -e PACKAGE_LIST="${INPUT_PACKAGE_LIST}" -v /tmp:/tmp -v "${INPUT_CONFIG_DIR}":/configs -v "${INPUT_BUILD_DIR}":/build "${DEPLOY_IMAGE}" bash -c 'uds deploy /build/uds-bundle-software-factory-nutanix-${BUNDLE_TYPE}-${ARCH}-${BUNDLE_VERSION}.tar.zst ${PACKAGE_LIST} --no-progress --confirm'
+
+  - name: remove-bundle
+    description: Remove bundle based on configured input build and config directories
+    inputs:
+      build_dir:
+        default: ./build
+        description: Input for the path to the build directory containing the uds bundle to deploy
+      config_dir:
+        default: ./scratch/configs/dev
+        description: Input for the path to the directory containing the uds-config.yaml to use for deploying the bundle
+      package_list:
+        default: ""
+        description: Input to specify packages that should be deployed from the bundle
+      bundle_type:
+        default: "rke2"
+        description: Input to specify the type of bundle to deploy
+    actions:
+      - cmd: docker run --rm -e ARCH="${ARCH}" -e BUNDLE_VERSION="${BUNDLE_VERSION}" -e BUNDLE_TYPE="${INPUT_BUNDLE_TYPE}" -e UDS_CONFIG=/configs/uds-config.yaml -e KUBECONFIG=/configs/kubeconfig -e PACKAGE_LIST="${INPUT_PACKAGE_LIST}" -v /tmp:/tmp -v "${INPUT_CONFIG_DIR}":/configs -v "${INPUT_BUILD_DIR}":/build "${DEPLOY_IMAGE}" bash -c 'uds remove /build/uds-bundle-software-factory-nutanix-${BUNDLE_TYPE}-${ARCH}-${BUNDLE_VERSION}.tar.zst ${PACKAGE_LIST} --no-progress --confirm'
 
   - name: deploy-published
     description: Deploy published oci of bundle from ghcr

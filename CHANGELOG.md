@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.2](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.5.1...v0.5.2) (2024-12-07)
+
+
+### Features
+
+* add pgbouncer configuration for gitlab ([40aa798](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/40aa798c8f37aa36b8237f8f2c7acd527ee476f2))
+
+
+### Miscellaneous
+
+* **deps:** update actions/checkout action to v4.2.2 ([#247](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/247)) ([7420d99](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/7420d998fc7e006b0547157a4ecda6e7d8fa8664))
+* **deps:** update dependency defenseunicorns/uds-cli to v0.19.0 ([#250](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/250)) ([6fbbc24](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/6fbbc2474ff29901faa7be5ecbaba7ff1a666279))
+* **deps:** update dependency defenseunicorns/uds-common to v1.3.0 ([#251](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/251)) ([8730df1](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/8730df17fe85682bae65a37f96cc8d2b5e6c0b1a))
+* **deps:** update ghcr.io/defenseunicorns/packages/uds/core docker tag to v0.31.2-registry1 ([#258](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/258)) ([fed9272](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/fed927286c60fcbabd1992d2704ebd18efb080bd))
+* **deps:** update ghcr.io/defenseunicorns/packages/uds/jira docker tag to v10 ([#272](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/272)) ([3c8127b](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/3c8127b7a2310d859097f026b9824deac00c5c01))
+* **deps:** update ghcr.io/defenseunicorns/packages/uds/mattermost docker tag to v10.1.3-uds.0-registry1 ([#261](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/261)) ([68f2daa](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/68f2daa883706714e3301249e31a8e9f0ae9b947))
+* **deps:** update ghcr.io/defenseunicorns/packages/uds/sonarqube docker tag to v10.7.0-uds.2-registry1 ([#248](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/248)) ([65848d4](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/65848d4e48a0bce2b9d58576e41f02a99cdea317))
+* **deps:** update ghcr.io/defenseunicorns/uds/identity-config docker tag to v0.7.0 ([#262](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/262)) ([00707a1](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/00707a1093652c7fd3da8d0fbe55d1ab07a8ed2d))
+* **deps:** update ghcr.io/zarf-dev/packages/init docker tag to v0.43.1 ([#289](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/289)) ([05103e6](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/05103e6080e51a3db120f337868b2db848244d6c))
+* **deps:** update helm release cert-manager to v1.16.2 ([#284](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/284)) ([95bf1c3](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/95bf1c3c87d68dfa778ec7220ab0fae2905d461b))
+* **deps:** update pre-commit hook gitleaks/gitleaks to v8.21.2 ([#265](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/265)) ([cdea743](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/cdea743f22585b33cb42f493f7d5bbd97ea92370))
+* **deps:** update pre-commit hook pre-commit/pre-commit-hooks to v5 ([#274](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/274)) ([e6483f4](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/e6483f49e49d6f6dd6c92bd0e4120c664c6e8344))
+* **deps:** update quay.io/jetstack/cert-manager-acmesolver docker tag to v1.16.2 ([#279](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/279)) ([6f208de](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/6f208dec630b2c0ab9f3a531977e315e0af64577))
+* **deps:** update quay.io/jetstack/cert-manager-cainjector docker tag to v1.16.2 ([#280](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/280)) ([b7160e5](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/b7160e5255f94a075bac1ee6a07e0cfba4f944c3))
+* **deps:** update quay.io/jetstack/cert-manager-controller docker tag to v1.16.2 ([#281](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/281)) ([e4daec9](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/e4daec9d7c00757c675d64d885b6e4c029b0b393))
+* **deps:** update quay.io/jetstack/cert-manager-startupapicheck docker tag to v1.16.2 ([#282](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/282)) ([e5b496b](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/e5b496b8fefb21ad9da0f3354cdff886766dd111))
+* **deps:** update quay.io/jetstack/cert-manager-webhook docker tag to v1.16.2 ([#283](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/283)) ([dbdb769](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/dbdb7692bb7f020fc8e94925349116a4961e82fb))
+* **deps:** update registry1.dso.mil/ironbank/opensource/kubernetes/kubectl docker tag to v1.30.6 ([#269](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/269)) ([e2235a1](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/e2235a1db308e7e99fa048d3c9a359414f80b54f))
+* remove pepr restarter and upgrade gitlab package ([#307](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/307)) ([daf6421](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/daf6421968385cb92377dcf4f0f9b0e3414c33dd))
+
 ## [0.5.1](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.5.0...v0.5.1) (2024-11-19)
 
 
