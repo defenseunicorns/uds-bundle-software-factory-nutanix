@@ -8,7 +8,6 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * add pgbouncer configuration for gitlab ([40aa798](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/40aa798c8f37aa36b8237f8f2c7acd527ee476f2))
-* integrated HA-valkey configuration ([#240](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/240)) ([346eb17](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/346eb173c70d97da9a26b78ab9773ad1ea3c4ab3))
 
 
 ### Miscellaneous
