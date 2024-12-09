@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.3](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.5.2...v0.5.3) (2024-12-09)
+
+
+### Features
+
+* integrated HA-valkey configuration ([#308](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/308)) ([2c7452c](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/2c7452c3a755dc05a607973b06c0d1ac2ed31fa2))
+
+
+### Miscellaneous
+
+* remove inspect and sbom publishing to release to mitigate bug in uds inspect ([#313](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/313)) ([8452bc2](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/8452bc2fd6d3c7dca4bb0af900a2924c84cc0392))
+* revert ha-valkey work to fix publishing ([705367d](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/705367d962636389eeded90d102770850de0943b))
+
 ## [0.5.2](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.5.1...v0.5.2) (2024-12-07)
 
 
