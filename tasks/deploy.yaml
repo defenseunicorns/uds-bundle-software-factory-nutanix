@@ -8,7 +8,7 @@ variables:
   - name: BUNDLE_VERSION
     description: "Version of the bundle to deploy"
     # x-release-please-start-version
-    default: "0.5.4"
+    default: "0.5.1"
     # x-release-please-end
 
 tasks:
