@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.4](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.5.3...v0.5.4) (2024-12-09)
+
+
+### Features
+
+* enable HA valkey configuration  ([#314](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/314)) ([7f89b51](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/7f89b51fe018b0d3b2cfdf3514b0567fc4bdd5c0))
+
 ## [0.5.3](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.5.2...v0.5.3) (2024-12-09)
 
 
