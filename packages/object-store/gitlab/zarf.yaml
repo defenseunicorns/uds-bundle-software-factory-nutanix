@@ -12,6 +12,8 @@ variables:
     default: "replace-me"
   - name: SECRET_KEY
     default: "replace-me"
+  - name: REGISTRY_BUCKET
+    default: uds-gitlab-registry
 
 components:
   - name: gitlab-object-store-secret
