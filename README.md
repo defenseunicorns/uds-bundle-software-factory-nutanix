@@ -29,13 +29,13 @@ Get the bundle you would like to install:
   - You can pull it via the same protocol used to push/pull container images:
 <!--x-release-please-start-version-->
     ```bash
-    uds pull oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix-rke2:0.5.3 --architecture amd64`
+    uds pull oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix-rke2:0.5.4 --architecture amd64`
     ```
 <!--x-release-please-end-->
   - You can also reference it by it's "docker name" (OCI image URL) at deploy time with the a similar command to the one above.
 <!--x-release-please-start-version-->
     ```bash
-    uds deploy oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix-rke2:0.5.3 --architecture amd64`
+    uds deploy oci://ghcr.io/defenseunicorns/uds-bundle/software-factory-nutanix-rke2:0.5.4 --architecture amd64`
     ```
 <!--x-release-please-end-->
 
