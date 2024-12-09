@@ -33,12 +33,6 @@ jobs:
           username: ${{ secrets.IRON_BANK_ROBOT_USERNAME }}
           password: ${{ secrets.IRON_BANK_ROBOT_PASSWORD }}
 
-      - name: Init zarf cache
-        uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4.1.2
-        with:
-          path: "~/.zarf-cache"
-          key: zarf-cache
-
       - name: Free GH runner build space
         run: |
           df -h
