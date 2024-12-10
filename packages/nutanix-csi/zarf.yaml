@@ -34,7 +34,7 @@ components:
     required: true
     description: Push nutanix images to the zarf registry
     images:
-      - registry.k8s.io/sig-storage/snapshot-controller:v8.1.0
+      - registry.k8s.io/sig-storage/snapshot-controller:v8.2.0
       - registry.k8s.io/sig-storage/snapshot-validation-webhook:v8.1.0
       - docker.io/nutanix/ntnx-csi:3.0.0
       - docker.io/nutanix/ntnx-csi-precheck:3.0.0
