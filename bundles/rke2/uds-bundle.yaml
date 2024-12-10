@@ -4,7 +4,7 @@ metadata:
   name: software-factory-nutanix-rke2
   description: A UDS bundle for deploying a software factory to an RKE2 cluster
   # x-release-please-start-version
-  version: "0.5.1"
+  version: "0.5.4"
   # x-release-please-end
   architecture: amd64
 
@@ -627,6 +627,9 @@ packages:
               value: OnRootMismatch
             - path: gitlab.gitaly.cgroups.initContainer.image.tag
               value: v17.6.1
+            - path: global.psql.host
+              description: "GitLab DB host should point to kubernetes service for read/write pgbouncer cluster."
+              value: "pgbouncer.gitlab-pgbouncer-rw.svc.cluster.local"
           variables:
             - name: MIGRATIONS_RESOURCES
               description: "Gitlab Migrations Resources"
