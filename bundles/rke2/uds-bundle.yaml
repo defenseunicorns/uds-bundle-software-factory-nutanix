@@ -400,7 +400,7 @@ packages:
   # Gitlab
   - name: gitlab-valkey
     repository: ghcr.io/defenseunicorns/packages/uds/valkey
-    ref: 8.0.1-uds.2-upstream
+    ref: 8.0.1-uds.3-upstream
     overrides:
       valkey:
         uds-valkey-config:
