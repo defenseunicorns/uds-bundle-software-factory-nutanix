@@ -35,7 +35,7 @@ packages:
   # Zarf init
   - name: init
     repository: ghcr.io/zarf-dev/packages/init
-    ref: v0.43.1
+    ref: v0.45.0
     overrides:
       zarf-seed-registry:
         docker-registry:
