@@ -1,0 +1,44 @@
+# Copyright 2024 Defense Unicorns
+# SPDX-License-Identifier: AGPL-3.0-or-later OR LicenseRef-Defense-Unicorns-Commercial
+
+# Based off of https://github.com/defenseunicorns/uds-core/blob/main/.github/workflows/snapshot-release.yaml
+
+name: Release Bundle Snapshot
+
+on:
+  schedule:
+    - cron: "0 11 * * *"
+  workflow_dispatch:
+
+jobs:
+  publish-snapshot-release:
+    permissions:
+      contents: write
+      packages: write
+      id-token: write
+    uses: ./.github/workflows/publish.yaml
+    with:
+      snapshot: true
+    secrets: inherit
+
+  update-snapshot-latest-tag:
+    needs: publish-snapshot-release
+    env:
+      GH_TOKEN: ${{ github.token }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-tags: 'true'
+      - name: Update snapshot-latest tag
+        run: |
+          # get last release tag
+          LAST_RELEASE_TAG="$(gh release list --exclude-drafts --exclude-pre-releases --json tagName --jq '.[0].tagName')"
+          # cleanup old release
+          if gh release view snapshot-latest; then
+            gh release delete snapshot-latest --cleanup-tag -y
+          fi
+          # generate new release
+          gh release create snapshot-latest -t "snapshot-latest" --prerelease --notes-start-tag "${LAST_RELEASE_TAG}" --generate-notes
