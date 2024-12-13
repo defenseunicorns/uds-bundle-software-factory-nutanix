@@ -1,0 +1,52 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  annotations:
+    meta.helm.sh/release-name: kube-prometheus-stack
+    meta.helm.sh/release-namespace: monitoring
+  creationTimestamp: "2024-10-28T22:04:27Z"
+  generation: 2
+  labels:
+    app: kube-prometheus-stack-admission
+    app.kubernetes.io/component: prometheus-operator-webhook
+    app.kubernetes.io/instance: kube-prometheus-stack
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: kube-prometheus-stack-prometheus-operator
+    app.kubernetes.io/part-of: kube-prometheus-stack
+    app.kubernetes.io/version: 65.3.1
+    chart: kube-prometheus-stack-65.3.1
+    heritage: Helm
+    release: kube-prometheus-stack
+  name: kube-prometheus-stack-admission
+  resourceVersion: "20341438"
+  uid: 03cfa776-7fdc-4a24-93e2-088c6e7f4e0b
+webhooks:
+- admissionReviewVersions:
+  - v1
+  - v1beta1
+  clientConfig:
+    caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJkakNDQVJ5Z0F3SUJBZ0lSQUxYSmFCWTFHVEdCcEE0V0FxaE5mMEV3Q2dZSUtvWkl6ajBFQXdJd0R6RU4KTUFzR0ExVUVDaE1FYm1sc01UQWdGdzB5TkRFd01qZ3lNVFU1TWpCYUdBOHlNVEkwTVRBd05ESXhOVGt5TUZvdwpEekVOTUFzR0ExVUVDaE1FYm1sc01UQlpNQk1HQnlxR1NNNDlBZ0VHQ0NxR1NNNDlBd0VIQTBJQUJHMlRMck1tCnpMR1dBYXBCanV2N2MvMHNCVWU4R2Z5Ti8rZWJCUGh4QUVFSGNGNG8zWVRNTXNoelNTaFBzcE1ESmdVOE14dXoKN0xCT0dMTGNRNE1LK3MralZ6QlZNQTRHQTFVZER3RUIvd1FFQXdJQ0JEQVRCZ05WSFNVRUREQUtCZ2dyQmdFRgpCUWNEQVRBUEJnTlZIUk1CQWY4RUJUQURBUUgvTUIwR0ExVWREZ1FXQkJRaDJzSHBUeWd2NGY5dkN4QU8xTmRmCkgzaVljREFLQmdncWhrak9QUVFEQWdOSUFEQkZBaUFUdU1hNUdSTjhiKys4NS9DT1RoRUZOcE5vSWlac1JONUQKc1liMWVSTjE4Z0loQU8yZmIyN1ZlSWxORGJVdUFCNE5BdnhwZ25zdmxCL0lnZ2JSc21JN1NMcVMKLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+    service:
+      name: kube-prometheus-stack-operator
+      namespace: monitoring
+      path: /admission-prometheusrules/mutate
+      port: 443
+  failurePolicy: Ignore
+  matchPolicy: Equivalent
+  name: prometheusrulemutate.monitoring.coreos.com
+  namespaceSelector: {}
+  objectSelector: {}
+  reinvocationPolicy: Never
+  rules:
+  - apiGroups:
+    - monitoring.coreos.com
+    apiVersions:
+    - '*'
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - prometheusrules
+    scope: '*'
+  sideEffects: None
+  timeoutSeconds: 10

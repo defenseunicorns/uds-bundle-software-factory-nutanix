@@ -1,0 +1,136 @@
+# Copyright 2024 Defense Unicorns
+# SPDX-License-Identifier: AGPL-3.0-or-later OR LicenseRef-Defense-Unicorns-Commercial
+
+name: Publish UDS Nutanix SWF Bundle
+
+on:
+  # triggered by tag-and-release.yaml and snapshot-release.yaml
+  workflow_call:
+    inputs:
+      snapshot:
+        description: 'true - for snapshot release'
+        required: true
+        type: boolean
+
+jobs:
+  publish-uds-nutanix-swf-bundle:
+    strategy:
+      fail-fast: false
+      matrix:
+        flavor: [upstream, registry1, unicorn]
+    runs-on: "uds-ubuntu-big-boy-8-core"
+    name: Publish bundle
+
+    permissions:
+      contents: read
+      packages: write
+      id-token: write  # This is needed for OIDC federation.
+
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Environment setup
+        uses: ./.github/actions/setup
+        with:
+          registry1Username: ${{ secrets.IRON_BANK_ROBOT_USERNAME }}
+          registry1Password: ${{ secrets.IRON_BANK_ROBOT_PASSWORD }}
+          ghToken: ${{ secrets.GITHUB_TOKEN }}
+          chainguardIdentity: ${{ secrets.CHAINGUARD_IDENTITY }}
+
+      - name: Init zarf cache
+        uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4.1.2
+        with:
+          path: "~/.zarf-cache"
+          key: zarf-cache
+
+      - name: (Snapshot) Get snapshot version using git commit short sha and date
+        if: ${{ inputs.snapshot }}
+        run: |
+          SHORT_SHA=$(git rev-parse --short HEAD)
+          RELEASE_DATE=$(date +'%Y-%m-%d')
+          echo "SNAPSHOT_VERSION=${RELEASE_DATE}-${SHORT_SHA}" >> $GITHUB_ENV
+          echo "PUBLISH_ARGS=--set VERSION=${RELEASE_DATE}-${SHORT_SHA}" >> $GITHUB_ENV
+
+      - name: (Snapshot) Set versions to snapshot
+        if: ${{ inputs.snapshot }}
+        run: |
+          yq -ei '.metadata.version=env(SNAPSHOT_VERSION), (.packages[]|select(has("ref"))|select(.name=="core")).ref=env(SNAPSHOT_VERSION)' bundles/k3d-standard/uds-bundle.yaml
+          yq -ei '.metadata.version=env(SNAPSHOT_VERSION), (.packages[]|select(has("ref"))|select(.name=="core-base")).ref=env(SNAPSHOT_VERSION)' bundles/k3d-slim-dev/uds-bundle.yaml
+          yq -ei '.metadata.version=env(SNAPSHOT_VERSION), (.packages[]|select(has("ref"))|select(.name=="core-identity-authorization")).ref=env(SNAPSHOT_VERSION)' bundles/k3d-slim-dev/uds-bundle.yaml
+          yq -ei '.metadata.version=env(SNAPSHOT_VERSION)' packages/standard/zarf.yaml
+          yq -ei '.metadata.version=env(SNAPSHOT_VERSION)' packages/base/zarf.yaml
+          yq -ei '.metadata.version=env(SNAPSHOT_VERSION)' packages/identity-authorization/zarf.yaml
+
+      - name: Build and publish rke2 bundle
+        run: |
+          uds run create-bundle-rke2 --set EXTRA_ARGS="--skip-sbom=false"
+          uds inspect --sbom build/uds-bundle-software-factory-nutanix-rke2*.tar.zst
+          uds publish build/uds-bundle-software-factory-nutanix-rke2-amd64-*.tar.zst oci://ghcr.io/defenseunicorns/uds-bundle --no-progress
+
+      - name: Upload SBOM to Release
+        id: upload-sbom-to-release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG_NAME="v${{ inputs.tag-name }}"
+          gh release upload "${TAG_NAME}" "$(find . -maxdepth 1 -type f -name "*-sboms.tar" -print0 | xargs -0 echo)"
+
+      - name: Cleanup
+        run: |
+          uds run clean
+
+      # Publish package and bundle to destination repository
+      - name: Publish Standard Package
+        run: uds run -f tasks/publish.yaml standard-package --set FLAVOR=${{ matrix.flavor }} --set SNAPSHOT="${{ inputs.snapshot }}" ${PUBLISH_ARGS} --no-progress
+
+      - name: Publish Upstream Flavored Bundles
+        if: ${{ matrix.flavor == 'upstream' }}
+        run: uds run -f tasks/publish.yaml bundles --set SNAPSHOT="${{ inputs.snapshot }}" ${PUBLISH_ARGS} --no-progress
+
+      - name: Save logs
+        if: always()
+        uses: defenseunicorns/uds-core/.github/actions/save-logs@3c65fe6767fe05a362ba364dd66deb572f0758a5  # 0.32.1
+        with:
+          suffix: -${{ matrix.flavor }}
+
+  publish-uds-core-layers:
+    if: ${{ !inputs.snapshot }}
+    strategy:
+      fail-fast: false
+      matrix:
+        flavor: [upstream, registry1, unicorn]
+        layer: [base, identity-authorization, runtime-security, backup-restore, logging, metrics-server, monitoring]
+        arch: [amd64, arm64]
+        exclude:
+          - flavor: registry1
+            arch: arm64
+    runs-on: ${{ matrix.arch == 'arm64' && 'uds-ubuntu-arm64-4-core' || 'uds-ubuntu-big-boy-4-core' }}
+    name: Publish package layers
+
+    permissions:
+      contents: read
+      packages: write
+      id-token: write  # This is needed for OIDC federation.
+
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Environment setup
+        uses: defenseunicorns/uds-core/.github/actions/setup@3c65fe6767fe05a362ba364dd66deb572f0758a5  # 0.32.1
+        with:
+          registry1Username: ${{ secrets.IRON_BANK_ROBOT_USERNAME }}
+          registry1Password: ${{ secrets.IRON_BANK_ROBOT_PASSWORD }}
+          ghToken: ${{ secrets.GITHUB_TOKEN }}
+          chainguardIdentity: ${{ secrets.CHAINGUARD_IDENTITY }}
+
+      - name: Test and Publish Core Package Layer
+        run: uds run -f tasks/publish.yaml single-layer --set FLAVOR=${{ matrix.flavor }} --set LAYER=${{ matrix.layer }} --no-progress
+
+      - name: Debug Output
+        if: ${{ always() && !inputs.snapshot }}
+        uses: defenseunicorns/uds-core/.github/actions/debug-output@3c65fe6767fe05a362ba364dd66deb572f0758a5  # 0.32.1
+      - name: Save logs
+        if: always()
+        uses: defenseunicorns/uds-core/.github/actions/save-logs@3c65fe6767fe05a362ba364dd66deb572f0758a5  # 0.32.1
+        with:
+          suffix: -${{ matrix.flavor }}-${{ matrix.layer }}-${{ matrix.arch }}
