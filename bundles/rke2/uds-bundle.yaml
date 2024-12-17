@@ -396,6 +396,26 @@ packages:
     path: ../../build
     ref: 0.0.2
 
+  - name: uds-runtime
+    repository: ghcr.io/defenseunicorns/packages/uds/uds-runtime
+    ref: 0.11.0-registry1
+    overrides:
+      uds-runtime:
+        uds-runtime:
+          variables:
+            - name: RESOURCES
+              path: resources
+              default:
+                requests:
+                  memory: "128Mi"
+                  cpu: "250m"
+                limits:
+                  memory: "2Gi"
+                  cpu: "1500m"
+            - name: SSO_ENABLED
+              path: sso.enabled
+              default: true
+
   # Additional manifests needed
   - name: additional-manifests
     path: ../../build
