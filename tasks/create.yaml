@@ -61,7 +61,7 @@ tasks:
     description: Create trust-bundle package for adding custom CAs.
     actions:
       - cmd: ./uds zarf package create ./packages/trust-bundles --confirm --no-progress --architecture="${ARCH}" --output ./build "${EXTRA_ARGS}"
-  
+
   - name: zarf-init-patch-package
     description: Create zarf-init-patch package for configuring zarf registry to run on control plane.
     actions:
