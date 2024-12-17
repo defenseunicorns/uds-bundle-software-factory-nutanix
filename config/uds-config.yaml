@@ -68,6 +68,8 @@ variables:
     ADMIN_TLS_KEY: replace-me-key
     TENANT_TLS_CERT: replace-me-cert
     TENANT_TLS_KEY: replace-me-key
+    # CA_CERT value must be base64 encoded. Should be the same value set for ADDITIONAL_CA_CHAIN at the top of the config
+    CA_CERT: replace-me-with-additional-ca-chain
     TENANT_HOST_LIST:
       - "*"
       - "*.nexus"  # To add the multiple nexus sub-domain registries to the tenant gateway. Do not attempt *.*.nexus, Nexus only supports first-level subdomain routing.

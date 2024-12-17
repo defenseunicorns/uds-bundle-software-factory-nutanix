@@ -410,7 +410,7 @@ packages:
                   cpu: "1500m"
             - name: SSO_ENABLED
               path: sso.enabled
-              default: false
+              default: true
 
   # Additional manifests needed
   - name: additional-manifests
