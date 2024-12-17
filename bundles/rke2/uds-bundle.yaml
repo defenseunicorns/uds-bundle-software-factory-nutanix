@@ -464,7 +464,7 @@ packages:
 
   - name: gitlab-pgbouncer-rw
     repository: ghcr.io/defenseunicorns/packages/uds/pgbouncer
-    ref: 1.21.0-uds.5-registry1
+    ref: 1.21.0-uds.6-registry1
     exports:
       - name: GITLAB_DB_USERNAME
       - name: GITLAB_DB_PASSWORD
@@ -509,7 +509,7 @@ packages:
   # https://docs.gitlab.com/ee/administration/postgresql/database_load_balancing.html
   - name: gitlab-pgbouncer-ro
     repository: ghcr.io/defenseunicorns/packages/uds/pgbouncer
-    ref: 1.21.0-uds.5-registry1
+    ref: 1.21.0-uds.6-registry1
     imports:
       - name: GITLAB_DB_USERNAME
         package: gitlab-pgbouncer-rw
