@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.5](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.5.4...v0.5.5) (2024-12-18)
+
+
+### Features
+
+* add uds-runtime to bundle ([#304](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/304)) ([e496248](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/e49624837e9cbc2c6887e56b395d8d95d342eefc))
+
+
+### Miscellaneous
+
+* add patch for zarf registry to run on control-plane ([#321](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/issues/321)) ([4a59db6](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/commit/4a59db61d79cdda3736bbac6808aa8850dfcf985))
+
 ## [0.5.4](https://github.com/defenseunicorns/uds-bundle-software-factory-nutanix/compare/v0.5.3...v0.5.4) (2024-12-09)
 
 
