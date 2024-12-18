@@ -55,6 +55,7 @@ tasks:
       - task: create:cert-manager-package
       - task: create:trust-manager-package
       - task: create:trust-bundles-package
+      - task: create:zarf-init-patch-package
 
   ################
   #  Deploy

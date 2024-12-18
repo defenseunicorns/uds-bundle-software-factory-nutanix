@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: zarf-init-patch
+  description: "Patch zarf registry so it runs on control plane"
+  version: "0.0.1"
+  architecture: amd64
+
+components:
+  - name: zarf-init-patch
+    required: true
+    actions:
+      onDeploy:
+        before:
+          - description: Patch zarf registry so it runs on control plane
+            cmd: |
+              kubectl patch deployment -n zarf zarf-docker-registry --patch-file=/dev/stdin <<-EOF
+              apiVersion: apps/v1
+              kind: Deployment
+              metadata:
+                name: zarf-docker-registry
+                namespace: zarf
+              spec:
+                template:
+                  spec:
+                    nodeSelector:
+                      node-role.kubernetes.io/master: "true"
+                    tolerations:
+                      - key: node-role.kubernetes.io/control-plane
+                        operator: Exists
+                        effect: NoSchedule
+              EOF

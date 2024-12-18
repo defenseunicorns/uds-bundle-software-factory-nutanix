@@ -53,6 +53,10 @@ packages:
               path: replicaCount
               default: 3
 
+  - name: zarf-init-patch
+    path: ../../build
+    ref: 0.0.1
+
   - name: nutanix-csi
     path: ../../build
     ref: 3.0.0
