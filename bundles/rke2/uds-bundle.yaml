@@ -831,8 +831,8 @@ packages:
                   maxHeap: "6g"
 
   - name: confluence
-    path: ../../../uds-package-confluence  # repository: ghcr.io/defenseunicorns/packages/uds/confluence
-    ref: 9.1.1-uds.2  # ref: 9.1.1-uds.2-registry1
+    repository: ghcr.io/defenseunicorns/packages/uds/confluence
+    ref: 9.2.0-uds.0-registry1
     overrides:
       confluence:
         uds-confluence-config:
