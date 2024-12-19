@@ -831,24 +831,27 @@ packages:
                   maxHeap: "6g"
 
   - name: confluence
-    repository: ghcr.io/defenseunicorns/packages/uds/confluence
-    ref: 1.20.0-uds.4-registry1
+    path: ../../../uds-package-confluence  # repository: ghcr.io/defenseunicorns/packages/uds/confluence
+    ref: 9.1.1-uds.2  # ref: 9.1.1-uds.2-registry1
     overrides:
       confluence:
         uds-confluence-config:
           values:
             - path: postgres.internal
               value: false
-            - path: postgres.username
-              value: "###ZARF_VAR_CONFLUENCE_DB_USERNAME###"
-            - path: postgres.password
-              value: "###ZARF_VAR_CONFLUENCE_DB_PASSWORD###"
             - path: additionalFiles
               value:
                 - name: trust-bundle
                   mountPath: /etc/pki/ca-trust/extracted/java/cacerts
                   key: "ca-bundle.jks"
                   type: configMap
+            - path: clustering.enabled
+              value: true
+          variables:
+            - name: CONFLUENCE_DB_USERNAME
+              path: postgres.username
+            - name: CONFLUENCE_DB_PASSWORD
+              path: postgres.password
         confluence:
           values:
             - path: additionalFiles
@@ -857,6 +860,12 @@ packages:
                   mountPath: /var/ssl
                   key: "ca-bundle.jks"
                   type: configMap
+            - path: confluence.hazelcastService.enabled
+              value: true # Set to true to enable clustering
+            - path: confluence.clustering.enabled
+              value: true # Set to true to enable clustering
+            - path: "volumes.sharedHome.persistentVolumeClaim.storageClassName"
+              value: "nutanix-dynamicfile"  # Need many read write for cluster's shared home dir.
           variables:
             - name: CONFLUENCE_LOCAL_HOME_ENABLED
               path: "volumes.localHome.persistentVolumeClaim.create"
@@ -881,7 +890,9 @@ packages:
                     memory: "8Gi"
                 jvm:
                   maxHeap: "6g"
-
+            - name: CONFLUENCE_REPLICAS
+              path: confluence.replicaCount
+              default: 1  # Do not increase this until step 3 below
    # Mattermost
   - name: mattermost
     repository: ghcr.io/defenseunicorns/packages/uds/mattermost
